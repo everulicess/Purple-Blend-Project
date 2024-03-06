@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
-public struct InputHandler : INetworkInput
+public struct NetworkInputData : INetworkInput
 {
     public Vector3 direction;
 }

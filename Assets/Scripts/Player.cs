@@ -7,6 +7,15 @@ public class Player : NetworkBehaviour
 {
     private NetworkCharacterController characterController;
 
+    [SerializeField] private Transform camTarget;
+
+    public override void Spawned()
+    {
+        if (HasStateAuthority)
+        {
+            CameraFollow.Singleton.SetTarget(camTarget);
+        }
+    }
     private void Awake()
     {
         characterController = GetComponent<NetworkCharacterController>();
@@ -14,11 +23,10 @@ public class Player : NetworkBehaviour
     }
     public override void FixedUpdateNetwork()
     {
-        if (GetInput(out InputHandler data))
+        if (GetInput(out NetworkInputData data))
         {
             data.direction.Normalize();
             characterController.Move(10 * data.direction * Runner.DeltaTime);
-
         }
     }
 }

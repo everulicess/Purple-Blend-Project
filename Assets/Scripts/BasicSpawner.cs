@@ -76,7 +76,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
-        var data = new InputHandler();
+        var data = new NetworkInputData();
         if (Input.GetKey(KeyCode.W))
         {
             data.direction += Vector3.forward;
@@ -107,13 +107,15 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player)
     {
     }
-
+    float playersJoined = 0f;
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
         if (!runner.IsServer) return;
-        Vector3 playerPos = new Vector3((player.RawEncoded % runner.Config.Simulation.PlayerCount) * 3, 1f, 0f);
+        Vector3 playerPos = new Vector3(/*(player.RawEncoded % runner.Config.Simulation.PlayerCount) * */0+playersJoined, 0f, 0f);
 
         NetworkObject networkObject = runner.Spawn(networkPrefabRef, playerPos, Quaternion.identity, player);
+
+        playersJoined++;
 
         spawnCharacter.Add(player, networkObject);
     }
