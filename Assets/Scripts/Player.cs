@@ -11,8 +11,9 @@ public class Player : NetworkBehaviour
 
     public override void Spawned()
     {
-        if (HasStateAuthority)
+        if (/*HasStateAuthority*/ HasInputAuthority)
         {
+            
             CameraFollow.Singleton.SetTarget(camTarget);
         }
     }

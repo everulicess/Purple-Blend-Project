@@ -42,7 +42,7 @@ public class CameraFollow : MonoBehaviour
     private void LateUpdate()
     {
         if (target != null)
-            camPosition = new Vector3(target.position.x, camHeight, camDistance);
+            camPosition = new Vector3(target.position.x,camHeight, target.position.z +camDistance);
             transform.SetPositionAndRotation(camPosition, Quaternion.Euler(camXRotationt,camYRotation,0));
     }
     public void SetTarget(Transform newTarget)
