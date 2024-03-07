@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8905188441464483676}
   - component: {fileID: 6075541524490898695}
   - component: {fileID: 91701927173731694}
+  - component: {fileID: 1134729114557446457}
   m_Layer: 0
   m_Name: Network Player Prefab
   m_TagString: Untagged
@@ -58,6 +59,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 5214935629976495616}
   - {fileID: 8905188441464483676}
+  - {fileID: 1134729114557446457}
 --- !u!143 &3577616919058033287
 CharacterController:
   m_ObjectHideFlags: 0
@@ -115,6 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camTarget: {fileID: 2627143927177756995}
+  anim: {fileID: 91701927173731694}
 --- !u!136 &6075541524490898695
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -159,6 +162,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1134729114557446457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2244119501597336846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 91701927173731694}
+  TotalWords: 1
+  ApplyTiming: 2
+  SyncSettings: 79
+  StateHashes: 0000000074c37e9447705ba32b1a167c79406955
+  TriggerHashes: 00000000
 --- !u!1 &6807533321239703391
 GameObject:
   m_ObjectHideFlags: 0
