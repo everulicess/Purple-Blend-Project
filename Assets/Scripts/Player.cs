@@ -9,25 +9,37 @@ public class Player : NetworkBehaviour
 
     [SerializeField] private Transform camTarget;
 
+    float turnSpeed = 360f;
+    float speed = 10f;
+
     public override void Spawned()
     {
-        if (/*HasStateAuthority*/ HasInputAuthority)
+        if (HasInputAuthority)
         {
-            
             CameraFollow.Singleton.SetTarget(camTarget);
         }
     }
     private void Awake()
     {
         characterController = GetComponent<NetworkCharacterController>();
-
     }
     public override void FixedUpdateNetwork()
     {
         if (GetInput(out NetworkInputData data))
         {
+            var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
+
+            var skewedInput = matrix.MultiplyPoint3x4(data.direction);
+
+            if (data.direction != Vector3.zero)
+            {
+                var relative = (transform.position + data.direction) - transform.position;
+                var rot = Quaternion.LookRotation(relative, Vector3.up);
+
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Runner.DeltaTime);
+            }
             data.direction.Normalize();
-            characterController.Move(10 * data.direction * Runner.DeltaTime);
+            characterController.Move(speed * skewedInput/*(transform.forward* data.direction.magnitude)*/ * Runner.DeltaTime);
         }
     }
 }
