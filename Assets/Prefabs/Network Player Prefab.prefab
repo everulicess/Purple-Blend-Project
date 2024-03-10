@@ -116,6 +116,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95929a67334595943b010b255285fc94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TheMule: {fileID: 11400000, guid: 6135ebfec20cf754093bf17873487e75, type: 2}
+  TheBoomstick: {fileID: 11400000, guid: c21266e585e919b41b10409d88097509, type: 2}
+  TheSiren: {fileID: 11400000, guid: 3d8ac073263b2bc47aea08280ea88043, type: 2}
+  currentCharacter: 0
   camTarget: {fileID: 2627143927177756995}
   anim: {fileID: 91701927173731694}
 --- !u!136 &6075541524490898695

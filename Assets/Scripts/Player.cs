@@ -5,6 +5,12 @@ using Fusion;
 
 public class Player : NetworkBehaviour
 {
+    [SerializeField] CharacterStatsScrObj TheMule;
+    [SerializeField] CharacterStatsScrObj TheBoomstick;
+    [SerializeField] CharacterStatsScrObj TheSiren;
+
+    [SerializeField]Characters currentCharacter;
+
     private NetworkCharacterController characterController;
 
     [SerializeField] private Transform camTarget;
