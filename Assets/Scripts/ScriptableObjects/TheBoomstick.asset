@@ -14,10 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementStats:
     CharacterName: 1
-    MovementSpeed: 0
-    MaxHealth: 0
-  CombatStats:
-    Damage: 0
-    Penetration: 0
-    Range: 0
-    Anim: {fileID: 0}
+    MovementSpeed: 5

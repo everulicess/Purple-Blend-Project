@@ -13,9 +13,7 @@ public enum Characters
 public struct CharacterMovementStats
 {
     public Characters CharacterName;
-
     public float MovementSpeed;
-    public float MaxHealth;
 }
 [Serializable]
 public struct CharacterCombatStats
@@ -29,5 +27,4 @@ public struct CharacterCombatStats
 public class CharacterStatsScrObj : ScriptableObject
 {
     public CharacterMovementStats MovementStats;
-    public CharacterCombatStats CombatStats;
 }

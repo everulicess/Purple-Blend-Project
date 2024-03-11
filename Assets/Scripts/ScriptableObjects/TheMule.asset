@@ -13,10 +13,5 @@ MonoBehaviour:
   m_Name: TheMule
   m_EditorClassIdentifier: 
   MovementStats:
-    MovementSpeed: 0
-    MaxHealth: 0
-  CombatStats:
-    Damage: 0
-    Penetration: 0
-    Range: 0
-    Anim: {fileID: 0}
+    CharacterName: 0
+    MovementSpeed: 2

@@ -7,33 +7,24 @@ using Fusion;
 public enum Pings
 {
     Ping1,
-    Ping2,
-    Ping3,
-    Ping4,
-    Ping5
+    Ping2
 }
 [Serializable]
-public struct PingsVisualsLibrary
+public struct PingInfo
 {
-    public GameObject Ping1;
-    public GameObject Ping2;
-    public GameObject Ping3;
-    public GameObject Ping4;
-    public GameObject Ping5;
+    [Tooltip("3D visual for the ping")] public GameObject Prefab;
+    [Tooltip("It will be played when the ping is placed")] public AudioClip Sound;
 }
 [Serializable]
-public struct PingsSoundsLibrary
+public struct CommunicationLibrary
 {
-    public AudioClip Audio1;
-    public AudioClip Audio2;
-    public AudioClip Audio3;
-    public AudioClip Audio4;
-    public AudioClip Audio5;
+    [Header("Pings")]
+    public PingInfo Ping1;
+    public PingInfo Ping2;
 }
 public class CommunicationManager : MonoBehaviour
 {
-    [SerializeField]PingsSoundsLibrary pingSoundLibrary;
-    [SerializeField]PingsVisualsLibrary pingVisualLibrary;
+    [SerializeField]CommunicationLibrary communicationLibrary;
 
     public static Dictionary<Pings, AudioClip> audioDictionary = new();
     public static Dictionary<Pings, GameObject> visualsDictionary = new();
@@ -64,6 +55,8 @@ public class CommunicationManager : MonoBehaviour
             currentPing = Pings.Ping1;
             PlacePing(currentPing);
         }
+        if (pingMenuUIObject == null) return;
+
         if (Input.GetKey(KeyCode.V))
         {
             pingMenuUIObject.SetActive(true);
@@ -78,9 +71,9 @@ public class CommunicationManager : MonoBehaviour
             pingMenuUIObject.SetActive(false);
         }
     }
-    public void PlacePing(/*GameObject _pingVisual,*/ /*AudioClip _pingSound,*/ Pings _ping)
+    public void PlacePing(Pings _ping)
     {
-        //get vsound and visuals for each ping
+        //get sound and visuals for each ping
         visualsDictionary.TryGetValue(_ping, out GameObject _pingVisual);
         audioDictionary.TryGetValue(_ping, out AudioClip _pingSound);
 
@@ -101,12 +94,12 @@ public class CommunicationManager : MonoBehaviour
     private void InitializeDictionaries()
     {
         //Sound
-        audioDictionary.Add(Pings.Ping1, pingSoundLibrary.Audio1);
-        audioDictionary.Add(Pings.Ping2, pingSoundLibrary.Audio2);
+        audioDictionary.Add(Pings.Ping1, communicationLibrary.Ping1.Sound);
+        audioDictionary.Add(Pings.Ping2, communicationLibrary.Ping2.Sound);
 
         //Visual
-        visualsDictionary.Add(Pings.Ping1, pingVisualLibrary.Ping1);
-        visualsDictionary.Add(Pings.Ping2, pingVisualLibrary.Ping2);
+        visualsDictionary.Add(Pings.Ping1, communicationLibrary.Ping1.Prefab);
+        visualsDictionary.Add(Pings.Ping2, communicationLibrary.Ping2.Prefab);
     }
 }
 
