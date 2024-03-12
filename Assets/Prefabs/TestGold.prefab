@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1878562763447368511}
   - component: {fileID: 7100253756493384330}
   m_Layer: 0
-  m_Name: TestCollectible
+  m_Name: TestGold
   m_TagString: Loot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

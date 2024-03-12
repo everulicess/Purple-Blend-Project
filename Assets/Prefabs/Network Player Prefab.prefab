@@ -272,7 +272,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pocketCapacity: 100
-  relicCapacity: 0
+  relicCapacity: 1
+  carriedRelics: 0
   pocketBar: {fileID: 1927164114474209368}
 --- !u!1 &3221181227218281146
 GameObject:
