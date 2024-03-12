@@ -30,6 +30,10 @@ public class Collector : MonoBehaviour
                 //Set player UI bar to filled %
                 pocketBar.fillAmount = carriedPocketLoot / pocketCapacity * 100f;
             }
+            else
+            {
+                Debug.Log("Your pockets are full!");
+            }
         }
     }
 }
