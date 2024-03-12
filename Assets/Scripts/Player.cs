@@ -5,12 +5,16 @@ using Fusion;
 
 public class Player : NetworkBehaviour
 {
+    [SerializeField] CharacterStatsScrObj Character;
+
+    //[SerializeField]Characters currentCharacter;
+
     private NetworkCharacterController characterController;
 
     [SerializeField] private Transform camTarget;
 
     float turnSpeed = 360f;
-    float speed = 300f;
+    [SerializeField]float speed = 3f;
 
     [SerializeField] Animator anim;
     public override void Spawned()
@@ -27,10 +31,14 @@ public class Player : NetworkBehaviour
     }
     public override void FixedUpdateNetwork()
     {
+        characterController.maxSpeed = Character.MovementStats.MovementSpeed;
+        
+        
         if (GetInput(out NetworkInputData data))
         {
             anim.SetBool("Moving", true);
             var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
+            //data.direction.Normalize();
 
             var skewedInput = matrix.MultiplyPoint3x4(data.direction);
 
@@ -41,14 +49,11 @@ public class Player : NetworkBehaviour
 
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Runner.DeltaTime);
             }
-            //data.direction.Normalize();
+            skewedInput.Normalize();
             characterController.Move(Runner.DeltaTime * speed * skewedInput);
-
+            //Debug.LogWarning($"skewed input is {skewedInput}");
             if (data.direction == Vector3.zero)
                 anim.SetBool("Moving", false);
         }
-
-
-
     }
 }
