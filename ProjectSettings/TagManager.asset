@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Loot
   - Relic
+  - Treasure
   layers:
   - Default
   - TransparentFX
