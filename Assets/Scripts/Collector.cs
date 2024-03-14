@@ -5,13 +5,16 @@ using UnityEngine.UI;
 
 public class Collector : MonoBehaviour
 {
-    //Variables for player pockets
+    //Variables for all the loot stuff
     [Range(1f, 500f)]
     public float pocketCapacity;
     [Range(1f, 4f)]
     public float relicCapacity;
     public float carriedRelics;
     private float carriedPocketLoot;
+    private bool carryingTreasure = false;
+    [SerializeField] private Transform carryPoint;
+    Transform treasurePosition;
 
     //UI element (doesnt work)
     public Image pocketBar;
@@ -62,12 +65,57 @@ public class Collector : MonoBehaviour
                 }
 
             }
-
-            if (col.gameObject.tag == "Deposit")
+        // collecting treasure
+            if (col.gameObject.tag == "Treasure")
             {
-            //if (Input.GetKey(KeyCode.E))
+                //if (carryingTreasure == false)
+                if (carryingTreasure) return;
+                //{
+                //Debug.Log("Player can pick up a treasure!");
+                if (Input.GetKey(KeyCode.E))
+                {
+                    carryingTreasure = true;
+                    treasurePosition = col.transform;
+                    Debug.Log("Player picked up treasure!");
+                }
+                //}
             }
 
+            //This is for depositing your pockets into the mule or spawn area to score.
+            if (col.gameObject.tag == "Deposit")
+                {
+                //if (Input.GetKey(KeyCode.E))
+                }
+
+    }
+    private void Update()
+    {
+        //If the player is carrying a treasure
+        if (carryingTreasure)
+        {
+            //follow the player carrypoint
+            Pickup();
+
+            //release the carried treasure
+            if (Input.GetKeyDown(KeyCode.E) && carryingTreasure == true)
+            {
+                DropItem();
+            }
+        }
+    }
+
+    private void DropItem()
+    {
+        treasurePosition.position = treasurePosition.position;
+        carryingTreasure = false;
+        Debug.Log("Player dropped a treasure!");
+    }
+
+    private void Pickup()
+    {
+        if (treasurePosition == null) return;
+        treasurePosition.position = carryPoint.position;
+        treasurePosition.rotation = carryPoint.rotation;
     }
 
     private void deposit()
