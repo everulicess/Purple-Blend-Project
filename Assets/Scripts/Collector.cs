@@ -42,50 +42,89 @@ public class Collector : MonoBehaviour
                 Debug.Log("Your pockets are full!");
             }
         }
+        if (col.gameObject.tag == "Relic")
+        {
+            Debug.Log("Player can pick up a relic");
+            if (Input.GetKey(KeyCode.E))
+            {
+                //If the player has a relic slot left
+                if (carriedRelics < relicCapacity)
+                {
+                    carriedRelics++;
+                    Destroy(col.transform.gameObject);
+                }
+                else
+                {
+                    Debug.Log("Your relic slots are full!");
+                }
+            }
+
+        }
+        // collecting treasure
+        if (col.gameObject.tag == "Treasure")
+        {
+            //if (carryingTreasure == false)
+            if (carryingTreasure) return;
+            //{
+            //Debug.Log("Player can pick up a treasure!");
+            if (Input.GetKey(KeyCode.E))
+            {
+                carryingTreasure = true;
+                treasurePosition = col.transform;
+                Debug.Log("Player picked up treasure!");
+            }
+            //}
+        }
+
+        //This is for depositing your pockets into the mule or spawn area to score.
+        if (col.gameObject.tag == "Deposit")
+        {
+            //if (Input.GetKey(KeyCode.E))
+        }
     }
 
     //Collecting Relics
         private void OnTriggerStay(Collider col)
         {
-            if (col.gameObject.tag == "Relic")
-            {
-                Debug.Log("Player can pick up a relic");
-                if (Input.GetKey(KeyCode.E))
-                {
-                    //If the player has a relic slot left
-                    if (carriedRelics < relicCapacity)
-                    {
-                        carriedRelics++;
-                        Destroy(col.transform.gameObject);
-                    }
-                    else
-                    {
-                        Debug.Log("Your relic slots are full!");
-                    }
-                }
+        //    if (col.gameObject.tag == "Relic")
+        //    {
+        //        Debug.Log("Player can pick up a relic");
+        //        if (Input.GetKey(KeyCode.E))
+        //        {
+        //            //If the player has a relic slot left
+        //            if (carriedRelics < relicCapacity)
+        //            {
+        //                carriedRelics++;
+        //                Destroy(col.transform.gameObject);
+        //            }
+        //            else
+        //            {
+        //                Debug.Log("Your relic slots are full!");
+        //            }
+        //        }
 
-            }
-        // collecting treasure
-            if (col.gameObject.tag == "Treasure")
-            {
-                //if (carryingTreasure == false)
-                if (carryingTreasure) return;
-                //{
-                //Debug.Log("Player can pick up a treasure!");
-                if (Input.GetKey(KeyCode.E))
-                {
-                    carryingTreasure = true;
-                    treasurePosition = col.transform;
-                    Debug.Log("Player picked up treasure!");
-                }
-                //}
-            }
+        //    }
+        //// collecting treasure
+        //    if (col.gameObject.tag == "Treasure")
+        //    {
+        //        //if (carryingTreasure == false)
+        //        if (carryingTreasure) return;
+        //        //{
+        //        //Debug.Log("Player can pick up a treasure!");
+        //        if (Input.GetKey(KeyCode.E))
+        //        {
+        //            carryingTreasure = true;
+        //            treasurePosition = col.transform;
+        //            Debug.Log("Player picked up treasure!");
+        //        }
+        //        //}
+        //    }
 
-            //This is for depositing your pockets into the mule or spawn area to score.
-            if (col.gameObject.tag == "Deposit")
-                {
-                //if (Input.GetKey(KeyCode.E))
-                }
+        //    //This is for depositing your pockets into the mule or spawn area to score.
+        //    if (col.gameObject.tag == "Deposit")
+        //        {
+        //        //if (Input.GetKey(KeyCode.E))
+        //        }
 
     }
     private void Update()
