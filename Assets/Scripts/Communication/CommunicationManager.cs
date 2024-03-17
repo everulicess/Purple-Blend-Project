@@ -8,13 +8,16 @@ public enum Pings
 {
     None,
     MissingPing,
-    LocationPing
+    LocationPing,
+    NewPing,
+    AnotherPing
 }
 [Serializable]
 public struct PingInfo
 {
     [Tooltip("3D visual for the ping")] public GameObject Prefab;
     [Tooltip("It will be played when the ping is placed")] public AudioClip Sound;
+    [Tooltip("Icon that will be displayed in the Menu")] public Texture Icon;
 }
 [Serializable]
 public struct CommunicationLibrary
@@ -22,6 +25,9 @@ public struct CommunicationLibrary
     [Header("Pings")]
     public PingInfo Ping1;
     public PingInfo Ping2;
+    public PingInfo Ping3;
+    public PingInfo Ping4;
+    public PingInfo Ping5;
 }
 public class CommunicationManager : MonoBehaviour
 {
@@ -29,84 +35,32 @@ public class CommunicationManager : MonoBehaviour
 
     public static Dictionary<Pings, AudioClip> audioDictionary = new();
     public static Dictionary<Pings, GameObject> visualsDictionary = new();
+    public static Dictionary<Pings, Texture> IconsDictionary = new();
 
     [SerializeField] private Camera cam;
 
-    [SerializeField] private GameObject pingMenuUIObject;
-    private Vector3 pingMenuPosition;
-    [SerializeField] PingElement[] ringElements;
-    
-    Pings currentPing;
+    public static Vector3 pingMenuPosition { private set; get; }
+
+    [SerializeField] RadialMenu radialMenu;
     private void Awake()
     {
         InitializeDictionaries();
-
-        pingMenuUIObject.SetActive(false);
-
-        currentPing = Pings.MissingPing;
-        //ringElements = FindObjectsOfType<PingElement>();
-
-        foreach (PingElement element in ringElements)
-        {
-            element.SelectedPingEvent += PlacePing;
-        }
-
     }
     void Update()
     {
-        //need logic to change current ping to specific ping based on the ring menu
-        
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            currentPing = Pings.LocationPing;
-            PlacePing(currentPing);
-        } if (Input.GetKeyDown(KeyCode.N))
-        {
-            currentPing = Pings.MissingPing;
-            PlacePing(currentPing);
-        }
-        if (pingMenuUIObject == null) return;
-
         if (Input.GetKey(KeyCode.V))
         {
-            
-            pingMenuUIObject.SetActive(true);
-            pingMenuUIObject.transform.position = pingMenuPosition;
+            radialMenu.Open();
+            radialMenu.transform.position = pingMenuPosition;
             //Cursor.visible = false;
         }
         else
         {
-            //CloseMenu();
+            radialMenu.Close();
             Cursor.lockState = CursorLockMode.None;
             //Cursor.visible = true;
             pingMenuPosition = Input.mousePosition;
-            pingMenuUIObject.SetActive(false);
-        }
-    }
-    public void CloseMenu()
-    {
-        
-        PlacePing(currentPing);
-    }
-    void PlacePing(Pings _ping)
-    {
-        if (!Input.GetKeyUp(KeyCode.V)) return;
-        if (_ping == Pings.None) return;
-        //get sound and visuals for each ping
-        visualsDictionary.TryGetValue(_ping, out GameObject _pingVisual);
-        audioDictionary.TryGetValue(_ping, out AudioClip _pingSound);
-
-        Ray ray = cam.ScreenPointToRay(pingMenuPosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            if (hit.collider.gameObject.layer==8)
-            {
-                Vector3 offset = new Vector3(hit.point.x, hit.point.y + 0.1f, hit.point.z);
-                Instantiate(_pingVisual, offset, Quaternion.identity);
-                AudioSource.PlayClipAtPoint(_pingSound, offset);
-
-                Debug.Log($"{_pingVisual.name} has been placed and {_pingSound.name} is ebing played");
-            }
+            //pingMenuUIObject.SetActive(false);
         }
     }
     private void InitializeDictionaries()
@@ -114,10 +68,23 @@ public class CommunicationManager : MonoBehaviour
         //Sound
         audioDictionary.Add(Pings.MissingPing, communicationLibrary.Ping1.Sound);
         audioDictionary.Add(Pings.LocationPing, communicationLibrary.Ping2.Sound);
+        audioDictionary.Add(Pings.None, communicationLibrary.Ping3.Sound);
+        audioDictionary.Add(Pings.AnotherPing, communicationLibrary.Ping4.Sound);
+        audioDictionary.Add(Pings.NewPing, communicationLibrary.Ping5.Sound);
 
         //Visual
         visualsDictionary.Add(Pings.MissingPing, communicationLibrary.Ping1.Prefab);
         visualsDictionary.Add(Pings.LocationPing, communicationLibrary.Ping2.Prefab);
+        visualsDictionary.Add(Pings.None, communicationLibrary.Ping3.Prefab);
+        visualsDictionary.Add(Pings.AnotherPing, communicationLibrary.Ping4.Prefab);
+        visualsDictionary.Add(Pings.NewPing, communicationLibrary.Ping5.Prefab);
+
+        //Icons
+        IconsDictionary.Add(Pings.MissingPing, communicationLibrary.Ping1.Icon);
+        IconsDictionary.Add(Pings.LocationPing, communicationLibrary.Ping2.Icon);
+        IconsDictionary.Add(Pings.None, communicationLibrary.Ping3.Icon);
+        IconsDictionary.Add(Pings.AnotherPing, communicationLibrary.Ping4.Icon);
+        IconsDictionary.Add(Pings.NewPing, communicationLibrary.Ping5.Icon);
     }
 }
 
