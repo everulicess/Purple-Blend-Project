@@ -274,7 +274,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 390aadc7612c2914ea49aa77fc7e933a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackType: {fileID: 11400000, guid: fbd0099305d371b4cba9bcc282a3870f, type: 2}
+  comboMaxTime: 1
+  attackTypes:
+  - {fileID: 11400000, guid: fbd0099305d371b4cba9bcc282a3870f, type: 2}
+  - {fileID: 11400000, guid: cedaf195cdbed1d49b2b5c3ded274111, type: 2}
+  - {fileID: 11400000, guid: 0e17f8c173e40fc4d8ea7ffe6746d22c, type: 2}
   child: {fileID: 1879479017}
   targets: []
 --- !u!136 &110066872
@@ -389,10 +393,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!1 &433688036
 GameObject:

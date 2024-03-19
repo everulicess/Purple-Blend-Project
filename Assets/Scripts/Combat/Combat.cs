@@ -7,12 +7,19 @@ using UnityEngine;
 
 public class Combat : MonoBehaviour
 {
-    public AttackTypesScrObj attackType;
+    public float comboMaxTime;
+    public List<AttackTypesScrObj> attackTypes = new List<AttackTypesScrObj>();
     public GameObject child;
 
     private float damage;
     private float knockback;
+    private float playerPush;
     private bool isAttacking;
+
+    private int comboCounter = 0;
+    private float comboTimeRemaining;
+    private bool comboTimerIsRunning = false;
+    private AttackTypesScrObj curAttack;
 
     private Vector3 point;
     private float lookRotationSpeed = 8f;
@@ -22,10 +29,13 @@ public class Combat : MonoBehaviour
     void Start()
     {
         // Assign values from AttackType Scriptable Object to the script and the attack area.
-        damage = attackType.damage;
-        knockback = attackType.knockback;
-        gameObject.transform.Find("AttackArea").GetComponent<MeshCollider>().sharedMesh = attackType.colliderShape;
-        gameObject.transform.Find("AttackArea").GetComponent<MeshFilter>().mesh = attackType.colliderShape;
+        curAttack = attackTypes[0];
+        damage = curAttack.damage;
+        knockback = curAttack.knockback;
+        playerPush = curAttack.playerPush;
+        gameObject.transform.Find("AttackArea").GetComponent<MeshCollider>().sharedMesh = curAttack.colliderShape;
+        gameObject.transform.Find("AttackArea").GetComponent<MeshFilter>().mesh = curAttack.colliderShape;
+        comboTimeRemaining = comboMaxTime;
     }
 
     private void Update()
@@ -35,9 +45,24 @@ public class Combat : MonoBehaviour
         {
             ClickToAttack();
         }
+        // Combo timer. When it reaches 0, the combo counter resets.
+        if (comboTimerIsRunning)
+        {
+            if (comboCounter > 0 && comboTimeRemaining > 0)
+            {
+                comboTimeRemaining -= Time.deltaTime;
+            }
+            else
+            {
+                Debug.Log("combo reset");
+                comboCounter = 0;
+                comboTimeRemaining = comboMaxTime;
+                comboTimerIsRunning = false;
+            }
+        }
     }
 
-    void ClickToAttack()
+    private void ClickToAttack()
     {
         // Converts click on the screen to a position in the game world.
         RaycastHit hit;
@@ -48,7 +73,7 @@ public class Combat : MonoBehaviour
         Attack();
     }
 
-    void FaceTarget()
+    private void FaceTarget()
     {
         // Turns the player towards the clicked spot.
         if (point != null)
@@ -59,7 +84,7 @@ public class Combat : MonoBehaviour
         }
     }
 
-    void Attack()
+    private void Attack()
     {
         // Switches isAttacking to true so that the player cannot spam attacks and invokes functions with a small delay.
         isAttacking = true;
@@ -82,23 +107,67 @@ public class Combat : MonoBehaviour
         targets.Remove(other.gameObject.GetComponent<BoxPlaceholderScript>());
     }
 
-    void TryAttacking()
+    private void TryAttacking()
     {
+        SetAttackData();
         // Enables attack area's MeshRenderer to show the attack happening.
         child.gameObject.GetComponent<MeshRenderer>().enabled = true;
-        // Checks through the list of objects within the targets list to damage them all.
+        DamageTargets();
+        PushPlayerToAttack();
+        IncreaseComboCounter();
+    }
+
+    // Checks through the list of objects within the targets list to damage them all.
+    private void DamageTargets()
+    {
         foreach (BoxPlaceholderScript target in targets.ToList())
         {
-            Vector3 knockbackVector = target.transform.position * knockback - gameObject.transform.position;
-            target.GetComponent<BoxPlaceholderScript>().Damaged(damage);
-            target.GetComponent<BoxPlaceholderScript>().ApplyKnockback(knockbackVector);
+            if (target != null)
+            {
+                Vector3 target_tp = target.transform.position;
+                Vector3 knockbackVector = new Vector3(target_tp.x * knockback, target_tp.y, target_tp.z * knockback) - gameObject.transform.forward;
+                target.GetComponent<BoxPlaceholderScript>().ApplyKnockback(knockbackVector);
+                target.GetComponent<BoxPlaceholderScript>().Damaged(damage);
+            }
         }
     }
 
-    void DisableIsAttacking()
+    // Sets the attack data to the correct attack within the combo.
+    private void SetAttackData()
+    {
+        curAttack = attackTypes[comboCounter];
+        damage = curAttack.damage;
+        knockback = curAttack.knockback;
+        playerPush = curAttack.playerPush * 100;
+        gameObject.transform.Find("AttackArea").GetComponent<MeshCollider>().sharedMesh = curAttack.colliderShape;
+        gameObject.transform.Find("AttackArea").GetComponent<MeshFilter>().mesh = curAttack.colliderShape;
+    }
+
+    // Increases the combo counter or resets it if it is done.
+    private void IncreaseComboCounter()
+    {
+        if (comboCounter < attackTypes.Count - 1)
+        {
+            comboCounter++;
+            comboTimeRemaining = comboMaxTime;
+            comboTimerIsRunning = true;
+        }
+        else
+        {
+            comboCounter = 0;
+            comboTimeRemaining = 0;
+            comboTimerIsRunning = false;
+        }
+    }
+    private void DisableIsAttacking()
     {
         // Allows player to attack again and disables the attack area's MeshRenderer.
         isAttacking = false;
         child.gameObject.GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    private void PushPlayerToAttack()
+    {
+        gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(transform.forward.x * playerPush, transform.forward.y, transform.forward.z * playerPush));
     }
 }

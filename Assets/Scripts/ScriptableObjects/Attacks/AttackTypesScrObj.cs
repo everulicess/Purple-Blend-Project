@@ -8,5 +8,6 @@ public class AttackTypesScrObj : ScriptableObject
 {
     public float damage;
     public float knockback;
+    public float playerPush;
     public Mesh colliderShape;
 }
