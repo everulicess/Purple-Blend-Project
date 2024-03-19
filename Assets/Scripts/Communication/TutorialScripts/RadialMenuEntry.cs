@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using Fusion;
 //using DG.Tweening;
 
-public class RadialMenuEntry : MonoBehaviour, IPointerClickHandler,IPointerEnterHandler,IPointerExitHandler
+public class RadialMenuEntry : NetworkBehaviour, IPointerClickHandler,IPointerEnterHandler,IPointerExitHandler
 {
-    public delegate void RadialMenuEntryDelegate(RadialMenuEntry pEntry);
+    public delegate void RadialMenuEntryDelegate(/*NetworkRunner pRunner,*/RadialMenuEntry pEntry);
     [SerializeField] TextMeshProUGUI Label;
     [SerializeField] RawImage Icon;
 
@@ -45,7 +46,7 @@ public class RadialMenuEntry : MonoBehaviour, IPointerClickHandler,IPointerEnter
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        Callback?.Invoke(this);
+        Callback?.Invoke(/*Runner,*/this);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

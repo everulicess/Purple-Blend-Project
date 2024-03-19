@@ -28,7 +28,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         await networkRunner.StartGame(new StartGameArgs()
         {
             GameMode = mode,
-            SessionName = "Test Room",
+            SessionName = "Test Room 2",
             Scene = scene,
             SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>(),
             PlayerCount = 2
@@ -111,7 +111,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
         if (!runner.IsServer) return;
-        Vector3 playerPos = new Vector3(/*(player.RawEncoded % runner.Config.Simulation.PlayerCount) * */0+playersJoined, 0f, 0f);
+        Vector3 playerPos = new(/*(player.RawEncoded % runner.Config.Simulation.PlayerCount) * */0+playersJoined, 0f, 0f);
 
         NetworkObject networkObject = runner.Spawn(networkPrefabRef, playerPos, Quaternion.identity, player);
 
