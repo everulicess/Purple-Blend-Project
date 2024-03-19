@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class BoxPlaceholderScript : MonoBehaviour
 {
-    public int health;
+    public float health;
 
-    public void Damaged(int damage)
+    public void Damaged(float damage)
     {
         Debug.Log(health);
         health -= damage;
@@ -17,5 +17,10 @@ public class BoxPlaceholderScript : MonoBehaviour
             GameObject.Find("Capsule").GetComponent<Combat>().targets.Remove(this);
             Destroy(this.gameObject);
         }
+    }
+
+    public void ApplyKnockback(Vector3 knockbackVector)
+    {
+        gameObject.GetComponent<Rigidbody>().AddForce(knockbackVector, ForceMode.Impulse);
     }
 }
