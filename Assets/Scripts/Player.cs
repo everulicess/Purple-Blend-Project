@@ -33,7 +33,6 @@ public class Player : NetworkBehaviour
     {
         characterController.maxSpeed = Character.MovementStats.MovementSpeed;
         
-        
         if (GetInput(out NetworkInputData data))
         {
             anim.SetBool("Moving", true);

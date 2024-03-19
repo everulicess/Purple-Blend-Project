@@ -13,7 +13,7 @@ public enum Pings
     AnotherPing
 }
 [Serializable]
-public struct PingInfo
+public class PingInfo
 {
     [Tooltip("3D visual for the ping")] public GameObject Prefab;
     [Tooltip("It will be played when the ping is placed")] public AudioClip Sound;

@@ -31,8 +31,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             SessionName = "Test Room",
             Scene = scene,
             SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>(),
-            //PlayerCount = 9
-
+            PlayerCount = 2
         });
     }
 
