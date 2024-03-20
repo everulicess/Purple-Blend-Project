@@ -255,10 +255,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 91701927173731694}
-  TotalWords: 1
+  TotalWords: 3
   ApplyTiming: 2
   SyncSettings: 79
-  StateHashes: 0000000074c37e9447705ba32b1a167c79406955
+  StateHashes: 0000000074c37e9447705ba32b1a167c794069558a18fce4c26c9b035daf07720f055fe53ac66cbd4990cd2bd1d60770
   TriggerHashes: 00000000
 --- !u!114 &280890212787123914
 MonoBehaviour:
