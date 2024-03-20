@@ -28,10 +28,10 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         await networkRunner.StartGame(new StartGameArgs()
         {
             GameMode = mode,
-            SessionName = "Test Room 2",
+            SessionName = "Test Room",
             Scene = scene,
             SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>(),
-            PlayerCount = 2
+            //PlayerCount = 2
         });
     }
 
@@ -116,6 +116,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         NetworkObject networkObject = runner.Spawn(networkPrefabRef, playerPos, Quaternion.identity, player);
 
         playersJoined++;
+        networkObject.name = $"Player {playersJoined}";
 
         spawnCharacter.Add(player, networkObject);
     }

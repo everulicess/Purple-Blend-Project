@@ -37,8 +37,6 @@ public class CommunicationManager : MonoBehaviour
     public static Dictionary<Pings, GameObject> visualsDictionary = new();
     public static Dictionary<Pings, Texture> IconsDictionary = new();
 
-    [SerializeField] private Camera cam;
-
     public static Vector3 pingMenuPosition { private set; get; }
 
     [SerializeField] RadialMenu radialMenu;
