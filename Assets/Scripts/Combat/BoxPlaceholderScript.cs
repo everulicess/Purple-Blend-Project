@@ -17,7 +17,7 @@ public class BoxPlaceholderScript : MonoBehaviour
         gameObject.GetComponent<Renderer>().material = damageMaterial;
         if(health <= 0)
         {
-            GameObject.Find("Capsule").GetComponent<Combat>().targets.Remove(this);
+            GameObject.Find("Player").GetComponent<Combat>().targets.Remove(this);
             Destroy(this.gameObject);
         }
         Invoke("ChangeMaterial", 0.1f);

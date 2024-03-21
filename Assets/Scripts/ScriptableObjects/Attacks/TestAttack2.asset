@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TestAttack2
   m_EditorClassIdentifier: 
   damage: 1.5
-  knockback: 10
+  knockback: 5
   playerPush: 1
   colliderShape: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
