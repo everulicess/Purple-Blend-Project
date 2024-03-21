@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   knockback: 3
-  playerPush: 1
+  playerPush: 0
   colliderShape: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}

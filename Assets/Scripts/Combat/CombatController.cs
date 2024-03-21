@@ -5,11 +5,11 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Combat : MonoBehaviour
+public class CombatController : MonoBehaviour
 {
     public float comboMaxTime;
     public List<AttackTypesScrObj> attackTypes = new List<AttackTypesScrObj>();
-    public GameObject child;
+    public GameObject hitbox;
 
     private float damage;
     private float knockback;
@@ -21,7 +21,7 @@ public class Combat : MonoBehaviour
     private bool comboTimerIsRunning = false;
     private AttackTypesScrObj curAttack;
 
-    private Vector3 point;
+    public Vector3 point;
     private float lookRotationSpeed = 8f;
     public List<BoxPlaceholderScript> targets = new List<BoxPlaceholderScript>();
 
@@ -41,10 +41,6 @@ public class Combat : MonoBehaviour
     private void Update()
     {
         FaceTarget();
-        if(Input.GetMouseButtonDown(0) && !isAttacking)
-        {
-            ClickToAttack();
-        }
         // Combo timer. When it reaches 0, the combo counter resets.
         if (comboTimerIsRunning)
         {
@@ -62,17 +58,6 @@ public class Combat : MonoBehaviour
         }
     }
 
-    private void ClickToAttack()
-    {
-        // Converts click on the screen to a position in the game world.
-        RaycastHit hit;
-        if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
-        {
-            point = hit.point;
-        }
-        Attack();
-    }
-
     private void FaceTarget()
     {
         // Turns the player towards the clicked spot.
@@ -84,12 +69,15 @@ public class Combat : MonoBehaviour
         }
     }
 
-    private void Attack()
+    public void Attack()
     {
-        // Switches isAttacking to true so that the player cannot spam attacks and invokes functions with a small delay.
-        isAttacking = true;
-        Invoke("TryAttacking", 0.3f);
-        Invoke("DisableIsAttacking", 0.5f);
+        if (!isAttacking)
+        {
+            // Switches isAttacking to true so that the player cannot spam attacks and invokes functions with a small delay.
+            isAttacking = true;
+            Invoke("TryAttacking", 0.3f);
+            Invoke("DisableIsAttacking", 0.5f);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -111,7 +99,7 @@ public class Combat : MonoBehaviour
     {
         SetAttackData();
         // Enables attack area's MeshRenderer to show the attack happening.
-        child.gameObject.GetComponent<MeshRenderer>().enabled = true;
+        hitbox.gameObject.GetComponent<MeshRenderer>().enabled = true;
         DamageTargets();
         PushPlayerToAttack();
         IncreaseComboCounter();
@@ -164,7 +152,7 @@ public class Combat : MonoBehaviour
     {
         // Allows player to attack again and disables the attack area's MeshRenderer.
         isAttacking = false;
-        child.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        hitbox.gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
     private void PushPlayerToAttack()

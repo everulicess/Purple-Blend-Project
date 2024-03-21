@@ -254,6 +254,7 @@ GameObject:
   - component: {fileID: 110066873}
   - component: {fileID: 110066872}
   - component: {fileID: 110066871}
+  - component: {fileID: 110066877}
   - component: {fileID: 110066876}
   m_Layer: 0
   m_Name: Player
@@ -276,10 +277,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   comboMaxTime: 1
   attackTypes:
-  - {fileID: 11400000, guid: cedaf195cdbed1d49b2b5c3ded274111, type: 2}
   - {fileID: 11400000, guid: fbd0099305d371b4cba9bcc282a3870f, type: 2}
+  - {fileID: 11400000, guid: cedaf195cdbed1d49b2b5c3ded274111, type: 2}
   - {fileID: 11400000, guid: 0e17f8c173e40fc4d8ea7ffe6746d22c, type: 2}
-  child: {fileID: 1879479017}
+  hitbox: {fileID: 1879479017}
+  point: {x: 0, y: 0, z: 0}
   targets: []
 --- !u!136 &110066872
 CapsuleCollider:
@@ -398,6 +400,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &110066877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110066870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a14dc2243daa4b84ea66504618a4dc71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &110481389
 GameObject:
   m_ObjectHideFlags: 0
