@@ -115,6 +115,7 @@ public class Combat : MonoBehaviour
         DamageTargets();
         PushPlayerToAttack();
         IncreaseComboCounter();
+        targets.Clear();
     }
 
     // Checks through the list of objects within the targets list to damage them all.
