@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyingTime: 2
+  ThisObject: {fileID: -1282070134898298644}
 --- !u!114 &-1282070134898298644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,7 +64,8 @@ MonoBehaviour:
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
-  NetworkedBehaviours: []
+  NetworkedBehaviours:
+  - {fileID: 765154197678172943}
 --- !u!1 &5736606546536377463
 GameObject:
   m_ObjectHideFlags: 0

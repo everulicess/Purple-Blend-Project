@@ -16,6 +16,7 @@ public class RadialMenu : NetworkBehaviour
 
     [SerializeField] RawImage TargetIcon;
     // Start is called before the first frame update
+    
     void Start()
     {
         Entries = new();
@@ -81,29 +82,37 @@ public class RadialMenu : NetworkBehaviour
     //    TargetIcon.texture = pEntry.GetIcon();
     //}
     //NetworkRunner runner;
-    [Rpc(RpcSources.All,RpcTargets.StateAuthority)]
+    [Rpc(RpcSources.All,RpcTargets.All,HostMode = RpcHostMode.SourceIsHostPlayer)]
     public void PlacePing_RPC(/*NetworkRunner prunner,*/ RadialMenuEntry pEntry)
     {
-        //if (!HasInputAuthority) return;
-        //if (runner) return;
-        Debug.LogError($"can send the RPC");
-        Pings _ping = pEntry.GetPingID();
-        //get sound and visuals for each ping
-        CommunicationManager.visualsDictionary.TryGetValue(_ping, out GameObject _pingVisual);
-        CommunicationManager.audioDictionary.TryGetValue(_ping, out AudioClip _pingSound);
-        Vector3 pos = CommunicationManager.pingMenuPosition;
-        Camera cam = FindObjectOfType<Camera>();
-        Ray ray = cam.ScreenPointToRay(pos);
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        Debug.Log($" trying to send RPC");
+        if (HasInputAuthority)
         {
-            if (hit.collider.gameObject.layer == 8)
+            Debug.LogError($"can send the RPC");
+            Pings _ping = pEntry.GetPingID();
+            //get sound and visuals for each ping
+            CommunicationManager.visualsDictionary.TryGetValue(_ping, out GameObject _pingVisual);
+            CommunicationManager.audioDictionary.TryGetValue(_ping, out AudioClip _pingSound);
+            Vector3 pos = CommunicationManager.pingMenuPosition;
+            Camera cam = FindObjectOfType<Camera>();
+            Ray ray = cam.ScreenPointToRay(pos);
+            if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                Vector3 offset = new(hit.point.x, hit.point.y + 0.1f, hit.point.z);
-                Runner.Spawn(_pingVisual, offset, Quaternion.identity);
-                AudioSource.PlayClipAtPoint(_pingSound, offset);
+                if (hit.collider.gameObject.layer == 8)
+                {
+                    Vector3 offset = new(hit.point.x, hit.point.y + 0.1f, hit.point.z);
+                    Runner.Spawn(_pingVisual, offset, Quaternion.identity);
+                    AudioSource.PlayClipAtPoint(_pingSound, offset);
 
-                Debug.Log($"{_pingVisual.name} has been placed and {_pingSound.name} is ebing played");
+                    Debug.Log($"{_pingVisual.name} has been placed and {_pingSound.name} is ebing played");
+                }
             }
         }
+        else
+        {
+            Debug.LogError($"not able to send the RPC, input authority: {HasInputAuthority}");
+        }
+        //if (runner) return;
+        
     }
 }

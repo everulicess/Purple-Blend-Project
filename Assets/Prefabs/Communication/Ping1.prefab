@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyingTime: 2
+  ThisObject: {fileID: 5181428273564063880}
 --- !u!114 &5181428273564063880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,4 +169,5 @@ MonoBehaviour:
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
-  NetworkedBehaviours: []
+  NetworkedBehaviours:
+  - {fileID: 765154197678172943}

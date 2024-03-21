@@ -12,6 +12,7 @@ public class Player : NetworkBehaviour
     private NetworkCharacterController characterController;
 
     [SerializeField] private Transform camTarget;
+    //Camera cam;
 
     float turnSpeed = 360f;
     [SerializeField]float speed = 3f;
@@ -33,29 +34,29 @@ public class Player : NetworkBehaviour
     {
         characterController = GetComponent<NetworkCharacterController>();
         anim = GetComponent<Animator>();
-        cam = FindObjectOfType<Camera>();
+        //cam = FindObjectOfType<Camera>();
     }
-    Camera cam;
+    
     public override void FixedUpdateNetwork()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit))
-            {
-                point = hit.point;
-                direction2 = point - transform.position;
-            }
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    RaycastHit hit;
+        //    if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit))
+        //    {
+        //        point = hit.point;
+        //        direction2 = point - transform.position;
+        //    }
+        //}
         float angle = Vector3.Angle(direction2, direction1);
-        Debug.Log($" Main Direction: {direction1}\n Looking Direction: {direction2}" +
-            $"\n Angle Between those 2 directions: {angle}\n Right Vector {Vector3.right}" +
-            $"\n Forward Vector 3: {Vector3.forward} \n Left Vector 3: {Vector3.left}" +
-            $"\n Back Vector 3: {Vector3.back}");
+        //Debug.Log($" Main Direction: {direction1}\n Looking Direction: {direction2}" +
+        //    $"\n Angle Between those 2 directions: {angle}\n Right Vector {Vector3.right}" +
+        //    $"\n Forward Vector 3: {Vector3.forward} \n Left Vector 3: {Vector3.left}" +
+        //    $"\n Back Vector 3: {Vector3.back}");
 
         characterController.maxSpeed = Character.MovementStats.MovementSpeed;
 
-        FaceTarget();
+        //FaceTarget();
 
         if (GetInput(out NetworkInputData data))
         {
