@@ -125,8 +125,8 @@ public class Combat : MonoBehaviour
             if (target != null)
             {
                 Vector3 target_tp = target.transform.position;
-                Vector3 knockbackVector = new Vector3(target_tp.x * knockback, target_tp.y, target_tp.z * knockback) - gameObject.transform.forward;
-                target.GetComponent<BoxPlaceholderScript>().ApplyKnockback(knockbackVector);
+                Vector3 knockbackVector = (target_tp - gameObject.transform.position).normalized;
+                target.GetComponent<BoxPlaceholderScript>().ApplyKnockback(knockbackVector*knockback);
                 target.GetComponent<BoxPlaceholderScript>().Damaged(damage);
             }
         }
