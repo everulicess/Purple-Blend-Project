@@ -3,98 +3,82 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
-public class Player : NetworkBehaviour
-{
-    [SerializeField] CharacterStatsScrObj Character;
+public class Player : NetworkBehaviour {
 
+    [SerializeField] private float turnSpeed = 360f;
+    [SerializeField] CharacterStatsScrObj Character;
+    [SerializeField] private Transform camTarget;
     //[SerializeField]Characters currentCharacter;
 
     private NetworkCharacterController characterController;
+    private Animator anim;
 
-    [SerializeField] private Transform camTarget;
+    //the time the attack animation locks the player's rotation
+    private float attackLength = 1.6f;
+    private float attackTime   = 0f;
 
-    float turnSpeed = 360f;
-    [SerializeField]float speed = 3f;
+    //keep a reference to the skew to save a bit of calculation (you could also rotate the world and remove this)
+    private readonly Quaternion skew = Quaternion.Euler(0, 45, 0);
 
-    [SerializeField] Animator anim;
-    private bool attacking = false;
-    public override void Spawned()
-    {
-        if (HasInputAuthority)
-        {
-            CameraFollow.Singleton.SetTarget(camTarget);
+    private bool isAttacking = false;
+    //getter/setter for isAttacking which automatically sets the variables to start the timer and animation
+    public bool IsAttacking {
+		get { return isAttacking; }
+		set {
+            isAttacking = value;
+            if(isAttacking) attackTime = attackLength;
+            anim.SetBool("Attacking", isAttacking);
         }
+	}
+
+    public override void Spawned(){
+        if (HasInputAuthority) CameraFollow.Singleton.SetTarget(camTarget);
     }
-    private void Awake()
-    {
+
+    private void Awake(){
         characterController = GetComponent<NetworkCharacterController>();
+        characterController.maxSpeed = Character.MovementStats.MovementSpeed;
         anim = GetComponent<Animator>();
     }
-    public override void FixedUpdateNetwork()
-    {
-        characterController.maxSpeed = Character.MovementStats.MovementSpeed;
+
+    public override void FixedUpdateNetwork(){
         
-        
-        if (GetInput(out NetworkInputData data))
-        {
-            anim.SetBool("Moving", true);
-            //Daan Animation Test
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
-                anim.SetBool("Attacking", true);
-                Debug.Log("Attacking");
-                attacking = true;
-            }
-            else
-            {
-                anim.SetBool("Attacking", false);
-                attacking = false;
-            }
-
-            var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
-            //data.direction.Normalize();
-
-            var skewedInput = matrix.MultiplyPoint3x4(data.direction);
-
-            if (data.direction != Vector3.zero)
-            {
-                var relative = (transform.position + data.direction) - transform.position;
-                var rot = Quaternion.LookRotation(relative, Vector3.up);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Runner.DeltaTime);
-            }
-
-            //Daan Testing animation calculation
-            Vector3 fwdDirection;
-            fwdDirection = transform.InverseTransformDirection(Vector3.forward);
-            Debug.Log(fwdDirection);
-            Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            Debug.Log(moveDirection);
-
-            float lerpMinimum = -1f;  
-            float lerpMaximum = 1f;
-            Vector3 moveX = new Vector3(Mathf.Lerp(lerpMinimum, lerpMaximum, fwdDirection.x + moveDirection.x), 0, 0);
-            Vector3 moveZ = new Vector3(0, 0, Mathf.Lerp(lerpMaximum, lerpMaximum, fwdDirection.z + moveDirection.z));
-            Debug.Log($"Move x = {moveX}");
-            Debug.Log($"Move Z = {moveZ}");
-           
-            float AnimationFloatX = moveX.x;
-            float AnimationFloatZ = moveZ.z;
-            anim.SetFloat("MoveX", AnimationFloatX);
-            anim.SetFloat("MoveY", AnimationFloatZ);
-            
-            /*
-            float AnimationFloatX = (fwdDirection.x + moveDirection.x)/2;
-            float Animatianim.SetFloat("MoveX", AnimationFloatX);onFloatY = (fwdDirection.y + moveDirection.y)/2;
-            anim.SetFloat("MoveX", AnimationFloatX);
-            */
-            
-
-            skewedInput.Normalize();
-            characterController.Move(Runner.DeltaTime * speed * skewedInput);
-            //Debug.LogWarning($"skewed input is {skewedInput}");
-            if (data.direction == Vector3.zero)
-                anim.SetBool("Moving", false);
-
+        //count down attack time and end the attack once it hits 0
+        if (IsAttacking && attackTime > 0) {
+            attackTime -= Runner.DeltaTime;
+            if (attackTime <= 0) IsAttacking = false;
         }
+
+        //exit if there is no input
+        if (!GetInput(out NetworkInputData data)) return;
+        
+        //initiate attack with mouse click (also checks if the player is already attacking so the animation does not restart)
+        if (Input.GetKey(KeyCode.Mouse0) && !IsAttacking) IsAttacking = true;
+
+        Vector3 forward = Vector3.zero;
+        if (data.direction != Vector3.zero){
+            forward = skew * data.direction;
+            //rotate the character unless it is currently attacking. The NetworkCharacterController's rotation speed should be 0 so it doesn't interfere with this.
+            if(!IsAttacking) transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(forward, Vector3.up), turnSpeed * Runner.DeltaTime);
+        }
+
+        //movement blending variables
+        if (characterController.Velocity == Vector3.zero) {
+            anim.SetFloat("MoveX", 0);
+            anim.SetFloat("MoveY", 0);
+        }
+        else {
+            //get the angle between the forward and movement vectors and multiply it by 2pi/360 to get the correct sine/cosine
+            float angle = Vector3.SignedAngle(transform.forward, characterController.Velocity, Vector3.up) * 0.0174532925199f;
+            //calculate the ratio between current and maximum speed to make blend walk and idle depending on speed
+            float ratio = characterController.Velocity.magnitude / characterController.maxSpeed;
+            //sine and cosine times ratio gives the final x and y values
+            anim.SetFloat("MoveX", Mathf.Sin(angle) * ratio);
+            anim.SetFloat("MoveY", Mathf.Cos(angle) * ratio);
+        }
+
+        //move the character
+        characterController.Move(forward);
+        anim.SetBool("Moving", characterController.Velocity != Vector3.zero);
     }
 }

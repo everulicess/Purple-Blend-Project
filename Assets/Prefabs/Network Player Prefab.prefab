@@ -181,7 +181,7 @@ MonoBehaviour:
   acceleration: 10
   braking: 10
   maxSpeed: 6
-  rotationSpeed: 15
+  rotationSpeed: 0
 --- !u!114 &8905188441464483676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,10 +194,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95929a67334595943b010b255285fc94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnSpeed: 360
+  speed: 2
   Character: {fileID: 11400000, guid: c21266e585e919b41b10409d88097509, type: 2}
   camTarget: {fileID: 2627143927177756995}
-  speed: 2
-  anim: {fileID: 91701927173731694}
 --- !u!136 &6075541524490898695
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -255,11 +255,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 91701927173731694}
-  TotalWords: 3
+  TotalWords: 4
   ApplyTiming: 2
   SyncSettings: 79
   StateHashes: 0000000074c37e9447705ba32b1a167c794069558a18fce4c26c9b035daf07720f055fe53ac66cbd4990cd2bd1d60770
-  TriggerHashes: 00000000
+  TriggerHashes: 000000000d286c4037013a39
 --- !u!114 &280890212787123914
 MonoBehaviour:
   m_ObjectHideFlags: 0
