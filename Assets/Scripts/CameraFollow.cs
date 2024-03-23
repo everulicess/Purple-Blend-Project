@@ -40,7 +40,7 @@ public class CameraFollow : MonoBehaviour
     [Header("Rotation")]
     [SerializeField] private float camXRotationt;
     [SerializeField] private float camYRotation;
-    private Vector3 camPosition;
+    //private Vector3 camPosition;
     private void Awake()
     {
         Singleton = this;
@@ -66,6 +66,7 @@ public class CameraFollow : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, pos, smoothSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(camXRotationt, camYRotation, 0f);
         this.gameObject.GetComponent<Camera>().orthographicSize = distance;
+
         //Zoom = Mathf.Clamp(Zoom, minDistance, maxDistance);
         //this.gameObject.GetComponent<Camera>().orthographicSize = Mathf.Clamp(this.gameObject.GetComponent<Camera>().orthographicSize, 0.4f, 8f);
 

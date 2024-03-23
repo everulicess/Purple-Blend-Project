@@ -51,6 +51,7 @@ public class RadialMenuEntry : NetworkBehaviour, IPointerClickHandler,IPointerEn
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        Debug.LogError($"PingID is: {PingId}");
         ///Animation using DG.Tweening
         ///Rect.DOSComplete();
         ///Rect.DOScale(vector3.one*1.5f,3f).SetEase(Ease.OutQuad);

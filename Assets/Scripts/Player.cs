@@ -12,7 +12,7 @@ public class Player : NetworkBehaviour
     private NetworkCharacterController characterController;
 
     [SerializeField] private Transform camTarget;
-    //Camera cam;
+    Camera cam;
 
     float turnSpeed = 360f;
     [SerializeField]float speed = 3f;
@@ -28,6 +28,7 @@ public class Player : NetworkBehaviour
         if (HasInputAuthority)
         {
             CameraFollow.Singleton.SetTarget(camTarget);
+            cam = CameraFollow.Singleton.GetComponent<Camera>();
         }
     }
     private void Awake()

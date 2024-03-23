@@ -29,7 +29,7 @@ public struct CommunicationLibrary
     public PingInfo Ping4;
     public PingInfo Ping5;
 }
-public class CommunicationManager : MonoBehaviour
+public class CommunicationManager : NetworkBehaviour
 {
     [SerializeField]CommunicationLibrary communicationLibrary;
 
@@ -37,7 +37,7 @@ public class CommunicationManager : MonoBehaviour
     public static Dictionary<Pings, GameObject> visualsDictionary = new();
     public static Dictionary<Pings, Texture> IconsDictionary = new();
 
-    public static Vector3 pingMenuPosition { private set; get; }
+    public static Vector3 PingMenuPosition { private set; get; }
 
     [SerializeField] RadialMenu radialMenu;
     private void Awake()
@@ -46,10 +46,15 @@ public class CommunicationManager : MonoBehaviour
     }
     void Update()
     {
+        MenuToggle();
+    }
+
+    private void MenuToggle()
+    {
         if (Input.GetKey(KeyCode.V))
         {
             radialMenu.Open();
-            radialMenu.transform.position = pingMenuPosition;
+            radialMenu.transform.position = PingMenuPosition;
             //Cursor.visible = false;
         }
         else
@@ -57,9 +62,15 @@ public class CommunicationManager : MonoBehaviour
             radialMenu.Close();
             Cursor.lockState = CursorLockMode.None;
             //Cursor.visible = true;
-            pingMenuPosition = Input.mousePosition;
+            PingMenuPosition = Input.mousePosition;
             //pingMenuUIObject.SetActive(false);
         }
+    }
+
+    public override void FixedUpdateNetwork()
+    {
+
+        MenuToggle();
     }
     private void InitializeDictionaries()
     {

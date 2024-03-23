@@ -85,16 +85,15 @@ public class RadialMenu : NetworkBehaviour
     [Rpc(RpcSources.All,RpcTargets.All,HostMode = RpcHostMode.SourceIsHostPlayer)]
     public void PlacePing_RPC(/*NetworkRunner prunner,*/ RadialMenuEntry pEntry)
     {
-        Debug.Log($" trying to send RPC");
-        if (HasInputAuthority)
+        if (Runner.IsClient||HasInputAuthority||HasStateAuthority)
         {
             Debug.LogError($"can send the RPC");
             Pings _ping = pEntry.GetPingID();
             //get sound and visuals for each ping
             CommunicationManager.visualsDictionary.TryGetValue(_ping, out GameObject _pingVisual);
             CommunicationManager.audioDictionary.TryGetValue(_ping, out AudioClip _pingSound);
-            Vector3 pos = CommunicationManager.pingMenuPosition;
-            Camera cam = FindObjectOfType<Camera>();
+            Vector3 pos = CommunicationManager.PingMenuPosition;
+            Camera cam = CameraFollow.Singleton.GetComponent<Camera>();
             Ray ray = cam.ScreenPointToRay(pos);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
