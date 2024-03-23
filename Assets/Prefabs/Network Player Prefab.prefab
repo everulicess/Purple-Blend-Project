@@ -195,7 +195,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnSpeed: 360
-  speed: 2
   Character: {fileID: 11400000, guid: c21266e585e919b41b10409d88097509, type: 2}
   camTarget: {fileID: 2627143927177756995}
 --- !u!136 &6075541524490898695
