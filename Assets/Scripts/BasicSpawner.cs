@@ -92,6 +92,12 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         //{
         //    data.direction += Vector3.right;
         //}
+        //input.Set(data);
+        if (Input.mousePosition.magnitude!=0)
+        {
+            data.MousePosition = new Vector3(Input.mousePosition.x,Input.mousePosition.y,Input.mousePosition.z);
+            //Debug.LogWarning(data.MousePosition);
+        }
         data.direction = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         input.Set(data);
     }

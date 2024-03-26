@@ -9,13 +9,17 @@ using Fusion;
 
 public class RadialMenuEntry : NetworkBehaviour, IPointerClickHandler,IPointerEnterHandler,IPointerExitHandler
 {
-    public delegate void RadialMenuEntryDelegate(/*NetworkRunner pRunner,*/RadialMenuEntry pEntry);
+    public delegate void RadialMenuEntryDelegate(RadialMenuEntry pEntry, Pings pPingId);
     [SerializeField] TextMeshProUGUI Label;
     [SerializeField] RawImage Icon;
 
     RectTransform Rect;
     RadialMenuEntryDelegate Callback;
-    [SerializeField]Pings PingId;
+    [SerializeField]protected Pings PingId;
+    public override void Spawned()
+    {
+        base.Spawned();
+    }
     private void Start()
     {
         Rect = Icon.GetComponent<RectTransform>();
@@ -46,7 +50,7 @@ public class RadialMenuEntry : NetworkBehaviour, IPointerClickHandler,IPointerEn
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        Callback?.Invoke(/*Runner,*/this);
+        Callback?.Invoke(this.gameObject.GetComponent<RadialMenuEntry>(),PingId);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -56,7 +60,6 @@ public class RadialMenuEntry : NetworkBehaviour, IPointerClickHandler,IPointerEn
         ///Rect.DOSComplete();
         ///Rect.DOScale(vector3.one*1.5f,3f).SetEase(Ease.OutQuad);
     }
-
     public void OnPointerExit(PointerEventData eventData)
     {
         ///Animation using DG.Tweening

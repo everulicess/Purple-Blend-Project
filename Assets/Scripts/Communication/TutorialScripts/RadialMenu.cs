@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System;
 using Fusion;
 
-public class RadialMenu : NetworkBehaviour
+public class RadialMenu : MonoBehaviour
 {
     [SerializeField] GameObject EntryPrefab;
 
@@ -16,10 +16,12 @@ public class RadialMenu : NetworkBehaviour
 
     [SerializeField] RawImage TargetIcon;
     // Start is called before the first frame update
-    
-    void Start()
+    private void Awake()
     {
         Entries = new();
+    }
+    void Start()
+    {
     }
 
     void AddEntry(Pings pPingId, RadialMenuEntry.RadialMenuEntryDelegate pCallback)
@@ -29,10 +31,10 @@ public class RadialMenu : NetworkBehaviour
         GameObject entry = Instantiate(EntryPrefab, transform);
 
         RadialMenuEntry rme = entry.GetComponent<RadialMenuEntry>();
+        rme.SetPing(pPingId);
         rme.SetLabel(pPingId.ToString());
         rme.SetIcon(icon);
         rme.SetCallback(pCallback);
-        rme.SetPing(pPingId);
 
         Entries.Add(rme);
     }
@@ -41,7 +43,7 @@ public class RadialMenu : NetworkBehaviour
         if (Entries.Count != 0) return;
         foreach (Pings ping in Enum.GetValues(typeof(Pings)))
         {
-            AddEntry(ping, PlacePing_RPC);
+            AddEntry(ping, FindObjectOfType<CommunicationManager>().PlacePing_RPC);
         }
         Rearrange();
     }
@@ -82,36 +84,36 @@ public class RadialMenu : NetworkBehaviour
     //    TargetIcon.texture = pEntry.GetIcon();
     //}
     //NetworkRunner runner;
-    [Rpc(RpcSources.All,RpcTargets.All,HostMode = RpcHostMode.SourceIsHostPlayer)]
-    public void PlacePing_RPC(/*NetworkRunner prunner,*/ RadialMenuEntry pEntry)
-    {
-        if (Runner.IsClient||HasInputAuthority||HasStateAuthority)
-        {
-            Debug.LogError($"can send the RPC");
-            Pings _ping = pEntry.GetPingID();
-            //get sound and visuals for each ping
-            CommunicationManager.visualsDictionary.TryGetValue(_ping, out GameObject _pingVisual);
-            CommunicationManager.audioDictionary.TryGetValue(_ping, out AudioClip _pingSound);
-            Vector3 pos = CommunicationManager.PingMenuPosition;
-            Camera cam = CameraFollow.Singleton.GetComponent<Camera>();
-            Ray ray = cam.ScreenPointToRay(pos);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                if (hit.collider.gameObject.layer == 8)
-                {
-                    Vector3 offset = new(hit.point.x, hit.point.y + 0.1f, hit.point.z);
-                    Runner.Spawn(_pingVisual, offset, Quaternion.identity);
-                    AudioSource.PlayClipAtPoint(_pingSound, offset);
+    //[Rpc(RpcSources.All,RpcTargets.All,HostMode = RpcHostMode.SourceIsHostPlayer)]
+    //public void PlacePing_RPC(/*NetworkRunner prunner,*/ RadialMenuEntry pEntry)
+    //{
+    //    if (Runner.IsClient||HasInputAuthority||HasStateAuthority)
+    //    {
+    //        Debug.LogError($"can send the RPC");
+    //        Pings _ping = pEntry.GetPingID();
+    //        //get sound and visuals for each ping
+    //        CommunicationManager.visualsDictionary.TryGetValue(_ping, out GameObject _pingVisual);
+    //        CommunicationManager.audioDictionary.TryGetValue(_ping, out AudioClip _pingSound);
+    //        Vector3 pos = CommunicationManager.PingMenuPosition;
+    //        Camera cam = CameraFollow.Singleton.GetComponent<Camera>();
+    //        Ray ray = cam.ScreenPointToRay(pos);
+    //        if (Physics.Raycast(ray, out RaycastHit hit))
+    //        {
+    //            if (hit.collider.gameObject.layer == 8)
+    //            {
+    //                Vector3 offset = new(hit.point.x, hit.point.y + 0.1f, hit.point.z);
+    //                Runner.Spawn(_pingVisual, offset, Quaternion.identity);
+    //                AudioSource.PlayClipAtPoint(_pingSound, offset);
 
-                    Debug.Log($"{_pingVisual.name} has been placed and {_pingSound.name} is ebing played");
-                }
-            }
-        }
-        else
-        {
-            Debug.LogError($"not able to send the RPC, input authority: {HasInputAuthority}");
-        }
-        //if (runner) return;
+    //                Debug.Log($"{_pingVisual.name} has been placed and {_pingSound.name} is ebing played");
+    //            }
+    //        }
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError($"not able to send the RPC, input authority: {HasInputAuthority}");
+    //    }
+    //    //if (runner) return;
         
-    }
+    //}
 }

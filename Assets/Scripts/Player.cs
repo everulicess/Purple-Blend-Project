@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using Fusion;
 
 public class Player : NetworkBehaviour
@@ -9,6 +10,7 @@ public class Player : NetworkBehaviour
 
     //[SerializeField]Characters currentCharacter;
 
+    public static Vector3 m_MousePosition;
     private NetworkCharacterController characterController;
 
     [SerializeField] private Transform camTarget;
@@ -25,10 +27,12 @@ public class Player : NetworkBehaviour
 
     public override void Spawned()
     {
+        Cursor.lockState = CursorLockMode.Confined;
         if (HasInputAuthority)
         {
             CameraFollow.Singleton.SetTarget(camTarget);
             cam = CameraFollow.Singleton.GetComponent<Camera>();
+
         }
     }
     private void Awake()
@@ -37,9 +41,10 @@ public class Player : NetworkBehaviour
         anim = GetComponent<Animator>();
         //cam = FindObjectOfType<Camera>();
     }
-    
+    //NetworkInputData data_;
     public override void FixedUpdateNetwork()
     {
+        //data_.MousePosition = Input.mousePosition;
         //if (Input.GetMouseButtonDown(0))
         //{
         //    RaycastHit hit;
@@ -70,7 +75,8 @@ public class Player : NetworkBehaviour
             {
                 var relative = (transform.position + data.direction) - transform.position;
                 var rot = Quaternion.LookRotation(relative, Vector3.up);
-
+                //m_MousePosition = data.MousePosition;
+                //Debug.LogWarning($"PLAYER MOUSE POSITION IS: {data.MousePosition}---------------------------------------------------------------");
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Runner.DeltaTime);
             }
             skewedInput.Normalize();
@@ -92,3 +98,34 @@ public class Player : NetworkBehaviour
         }
     }
 }
+
+
+
+
+
+
+//public enum Pings
+//{
+//    None,
+//    MissingPing,
+//    LocationPing,
+//    NewPing,
+//    AnotherPing
+//}
+//[Serializable]
+//public class PingInfo
+//{
+//    [Tooltip("3D visual for the ping")] public GameObject Prefab;
+//    [Tooltip("It will be played when the ping is placed")] public AudioClip Sound;
+//    [Tooltip("Icon that will be displayed in the Menu")] public Texture Icon;
+//}
+//[Serializable]
+//public struct CommunicationLibrary
+//{
+//    [Header("Pings")]
+//    public PingInfo Ping1;
+//    public PingInfo Ping2;
+//    public PingInfo Ping3;
+//    public PingInfo Ping4;
+//    public PingInfo Ping5;
+//}

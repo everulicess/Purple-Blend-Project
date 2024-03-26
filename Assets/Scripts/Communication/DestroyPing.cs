@@ -6,13 +6,21 @@ using Fusion;
 
 public class DestroyPing : NetworkBehaviour
 {
+    TickTimer life;
     [SerializeField] float destroyingTime;
-    [SerializeField] NetworkObject ThisObject;
+    NetworkObject ThisObject;
     TextMeshProUGUI locationText;
+    private bool deletinItem = false;
     // Update is called once per frame
     public override void Spawned()
     {
+        base.Spawned();
         locationText = GameObject.FindGameObjectWithTag("textPos").GetComponent<TextMeshProUGUI>();
+        ThisObject = GetComponent<NetworkObject>();
+    }
+    public void Init()
+    {
+        destroyingTime = 3f;
     }
     public override void FixedUpdateNetwork()
     {
@@ -23,9 +31,14 @@ public class DestroyPing : NetworkBehaviour
             //Destroy(this.gameObject);
         }
     }
+    
     void Update()
     {
-        destroyingTime -= Time.deltaTime;
+        //if (Input.GetKeyDown(KeyCode.P))
+        
+            deletinItem = !deletinItem;
+        
+        destroyingTime -= deletinItem? Runner.DeltaTime:0f;
 
     }
 }
