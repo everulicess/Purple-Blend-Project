@@ -93,9 +93,9 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         //    data.direction += Vector3.right;
         //}
         //input.Set(data);
-        if (Input.mousePosition.magnitude!=0)
+        if (Input.mousePosition.magnitude != 0)
         {
-            data.MousePosition = new Vector3(Input.mousePosition.x,Input.mousePosition.y,Input.mousePosition.z);
+            data.MousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
             //Debug.LogWarning(data.MousePosition);
         }
         data.direction = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
@@ -117,7 +117,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
         if (!runner.IsServer) return;
-        Vector3 playerPos = new(/*(player.RawEncoded % runner.Config.Simulation.PlayerCount) * */0+playersJoined, 0f, 0f);
+        Vector3 playerPos = new(/*(player.RawEncoded % runner.Config.Simulation.PlayerCount) * */0 + playersJoined, 0f, 0f);
 
         NetworkObject networkObject = runner.Spawn(networkPrefabRef, playerPos, Quaternion.identity, player);
 

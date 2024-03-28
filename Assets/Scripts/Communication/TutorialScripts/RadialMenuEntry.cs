@@ -7,7 +7,7 @@ using TMPro;
 using Fusion;
 //using DG.Tweening;
 
-public class RadialMenuEntry : NetworkBehaviour, IPointerClickHandler,IPointerEnterHandler,IPointerExitHandler
+public class RadialMenuEntry : NetworkBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public delegate void RadialMenuEntryDelegate(RadialMenuEntry pEntry, Pings pPingId);
     [SerializeField] TextMeshProUGUI Label;
@@ -15,7 +15,7 @@ public class RadialMenuEntry : NetworkBehaviour, IPointerClickHandler,IPointerEn
 
     RectTransform Rect;
     RadialMenuEntryDelegate Callback;
-    [SerializeField]protected Pings PingId;
+    [SerializeField] protected Pings PingId;
     public override void Spawned()
     {
         base.Spawned();
@@ -50,12 +50,12 @@ public class RadialMenuEntry : NetworkBehaviour, IPointerClickHandler,IPointerEn
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        Callback?.Invoke(this.gameObject.GetComponent<RadialMenuEntry>(),PingId);
+        Callback?.Invoke(this.gameObject.GetComponent<RadialMenuEntry>(), PingId);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.LogError($"PingID is: {PingId}");
+        //Debug.LogError($"PingID is: {PingId}");
         ///Animation using DG.Tweening
         ///Rect.DOSComplete();
         ///Rect.DOScale(vector3.one*1.5f,3f).SetEase(Ease.OutQuad);

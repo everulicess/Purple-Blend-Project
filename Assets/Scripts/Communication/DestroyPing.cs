@@ -15,7 +15,7 @@ public class DestroyPing : NetworkBehaviour
     public override void Spawned()
     {
         base.Spawned();
-        locationText = GameObject.FindGameObjectWithTag("textPos").GetComponent<TextMeshProUGUI>();
+        //locationText = GameObject.FindGameObjectWithTag("textPos").GetComponent<TextMeshProUGUI>();
         ThisObject = GetComponent<NetworkObject>();
     }
     public void Init()
@@ -24,21 +24,21 @@ public class DestroyPing : NetworkBehaviour
     }
     public override void FixedUpdateNetwork()
     {
-        locationText.text = $"position: {transform.position}";
+        //locationText.text = $"position: {transform.position}";
         if (destroyingTime < 0)
         {
             Runner.Despawn(ThisObject);
             //Destroy(this.gameObject);
         }
     }
-    
+
     void Update()
     {
         //if (Input.GetKeyDown(KeyCode.P))
-        
-            deletinItem = !deletinItem;
-        
-        destroyingTime -= deletinItem? Runner.DeltaTime:0f;
+
+        deletinItem = !deletinItem;
+
+        destroyingTime -= deletinItem ? Runner.DeltaTime : 0f;
 
     }
 }

@@ -20,14 +20,10 @@ public class RadialMenu : MonoBehaviour
     {
         Entries = new();
     }
-    void Start()
-    {
-    }
-
     void AddEntry(Pings pPingId, RadialMenuEntry.RadialMenuEntryDelegate pCallback)
     {
-        //Get references for each ping
         CommunicationManager.IconsDictionary.TryGetValue(pPingId, out Texture icon);
+
         GameObject entry = Instantiate(EntryPrefab, transform);
 
         RadialMenuEntry rme = entry.GetComponent<RadialMenuEntry>();
@@ -114,6 +110,6 @@ public class RadialMenu : MonoBehaviour
     //        Debug.LogError($"not able to send the RPC, input authority: {HasInputAuthority}");
     //    }
     //    //if (runner) return;
-        
+
     //}
 }

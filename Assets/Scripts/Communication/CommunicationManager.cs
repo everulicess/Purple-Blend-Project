@@ -31,7 +31,7 @@ public struct CommunicationLibrary
 }
 public class CommunicationManager : NetworkBehaviour
 {
-    [SerializeField]CommunicationLibrary communicationLibrary;
+    [SerializeField] CommunicationLibrary communicationLibrary;
 
     private static Dictionary<Pings, AudioClip> audioDictionary = new() { };
     private static Dictionary<Pings, NetworkObject> visualsDictionary = new();
@@ -65,12 +65,13 @@ public class CommunicationManager : NetworkBehaviour
     void Update()
     {
         MenuToggle();
+        Debug.LogWarning($"Horizontal mouse Input = {Input.GetAxisRaw("Horizontal")} \n Vertical mouse Input = {Input.GetAxisRaw("Vertical")}");
     }
     //NetworkInput input;
     private void MenuToggle()
     {
         if (!Runner) return;
-       
+
         PlayerRef player = Runner.LocalPlayer;
         var data = new NetworkInputData();
 
@@ -86,7 +87,7 @@ public class CommunicationManager : NetworkBehaviour
             radialMenu.Close();
             Cursor.lockState = CursorLockMode.None;
             //Cursor.visible = true;
-            if (player == Runner.LocalPlayer && Input.mousePresent) 
+            if (player == Runner.LocalPlayer && Input.mousePresent)
             {
 
                 //Debug.LogError($"this player is: {player.GetType().FullName}");
@@ -100,7 +101,7 @@ public class CommunicationManager : NetworkBehaviour
 
                 //Debug.LogWarning($"my local mouse position is {PingMenuPosition}");
                 //}
-                    
+
 
             }
             //else
@@ -115,7 +116,7 @@ public class CommunicationManager : NetworkBehaviour
 
     //[Rpc(RpcSources.StateAuthority, RpcTargets.All, HostMode = RpcHostMode.SourceIsHostPlayer)]
     [Rpc(RpcSources.All, RpcTargets.StateAuthority, InvokeLocal = true, Channel = RpcChannel.Reliable)]
-    public void PlacePing_RPC(RadialMenuEntry pEntry,Pings pPingId)
+    public void PlacePing_RPC(RadialMenuEntry pEntry, Pings pPingId)
     {
         Vector3 pMousePosition = Input.mousePosition;
         //if (!Object.HasInputAuthority) return;
@@ -123,39 +124,40 @@ public class CommunicationManager : NetworkBehaviour
         //if (Runner.IsClient || HasInputAuthority || HasStateAuthority)
         //{
         //if (pEntry == null) return;
-        
+
         //Debug.LogError($"can send the RPC \n PingID being placed ====== {pEntry.GetPingID()}");
 
         //Pings _ping = pEntry != null ? pEntry.GetPingID() : Pings.NewPing;
-        Pings _ping =pPingId;
+        Pings _ping = pPingId;
 
-            //get sound and visuals for each ping
-            visualsDictionary.TryGetValue(_ping, out NetworkObject _pingVisual);
-            audioDictionary.TryGetValue(_ping, out AudioClip _pingSound);
+        //get sound and visuals for each ping
+        visualsDictionary.TryGetValue(_ping, out NetworkObject _pingVisual);
+        audioDictionary.TryGetValue(_ping, out AudioClip _pingSound);
 
         Vector3 pos = MousePosition._rect.position;
         Camera cam = CameraFollow.Singleton.GetComponent<Camera>();
         //Vector3 posWorld = cam.ScreenToWorldPoint(Input.mousePosition);
 
         Ray ray = cam.ScreenPointToRay(pos);
-            if (Physics.Raycast(ray, out RaycastHit hit))
+        //Runner.GetPhysicsScene()..Raycast(ray, out RaycastHit hit))
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            if (hit.collider.gameObject.layer == 8)
             {
-                if (hit.collider.gameObject.layer == 8)
-                {
-                    Vector3 offset = new(hit.point.x, hit.point.y + 0.1f, hit.point.z);
+                Vector3 offset = new(hit.point.x, hit.point.y + 0.1f, hit.point.z);
                 //if (HasStateAuthority)
                 //{
-                    Runner.Spawn(_pingVisual, offset, Quaternion.identity, Runner.LocalPlayer,
-                        (Runner, O) =>
-                        {
-                            O.GetComponent<DestroyPing>().Init();
-                        }
-                        );
+                Runner.Spawn(_pingVisual, offset, Quaternion.identity, Runner.LocalPlayer,
+                    (Runner, O) =>
+                    {
+                        O.GetComponent<DestroyPing>().Init();
+                    }
+                    );
                 //}
                 AudioSource.PlayClipAtPoint(_pingSound, offset);
                 Debug.Log($"{_pingVisual.name} has been placed and {_pingSound.name} is being played");
-                }
             }
+        }
         //}
         //else
         //{
