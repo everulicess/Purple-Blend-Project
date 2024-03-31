@@ -11,12 +11,17 @@ public class DestroyPing : NetworkBehaviour
     NetworkObject ThisObject;
     TextMeshProUGUI locationText;
     private bool deletinItem = false;
+    Pings myPing;
     // Update is called once per frame
     public override void Spawned()
     {
-        base.Spawned();
         //locationText = GameObject.FindGameObjectWithTag("textPos").GetComponent<TextMeshProUGUI>();
         ThisObject = GetComponent<NetworkObject>();
+    }
+    public void SetPing(Pings pPingID)
+    {
+        //Debug.LogError($"Ping spawned with the the next ID: {pPingID}");
+        myPing = pPingID;
     }
     public void Init()
     {
@@ -24,6 +29,7 @@ public class DestroyPing : NetworkBehaviour
     }
     public override void FixedUpdateNetwork()
     {
+        name = myPing.ToString();
         //locationText.text = $"position: {transform.position}";
         if (destroyingTime < 0)
         {

@@ -8,7 +8,25 @@ using System;
 
 public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 {
-    private NetworkRunner networkRunner;
+    public static BasicSpawner Singleton
+    {
+        get => singleton;
+        set
+        {
+            if (value == null)
+                singleton = null;
+            else if (singleton == null)
+                singleton = value;
+            else if (singleton != value)
+            {
+                Destroy(value);
+                Debug.LogError($"Only one instance of {nameof(BasicSpawner)}!");
+            }
+        }
+    }
+    private static BasicSpawner singleton;
+
+    public NetworkRunner networkRunner;
     [SerializeField] NetworkPrefabRef networkPrefabRef;
 
     private Dictionary<PlayerRef, NetworkObject> spawnCharacter = new Dictionary<PlayerRef, NetworkObject>();
@@ -72,36 +90,24 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken)
     {
     }
-
+    bool PingButtonPressed = false;
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
         var data = new NetworkInputData();
-        //if (Input.GetKey(KeyCode.W))
-        //{
-        //    data.direction += Vector3.forward;
 
-        //}if (Input.GetKey(KeyCode.S))
+        //if (Input.mousePosition.magnitude != 0)
         //{
-        //    data.direction += Vector3.back;
-
-        //}if (Input.GetKey(KeyCode.A))
-        //{
-        //    data.direction += Vector3.left;
-
-        //}if (Input.GetKey(KeyCode.D))
-        //{
-        //    data.direction += Vector3.right;
+        //    data.PingPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
+        //    //Debug.LogWarning(data.MousePosition);
         //}
-        //input.Set(data);
-        if (Input.mousePosition.magnitude != 0)
-        {
-            data.MousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
-            //Debug.LogWarning(data.MousePosition);
-        }
+        data.buttons.Set(MyButtons.PingsButton, Input.GetKeyDown(KeyCode.V)||PingButtonPressed);
         data.direction = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         input.Set(data);
     }
-
+    private void Update()
+    {
+        PingButtonPressed = Input.GetKeyDown(KeyCode.V);
+    }
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input)
     {
     }
@@ -122,8 +128,6 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         NetworkObject networkObject = runner.Spawn(networkPrefabRef, playerPos, Quaternion.identity, player);
 
         playersJoined++;
-        networkObject.name = $"Player {playersJoined}";
-
         spawnCharacter.Add(player, networkObject);
     }
 

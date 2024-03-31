@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using Fusion;
 
 public class Player : NetworkBehaviour
@@ -25,13 +24,23 @@ public class Player : NetworkBehaviour
     Vector3 direction1;
     Vector3 direction2;
 
+    [Header("Camera Reference")]
+    [SerializeField] GameObject localCameraObject;
+    Camera localCamera;
+
+    [SerializeField] NetworkObject debugObject;
+
     public override void Spawned()
     {
-        Cursor.lockState = CursorLockMode.Confined;
+        //Cursor.lockState = CursorLockMode.Confined;
         if (HasInputAuthority)
         {
-            CameraFollow.Singleton.SetTarget(camTarget);
-            cam = CameraFollow.Singleton.GetComponent<Camera>();
+            this.gameObject.name = $"{Runner.ActivePlayers}";
+            var cam = Instantiate(localCameraObject);
+            cam.GetComponent<LocalCamera>().SetTarget(camTarget);
+            localCamera = cam.GetComponentInChildren<Camera>();
+            //    CameraFollow.Singleton.SetTarget(camTarget);
+            //    //cam = CameraFollow.Singleton.GetComponent<Camera>();
 
         }
     }
@@ -63,13 +72,25 @@ public class Player : NetworkBehaviour
         characterController.maxSpeed = Character.MovementStats.MovementSpeed;
 
         //FaceTarget();
-
+        m_MousePosition = Input.mousePosition;
         if (GetInput(out NetworkInputData data))
         {
             anim.SetBool("Moving", true);
             var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
             //data.direction.Normalize();
+            if ((data.buttons.IsSet(MyButtons.PingsButton) || Input.GetKeyDown(KeyCode.V) )&& HasInputAuthority)
+            {
+                //RPC_SendMessage(MousePosition.PingPosition);
+                //Runner.Spawn(GameObject.CreatePrimitive(PrimitiveType.Cube), data.PingPosition, Quaternion.identity);
 
+                //Debug.LogError(" V was pressed");
+                //Ray ray = localCamera.ScreenPointToRay(Input.mousePosition);
+                //if (Physics.Raycast(ray, out RaycastHit hit))
+                //{
+                //    data.PingPosition = new(hit.point.x, 1f, hit.point.z);
+                //}
+                //FindObjectOfType<CommunicationManager>().PlacePing_RPC(Pings.LocationPing);
+            }
             var skewedInput = matrix.MultiplyPoint3x4(data.direction);
             if (data.direction != Vector3.zero)
             {
@@ -87,7 +108,28 @@ public class Player : NetworkBehaviour
                 anim.SetBool("Moving", false);
         }
     }
+    //[Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
+    //public void RPC_SendMessage(Vector3 pVector, RpcInfo info = default)
+    //{
+    //    RPC_RelayMessage(pVector, info.Source);
+    //}
 
+    //[Rpc(RpcSources.StateAuthority, RpcTargets.All, HostMode = RpcHostMode.SourceIsServer)]
+    //public void RPC_RelayMessage(Vector3 pVector, PlayerRef messageSource)
+    //{
+    //    string message = "";
+    //    if (messageSource == Runner.LocalPlayer)
+    //    {
+    //        message = $"You said: {pVector}\n";
+    //    }
+    //    else
+    //    {
+    //        message = $"Some other player said: {pVector}\n";
+    //    }
+    //    Debug.LogWarning(message);
+    //    Runner.Spawn(debugObject, pVector, Quaternion.identity);
+
+    //}
     void FaceTarget()
     {
         if (point != null)

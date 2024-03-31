@@ -20,7 +20,7 @@ public class RadialMenu : MonoBehaviour
     {
         Entries = new();
     }
-    void AddEntry(Pings pPingId, RadialMenuEntry.RadialMenuEntryDelegate pCallback)
+    void AddEntry(Pings pPingId/*, RadialMenuEntry.RadialMenuEntryDelegate pCallback*/)
     {
         CommunicationManager.IconsDictionary.TryGetValue(pPingId, out Texture icon);
 
@@ -30,7 +30,7 @@ public class RadialMenu : MonoBehaviour
         rme.SetPing(pPingId);
         rme.SetLabel(pPingId.ToString());
         rme.SetIcon(icon);
-        rme.SetCallback(pCallback);
+        //rme.SetCallback(pCallback);
 
         Entries.Add(rme);
     }
@@ -39,7 +39,7 @@ public class RadialMenu : MonoBehaviour
         if (Entries.Count != 0) return;
         foreach (Pings ping in Enum.GetValues(typeof(Pings)))
         {
-            AddEntry(ping, FindObjectOfType<CommunicationManager>().PlacePing_RPC);
+            AddEntry(ping);
         }
         Rearrange();
     }
@@ -53,17 +53,6 @@ public class RadialMenu : MonoBehaviour
         }
         Entries.Clear();
     }
-    //public void Toggle()
-    //{
-    //    if (Entries.Count==0)
-    //    {
-    //        Open();
-    //    }
-    //    else
-    //    {
-    //        Close();
-    //    }
-    //}
     void Rearrange()
     {
         float radiansOfSeparation = (Mathf.PI * 2) / Entries.Count;

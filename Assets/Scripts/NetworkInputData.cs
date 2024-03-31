@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
+enum MyButtons
+{
+    PingsButton
+}
 public struct NetworkInputData : INetworkInput
 {
     public Vector3 direction;
 
-    public Vector3 MousePosition;
+    public Vector3 PingPosition;
+    public NetworkButtons buttons;
 }

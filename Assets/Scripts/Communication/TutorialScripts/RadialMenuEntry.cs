@@ -9,17 +9,14 @@ using Fusion;
 
 public class RadialMenuEntry : NetworkBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public delegate void RadialMenuEntryDelegate(RadialMenuEntry pEntry, Pings pPingId);
+    public delegate void RadialMenuEntryDelegate(/*RadialMenuEntry pEntry,*/ Pings pPingId);
     [SerializeField] TextMeshProUGUI Label;
     [SerializeField] RawImage Icon;
 
     RectTransform Rect;
     RadialMenuEntryDelegate Callback;
     [SerializeField] protected Pings PingId;
-    public override void Spawned()
-    {
-        base.Spawned();
-    }
+    
     private void Start()
     {
         Rect = Icon.GetComponent<RectTransform>();
@@ -50,11 +47,12 @@ public class RadialMenuEntry : NetworkBehaviour, IPointerClickHandler, IPointerE
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        Callback?.Invoke(this.gameObject.GetComponent<RadialMenuEntry>(), PingId);
+        //communication.PlacePing_RPC(this, this.PingId);
+        //Callback?.Invoke(/*this.gameObject.GetComponent<RadialMenuEntry>(),*/ PingId);
     }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
+        FindObjectOfType<PlayerCommunication>().SetPingToDisplay(PingId);
         //Debug.LogError($"PingID is: {PingId}");
         ///Animation using DG.Tweening
         ///Rect.DOSComplete();
@@ -62,6 +60,7 @@ public class RadialMenuEntry : NetworkBehaviour, IPointerClickHandler, IPointerE
     }
     public void OnPointerExit(PointerEventData eventData)
     {
+        FindObjectOfType<PlayerCommunication>().SetPingToDisplay(PingId);
         ///Animation using DG.Tweening
         ///Rect.DOSComplete();
         ///Rect.DOScale(vector3.one,3f).SetEase(Ease.OutQuad);
