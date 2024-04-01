@@ -4,15 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Loot
-  - Relic
-  - Treasure
-  - textPos
+  - SpawnPoint
+  - Rooms
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - 
   - Water
   - UI
   - 
