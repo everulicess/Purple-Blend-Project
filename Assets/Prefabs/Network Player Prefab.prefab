@@ -92,7 +92,6 @@ GameObject:
   - component: {fileID: 91701927173731694}
   - component: {fileID: 1134729114557446457}
   - component: {fileID: 280890212787123914}
-  - component: {fileID: -1339233579890901046}
   m_Layer: 0
   m_Name: Network Player Prefab
   m_TagString: Player
@@ -139,7 +138,6 @@ MonoBehaviour:
   - {fileID: 5214935629976495616}
   - {fileID: 8905188441464483676}
   - {fileID: 1134729114557446457}
-  - {fileID: -1339233579890901046}
 --- !u!143 &3577616919058033287
 CharacterController:
   m_ObjectHideFlags: 0
@@ -162,7 +160,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
@@ -183,7 +181,7 @@ MonoBehaviour:
   acceleration: 10
   braking: 10
   maxSpeed: 6
-  rotationSpeed: 15
+  rotationSpeed: 0
 --- !u!114 &8905188441464483676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,12 +194,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95929a67334595943b010b255285fc94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnSpeed: 360
   Character: {fileID: 11400000, guid: c21266e585e919b41b10409d88097509, type: 2}
   camTarget: {fileID: 2627143927177756995}
-  speed: 2
-  anim: {fileID: 91701927173731694}
-  localCameraObject: {fileID: 7072012241765596909, guid: ed809da431a1cdb4890e5d69d1035499, type: 3}
-  debugObject: {fileID: 5181428273564063880, guid: 6d379561705db3245ac91b2b3b710692, type: 3}
 --- !u!136 &6075541524490898695
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -259,11 +254,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 91701927173731694}
-  TotalWords: 1
+  TotalWords: 4
   ApplyTiming: 2
   SyncSettings: 79
-  StateHashes: 0000000074c37e9447705ba32b1a167c79406955
-  TriggerHashes: 00000000
+  StateHashes: 0000000074c37e9447705ba32b1a167c794069558a18fce4c26c9b035daf07720f055fe53ac66cbd4990cd2bd1d60770
+  TriggerHashes: 000000000d286c4037013a39
 --- !u!114 &280890212787123914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,19 +276,6 @@ MonoBehaviour:
   carriedRelics: 0
   carryPoint: {fileID: 8078895455858871908}
   pocketBar: {fileID: 1927164114474209368}
---- !u!114 &-1339233579890901046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2244119501597336846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51dedd782c65c924e924f84c65d0e85c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugObject: {fileID: -1282070134898298644, guid: a786c0e224a6957469705e91d53538e2, type: 3}
 --- !u!1 &3221181227218281146
 GameObject:
   m_ObjectHideFlags: 0
