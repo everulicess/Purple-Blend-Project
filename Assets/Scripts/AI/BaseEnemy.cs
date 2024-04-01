@@ -5,7 +5,8 @@ using UnityEngine.AI;
 
 public class BaseEnemy : MonoBehaviour
 {
-    public Transform player;
+    public List<CombatPlayerController> players = new List<CombatPlayerController>();
+    private CombatPlayerController curTarget;
     private NavMeshAgent agent;
     private bool in_range = false;
     private CombatController combatController;
@@ -15,17 +16,19 @@ public class BaseEnemy : MonoBehaviour
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
         combatController = gameObject.GetComponent<CombatController>();
+        curTarget = players[0];
     }
 
     // Update is called once per frame
     void Update()
     {
-        agent.destination = player.position;
+        agent.destination = curTarget.gameObject.transform.position;
         if (in_range)
         {
             combatController.Attack();
         }
-        transform.LookAt(player.position);
+        Vector3 targetLookAt = new Vector3(curTarget.gameObject.transform.position.x, this.transform.position.y, curTarget.gameObject.transform.position.z);
+        transform.LookAt(targetLookAt);
     }
 
     private void OnTriggerEnter(Collider other)
