@@ -300,6 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa664735ee7efbb409fa193271c1dcbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  networkRunner: {fileID: 0}
   networkPrefabRef:
     RawGuidValue: 91b7f14a791887445a97f60cac7629d3
 --- !u!1 &18477585
@@ -1942,7 +1943,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1986834339
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -199,6 +199,7 @@ MonoBehaviour:
   turnSpeed: 360
   Character: {fileID: 11400000, guid: c21266e585e919b41b10409d88097509, type: 2}
   camTarget: {fileID: 2627143927177756995}
+  cam: {fileID: 7072012241765596909, guid: ed809da431a1cdb4890e5d69d1035499, type: 3}
 --- !u!136 &6075541524490898695
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -21,6 +21,8 @@ public class Player : NetworkBehaviour {
     //keep a reference to the skew to save a bit of calculation (you could also rotate the world and remove this)
     private readonly Quaternion skew = Quaternion.Euler(0, 45, 0);
 
+    [SerializeField] GameObject cam;
+    GameObject localCamera;
     private bool isAttacking = false;
     //getter/setter for isAttacking which automatically sets the variables to start the timer and animation
     public bool IsAttacking {
@@ -33,7 +35,9 @@ public class Player : NetworkBehaviour {
 	}
 
     public override void Spawned(){
-        if (HasInputAuthority) CameraFollow.Singleton.SetTarget(camTarget);
+        if (HasInputAuthority) /*CameraFollow.Singleton.SetTarget(camTarget);*/
+            localCamera = Instantiate(cam);
+        localCamera.GetComponent<LocalCamera>().SetTarget(camTarget);
     }
 
     private void Awake(){
