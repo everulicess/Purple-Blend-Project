@@ -35,9 +35,11 @@ public class Player : NetworkBehaviour {
 	}
 
     public override void Spawned(){
-        if (HasInputAuthority) /*CameraFollow.Singleton.SetTarget(camTarget);*/
+        if (HasInputAuthority)
+        { /*CameraFollow.Singleton.SetTarget(camTarget);*/
             localCamera = Instantiate(cam);
-        localCamera.GetComponent<LocalCamera>().SetTarget(camTarget);
+            localCamera.GetComponent<LocalCamera>().SetTarget(camTarget);
+        }
     }
 
     private void Awake(){
