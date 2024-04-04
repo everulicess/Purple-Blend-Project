@@ -91,6 +91,9 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     {
     }
     bool PingButtonPressed = false;
+    bool InteractButtonPressed = false;
+    bool LeftClickPressed = false;
+    bool RightClickPressed = false;
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
         var data = new NetworkInputData();
@@ -101,12 +104,18 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         //    //Debug.LogWarning(data.MousePosition);
         //}
         data.buttons.Set(MyButtons.PingsButton, Input.GetKeyDown(KeyCode.V)||PingButtonPressed);
+        data.buttons.Set(MyButtons.InteractButton, Input.GetKeyDown(KeyCode.E)||InteractButtonPressed);
+        data.buttons.Set(MyButtons.LeftClick, Input.GetMouseButtonDown(0)||LeftClickPressed);
+        data.buttons.Set(MyButtons.RightClick, Input.GetMouseButtonDown(1)||RightClickPressed);
         data.direction = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         input.Set(data);
     }
     private void Update()
     {
         PingButtonPressed = Input.GetKeyDown(KeyCode.V);
+        InteractButtonPressed = Input.GetKeyDown(KeyCode.E);
+        LeftClickPressed = Input.GetMouseButtonDown(0);
+        RightClickPressed = Input.GetMouseButtonDown(1);
     }
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input)
     {

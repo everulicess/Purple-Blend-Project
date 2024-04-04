@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
-
+[RequireComponent(
+    typeof(NetworkCharacterController),
+    typeof(NetworkMecanimAnimator),
+    typeof(Collector)
+    )]
 public class Player : NetworkBehaviour {
 
     [SerializeField] private float turnSpeed = 360f;
@@ -24,6 +28,8 @@ public class Player : NetworkBehaviour {
     [SerializeField] GameObject cam;
     GameObject localCamera;
     private bool isAttacking = false;
+
+    Collector m_Collector;
     //getter/setter for isAttacking which automatically sets the variables to start the timer and animation
     public bool IsAttacking {
 		get { return isAttacking; }
@@ -46,11 +52,11 @@ public class Player : NetworkBehaviour {
         characterController = GetComponent<NetworkCharacterController>();
         characterController.maxSpeed = Character.MovementStats.MovementSpeed;
         anim = GetComponent<Animator>();
+        m_Collector = GetComponent<Collector>();
         //cam = FindObjectOfType<Camera>();
     }
     public override void FixedUpdateNetwork()
     {
-
         //count down attack time and end the attack once it hits 0
         if (IsAttacking && attackTime > 0)
         {
@@ -62,7 +68,7 @@ public class Player : NetworkBehaviour {
         if (!GetInput(out NetworkInputData data)) return;
 
         //initiate attack with mouse click (also checks if the player is already attacking so the animation does not restart)
-        if (Input.GetKey(KeyCode.Mouse0) && !IsAttacking) IsAttacking = true;
+        if (data.buttons.IsSet(MyButtons.LeftClick) && !IsAttacking) IsAttacking = true;
 
         Vector3 forward = Vector3.zero;
         if (data.direction != Vector3.zero)
@@ -92,5 +98,8 @@ public class Player : NetworkBehaviour {
         //move the character
         characterController.Move(forward);
         anim.SetBool("Moving", characterController.Velocity != Vector3.zero);
+
+        //Interaction using E
+        m_Collector.SetInteractionBool(data.buttons.IsSet(MyButtons.InteractButton));
     }
 }

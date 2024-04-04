@@ -2,215 +2,139 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Fusion;
 
-public class Collector : MonoBehaviour
+public class Collector : NetworkBehaviour
 {
-    //Variables for all the loot stuff
+    //Storage variables
+    //Coins
     [Range(1f, 500f)]
-    public float pocketCapacity;
-    [Range(1f, 4f)]
-    public float relicCapacity;
-    public float carriedRelics;
-    private float carriedPocketLoot;
-    private bool carryingTreasure = false;
-    [SerializeField] private Transform carryPoint;
+    [SerializeField] float pocketCapacity;
+    float carriedPocketLoot;
+
+    //Relics
+    [Range(1, 4)]
+    [SerializeField] int relicCapacity;
+    int carriedRelics;
+
+    //Treasure
+    bool carryingTreasure = false;
+    [SerializeField] Transform carryPoint;
     GameObject treasure;
 
-    //UI element (doesnt work)
+    //Total player's gold
+    float totalPlayerGold = 0f;
+    NetworkObject net_objectPickedup;
+    //UI element (doesn't work)
     public Image pocketBar;
-    private void OnTriggerEnter(Collider other)
+    bool isInteracting;
+    private void Update()
     {
-        //if (other.gameObject-TryGetComponent<Collectable>(out Collectable _collectable))
-        //{
-        //    other.gameObject.
-        //}
-        //Debug.LogError($"the tag {other.tag} is colliding");
-        switch (other.tag)
+        if (isInteracting)
         {
-            case "Loot":
-                CollectLoot(other);
-                ; break;
-            case "Relic":
-                Debug.Log("Player can pick up a relic");
-                CollectRelic(other);
-                ; break;
-            case "Treasure":
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    carryingTreasure = !carryingTreasure;
-                    Debug.LogWarning($"Player picked up treasure! \n TREASURE BEING PICKED {treasure}");
-                }
-                Debug.LogWarning($"Treasure is colliding with player");
-                CollectTreasure(other);
-                ; break;
-            case "Deposit":
-                Deposit();
-                ; break;
-            default:
-                break;
+            Debug.LogWarning("Player Is Interacting");
         }
     }
-    private static void Deposit()
+    public void SetInteractionBool(bool pIsInteracting)
     {
-        Debug.Log("Deposit Area");
+        isInteracting = pIsInteracting;
     }
-    private void CollectTreasure(Collider other)
+    public void SetObjectToPickUp(NetworkObject pObjectToPickup)
     {
-        treasure = carryingTreasure ? other.gameObject : null;
-        Debug.Log("Player can pick up a treasure!");
+        net_objectPickedup = pObjectToPickup;
     }
-    private void CollectRelic(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (Input.GetKey(KeyCode.E))
+        other.TryGetComponent<Collectable>(out Collectable _collectable);
+        if (_collectable != null)
+        {
+            _collectable.TryInteracting(this);
+        }
+
+        other.TryGetComponent<Deposit>(out Deposit _deposit);
+        if (_deposit != null)
+        {
+            if (totalPlayerGold <= 0) return;
+            carriedPocketLoot = 0;
+            carriedRelics = 0;
+            _deposit.UpdateGlobalGold_RPC(totalPlayerGold);
+            totalPlayerGold = 0;
+        }
+        
+    }
+    /// <summary>
+    /// Checks if the player has enough space for more gold, then picks it up
+    /// </summary>
+    /// <param name="pCoin"></param> reference to the coin script
+    /// <param name="amountToIncrease"></param> increasing amount
+    public void CollectCoins(Collectable pCoin, float amountToIncrease)
+    {
+        if (carriedPocketLoot > (pocketCapacity-amountToIncrease)) return;
+        //{
+        //    Debug.Log("Your pockets are full!");
+        //    return;
+        //}
+        totalPlayerGold += amountToIncrease;
+        carriedPocketLoot += amountToIncrease;
+        carriedPocketLoot = Mathf.Clamp(carriedPocketLoot, 0f, pocketCapacity);
+        pCoin.DeleteObject();
+    }
+    /// <summary>
+    /// Checks if the player is trying to interact and if there is anough space for the relic
+    /// </summary>
+    /// <param name="pRelic"></param> refrence to the relic, to destroy it if it's collected
+    public void CollectRelic(Collectable pRelic, float pAmountToIncrease)
+    {
+        if (isInteracting)
         {
             //If the player has a relic slot left
-            if (carriedRelics>=relicCapacity)
+            if (carriedRelics >= relicCapacity)
             {
                 Debug.Log("Your relic slots are full!");
                 return;
             }
             carriedRelics++;
-            Destroy(other.transform.gameObject);
+            totalPlayerGold += pAmountToIncrease;
+            pRelic.DeleteObject();
         }
     }
-    private void CollectLoot(Collider other)
+    public bool CanPickUp()
     {
-        if (carriedPocketLoot >= pocketCapacity)
+        return !carryingTreasure;
+    }
+    public void CollectTreasure(Collectable pTreasure, Rigidbody pRigidBody, BoxCollider pCollider)
+    {
+        if (isInteracting)
         {
-            Debug.Log("Your pockets are full!");
-            return;
+            carryingTreasure = !carryingTreasure;
+            pRigidBody.useGravity = !carryingTreasure;
+            pRigidBody.isKinematic = !carryingTreasure;
+            pCollider.enabled = !carryingTreasure;
         }
-        carriedPocketLoot += 25;
-        carriedPocketLoot = Mathf.Clamp(carriedPocketLoot, 0, pocketCapacity);
-        Debug.Log($"the player is carrying {carriedPocketLoot} gold");
-        Destroy(other.transform.gameObject);
 
-            //This is for depositing your pockets into the mule or spawn area to score.
-            //if (col.gameObject.tag == "Deposit")
-            //    {
-            //    //if (Input.GetKey(KeyCode.E))
-            //    }
+        //treasure = carryingTreasure ? pTreasure.gameObject : null;
 
+        if (carryingTreasure)
+        {
+            treasure = net_objectPickedup.gameObject;
+            treasure.transform.SetPositionAndRotation(carryPoint.position, carryPoint.rotation);
+            //pTreasure.transform.position = carryPoint.position;
+        }
     }
-    private void Update()
+
+    private void Treasure(Collider other)
     {
-       
-        Pickup();
+        //treasure = carryingTreasure ? other.gameObject : null;
+        Debug.Log("Player can pick up a treasure!");
     }
+   
     private void Pickup()
     {
+        GameObject _cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        _cube.AddComponent<NetworkObject>();
+        
+        Runner.Spawn(_cube, this.gameObject.transform.position + (Vector3.forward * 3f), Quaternion.identity);
         if (treasure == null) return;
         treasure.transform.SetPositionAndRotation(carryPoint.position, carryPoint.rotation);
     }
-    //Collecting gold
-    //private void OnTriggerEnter(Collider col)
-    //{
-    //    if (col.gameObject.tag == "Loot")
-    //    {
-    //        Debug.Log("Player has detected loot");
-
-    //        // if the player is not full
-    //        if (carriedPocketLoot < pocketCapacity)
-    //        {
-    //            carriedPocketLoot += 25;
-    //            carriedPocketLoot = Mathf.Clamp(carriedPocketLoot, 0, pocketCapacity);
-    //            Debug.Log($"the player is carrying {carriedPocketLoot} gold");
-    //            Destroy(col.transform.gameObject);
-
-    //            //Set player UI bar to filled %
-    //            pocketBar.fillAmount = carriedPocketLoot / pocketCapacity * 100f;
-    //        }
-    //        else
-    //        {
-    //            Debug.Log("Your pockets are full!");
-    //        }
-    //    }
-    //}
-
-    //Collecting Relics
-    //    private void OnTriggerStay(Collider col)
-    //    {
-    //        if (col.gameObject.tag == "Relic")
-    //        {
-    //            Debug.Log("Player can pick up a relic");
-    //            if (Input.GetKey(KeyCode.E))
-    //            {
-    //                //If the player has a relic slot left
-    //                if (carriedRelics < relicCapacity)
-    //                {
-    //                    carriedRelics++;
-    //                    Destroy(col.transform.gameObject);
-    //                }
-    //                else
-    //                {
-    //                    Debug.Log("Your relic slots are full!");
-    //                }
-    //            }
-
-    //        }
-    //    // collecting treasure
-    //        if (col.gameObject.tag == "Treasure")
-    //        {
-    //            //if (carryingTreasure == false)
-    //            if (carryingTreasure) return;
-    //            //{
-    //            //Debug.Log("Player can pick up a treasure!");
-    //            if (Input.GetKey(KeyCode.E))
-    //            {
-    //                carryingTreasure = true;
-    //                treasurePosition = col.transform;
-    //                Debug.Log("Player picked up treasure!");
-    //            }
-    //            //}
-    //        }
-
-    //        //This is for depositing your pockets into the mule or spawn area to score.
-    //        if (col.gameObject.tag == "Deposit")
-    //            {
-    //            //if (Input.GetKey(KeyCode.E))
-    //            }
-
-    //}
-    //private void Update()
-    //{
-    //    //If the player is carrying a treasure
-    //    if (carryingTreasure)
-    //    {
-    //        //follow the player carrypoint
-    //        Pickup();
-
-    //        //release the carried treasure
-    //        if (Input.GetKeyDown(KeyCode.E) && carryingTreasure == true)
-    //        {
-    //            DropItem();
-    //        }
-    //    }
-    //}
-
-    //private void DropItem()
-    //{
-    //    treasurePosition.position = treasurePosition.position;
-    //    carryingTreasure = false;
-    //    Debug.Log("Player dropped a treasure!");
-    //}
-
-    //private void Pickup()
-    //{
-    //    if (treasurePosition == null) return;
-    //    treasurePosition.position = carryPoint.position;
-    //    treasurePosition.rotation = carryPoint.rotation;
-    //}
-
-    //private void deposit()
-    //{
-    //    //This is where it checks who it can deposit to, and then transfers all carried goods over to that deposit.
-
-    //    //check for mule or main deposit
-
-    //    //mule
-    //    //check for if space left and how much
-
-    //    //main
-    //    //deposit all goods and add to score
-    //}
 }

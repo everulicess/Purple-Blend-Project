@@ -139,6 +139,7 @@ MonoBehaviour:
   - {fileID: 5214935629976495616}
   - {fileID: 8905188441464483676}
   - {fileID: 1134729114557446457}
+  - {fileID: 280890212787123914}
   - {fileID: -7509562787672207929}
 --- !u!143 &3577616919058033287
 CharacterController:
@@ -275,8 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pocketCapacity: 100
-  relicCapacity: 1
-  carriedRelics: 0
+  relicCapacity: 2
   carryPoint: {fileID: 8078895455858871908}
   pocketBar: {fileID: 1927164114474209368}
 --- !u!114 &-7509562787672207929
@@ -540,7 +540,7 @@ Transform:
   m_GameObject: {fileID: 7916595526166394597}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0.5}
+  m_LocalPosition: {x: 0, y: 1.399, z: 0.598}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

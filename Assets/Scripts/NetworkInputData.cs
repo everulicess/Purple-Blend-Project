@@ -5,7 +5,10 @@ using Fusion;
 
 enum MyButtons
 {
-    PingsButton
+    PingsButton,
+    InteractButton,
+    LeftClick,
+    RightClick
 }
 public struct NetworkInputData : INetworkInput
 {
