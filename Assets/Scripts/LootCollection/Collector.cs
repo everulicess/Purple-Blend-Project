@@ -20,6 +20,10 @@ public class Collector : MonoBehaviour
     public Image pocketBar;
     private void OnTriggerEnter(Collider other)
     {
+        //if (other.gameObject-TryGetComponent<Collectable>(out Collectable _collectable))
+        //{
+        //    other.gameObject.
+        //}
         //Debug.LogError($"the tag {other.tag} is colliding");
         switch (other.tag)
         {

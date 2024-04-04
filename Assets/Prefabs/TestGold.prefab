@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1878562763447368511}
   - component: {fileID: 7100253756493384330}
+  - component: {fileID: -5985927602359136261}
+  - component: {fileID: 3267434736722988042}
   m_Layer: 0
   m_Name: TestGold
   m_TagString: Loot
@@ -56,6 +58,35 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-5985927602359136261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5583710922150740365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 2409539830
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours: []
+--- !u!114 &3267434736722988042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5583710922150740365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 786569b0b7cee1a489f26c1248c88055, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7308821268664443152
 GameObject:
   m_ObjectHideFlags: 0
