@@ -6,6 +6,12 @@ using Fusion;
 
 public class Collector : NetworkBehaviour
 {
+    //UI
+    [SerializeField] GameObject pocketUI;
+    [SerializeField] Image totalPocketBar;
+    [SerializeField] Image currentPocketBar;
+    [Networked] float currentFill { get; set; }
+
     //Storage variables
     //Coins
     [Range(1f, 500f)]
@@ -26,14 +32,26 @@ public class Collector : NetworkBehaviour
     float totalPlayerGold = 0f;
     NetworkObject net_objectPickedup;
     //UI element (doesn't work)
-    public Image pocketBar;
+    //public Image pocketBar;
     bool isInteracting;
     private void Update()
     {
-        if (isInteracting)
+        if (HasInputAuthority)
         {
-            Debug.LogWarning("Player Is Interacting");
+            pocketUI.SetActive(true);
+            pocketUI.transform.LookAt(FindObjectOfType<Camera>().transform.position);
+
+            currentFill = carriedPocketLoot;
+            currentPocketBar.fillAmount = currentFill / pocketCapacity;
         }
+        else
+        {
+            pocketUI.SetActive(false);
+        }
+    }
+    public override void Render()
+    {
+        
     }
     public void SetInteractionBool(bool pIsInteracting)
     {
@@ -48,6 +66,7 @@ public class Collector : NetworkBehaviour
         other.TryGetComponent<Collectable>(out Collectable _collectable);
         if (_collectable != null)
         {
+            Debug.LogError($"is colliding with this {_collectable.name}");
             _collectable.TryInteracting(this);
         }
 
@@ -70,12 +89,10 @@ public class Collector : NetworkBehaviour
     public void CollectCoins(Collectable pCoin, float amountToIncrease)
     {
         if (carriedPocketLoot > (pocketCapacity-amountToIncrease)) return;
-        //{
-        //    Debug.Log("Your pockets are full!");
-        //    return;
-        //}
+        
         totalPlayerGold += amountToIncrease;
         carriedPocketLoot += amountToIncrease;
+        Debug.LogWarning($"COLLECTING COINS");
         carriedPocketLoot = Mathf.Clamp(carriedPocketLoot, 0f, pocketCapacity);
         pCoin.DeleteObject();
     }
@@ -111,7 +128,6 @@ public class Collector : NetworkBehaviour
             pRigidBody.isKinematic = !carryingTreasure;
             pCollider.enabled = !carryingTreasure;
         }
-
         //treasure = carryingTreasure ? pTreasure.gameObject : null;
 
         if (carryingTreasure)
@@ -122,11 +138,6 @@ public class Collector : NetworkBehaviour
         }
     }
 
-    private void Treasure(Collider other)
-    {
-        //treasure = carryingTreasure ? other.gameObject : null;
-        Debug.Log("Player can pick up a treasure!");
-    }
    
     private void Pickup()
     {

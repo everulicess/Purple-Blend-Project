@@ -19,5 +19,4 @@ public class CoinsCollectable : Collectable
     {
         playerCollector.CollectCoins(this, goldValue);
     }
-
 }

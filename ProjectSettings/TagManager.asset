@@ -6,11 +6,6 @@ TagManager:
   tags:
   - SpawnPoint
   - Rooms
-  - Loot
-  - Relic
-  - Treasure
-  - textPos
-  - Gold
   layers:
   - Default
   - TransparentFX
