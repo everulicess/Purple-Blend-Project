@@ -221,10 +221,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2.1020122
+  m_Radius: 0.8
+  m_Height: 2.5
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!95 &91701927173731694
 Animator:
   serializedVersion: 5
@@ -234,8 +234,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2244119501597336846}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: de13a7420582ded45a8d7d3f96889aca, type: 3}
-  m_Controller: {fileID: 9100000, guid: a7024401bf8b6a543b1da54835ae4f9a, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 95bee5def85ab36439771129bed4ec6a, type: 3}
+  m_Controller: {fileID: 9100000, guid: 591d410195729a64697a63eaeb361ef3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -259,10 +259,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 91701927173731694}
-  TotalWords: 0
+  TotalWords: 4
   ApplyTiming: 2
   SyncSettings: 79
-  StateHashes: 0000000074c37e9447705ba32b1a167c794069558a18fce4c26c9b035daf07720f055fe53ac66cbd4990cd2bd1d60770
+  StateHashes: 0000000074c37e9447705ba32b1a167c794069558a18fce4c26c9b035daf077246988a14b29b95915931f8d945c12130ee7bda32bc57e948784bdd452a67ee3f542ad3ab0606e0d1
   TriggerHashes: 000000000d286c4037013a39
 --- !u!114 &280890212787123914
 MonoBehaviour:
