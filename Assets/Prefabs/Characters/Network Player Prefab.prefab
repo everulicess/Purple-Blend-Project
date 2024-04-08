@@ -183,7 +183,7 @@ MonoBehaviour:
   gravity: -20
   jumpImpulse: 8
   acceleration: 10
-  braking: 10
+  braking: 100
   maxSpeed: 6
   rotationSpeed: 0
 --- !u!114 &8905188441464483676
@@ -202,6 +202,9 @@ MonoBehaviour:
   Character: {fileID: 11400000, guid: c21266e585e919b41b10409d88097509, type: 2}
   camTarget: {fileID: 2627143927177756995}
   cam: {fileID: 7072012241765596909, guid: ed809da431a1cdb4890e5d69d1035499, type: 3}
+  knockBackCounter: 0
+  knockBackTime: 0
+  knockBackForce: 0
 --- !u!136 &6075541524490898695
 CapsuleCollider:
   m_ObjectHideFlags: 0

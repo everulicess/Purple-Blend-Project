@@ -21,7 +21,7 @@ public class PlayerCommunication : NetworkBehaviour
         //if (!placePing) return;
         if (Input.GetKeyUp(KeyCode.V) /*&& HasInputAuthority*/)
         {
-            RPC_SendMessage( MousePosition.PingPosition);
+            RPC_SendMessage( MousePosition.InWorldRayPosition);
             //pingID = SetPingToDisplay(pingID);
             Debug.LogError($"Ping that will be passed to the object: {pingID}");
         }

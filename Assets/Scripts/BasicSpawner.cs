@@ -98,11 +98,6 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     {
         var data = new NetworkInputData();
 
-        //if (Input.mousePosition.magnitude != 0)
-        //{
-        //    data.PingPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
-        //    //Debug.LogWarning(data.MousePosition);
-        //}
         data.buttons.Set(MyButtons.PingsButton, Input.GetKeyDown(KeyCode.V)||PingButtonPressed);
         data.buttons.Set(MyButtons.InteractButton, Input.GetKeyDown(KeyCode.E)||InteractButtonPressed);
         data.buttons.Set(MyButtons.LeftClick, Input.GetMouseButtonDown(0)||LeftClickPressed);

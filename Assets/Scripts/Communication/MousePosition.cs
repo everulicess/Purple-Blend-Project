@@ -7,8 +7,8 @@ public class MousePosition : MonoBehaviour
     public static RectTransform _rect;
     //[SerializeField] private CursorLockMode _cursorLockState = CursorLockMode.None;
     //private Camera cam;
-    public static Vector3 PingPosition;
-    [SerializeField] GameObject debugObject;
+    public static Vector3 InWorldRayPosition;
+    //[SerializeField] GameObject debugObject;
     void Start()
     {
         if (Input.mousePresent)
@@ -32,11 +32,11 @@ public class MousePosition : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.B))
         {
             Vector3 offsetTry = FindObjectOfType<LocalCamera>().GetComponentInChildren<Camera>().ScreenToWorldPoint(_rect.position);
-            PingPosition = offsetTry;
+            InWorldRayPosition = offsetTry;
 
         }
 
-        if (Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.V) || Input.GetMouseButtonDown(0))
         {
             Ray ray = FindObjectOfType<LocalCamera>().GetComponentInChildren<Camera>().ScreenPointToRay(_rect.position);
             if (Physics.Raycast(ray, out RaycastHit hit))
@@ -44,9 +44,7 @@ public class MousePosition : MonoBehaviour
                 if (hit.collider.gameObject.layer != 8) return;
 
                 Vector3 offset = new(hit.point.x, hit.point.y + 0.1f, hit.point.z);
-                PingPosition = offset;
-                //Instantiate(debugObject, offset, Quaternion.identity);
-                //Debug.LogError($"the next point was hit {hit.point}");
+                InWorldRayPosition = offset;
             }
         }
     }
