@@ -1,70 +1,83 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 
 public class RoomSpawner : MonoBehaviour
 {
-    public int openingDirection;
-    // 1 --> need bottom door
-    // 2 --> need top door
-    // 3 --> need left door
-    // 4 --> need right door
+    [SerializeField] private int roomCount;
+    [SerializeField] private Vector2 roomSize;
+    [SerializeField] private float generateTime;
+    [SerializeField] private List<GameObject> roomLayouts = new List<GameObject>();
 
-    private RoomTemplates templates;
-    private int random;
-    public bool spawned = false;
-
-    public float waitTime = 4f;
+    private List<GameObject> generatedRooms = new List<GameObject>();
+    private int selectedDoor = 0;
 
     private void Start()
     {
-        Destroy(gameObject, waitTime);
-        templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-        Invoke("Spawn", 0.1f);
+        generatedRooms.Add(gameObject);
+        StartCoroutine(GenerateMap());
     }
 
-    private void Spawn()
+    IEnumerator GenerateMap()
     {
-        if (spawned == false)
+        int counter = 0;
+        while (counter < roomCount)
         {
-            if (openingDirection == 1)
+
+            RoomTemplates selectedRoom = generatedRooms[Random.Range(0, generatedRooms.Count-1)].GetComponent<RoomTemplates>();
+            for (int door = 0; door < selectedRoom.doorAvailability.Length; door++)
             {
-                //Need to spawn a room with a bottom door
-                random = Random.Range(0, templates.bottomRooms.Length);
-                Instantiate(templates.bottomRooms[random], transform.position, templates.bottomRooms[random].transform.rotation);
+                if (selectedRoom.doorAvailability[door] == true)
+                {
+                    selectedDoor = door;
+                    break;
+                }
             }
-            else if (openingDirection == 2)
+
+            int randomRoomIndex = Random.Range(0, roomLayouts.Count-1);
+            GameObject room = Instantiate(roomLayouts[randomRoomIndex]);
+            room.GetComponent<RoomTemplates>().roomSize = new Vector3(roomSize.x, room.GetComponent<RoomTemplates>().roomSize.y, roomSize.y);
+            room.GetComponent<RoomTemplates>().InitializeRoomData();
+
+            Vector3 objPos = selectedRoom.transform.position;
+            if (selectedDoor == 0)
             {
-                //Need to spawn a room with a top door
-                random = Random.Range(0, templates.topRooms.Length);
-                Instantiate(templates.topRooms[random], transform.position, templates.topRooms[random].transform.rotation);
+                room.transform.position = new Vector3(objPos.x + roomSize.x, 0, objPos.z);
+                room.GetComponent<RoomTemplates>().doorAvailability[2] = false;
             }
-            else if (openingDirection == 3)
+            else if (selectedDoor == 1)
             {
-                //Need to spawn a room with a left door
-                random = Random.Range(0, templates.leftRooms.Length);
-                Instantiate(templates.leftRooms[random], transform.position, templates.leftRooms[random].transform.rotation);
+                room.transform.position = new Vector3(objPos.x, 0, objPos.z - roomSize.y);
+                room.GetComponent<RoomTemplates>().doorAvailability[3] = false;
             }
-            else if (openingDirection == 4)
+            else if (selectedDoor == 2)
             {
-                //Need to spawn a room with a right door
-                random = Random.Range(0, templates.rightRooms.Length);
-                Instantiate(templates.rightRooms[random], transform.position, templates.rightRooms[random].transform.rotation);
+                room.transform.position = new Vector3(objPos.x - roomSize.x, 0, objPos.z);
+                room.GetComponent<RoomTemplates>().doorAvailability[0] = false;
             }
-            spawned = true;
+            else if (selectedDoor == 3)
+            {
+                room.transform.position = new Vector3(objPos.x, 0, objPos.z + roomSize.y);
+                room.GetComponent<RoomTemplates>().doorAvailability[1] = false;
+            }
+
+            yield return new WaitForSeconds(generateTime / 2);
+            if (room.GetComponent<RoomTemplates>().overlap == true)
+            {
+                Destroy(room);
+            } else
+            {
+                generatedRooms.Add(room);
+                selectedRoom.doorAvailability[selectedDoor] = false;
+                counter++;
+            }
+            yield return new WaitForSeconds(generateTime / 2);
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("SpawnPoint"))
+        for (int i = 0; i < generatedRooms.Count; i++)
         {
-            if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
-            {
-                //Spawn wall to block off opening
-                Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
-            }
-            Destroy(gameObject);
+            generatedRooms[i].GetComponent<RoomTemplates>().PlaceDoors();
         }
     }
 }

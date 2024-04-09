@@ -4,8 +4,9 @@ using System.Drawing;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using Fusion;
 
-public class CombatController : MonoBehaviour
+public class CombatController : NetworkBehaviour
 {
     public float comboMaxTime;
     public List<AttackTypesScrObj> attackTypes = new List<AttackTypesScrObj>();
@@ -38,7 +39,7 @@ public class CombatController : MonoBehaviour
         comboTimeRemaining = comboMaxTime;
     }
 
-    private void Update()
+    public override void FixedUpdateNetwork()
     {
         FaceTarget();
         // Combo timer. When it reaches 0, the combo counter resets.
@@ -101,7 +102,7 @@ public class CombatController : MonoBehaviour
         // Enables attack area's MeshRenderer to show the attack happening.
         hitbox.gameObject.GetComponent<MeshRenderer>().enabled = true;
         DamageTargets();
-        PushPlayerToAttack();
+        //PushPlayerToAttack();
         IncreaseComboCounter();
         targets.Clear();
     }
@@ -155,8 +156,8 @@ public class CombatController : MonoBehaviour
         hitbox.gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
-    private void PushPlayerToAttack()
-    {
-        gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(transform.forward.x * playerPush, transform.forward.y, transform.forward.z * playerPush));
-    }
+    //private void PushPlayerToAttack()
+    //{
+    //    gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(transform.forward.x * playerPush, transform.forward.y, transform.forward.z * playerPush));
+    //}
 }
