@@ -24,7 +24,7 @@ public class CombatController : NetworkBehaviour
 
     public Vector3 point;
     private float lookRotationSpeed = 8f;
-    public List<BoxPlaceholderScript> targets = new List<BoxPlaceholderScript>();
+    public List<IDamageable> targets = new List<IDamageable>();
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +59,7 @@ public class CombatController : NetworkBehaviour
         }
     }
 
+    // NEEDS TO BE MOVED TO PLAYER CONTROLLER
     private void FaceTarget()
     {
         // Turns the player towards the clicked spot.
@@ -86,14 +87,14 @@ public class CombatController : NetworkBehaviour
         // Adds object to potential list of targets.
         if (other.gameObject.GetComponent<BoxPlaceholderScript>() != null)
         {
-            targets.Add(other.gameObject.GetComponent<BoxPlaceholderScript>());
+            targets.Add(other.gameObject.GetComponent<IDamageable>());
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
         // Removes object from potential list of targets.
-        targets.Remove(other.gameObject.GetComponent<BoxPlaceholderScript>());
+        targets.Remove(other.gameObject.GetComponent<IDamageable>());
     }
 
     private void TryAttacking()

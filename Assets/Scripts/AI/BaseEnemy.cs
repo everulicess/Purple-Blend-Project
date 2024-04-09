@@ -6,29 +6,29 @@ using UnityEngine.AI;
 public class BaseEnemy : MonoBehaviour
 {
     public List<Player> players = new List<Player>();
-    private Player curTarget;
+    private Player target;
     private NavMeshAgent agent;
     private bool in_range = false;
     private CombatController combatController;
 
-    // Start is called before the first frame update
     void Start()
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
         combatController = gameObject.GetComponent<CombatController>();
-        curTarget = players[0];
     }
 
-    // Update is called once per frame
     void Update()
     {
-        agent.destination = curTarget.gameObject.transform.position;
-        if (in_range)
+        if (target)
         {
-            combatController.Attack();
+            agent.destination = target.gameObject.transform.position;
+            if (in_range)
+            {
+                combatController.Attack();
+            }
+            Vector3 targetLookAt = new Vector3(target.gameObject.transform.position.x, this.transform.position.y, target.gameObject.transform.position.z);
+            transform.LookAt(targetLookAt);
         }
-        Vector3 targetLookAt = new Vector3(curTarget.gameObject.transform.position.x, this.transform.position.y, curTarget.gameObject.transform.position.z);
-        transform.LookAt(targetLookAt);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,6 +36,7 @@ public class BaseEnemy : MonoBehaviour
         if (other.tag == "Player")
         {
             in_range = true;
+            target = other.GetComponent<Player>();
         }
     }
 
@@ -44,6 +45,7 @@ public class BaseEnemy : MonoBehaviour
         if (other.tag == "Player")
         {
             in_range = false;
+            target = null;
         }
     }
 }
