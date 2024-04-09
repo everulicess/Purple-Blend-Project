@@ -8,7 +8,8 @@ enum MyButtons
     PingsButton,
     InteractButton,
     LeftClick,
-    RightClick
+    RightClick,
+    TestingButtonQ
 }
 public struct NetworkInputData : INetworkInput
 {

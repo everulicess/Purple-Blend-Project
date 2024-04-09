@@ -92,6 +92,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     }
     bool PingButtonPressed = false;
     bool InteractButtonPressed = false;
+    bool TestingButtonQPressed = false;
     bool LeftClickPressed = false;
     bool RightClickPressed = false;
     public void OnInput(NetworkRunner runner, NetworkInput input)
@@ -100,6 +101,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
         data.buttons.Set(MyButtons.PingsButton, Input.GetKeyDown(KeyCode.V)||PingButtonPressed);
         data.buttons.Set(MyButtons.InteractButton, Input.GetKeyDown(KeyCode.E)||InteractButtonPressed);
+        data.buttons.Set(MyButtons.TestingButtonQ, Input.GetKeyDown(KeyCode.Q)||TestingButtonQPressed);
         data.buttons.Set(MyButtons.LeftClick, Input.GetMouseButtonDown(0)||LeftClickPressed);
         data.buttons.Set(MyButtons.RightClick, Input.GetMouseButtonDown(1)||RightClickPressed);
         data.direction = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
@@ -107,6 +109,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     }
     private void Update()
     {
+        TestingButtonQPressed = Input.GetKeyDown(KeyCode.Q);
         PingButtonPressed = Input.GetKeyDown(KeyCode.V);
         InteractButtonPressed = Input.GetKeyDown(KeyCode.E);
         LeftClickPressed = Input.GetMouseButtonDown(0);

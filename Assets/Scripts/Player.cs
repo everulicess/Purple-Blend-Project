@@ -30,9 +30,9 @@ public class Player : NetworkBehaviour
     private bool isAttacking = false;
 
     Collector m_Collector;
-#if UNITY_EDITOR
+    Health m_Health;
+
     [Header("knockBack variables")]
-#endif
     //Knockback and Push variables
     [SerializeField] float knockBackCounter;
     [SerializeField] float knockBackTime = 5f;
@@ -66,6 +66,7 @@ public class Player : NetworkBehaviour
         m_CharacterController.maxSpeed = Character.MovementStats.MovementSpeed;
         anim = GetComponent<Animator>();
         m_Collector = GetComponent<Collector>();
+        m_Health = GetComponent<Health>();
         //cam = FindObjectOfType<Camera>();
     }
     public override void FixedUpdateNetwork()
@@ -96,7 +97,6 @@ public class Player : NetworkBehaviour
                 {
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(forward, Vector3.up), turnSpeed * Runner.DeltaTime);
                 }
-
             }
             else
             {
@@ -112,7 +112,6 @@ public class Player : NetworkBehaviour
                 FaceTo();
             }
         }
-
         //movement blending variables
         if (m_CharacterController.Velocity == Vector3.zero)
         {
@@ -142,6 +141,11 @@ public class Player : NetworkBehaviour
             }
             //forward = new Vector3(forward.x, 200f, forward.z);
         }
+        if (data.buttons.IsSet(MyButtons.TestingButtonQ))
+        {
+            //m_Health.OnTakeDamage(0.25f);
+            //return;
+        }
 
         //move the character
         m_CharacterController.Move(forward);
@@ -156,7 +160,7 @@ public class Player : NetworkBehaviour
     public Vector3 ApplyForce( Vector3 pMoveDirection, Vector3 pForceDirection)
     {
         knockBackCounter = knockBackTime;
-        Debug.LogWarning($"knockback!!!!!!!!!");
+        //Debug.LogWarning($"knockback!!!!!!!!!");
         return pForceDirection * knockBackForce;
     }
 }

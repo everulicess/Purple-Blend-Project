@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public class BaseEnemy : MonoBehaviour
 {
-    public List<CombatPlayerController> players = new List<CombatPlayerController>();
-    private CombatPlayerController curTarget;
+    public List<Player> players = new List<Player>();
+    private Player curTarget;
     private NavMeshAgent agent;
     private bool in_range = false;
     private CombatController combatController;
