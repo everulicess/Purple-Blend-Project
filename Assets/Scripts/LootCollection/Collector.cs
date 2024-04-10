@@ -13,10 +13,12 @@ public class Collector : NetworkBehaviour
     [Networked] float currentFill { get; set; }
 
     //Storage variables
+    ChangeDetector _changes;
+
     //Coins
     [Range(1f, 500f)]
     [SerializeField] float pocketCapacity;
-    float carriedPocketLoot;
+    [Networked] float carriedPocketLoot { get; set; }
 
     //Relics
     [Range(1, 4)]
@@ -31,9 +33,12 @@ public class Collector : NetworkBehaviour
     //Total player's gold
     float totalPlayerGold = 0f;
     NetworkObject net_objectPickedup;
-    //UI element (doesn't work)
-    //public Image pocketBar;
     bool isInteracting;
+
+    public override void Spawned()
+    {
+        _changes = GetChangeDetector(ChangeDetector.Source.SimulationState);
+    }
     private void Update()
     {
         if (HasInputAuthority)
@@ -49,9 +54,53 @@ public class Collector : NetworkBehaviour
             pocketUI.SetActive(false);
         }
     }
+    private static Collider[] _colliders = new Collider[20];
+    private static List<LagCompensatedHit> _hits = new();
+    [SerializeField] LayerMask LayerMask;
+    public override void FixedUpdateNetwork()
+    {
+        var hitboxes = Runner.LagCompensation.RaycastAll(new Vector3(transform.position.x, 0, transform.position.z), transform.forward, 30f, player: Object.InputAuthority, _hits, LayerMask, clearHits: true);
+        for (int i = 0; i < hitboxes; i++)
+        {
+            // Check for Collectable component on collider game object or any parent.
+            var collectable = _hits[i].Hitbox.GetComponentInParent<Collectable>();
+            Debug.Log($"{Time.time} {this.name} has collected {collectable.name}");
+
+
+            if (collectable != null)
+            {
+                break;
+            }
+        }
+        int collisions = Runner.GetPhysicsScene().OverlapSphere(new Vector3(transform.position.x,0,transform.position.z), 1f, _colliders, LayerMask, QueryTriggerInteraction.Collide);
+        for (int i = 0; i < collisions; i++)
+        {
+            // Check for Collectable component on collider game object or any parent.
+            var collectable = _colliders[i].GetComponentInParent<Collectable>();
+            if (collectable != null)
+            {
+                collectable.TryInteracting(this);
+                Debug.Log($"{Time.time} {this.name} has collected {collectable.name}");
+                // Pickup was successful, activating timer.
+                //_activationTimer = TickTimer.CreateFromSeconds(Runner, Cooldown);
+                break;
+            }
+        }
+    }
     public override void Render()
     {
-        
+        foreach (var change in _changes.DetectChanges(this, out var previousBuffer,out var currentBuffer))
+        {
+            switch (change)
+            {
+                case nameof(carriedPocketLoot):
+                    var reader = GetPropertyReader<float>(nameof(carriedPocketLoot));
+                    var (previous, current) = reader.Read(previousBuffer, currentBuffer);
+                    ;break;
+                default:
+                    break;
+            }
+        }
     }
     public void SetInteractionBool(bool pIsInteracting)
     {
@@ -63,13 +112,6 @@ public class Collector : NetworkBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        other.TryGetComponent<Collectable>(out Collectable _collectable);
-        if (_collectable != null)
-        {
-            Debug.LogError($"is colliding with this {_collectable.name}");
-            _collectable.TryInteracting(this);
-        }
-
         other.TryGetComponent<Deposit>(out Deposit _deposit);
         if (_deposit != null)
         {
@@ -79,7 +121,13 @@ public class Collector : NetworkBehaviour
             _deposit.UpdateGlobalGold_RPC(totalPlayerGold);
             totalPlayerGold = 0;
         }
-        
+        //return;
+        //other.TryGetComponent<Collectable>(out Collectable _collectable);
+        //if (_collectable != null)
+        //{
+        //    Debug.LogError($"is colliding with this {_collectable.name}");
+        //    _collectable.TryInteracting(this);
+        //}
     }
     /// <summary>
     /// Checks if the player has enough space for more gold, then picks it up

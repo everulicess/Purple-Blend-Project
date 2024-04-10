@@ -15,11 +15,11 @@ public interface IDamageable
     /// RPC send to the server, needs to use the fusion namespace, and have 
     /// [Rpc(sources: RpcSources.All, targets: RpcTargets.StateAuthority)] on top of the void
     /// </summary>
-    void Damage_ToHostRPC(float pDamage);
+    //void Damage_ToHostRPC(float pDamage);
     /// <summary>
     /// RPC that should be called inside the "Damage_ToHostRPC", holds the logic for taking damage
     /// RPC send to the clients, needs to use the fusion namespace, and have 
     /// [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.All)] on top of the void
     /// </summary>
-    void Damage_ToClientsRPC(float pDamage);
+    //void Damage_ToClientsRPC(float pDamage);
 }

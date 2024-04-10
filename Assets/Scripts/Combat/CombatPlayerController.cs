@@ -24,11 +24,11 @@ public class CombatPlayerController : MonoBehaviour
     private void ClickToAttack()
     {
         // Converts click on the screen to a position in the game world.
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
-        {
-            combatController.point = hit.point;
-        }
+        //RaycastHit hit;
+        //if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+        //{
+        //    combatController.point = hit.point;
+        //}
         combatController.Attack();
     }
 }

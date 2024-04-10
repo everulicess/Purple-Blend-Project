@@ -24,7 +24,7 @@ public class CombatController : NetworkBehaviour
 
     public Vector3 point;
     private float lookRotationSpeed = 8f;
-    public List<IDamageable> targets = new List<IDamageable>();
+    public List<Health> targets = new();
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +41,7 @@ public class CombatController : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        FaceTarget();
+        //FaceTarget();
         // Combo timer. When it reaches 0, the combo counter resets.
         if (comboTimerIsRunning)
         {
@@ -77,24 +77,30 @@ public class CombatController : NetworkBehaviour
         {
             // Switches isAttacking to true so that the player cannot spam attacks and invokes functions with a small delay.
             isAttacking = true;
-            Invoke("TryAttacking", 0.3f);
-            Invoke("DisableIsAttacking", 0.5f);
+            Invoke(nameof(TryAttacking), 0.3f);
+            Invoke(nameof(DisableIsAttacking), 0.5f);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         // Adds object to potential list of targets.
-        if (other.gameObject.GetComponent<BoxPlaceholderScript>() != null)
+        //if (other.gameObject.GetComponent<BoxPlaceholderScript>() != null)
+        //{
+        //    targets.Add(other.gameObject.GetComponent<IDamageable>());
+        //}
+        other.TryGetComponent(out Health health);
+        if (health!=null)
         {
-            targets.Add(other.gameObject.GetComponent<IDamageable>());
+            targets.Add(health);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
         // Removes object from potential list of targets.
-        targets.Remove(other.gameObject.GetComponent<IDamageable>());
+        //targets.Remove(other.gameObject.GetComponent<IDamageable>());
+        targets.Remove(other.gameObject.GetComponent<Health>());
     }
 
     private void TryAttacking()
@@ -111,14 +117,18 @@ public class CombatController : NetworkBehaviour
     // Checks through the list of objects within the targets list to damage them all.
     private void DamageTargets()
     {
-        foreach (BoxPlaceholderScript target in targets.ToList())
+        foreach (Health target in targets.ToList())
         {
+            damage = target.isPlayer ? 0.001f : 0.01f;
+
             if (target != null)
             {
                 Vector3 target_tp = target.transform.position;
                 Vector3 knockbackVector = (target_tp - gameObject.transform.position).normalized;
-                target.GetComponent<BoxPlaceholderScript>().ApplyKnockback(knockbackVector*knockback);
-                target.GetComponent<BoxPlaceholderScript>().Damaged(damage);
+                //target.GetComponent<BoxPlaceholderScript>().ApplyKnockback(knockbackVector*knockback);
+                target.TryGetComponent(out IDamageable damageable);
+                if (damageable == null) return;
+                damageable.OnTakeDamage(damage);
             }
         }
     }

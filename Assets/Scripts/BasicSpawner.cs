@@ -106,6 +106,12 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         data.buttons.Set(MyButtons.RightClick, Input.GetMouseButtonDown(1)||RightClickPressed);
         data.direction = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         input.Set(data);
+
+        //reset input
+        InteractButtonPressed = false;
+        TestingButtonQPressed = false;
+        LeftClickPressed = false;
+        RightClickPressed = false;
     }
     private void Update()
     {

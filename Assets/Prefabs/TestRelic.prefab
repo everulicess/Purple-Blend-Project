@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2544179160921856317}
   - component: {fileID: 4576816750732881441}
   - component: {fileID: 2525975116298870417}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1777404110792817557}
   - component: {fileID: 8836586621202008470}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ MonoBehaviour:
   BoxExtents: {x: 0.3, y: 0.3, z: 0.3}
   CapsuleExtents: 0
   Offset: {x: 0, y: 0.2, z: 0}
-  Root: {fileID: 0}
+  Root: {fileID: 31941628938694993}
   GizmosColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &3474172037903562253
 GameObject:
@@ -144,7 +144,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1121801883103618421}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Relic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: -6803665204951536225}
   - component: {fileID: 4408731417855607630}
   - component: {fileID: 31941628938694993}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TestRelic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,10 +275,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Config: 3
-  BroadRadius: 0
+  BroadRadius: 1.97
   Offset: {x: 0, y: 0, z: 0}
-  GizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  Hitboxes: []
+  GizmosColor: {r: 0.6301887, g: 0.58707076, b: 0.0321039, a: 1}
+  Hitboxes:
+  - {fileID: 8836586621202008470}
 --- !u!1 &7079028689342373688
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +291,7 @@ GameObject:
   - component: {fileID: 2987516932741791887}
   - component: {fileID: 7828200612105845896}
   - component: {fileID: 3185171257843446547}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,7 +374,7 @@ GameObject:
   - component: {fileID: 3100359023048399521}
   - component: {fileID: 3757930189183922853}
   - component: {fileID: 6854141080288754351}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

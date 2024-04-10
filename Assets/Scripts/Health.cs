@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 using UnityEngine.UI;
-public class Health : NetworkBehaviour,IDamageable
+public class Health : NetworkBehaviour, IDamageable
 {
     [Header("Health User Interface")]
     //UI
+    [SerializeField] GameObject HealthUI;
     [SerializeField] Image fillImage;
 
     [Header("change detectors")]
@@ -15,16 +16,34 @@ public class Health : NetworkBehaviour,IDamageable
     [SerializeField] [Networked] float HealthPoints { get; set; }
     [SerializeField] [Networked] bool isDead { get; set; }
 
-    const float maxHealthPoints = 1f;
+    const float maxHealthPoints = 100f;
 
     bool isInitailized;
-    public override void Spawned()
+    public bool isPlayer;
+    private void Start()
     {
         _changes = GetChangeDetector(ChangeDetector.Source.SimulationState);
         HealthPoints = maxHealthPoints;
         isDead = false;
         fillImage.fillAmount = HealthPoints / maxHealthPoints;
+        isPlayer = this.TryGetComponent(out Player _player);
+    }
+    public override void Spawned()
+    {
+        if (!Runner.IsServer) return;
+        _changes = GetChangeDetector(ChangeDetector.Source.SimulationState);
+        HealthPoints = maxHealthPoints;
+        isDead = false;
+        fillImage.fillAmount = HealthPoints / maxHealthPoints;
+        isPlayer = this.TryGetComponent(out Player _player);
         isInitailized = true;
+    }
+    private void Update()
+    {
+        HealthUI.SetActive(true);
+        HealthUI.transform.LookAt(FindObjectOfType<Camera>().transform.position);
+
+        fillImage.fillAmount = HealthPoints / maxHealthPoints;
     }
     public override void FixedUpdateNetwork()
     {

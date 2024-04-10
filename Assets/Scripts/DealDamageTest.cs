@@ -9,7 +9,7 @@ public class DealDamageTest : MonoBehaviour
         other.TryGetComponent<IDamageable>(out IDamageable damageable);
         if (damageable!= null)
         {
-            damageable.OnTakeDamage(0.25f);
+            damageable.OnTakeDamage(5f);
         }
     }
 }
