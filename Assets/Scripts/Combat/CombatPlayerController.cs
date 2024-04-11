@@ -6,17 +6,18 @@ using UnityEngine;
 public class CombatPlayerController : MonoBehaviour
 {
     private CombatController combatController;
+    private Player m_Player;
 
     // Start is called before the first frame update
     void Start()
     {
         combatController = gameObject.GetComponent<CombatController>();
+        m_Player = GetComponent<Player>();
     }
-
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (m_Player.IsAttacking)
         {
             ClickToAttack();
         }

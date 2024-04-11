@@ -26,10 +26,13 @@ public class CombatController : NetworkBehaviour
     private float lookRotationSpeed = 8f;
     public List<Health> targets = new();
 
+    [SerializeField] string thisObjectTag;
+
     // Start is called before the first frame update
     void Start()
     {
         // Assign values from AttackType Scriptable Object to the script and the attack area.
+        thisObjectTag = this.tag;
         curAttack = attackTypes[0];
         damage = curAttack.damage;
         knockback = curAttack.knockback;
@@ -84,12 +87,14 @@ public class CombatController : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Adds object to potential list of targets.
         //if (other.gameObject.GetComponent<BoxPlaceholderScript>() != null)
         //{
         //    targets.Add(other.gameObject.GetComponent<IDamageable>());
         //}
+
+        //Gets the Health script
         other.TryGetComponent(out Health health);
+        // Adds object to potential list of targets.
         if (health!=null)
         {
             targets.Add(health);
@@ -119,13 +124,17 @@ public class CombatController : NetworkBehaviour
     {
         foreach (Health target in targets.ToList())
         {
-            damage = target.isPlayer ? 0.001f : 0.01f;
-
+            if (target.CompareTag(thisObjectTag)) 
+            {
+                Debug.LogError("no friendly fire");
+                return; 
+            }
             if (target != null)
             {
                 Vector3 target_tp = target.transform.position;
                 Vector3 knockbackVector = (target_tp - gameObject.transform.position).normalized;
                 //target.GetComponent<BoxPlaceholderScript>().ApplyKnockback(knockbackVector*knockback);
+                //damage = target.CompareTag("Player") ? 0.1f : 2f;
                 target.TryGetComponent(out IDamageable damageable);
                 if (damageable == null) return;
                 damageable.OnTakeDamage(damage);

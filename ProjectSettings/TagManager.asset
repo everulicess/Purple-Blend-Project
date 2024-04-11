@@ -6,7 +6,7 @@ TagManager:
   tags:
   - SpawnPoint
   - Rooms
-  - textPos
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -15,10 +15,10 @@ TagManager:
   - Water
   - UI
   - 
-  - 
-  - communication
+  - Players
+  - Pings
   - Loot
-  - 
+  - Enemies
   - 
   - 
   - 

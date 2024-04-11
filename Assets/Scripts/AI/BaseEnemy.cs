@@ -33,7 +33,7 @@ public class BaseEnemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             in_range = true;
             target = other.GetComponent<Player>();
@@ -42,7 +42,7 @@ public class BaseEnemy : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             in_range = false;
             target = null;

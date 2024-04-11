@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 465850698051634496}
   - component: {fileID: 3817500957945981623}
   - component: {fileID: 1016053095457778734}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AttackArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 434085572118777064}
   - component: {fileID: 1153933636782322866}
   - component: {fileID: 6128726719564738175}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 8178196939595854891}
   - component: {fileID: 6221795496585051877}
   - component: {fileID: 2358778226105320732}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,16 +324,17 @@ GameObject:
   - component: {fileID: 8593018603654398642}
   - component: {fileID: 3235098952379921703}
   - component: {fileID: 3324590911834236917}
+  - component: {fileID: 8073582485224174918}
+  - component: {fileID: 7794257480930343302}
   - component: {fileID: 7221360909114659344}
   - component: {fileID: 3653183240019664865}
-  - component: {fileID: 8596117185337293986}
   - component: {fileID: 579595755809297139}
+  - component: {fileID: 8596117185337293986}
   - component: {fileID: 5327369626551268864}
-  - component: {fileID: 8073582485224174918}
   - component: {fileID: 450433305955062855}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -406,6 +407,42 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8073582485224174918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8865195289033986722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 1433238114
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 7794257480930343302}
+  - {fileID: 5327369626551268864}
+  - {fileID: 450433305955062855}
+--- !u!114 &7794257480930343302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8865195289033986722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
 --- !u!136 &7221360909114659344
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -451,20 +488,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &8596117185337293986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8865195289033986722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c956dfc8fa44324ba6d522cbe9cc569, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  players:
-  - {fileID: 0}
 --- !u!54 &579595755809297139
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -492,6 +515,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &8596117185337293986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8865195289033986722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c956dfc8fa44324ba6d522cbe9cc569, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players:
+  - {fileID: 0}
 --- !u!114 &5327369626551268864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,25 +548,7 @@ MonoBehaviour:
   hitbox: {fileID: 771044456922951676}
   point: {x: 0, y: 0, z: 0}
   targets: []
---- !u!114 &8073582485224174918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8865195289033986722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SortKey: 1433238114
-  ObjectInterest: 1
-  Flags: 262145
-  NestedObjects: []
-  NetworkedBehaviours:
-  - {fileID: 5327369626551268864}
-  - {fileID: 450433305955062855}
+  thisObjectTag: 
 --- !u!114 &450433305955062855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,6 +662,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1190871583342083808, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1981300508179839898, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5
@@ -679,9 +702,25 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 4680057896596818683, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5272346867184217902, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6535130715290234076, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
       propertyPath: m_Name
       value: Player Pocket
+      objectReference: {fileID: 0}
+    - target: {fileID: 6535130715290234076, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8702616506164812594, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9126730341931226783, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
       propertyPath: m_AnchoredPosition.x

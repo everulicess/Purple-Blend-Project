@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: -3934953189958981407}
   - component: {fileID: 717622672262634564}
   - component: {fileID: 2320474407272221357}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Network Player Prefab
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnSpeed: 360
-  Character: {fileID: 11400000, guid: c21266e585e919b41b10409d88097509, type: 2}
+  Character: {fileID: 11400000, guid: 6135ebfec20cf754093bf17873487e75, type: 2}
   camTarget: {fileID: 2627143927177756995}
   cam: {fileID: 7072012241765596909, guid: ed809da431a1cdb4890e5d69d1035499, type: 3}
   knockBackCounter: 0
@@ -268,6 +268,7 @@ MonoBehaviour:
   hitbox: {fileID: 4102791356485585807}
   point: {x: 0, y: 0, z: 0}
   targets: []
+  thisObjectTag: 
 --- !u!114 &2320474407272221357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,7 +412,7 @@ Transform:
   m_GameObject: {fileID: 4102791356485585807}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.73, z: 0.56}
+  m_LocalPosition: {x: 0, y: 1.73, z: 0.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -427,10 +428,10 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -949,6 +950,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4329418304506125130, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
       propertyPath: m_FillMethod
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329418304506125130, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4329418304506125130, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}

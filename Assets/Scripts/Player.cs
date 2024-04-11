@@ -107,10 +107,11 @@ public class Player : NetworkBehaviour
         else
         {
             knockBackCounter -= Runner.DeltaTime;
-            if (IsAttacking)
-            {
-                FaceTo();
-            }
+           
+        }
+        if (IsAttacking)
+        {
+            FaceTo();
         }
         //movement blending variables
         if (m_CharacterController.Velocity == Vector3.zero)
