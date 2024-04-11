@@ -51,7 +51,7 @@ public class Health : NetworkBehaviour, IDamageable
     }
     public override void Render()
     {
-        if (isDead)Runner.Despawn(this.gameObject.GetComponent<NetworkObject>());
+        //if (isDead)Runner.Despawn(this.gameObject.GetComponent<NetworkObject>());
 
         foreach (var change in _changes.DetectChanges(this, out var previousBuffer, out var currentBuffer))
         {
@@ -106,13 +106,5 @@ public class Health : NetworkBehaviour, IDamageable
     {
 
     }
-    public void Damage_ToHostRPC(float pDamage)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void Damage_ToClientsRPC(float pDamage)
-    {
-        throw new System.NotImplementedException();
-    }
+    
 }

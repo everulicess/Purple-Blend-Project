@@ -94,10 +94,10 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -332,6 +332,7 @@ GameObject:
   - component: {fileID: 8596117185337293986}
   - component: {fileID: 5327369626551268864}
   - component: {fileID: 450433305955062855}
+  - component: {fileID: 892737452660225522}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -547,8 +548,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0e17f8c173e40fc4d8ea7ffe6746d22c, type: 2}
   hitbox: {fileID: 771044456922951676}
   point: {x: 0, y: 0, z: 0}
-  targets: []
-  thisObjectTag: 
 --- !u!114 &450433305955062855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,6 +565,25 @@ MonoBehaviour:
   _HealthPoints: 0
   _isDead: 0
   isPlayer: 0
+--- !u!114 &892737452660225522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8865195289033986722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1001 &6073143582478543621
 PrefabInstance:
   m_ObjectHideFlags: 0

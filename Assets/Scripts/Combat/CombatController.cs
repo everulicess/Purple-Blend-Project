@@ -9,7 +9,7 @@ using Fusion;
 public class CombatController : NetworkBehaviour
 {
     public float comboMaxTime;
-    public List<AttackTypesScrObj> attackTypes = new List<AttackTypesScrObj>();
+    public List<AttackTypesScrObj> attackTypes = new();
     public GameObject hitbox;
 
     private float damage;
@@ -24,12 +24,12 @@ public class CombatController : NetworkBehaviour
 
     public Vector3 point;
     private float lookRotationSpeed = 8f;
-    public List<Health> targets = new();
+    protected List<Health> targets = new();
 
-    [SerializeField] string thisObjectTag;
+    protected string thisObjectTag;
 
     // Start is called before the first frame update
-    void Start()
+    public override void Spawned()
     {
         // Assign values from AttackType Scriptable Object to the script and the attack area.
         thisObjectTag = this.tag;
@@ -40,6 +40,7 @@ public class CombatController : NetworkBehaviour
         gameObject.transform.Find("AttackArea").GetComponent<MeshCollider>().sharedMesh = curAttack.colliderShape;
         gameObject.transform.Find("AttackArea").GetComponent<MeshFilter>().mesh = curAttack.colliderShape;
         comboTimeRemaining = comboMaxTime;
+        hitbox.AddComponent<SetTargets>();
     }
 
     public override void FixedUpdateNetwork()
@@ -85,26 +86,33 @@ public class CombatController : NetworkBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag(thisObjectTag)) return;
+    //    //Gets the Health script
+    //    other.TryGetComponent(out Health health);
+    //    // Adds object to potential list of targets.
+    //    if (health!=null)
+    //    {
+    //        targets.Add(health);
+    //    }
+    //}
+    public void UpdateTargetList(List<Health> list, bool isAdding) 
     {
-        //if (other.gameObject.GetComponent<BoxPlaceholderScript>() != null)
+        targets.Clear();
+        //if (isAdding)
         //{
-        //    targets.Add(other.gameObject.GetComponent<IDamageable>());
+            foreach (Health item in list)
+            {
+                targets.Add(item);
+                Debug.Log($"{item.name} has been added to the list");
+            }
         //}
-
-        //Gets the Health script
-        other.TryGetComponent(out Health health);
-        // Adds object to potential list of targets.
-        if (health!=null)
-        {
-            targets.Add(health);
-        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         // Removes object from potential list of targets.
-        //targets.Remove(other.gameObject.GetComponent<IDamageable>());
         targets.Remove(other.gameObject.GetComponent<Health>());
     }
 
@@ -122,15 +130,12 @@ public class CombatController : NetworkBehaviour
     // Checks through the list of objects within the targets list to damage them all.
     private void DamageTargets()
     {
-        foreach (Health target in targets.ToList())
+        foreach (Health target in targets/*.ToList()*/)
         {
-            if (target.CompareTag(thisObjectTag)) 
-            {
-                Debug.LogError("no friendly fire");
-                return; 
-            }
             if (target != null)
             {
+                //if (!target.CompareTag(thisObjectTag))
+                //{
                 Vector3 target_tp = target.transform.position;
                 Vector3 knockbackVector = (target_tp - gameObject.transform.position).normalized;
                 //target.GetComponent<BoxPlaceholderScript>().ApplyKnockback(knockbackVector*knockback);
@@ -138,6 +143,12 @@ public class CombatController : NetworkBehaviour
                 target.TryGetComponent(out IDamageable damageable);
                 if (damageable == null) return;
                 damageable.OnTakeDamage(damage);
+                Debug.Log($"Dealing {damage} damage to {target.name}");
+                //}
+                //else
+                //{
+                //    Debug.LogError("no friendly fire");
+                //}
             }
         }
     }

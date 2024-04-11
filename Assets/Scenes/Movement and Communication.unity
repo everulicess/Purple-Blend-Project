@@ -1940,30 +1940,6 @@ RectTransform:
   m_AnchoredPosition: {x: 166.66667, y: -155}
   m_SizeDelta: {x: 333.33334, y: 310}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &201947362 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8865195289033986722, guid: 9e4d41d53fc369a408b802cf54d3f67a, type: 3}
-  m_PrefabInstance: {fileID: 3467930439448542226}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &201947374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 201947362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 0
-  m_Area: 0
-  m_OverrideGenerateLinks: 0
-  m_GenerateLinks: 0
-  m_IgnoreFromBuild: 1
-  m_ApplyToChildren: 1
-  m_AffectedAgents: ffffffff
 --- !u!1 &204752733
 GameObject:
   m_ObjectHideFlags: 0
@@ -5066,11 +5042,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7de98f9ed7fc9b4f8ebe2f8c86e9c2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomCount: 20
+  roomCount: 5
   roomSize: {x: 10, y: 10}
   generateTime: 0.05
   roomLayouts:
-  - {fileID: 771068772}
+  - {fileID: 3939010933494063174, guid: 037e7e3ebe271e843a3481a15305ae7a, type: 3}
   navMeshSurface: {fileID: 20829246}
 --- !u!1 &809312060
 GameObject:
@@ -8486,7 +8462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3939010933494063174, guid: 037e7e3ebe271e843a3481a15305ae7a, type: 3}
       propertyPath: m_Name
-      value: EmptyRoom
+      value: StartRoom
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14239,17 +14215,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 8865195289033986722, guid: 9e4d41d53fc369a408b802cf54d3f67a, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8865195289033986722, guid: 9e4d41d53fc369a408b802cf54d3f67a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 201947374}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e4d41d53fc369a408b802cf54d3f67a, type: 3}
 --- !u!1001 &5125359974166693090
 PrefabInstance:
