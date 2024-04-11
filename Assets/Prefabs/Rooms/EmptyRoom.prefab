@@ -716,7 +716,7 @@ GameObject:
   - component: {fileID: 71152674469903765}
   - component: {fileID: 361062154530443736}
   m_Layer: 0
-  m_Name: C
+  m_Name: EmptyRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

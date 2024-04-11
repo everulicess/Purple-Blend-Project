@@ -169,7 +169,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 5b6c6852f76fa8741aa1cbd3483e37c2, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 35f060dea1ec71449bf18f3b306fdd6a, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &20829247
 Transform:
@@ -1093,7 +1093,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players:
-  - {fileID: 1336958474}
+  - {fileID: 0}
 --- !u!195 &1019849031
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1162,6 +1162,7 @@ MonoBehaviour:
   hitbox: {fileID: 1612738876}
   point: {x: 0, y: 0, z: 0}
   targets: []
+  thisObjectTag: 
 --- !u!1 &1020766895
 GameObject:
   m_ObjectHideFlags: 0
@@ -1502,6 +1503,7 @@ MonoBehaviour:
   hitbox: {fileID: 804486662}
   point: {x: 0, y: 0, z: 0}
   targets: []
+  thisObjectTag: 
 --- !u!114 &1336958474
 MonoBehaviour:
   m_ObjectHideFlags: 0

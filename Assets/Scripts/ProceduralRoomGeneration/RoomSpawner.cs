@@ -2,14 +2,16 @@ using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class RoomSpawner : MonoBehaviour
 {
     [SerializeField] private int roomCount;
-    [SerializeField] private Vector2 roomSize;
-    [SerializeField] private float generateTime;
+    [SerializeField] private Vector2 roomSize = new Vector2(10, 10);
+    [SerializeField] private float generateTime = 0.05f;
     [SerializeField] private List<GameObject> roomLayouts = new List<GameObject>();
+    [SerializeField] private NavMeshSurface navMeshSurface;
 
     private List<GameObject> generatedRooms = new List<GameObject>();
     private int selectedDoor = 0;
@@ -23,16 +25,23 @@ public class RoomSpawner : MonoBehaviour
     IEnumerator GenerateMap()
     {
         int counter = 0;
-        while (counter < roomCount)
+        while (counter < roomCount-1)
         {
 
             RoomTemplates selectedRoom = generatedRooms[Random.Range(0, generatedRooms.Count-1)].GetComponent<RoomTemplates>();
+            int randomDoor = Random.Range(0, selectedRoom.doorAvailability.Length);
             for (int door = 0; door < selectedRoom.doorAvailability.Length; door++)
             {
-                if (selectedRoom.doorAvailability[door] == true)
+                if (door == randomDoor)
                 {
-                    selectedDoor = door;
-                    break;
+                    if (selectedRoom.doorAvailability[door] == true)
+                    {
+                        selectedDoor = door;
+                        break;
+                    } else
+                    {
+                        goto end_of_loop;
+                    }
                 }
             }
 
@@ -44,22 +53,22 @@ public class RoomSpawner : MonoBehaviour
             Vector3 objPos = selectedRoom.transform.position;
             if (selectedDoor == 0)
             {
-                room.transform.position = new Vector3(objPos.x + roomSize.x, 0, objPos.z);
+                room.transform.position = new Vector3(objPos.x + roomSize.x, objPos.y, objPos.z);
                 room.GetComponent<RoomTemplates>().doorAvailability[2] = false;
             }
             else if (selectedDoor == 1)
             {
-                room.transform.position = new Vector3(objPos.x, 0, objPos.z - roomSize.y);
+                room.transform.position = new Vector3(objPos.x, objPos.y, objPos.z - roomSize.y);
                 room.GetComponent<RoomTemplates>().doorAvailability[3] = false;
             }
             else if (selectedDoor == 2)
             {
-                room.transform.position = new Vector3(objPos.x - roomSize.x, 0, objPos.z);
+                room.transform.position = new Vector3(objPos.x - roomSize.x, objPos.y, objPos.z);
                 room.GetComponent<RoomTemplates>().doorAvailability[0] = false;
             }
             else if (selectedDoor == 3)
             {
-                room.transform.position = new Vector3(objPos.x, 0, objPos.z + roomSize.y);
+                room.transform.position = new Vector3(objPos.x, objPos.y, objPos.z + roomSize.y);
                 room.GetComponent<RoomTemplates>().doorAvailability[1] = false;
             }
 
@@ -74,10 +83,13 @@ public class RoomSpawner : MonoBehaviour
                 counter++;
             }
             yield return new WaitForSeconds(generateTime / 2);
+            end_of_loop: {}
         }
         for (int i = 0; i < generatedRooms.Count; i++)
         {
             generatedRooms[i].GetComponent<RoomTemplates>().PlaceDoors();
         }
+        yield return new WaitForSeconds(generateTime / 2);
+        navMeshSurface.BuildNavMesh();
     }
 }

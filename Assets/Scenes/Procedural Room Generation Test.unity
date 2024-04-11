@@ -140,11 +140,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7de98f9ed7fc9b4f8ebe2f8c86e9c2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomCount: 10
+  roomCount: 20
   roomSize: {x: 10, y: 10}
-  generateTime: 0.1
+  generateTime: 0.05
   roomLayouts:
   - {fileID: 3939010933494063174, guid: 037e7e3ebe271e843a3481a15305ae7a, type: 3}
+  navMeshSurface: {fileID: 0}
 --- !u!1 &1110584662
 GameObject:
   m_ObjectHideFlags: 0
