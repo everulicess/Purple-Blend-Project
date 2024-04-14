@@ -8,7 +8,11 @@ using Fusion;
 
 public class MainMenuManager : MonoBehaviour
 {
-    [SerializeField] GameObject StartGameUIObject;
+    [Header("Panels")]
+    [SerializeField] GameObject StartGamePanel;
+    [SerializeField] GameObject SessionBrowserPanel;
+    [SerializeField] GameObject statusPanel;
+
     [SerializeField] TMP_InputField sessionName;
 
     public void ToggleStartGameObject()
@@ -17,36 +21,54 @@ public class MainMenuManager : MonoBehaviour
         {
             sessionName.text = " ";
         }
-        StartGameUIObject.SetActive(!StartGameUIObject.activeSelf);
+        StartGamePanel.SetActive(!StartGamePanel.activeSelf);
     }
     public void StartSession()
     {
         if (sessionName.text == string.Empty) return;
         Debug.Log($"{sessionName.text}session initiated");
-        GameStart(GameMode.AutoHostOrClient, sessionName.text);
     }
-    NetworkRunner networkRunner;
-    async void GameStart(GameMode pMode, string pSessionName)
+   public void OnFindGameClicked()
     {
-        networkRunner = gameObject.AddComponent<NetworkRunner>();
-        networkRunner.ProvideInput = true;
 
-        var scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex);
-        var sceneInfo = new NetworkSceneInfo();
+        NetworkRunnerHandler networkRunnerHandler = FindObjectOfType<NetworkRunnerHandler>();
 
-        if (scene.IsValid)
-        {
-            sceneInfo.AddSceneRef(scene, LoadSceneMode.Additive);
-        }
+        networkRunnerHandler.OnJoinLobby();
 
-        await networkRunner.StartGame(new StartGameArgs()
-        {
-            GameMode = pMode,
-            SessionName = pSessionName,
-            Scene = scene,
-            SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>(),
-            //PlayerCount = 2
-        });
-        SceneManager.LoadScene(2);
+        HideAllPanels();
+
+        SessionBrowserPanel.SetActive(true);
+        FindObjectOfType<SessionListUIHandler>(true).OnLookingForGameSessions();
+
+    }
+    void HideAllPanels()
+    {
+        SessionBrowserPanel.SetActive(false);
+        StartGamePanel.SetActive(false);
+        statusPanel.SetActive(false);
+    }
+
+    public void OnCreateNewGameClicked()
+    {
+        
+        HideAllPanels();
+
+        StartGamePanel.SetActive(true);
+    }
+    public void OnStartNewSessionClicked()
+    {
+        NetworkRunnerHandler networkRunnerHandler = FindObjectOfType<NetworkRunnerHandler>();
+
+        networkRunnerHandler.CreateGame(sessionName.text, "Movement and Communication");
+
+        HideAllPanels();
+
+        statusPanel.SetActive(true);
+    }
+    public void OnJoinningServer()
+    {
+        HideAllPanels();
+
+        statusPanel.SetActive(true);
     }
 }

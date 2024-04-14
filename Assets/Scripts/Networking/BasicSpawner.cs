@@ -8,63 +8,53 @@ using System;
 
 public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 {
-    public static BasicSpawner Singleton
-    {
-        get => singleton;
-        set
-        {
-            if (value == null)
-                singleton = null;
-            else if (singleton == null)
-                singleton = value;
-            else if (singleton != value)
-            {
-                Destroy(value);
-                Debug.LogError($"Only one instance of {nameof(BasicSpawner)}!");
-            }
-        }
-    }
-    private static BasicSpawner singleton;
 
     public NetworkRunner networkRunner;
     [SerializeField] NetworkPrefabRef networkPrefabRef;
 
     private Dictionary<PlayerRef, NetworkObject> spawnCharacter = new Dictionary<PlayerRef, NetworkObject>();
-    async void GameStart(GameMode mode)
+    //async void GameStart(GameMode mode)
+    //{
+    //    networkRunner = gameObject.AddComponent<NetworkRunner>();
+    //    networkRunner.ProvideInput = true;
+
+    //    var scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex);
+    //    var sceneInfo = new NetworkSceneInfo();
+
+    //    if (scene.IsValid)
+    //    {
+    //        sceneInfo.AddSceneRef(scene, LoadSceneMode.Additive);
+    //    }
+
+    //    await networkRunner.StartGame(new StartGameArgs()
+    //    {
+    //        GameMode = mode,
+    //        SessionName = "Test Room",
+    //        Scene = scene,
+    //        SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>(),
+    //        //PlayerCount = 2
+    //    });
+    //}
+
+    SessionListUIHandler sessionListUIHandler;
+
+    private void Awake()
     {
-        networkRunner = gameObject.AddComponent<NetworkRunner>();
-        networkRunner.ProvideInput = true;
-
-        var scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex);
-        var sceneInfo = new NetworkSceneInfo();
-
-        if (scene.IsValid)
-        {
-            sceneInfo.AddSceneRef(scene, LoadSceneMode.Additive);
-        }
-
-        await networkRunner.StartGame(new StartGameArgs()
-        {
-            GameMode = mode,
-            SessionName = "Test Room",
-            Scene = scene,
-            SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>(),
-            //PlayerCount = 2
-        });
+        sessionListUIHandler = FindObjectOfType<SessionListUIHandler>(true);
     }
 
     private void OnGUI()
     {
         if (networkRunner == null)
         {
-            if (GUI.Button(new Rect(0, 0, 200, 40), "Host"))
-            {
-                GameStart(GameMode.Host);
-            }
-            if (GUI.Button(new Rect(0, 40, 200, 40), "Join"))
-            {
-                GameStart(GameMode.Client);
-            }
+            //if (GUI.Button(new Rect(0, 0, 200, 40), "Host"))
+            //{
+            //    GameStart(GameMode.Host);
+            //}
+            //if (GUI.Button(new Rect(0, 40, 200, 40), "Join"))
+            //{
+            //    GameStart(GameMode.Client);
+            //}
         }
     }
     public void OnConnectedToServer(NetworkRunner runner)
@@ -87,8 +77,13 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     {
     }
 
-    public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken)
+    public async void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken)
     {
+        Debug.LogError($"On Host Migration");
+        await runner.Shutdown(shutdownReason: ShutdownReason.HostMigration);
+
+        FindObjectOfType<NetworkRunnerHandler>().StartHostMigration(hostMigrationToken);
+        Debug.LogError($"Method started");
     }
     bool PingButtonPressed = false;
     bool InteractButtonPressed = false;
@@ -136,6 +131,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
         if (!runner.IsServer) return;
+        if (SceneManager.GetActiveScene().name == "MenuScene") return;
         Vector3 playerPos = new(/*(player.RawEncoded % runner.Config.Simulation.PlayerCount) * */0 + playersJoined, 0f, 0f);
 
         NetworkObject networkObject = runner.Spawn(networkPrefabRef, playerPos, Quaternion.identity, player);
@@ -171,6 +167,22 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
     {
+        if (sessionListUIHandler == null) return;
+        if (sessionList.Count == 0)
+        {
+            sessionListUIHandler.OnNoSessionFound();
+
+        }
+        else
+        {
+            sessionListUIHandler.ClearList();
+
+            foreach(SessionInfo sessionInfo in sessionList)
+            {
+                sessionListUIHandler.AddToList(sessionInfo);
+            }
+        }
+        
     }
 
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)

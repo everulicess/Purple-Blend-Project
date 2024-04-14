@@ -11,7 +11,7 @@ public class PlayerCommunication : NetworkBehaviour
 
     //[Header("Ping Info")]
     NetworkObject pingVisual;
-    Pings pingID;
+    [Networked] Pings pingID { get; set; }
     private void Start()
     {
         //Debug.LogWarning($"this object {nameof(PlayerCommunication)} is in the scene");
