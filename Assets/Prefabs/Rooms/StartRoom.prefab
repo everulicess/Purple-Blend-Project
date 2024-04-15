@@ -239,8 +239,8 @@ Transform:
   m_GameObject: {fileID: 2047536174521678567}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.74, y: 0.64, z: 0.78}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4188642091131021966}
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomCount: 0
-  roomSize: {x: 10, y: 10}
+  roomSize: {x: 20, y: 20}
   generateTime: 0.05
   roomLayouts:
   - {fileID: 3212770992262226114, guid: 037e7e3ebe271e843a3481a15305ae7a, type: 3}
@@ -1037,7 +1037,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 9, y: 1, z: 9}
+  m_Size: {x: 8, y: 1, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2146154445630239374
 MonoBehaviour:

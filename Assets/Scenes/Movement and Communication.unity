@@ -14270,15 +14270,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 643082230513203300, guid: 9c6f121357c325c42a4500fb3ef3a13d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.74
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 643082230513203300, guid: 9c6f121357c325c42a4500fb3ef3a13d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.64
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 643082230513203300, guid: 9c6f121357c325c42a4500fb3ef3a13d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.78
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 643082230513203300, guid: 9c6f121357c325c42a4500fb3ef3a13d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14310,7 +14310,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1141084576749081095, guid: 9c6f121357c325c42a4500fb3ef3a13d, type: 3}
       propertyPath: roomCount
-      value: 8
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141084576749081095, guid: 9c6f121357c325c42a4500fb3ef3a13d, type: 3}
+      propertyPath: roomSize.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141084576749081095, guid: 9c6f121357c325c42a4500fb3ef3a13d, type: 3}
+      propertyPath: roomSize.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141084576749081095, guid: 9c6f121357c325c42a4500fb3ef3a13d, type: 3}
+      propertyPath: generateTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1141084576749081095, guid: 9c6f121357c325c42a4500fb3ef3a13d, type: 3}
       propertyPath: navMeshSurface

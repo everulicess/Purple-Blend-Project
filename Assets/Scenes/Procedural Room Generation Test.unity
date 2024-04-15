@@ -469,6 +469,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 3212770992262226114, guid: 037e7e3ebe271e843a3481a15305ae7a, type: 3}
+      propertyPath: SortKey
+      value: 3013374135
+      objectReference: {fileID: 0}
+    - target: {fileID: 3212770992262226114, guid: 037e7e3ebe271e843a3481a15305ae7a, type: 3}
+      propertyPath: NetworkedBehaviours.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3212770992262226114, guid: 037e7e3ebe271e843a3481a15305ae7a, type: 3}
+      propertyPath: NetworkedBehaviours.Array.data[2]
+      value: 
+      objectReference: {fileID: 378425991}
     - target: {fileID: 3306990146850436921, guid: 037e7e3ebe271e843a3481a15305ae7a, type: 3}
       propertyPath: m_Size.x
       value: 1
@@ -480,6 +492,10 @@ PrefabInstance:
     - target: {fileID: 3306990146850436921, guid: 037e7e3ebe271e843a3481a15305ae7a, type: 3}
       propertyPath: m_Size.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540589393042324937, guid: 037e7e3ebe271e843a3481a15305ae7a, type: 3}
+      propertyPath: SortKey
+      value: 1944160734
       objectReference: {fileID: 0}
     - target: {fileID: 3939010933494063174, guid: 037e7e3ebe271e843a3481a15305ae7a, type: 3}
       propertyPath: m_Name
@@ -501,9 +517,17 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 6126016071870299964, guid: 037e7e3ebe271e843a3481a15305ae7a, type: 3}
+      propertyPath: SortKey
+      value: 2774704127
+      objectReference: {fileID: 0}
     - target: {fileID: 7209441796281178967, guid: 037e7e3ebe271e843a3481a15305ae7a, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943591257269634017, guid: 037e7e3ebe271e843a3481a15305ae7a, type: 3}
+      propertyPath: SortKey
+      value: 94728723
       objectReference: {fileID: 0}
     - target: {fileID: 7981660269749549363, guid: 037e7e3ebe271e843a3481a15305ae7a, type: 3}
       propertyPath: m_IsKinematic
@@ -512,6 +536,10 @@ PrefabInstance:
     - target: {fileID: 8015022727902577894, guid: 037e7e3ebe271e843a3481a15305ae7a, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483766726567144213, guid: 037e7e3ebe271e843a3481a15305ae7a, type: 3}
+      propertyPath: SortKey
+      value: 2993733859
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
