@@ -1,22 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fusion;
 
-public class RoomTemplates : MonoBehaviour
+public class RoomTemplates : NetworkBehaviour
 {
     public bool[] doorAvailability = { true, true, true, true };
+    //public bool[] net_DoorAvailability 
     public Vector3 roomSize;
     public bool overlap;
 
     private BoxCollider overlapArea;
 
-    private void Start()
+    public override void Spawned()
     {
         overlapArea = transform.GetChild(1).GetComponent<BoxCollider>();
     }
-
     public void InitializeRoomData()
     {
+        
         for (int i = 0; i < doorAvailability.Length; i++)
         {
             doorAvailability[i] = true;
@@ -29,7 +31,8 @@ public class RoomTemplates : MonoBehaviour
         {
             if (!doorAvailability[i])
             {
-                Destroy(transform.GetChild(2).GetChild(i).gameObject);
+                Runner.Despawn(transform.GetChild(2).GetChild(i).gameObject.GetComponent<NetworkObject>());
+                //Destroy(transform.GetChild(2).GetChild(i).gameObject);
             }
         }
     }
