@@ -14,16 +14,16 @@ public class ChildColliderScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        other.TryGetComponent(out Player obj);
+        if (obj == null) return;
+        if (CompareTag("HitBox"))
         {
-            if (CompareTag("HitBox"))
-            {
-                enemy.InRangeSetter(true);
-            } else if (CompareTag("DetectionArea"))
-            {
-                Debug.Log("detected");
-                enemy.TargetSetter(true, other.GetComponent<Player>());
-            }
+            enemy.InRangeSetter(true);
+        }
+        else if (CompareTag("DetectionArea"))
+        {
+            Debug.Log("detected");
+            enemy.TargetSetter(true, other.GetComponent<Player>());
         }
     }
 
