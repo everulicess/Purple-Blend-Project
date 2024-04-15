@@ -5,10 +5,10 @@ using UnityEngine.AI;
 
 public class BaseEnemy : MonoBehaviour
 {
-    public List<Player> players = new List<Player>();
+    private List<Player> targets = new List<Player>();
     private Player target;
     private NavMeshAgent agent;
-    private bool in_range = false;
+    private bool inRange = false;
     private CombatController combatController;
 
     void Start()
@@ -21,31 +21,25 @@ public class BaseEnemy : MonoBehaviour
     {
         if (target)
         {
-            agent.destination = target.gameObject.transform.position;
-            if (in_range)
+            if (inRange)
             {
                 combatController.Attack();
+            } else
+            {
+                agent.destination = target.gameObject.transform.position;
+                Vector3 targetLookAt = new Vector3(target.gameObject.transform.position.x, this.transform.position.y, target.gameObject.transform.position.z);
+                transform.LookAt(targetLookAt);
             }
-            Vector3 targetLookAt = new Vector3(target.gameObject.transform.position.x, this.transform.position.y, target.gameObject.transform.position.z);
-            transform.LookAt(targetLookAt);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void InRangeSetter(bool set)
     {
-        if (other.CompareTag("Player"))
-        {
-            in_range = true;
-            target = other.GetComponent<Player>();
-        }
+        inRange = set;
     }
 
-    private void OnTriggerExit(Collider other)
+    public void TargetSetter(Player set)
     {
-        if (other.CompareTag("Player"))
-        {
-            in_range = false;
-            target = null;
-        }
+        target = set;
     }
 }
