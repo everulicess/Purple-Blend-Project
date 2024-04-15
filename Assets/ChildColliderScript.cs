@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class ChildColliderScript : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class ChildColliderScript : MonoBehaviour
                 enemy.InRangeSetter(true);
             } else if (CompareTag("DetectionArea"))
             {
+                Debug.Log("detected");
                 enemy.TargetSetter(true, other.GetComponent<Player>());
             }
         }
