@@ -20,7 +20,7 @@ public class ChildColliderScript : MonoBehaviour
                 enemy.InRangeSetter(true);
             } else if (CompareTag("DetectionArea"))
             {
-                enemy.TargetSetter(other.GetComponent<Player>());
+                enemy.TargetSetter(true, other.GetComponent<Player>());
             }
         }
     }
@@ -35,7 +35,7 @@ public class ChildColliderScript : MonoBehaviour
             }
             else if (CompareTag("DetectionArea"))
             {
-                enemy.TargetSetter(null);
+                enemy.TargetSetter(false, other.GetComponent<Player>());
             }
         }
     }

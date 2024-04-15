@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementStats:
     CharacterName: 0
-    MovementSpeed: 2
+    MovementSpeed: 4

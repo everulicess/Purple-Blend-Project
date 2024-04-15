@@ -38,8 +38,19 @@ public class BaseEnemy : MonoBehaviour
         inRange = set;
     }
 
-    public void TargetSetter(Player set)
+    public void TargetSetter(bool add, Player set)
     {
-        target = set;
+        if (add)
+        {
+            targets.Add(set);
+            target = targets[0];
+        } else
+        {
+            targets.Remove(set);
+            if (targets.Count > 1)
+            {
+                target = targets[0];
+            }
+        }
     }
 }
