@@ -14100,7 +14100,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8593018603654398642, guid: 9e4d41d53fc369a408b802cf54d3f67a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.47
+      value: 4.4
       objectReference: {fileID: 0}
     - target: {fileID: 8593018603654398642, guid: 9e4d41d53fc369a408b802cf54d3f67a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -14314,15 +14314,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1141084576749081095, guid: 9c6f121357c325c42a4500fb3ef3a13d, type: 3}
       propertyPath: roomSize.x
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1141084576749081095, guid: 9c6f121357c325c42a4500fb3ef3a13d, type: 3}
       propertyPath: roomSize.y
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1141084576749081095, guid: 9c6f121357c325c42a4500fb3ef3a13d, type: 3}
       propertyPath: generateTime
-      value: 1
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 1141084576749081095, guid: 9c6f121357c325c42a4500fb3ef3a13d, type: 3}
       propertyPath: navMeshSurface

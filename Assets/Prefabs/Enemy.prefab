@@ -441,7 +441,7 @@ CapsuleCollider:
   m_Radius: 0.45899022
   m_Height: 1.7135512
   m_Direction: 1
-  m_Center: {x: 0, y: 0.25, z: 0.041009784}
+  m_Center: {x: 0, y: -0.2, z: 0.041009784}
 --- !u!195 &3653183240019664865
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -575,7 +575,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5168952840568892493, guid: 78df595fca68451488fe420e92213442, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5168952840568892493, guid: 78df595fca68451488fe420e92213442, type: 3}
       propertyPath: m_LocalPosition.z
