@@ -36,13 +36,22 @@ public class MousePosition : MonoBehaviour
 
         //}
 
-        if (Input.GetKeyDown(KeyCode.V) || Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.V))
         {
             Ray ray = FindObjectOfType<LocalCamera>().GetComponentInChildren<Camera>().ScreenPointToRay(_rect.position);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 if (hit.collider.gameObject.layer != 8) return;
 
+                Vector3 offset = new(hit.point.x, hit.point.y + 0.1f, hit.point.z);
+                InWorldRayPosition = offset;
+            }
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = FindObjectOfType<LocalCamera>().GetComponentInChildren<Camera>().ScreenPointToRay(_rect.position);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
                 Vector3 offset = new(hit.point.x, hit.point.y + 0.1f, hit.point.z);
                 InWorldRayPosition = offset;
             }

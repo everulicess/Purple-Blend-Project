@@ -105,7 +105,6 @@ public class Player : NetworkBehaviour
 
         if (data.buttons.IsSet(MyButtons.LeftClick))
         {
-            //m_CombatController.Attack();
             // apply the impact force:
             if (knockBackCounter <= 0)
             {
@@ -115,6 +114,7 @@ public class Player : NetworkBehaviour
 
         isCarrying = m_Collector.GetCarryingBool();
         anim.SetBool("isCarrying", isCarrying);
+
         //move the character
         m_CharacterController.Move(forward);
         anim.SetBool("Moving", m_CharacterController.Velocity != Vector3.zero);
