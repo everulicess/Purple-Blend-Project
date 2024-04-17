@@ -72,7 +72,6 @@ public class Player : NetworkBehaviour
         m_Collector = GetComponent<Collector>();
         m_Health = GetComponent<Health>();
         m_CombatController = GetComponent<CombatController>();
-        //cam = FindObjectOfType<Camera>();
     }
     public override void FixedUpdateNetwork()
     {
@@ -82,6 +81,7 @@ public class Player : NetworkBehaviour
             attackTime -= Time.deltaTime;
             if (attackTime <= 0) IsAttacking = false;
         }
+
         //exit if there is no input
         if (!GetInput(out NetworkInputData data)) return;
 
@@ -91,6 +91,56 @@ public class Player : NetworkBehaviour
         var dir = MousePosition.InWorldRayPosition - transform.position;
         dir.Normalize();
         //Vector3 forward = Vector3.zero;
+        KnockBackHandler(data);
+        if (IsAttacking)
+        {
+            FaceTo();
+        }
+
+        //movement blending variables
+        WalkAnim();
+
+        //Interaction using E
+        m_Collector.SetInteractionBool(data.buttons.IsSet(MyButtons.InteractButton));
+
+        if (data.buttons.IsSet(MyButtons.LeftClick))
+        {
+            //m_CombatController.Attack();
+            // apply the impact force:
+            if (knockBackCounter <= 0)
+            {
+                forward = ApplyForce(forward, dir);
+            }
+        }
+
+        isCarrying = m_Collector.GetCarryingBool();
+        anim.SetBool("isCarrying", isCarrying);
+        //move the character
+        m_CharacterController.Move(forward);
+        anim.SetBool("Moving", m_CharacterController.Velocity != Vector3.zero);
+    }
+
+    private void WalkAnim()
+    {
+        if (m_CharacterController.Velocity == Vector3.zero)
+        {
+            anim.SetFloat("MoveX", 0);
+            anim.SetFloat("MoveY", 0);
+        }
+        else
+        {
+            //get the angle between the forward and movement vectors and multiply it by 2pi/360 to get the correct sine/cosine
+            float angle = Vector3.SignedAngle(transform.forward, m_CharacterController.Velocity, Vector3.up) * 0.0174532925199f;
+            //calculate the ratio between current and maximum speed to make blend walk and idle depending on speed
+            float ratio = m_CharacterController.Velocity.magnitude / m_CharacterController.maxSpeed;
+            //sine and cosine times ratio gives the final x and y values
+            anim.SetFloat("MoveX", Mathf.Sin(angle) * ratio);
+            anim.SetFloat("MoveY", Mathf.Cos(angle) * ratio);
+        }
+    }
+
+    private void KnockBackHandler(NetworkInputData data)
+    {
         //check for the knockback, if there is no knockback then the player will be able to move
         if (knockBackCounter <= 0)
         {
@@ -112,54 +162,10 @@ public class Player : NetworkBehaviour
         else
         {
             knockBackCounter -= Runner.DeltaTime;
-           
-        }
-        if (IsAttacking)
-        {
-            FaceTo();
-        }
-        //movement blending variables
-        if (m_CharacterController.Velocity == Vector3.zero)
-        {
-            anim.SetFloat("MoveX", 0);
-            anim.SetFloat("MoveY", 0);
-        }
-        else
-        {
-            //get the angle between the forward and movement vectors and multiply it by 2pi/360 to get the correct sine/cosine
-            float angle = Vector3.SignedAngle(transform.forward, m_CharacterController.Velocity, Vector3.up) * 0.0174532925199f;
-            //calculate the ratio between current and maximum speed to make blend walk and idle depending on speed
-            float ratio = m_CharacterController.Velocity.magnitude / m_CharacterController.maxSpeed;
-            //sine and cosine times ratio gives the final x and y values
-            anim.SetFloat("MoveX", Mathf.Sin(angle) * ratio);
-            anim.SetFloat("MoveY", Mathf.Cos(angle) * ratio);
-        }
 
-        //Interaction using E
-        m_Collector.SetInteractionBool(data.buttons.IsSet(MyButtons.InteractButton));
-       
-        if (data.buttons.IsSet(MyButtons.LeftClick)) 
-        {
-            //m_CombatController.Attack();
-            // apply the impact force:
-            if (knockBackCounter<=0)
-            {
-                forward = ApplyForce(forward, dir);
-            }
-            //forward = new Vector3(forward.x, 200f, forward.z);
         }
-        if (data.buttons.IsSet(MyButtons.TestingButtonQ))
-        {
-            //m_Health.OnTakeDamage(0.25f);
-            //return;
-        }
-
-        isCarrying = m_Collector.GetCarryingBool();
-        anim.SetBool("isCarrying", isCarrying);
-        //move the character
-        m_CharacterController.Move(forward);
-        anim.SetBool("Moving", m_CharacterController.Velocity != Vector3.zero);
     }
+
     private void FaceTo()
     {
         Vector3 direction = (MousePosition.InWorldRayPosition - transform.position).normalized;
