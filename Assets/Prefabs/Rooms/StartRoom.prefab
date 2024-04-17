@@ -320,9 +320,6 @@ MonoBehaviour:
   generateTime: 0.05
   roomLayouts:
   - {fileID: 3212770992262226114, guid: 037e7e3ebe271e843a3481a15305ae7a, type: 3}
-  - {fileID: 3212770992262226114, guid: ec0516a8757e19942a81f31035baf599, type: 3}
-  - {fileID: 3212770992262226114, guid: 5e96d40f7503b944596167dcabb8b6e4, type: 3}
-  - {fileID: 3212770992262226114, guid: 7615ebcb5f9b6a047bc540ff79874c3d, type: 3}
   navMeshSurface: {fileID: 0}
 --- !u!1 &2413151775946731445
 GameObject:
