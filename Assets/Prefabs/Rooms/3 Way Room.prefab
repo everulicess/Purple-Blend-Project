@@ -2023,7 +2023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f724bd8209e9fad4b86aeb17efcbcb99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorAvailability: 01000101
+  doorAvailability: 01010100
   roomSize: {x: 0, y: 0, z: 0}
   overlap: 0
 --- !u!114 &3212770992262226114

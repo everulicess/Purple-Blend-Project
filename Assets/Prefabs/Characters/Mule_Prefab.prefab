@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8431897840648135557}
-  - component: {fileID: -2941895665417519000}
   m_Layer: 0
   m_Name: Mule_Prefab
   m_TagString: Untagged
@@ -33,6 +32,7 @@ Transform:
   - {fileID: 8269488404925047016}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
 --- !u!95 &-2941895665417519000
 Animator:
   serializedVersion: 5
@@ -54,6 +54,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+=======
+>>>>>>> Stashed changes
 --- !u!1001 &8451469353936324355
 PrefabInstance:
   m_ObjectHideFlags: 0
