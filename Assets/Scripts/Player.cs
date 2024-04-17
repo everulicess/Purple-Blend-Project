@@ -20,7 +20,7 @@ public class Player : NetworkBehaviour
     private CombatController m_CombatController;
 
     //the time the attack animation locks the player's rotation
-    private float attackLength = 1.6f;
+    [SerializeField] private float attackLength = 1.6f;
     private float attackTime = 0f;
 
     //keep a reference to the skew to save a bit of calculation (you could also rotate the world and remove this)
