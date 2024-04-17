@@ -35,7 +35,7 @@ public class Player : NetworkBehaviour
 
     [Header("knockBack variables")]
     //Knockback and Push variables
-    [SerializeField] float knockBackCounter;
+    float knockBackCounter;
     [SerializeField] float knockBackTime = 5f;
     [SerializeField] float knockBackForce = 100f;
 
@@ -55,7 +55,7 @@ public class Player : NetworkBehaviour
     public override void Spawned()
     {
         if (HasInputAuthority)
-        { /*CameraFollow.Singleton.SetTarget(camTarget);*/
+        {
             localCamera = Instantiate(cam);
             localCamera.GetComponent<LocalCamera>().SetTarget(camTarget);
         }

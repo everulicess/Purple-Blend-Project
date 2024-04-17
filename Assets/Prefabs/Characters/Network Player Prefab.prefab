@@ -132,9 +132,8 @@ MonoBehaviour:
   camTarget: {fileID: 2627143927177756995}
   attackLength: 0.1
   cam: {fileID: 7072012241765596909, guid: ed809da431a1cdb4890e5d69d1035499, type: 3}
-  knockBackCounter: 0
-  knockBackTime: 0
-  knockBackForce: 0
+  knockBackTime: 0.2
+  knockBackForce: 10
 --- !u!136 &6075541524490898695
 CapsuleCollider:
   m_ObjectHideFlags: 0
