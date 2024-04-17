@@ -81,33 +81,19 @@ public class CombatController : NetworkBehaviour
         {
             // Switches isAttacking to true so that the player cannot spam attacks and invokes functions with a small delay.
             isAttacking = true;
-            Invoke(nameof(TryAttacking), 0.3f);
-            Invoke(nameof(DisableIsAttacking), 0.5f);
+            TryAttacking();
+            Invoke(nameof(DisableIsAttacking), 0.3f);
         }
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag(thisObjectTag)) return;
-    //    //Gets the Health script
-    //    other.TryGetComponent(out Health health);
-    //    // Adds object to potential list of targets.
-    //    if (health!=null)
-    //    {
-    //        targets.Add(health);
-    //    }
-    //}
     public void UpdateTargetList(List<Health> list, bool isAdding) 
     {
         targets.Clear();
-        //if (isAdding)
-        //{
             foreach (Health item in list)
             {
                 targets.Add(item);
                 Debug.Log($"{item.name} has been added to the list");
             }
-        //}
     }
 
     private void OnTriggerExit(Collider other)
@@ -122,7 +108,6 @@ public class CombatController : NetworkBehaviour
         // Enables attack area's MeshRenderer to show the attack happening.
         hitbox.gameObject.GetComponent<MeshRenderer>().enabled = true;
         DamageTargets();
-        //PushPlayerToAttack();
         IncreaseComboCounter();
         targets.Clear();
     }
@@ -130,25 +115,16 @@ public class CombatController : NetworkBehaviour
     // Checks through the list of objects within the targets list to damage them all.
     private void DamageTargets()
     {
-        foreach (Health target in targets/*.ToList()*/)
+        foreach (Health target in targets)
         {
             if (target != null)
             {
-                //if (!target.CompareTag(thisObjectTag))
-                //{
                 Vector3 target_tp = target.transform.position;
                 Vector3 knockbackVector = (target_tp - gameObject.transform.position).normalized;
-                //target.GetComponent<BoxPlaceholderScript>().ApplyKnockback(knockbackVector*knockback);
-                //damage = target.CompareTag("Player") ? 0.1f : 2f;
                 target.TryGetComponent(out IDamageable damageable);
                 if (damageable == null) return;
                 damageable.OnTakeDamage(damage);
                 Debug.Log($"Dealing {damage} damage to {target.name}");
-                //}
-                //else
-                //{
-                //    Debug.LogError("no friendly fire");
-                //}
             }
         }
     }
@@ -186,9 +162,4 @@ public class CombatController : NetworkBehaviour
         isAttacking = false;
         hitbox.gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
-
-    //private void PushPlayerToAttack()
-    //{
-    //    gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(transform.forward.x * playerPush, transform.forward.y, transform.forward.z * playerPush));
-    //}
 }

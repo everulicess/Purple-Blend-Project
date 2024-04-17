@@ -26,12 +26,12 @@ public class ChildColliderScript : NetworkBehaviour
             case "HitBox":
                 for (int i = 0; i < collisions; i++)
                 {
-                    if (_colliders[i] != null)
+                    if (!_colliders[i]) enemy.InRangeSetter(false);
+                    else
                     {
                         enemy.InRangeSetter(true);
                         break;
                     }
-                    else enemy.InRangeSetter(false);
                 }
                 ; break;
             case "DetectionArea":

@@ -140,7 +140,7 @@ public class Player : NetworkBehaviour
        
         if (data.buttons.IsSet(MyButtons.LeftClick)) 
         {
-            m_CombatController.Attack();
+            //m_CombatController.Attack();
             // apply the impact force:
             if (knockBackCounter<=0)
             {

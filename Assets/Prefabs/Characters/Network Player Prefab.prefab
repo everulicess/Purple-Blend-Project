@@ -131,8 +131,8 @@ MonoBehaviour:
   camTarget: {fileID: 2627143927177756995}
   attackLength: 0.1
   cam: {fileID: 7072012241765596909, guid: ed809da431a1cdb4890e5d69d1035499, type: 3}
-  knockBackTime: 0.2
-  knockBackForce: 10
+  knockBackTime: 0
+  knockBackForce: 0
 --- !u!136 &6075541524490898695
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -489,7 +489,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2440e0c45c4b6384483d9b654c8b1f49, type: 2}
+  - {fileID: 2100000, guid: 9bd26cabf7d17a543a45bb106ecef2ac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
