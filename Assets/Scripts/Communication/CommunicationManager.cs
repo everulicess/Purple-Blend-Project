@@ -29,7 +29,7 @@ public struct CommunicationLibrary
     public PingInfo Ping4;
     public PingInfo Ping5;
 }
-public class CommunicationManager : NetworkBehaviour
+public class CommunicationManager : MonoBehaviour
 {
     [SerializeField] CommunicationLibrary communicationLibrary;
 
@@ -40,32 +40,18 @@ public class CommunicationManager : NetworkBehaviour
     public static Vector3 PingMenuPosition;
 
     [SerializeField] RadialMenu radialMenu;
-    private Camera cam;
-   
     private void Awake()
     {
         radialMenu = FindObjectOfType<RadialMenu>();
         InitializeDictionaries();
     }
-    private void Start()
-    {
-        cam = FindObjectOfType<LocalCamera>().GetComponentInChildren<Camera>();
-    }
-    public override void FixedUpdateNetwork()
-    {
-        //MenuToggle();
-    }
     void Update()
     {
         MenuToggle();
     }
-    //NetworkInput input;
+    
     private void MenuToggle()
     {
-        if (!Runner) return;
-
-        PlayerRef player = Runner.LocalPlayer;
-
         if (Input.GetKey(KeyCode.V))
         {
             radialMenu.Open();
@@ -76,22 +62,20 @@ public class CommunicationManager : NetworkBehaviour
         else
         {
             radialMenu.Close();
-            
-             PingMenuPosition = Input.mousePosition;
-           
+            PingMenuPosition = Input.mousePosition;
         }
     }
 
     private void InitializeDictionaries()
     {
-        //Sound
+        //Sounds
         audioDictionary.Add(Pings.MissingPing, communicationLibrary.Ping1.Sound);
         audioDictionary.Add(Pings.LocationPing, communicationLibrary.Ping2.Sound);
         audioDictionary.Add(Pings.None, communicationLibrary.Ping3.Sound);
         audioDictionary.Add(Pings.AnotherPing, communicationLibrary.Ping4.Sound);
         audioDictionary.Add(Pings.NewPing, communicationLibrary.Ping5.Sound);
 
-        //Visual
+        //Visuals
         visualsDictionary.Add(Pings.MissingPing, communicationLibrary.Ping1.Prefab);
         visualsDictionary.Add(Pings.LocationPing, communicationLibrary.Ping2.Prefab);
         visualsDictionary.Add(Pings.None, communicationLibrary.Ping3.Prefab);

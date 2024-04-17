@@ -105,6 +105,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         //reset input
         InteractButtonPressed = false;
         TestingButtonQPressed = false;
+        PingButtonPressed = false;
         LeftClickPressed = false;
         RightClickPressed = false;
     }

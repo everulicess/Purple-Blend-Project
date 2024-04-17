@@ -54,6 +54,10 @@ public class Collector : NetworkBehaviour
             pocketUI.SetActive(false);
         }
     }
+    public bool GetCarryingBool()
+    {
+        return carryingTreasure;
+    }
     private static Collider[] _colliders = new Collider[20];
     private static List<LagCompensatedHit> _hits = new();
     [SerializeField] LayerMask LayerMask;

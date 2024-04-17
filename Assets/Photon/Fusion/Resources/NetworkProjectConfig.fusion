@@ -3,7 +3,7 @@
     "TypeId": "NetworkProjectConfig",
     "PeerMode": 0,
     "LagCompensation": {
-        "Enabled": false,
+        "Enabled": true,
         "HitboxBufferLengthInMs": 200,
         "HitboxDefaultCapacity": 512,
         "CachedStaticCollidersSize": 64
@@ -31,7 +31,7 @@
     },
     "HostMigration": {
         "EnableAutoUpdate": false,
-        "UpdateDelay": 30
+        "UpdateDelay": 10
     },
     "EncryptionConfig": {
         "EnableEncryption": false

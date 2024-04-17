@@ -7,7 +7,7 @@ using TMPro;
 using Fusion;
 //using DG.Tweening;
 
-public class RadialMenuEntry : NetworkBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class RadialMenuEntry : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public delegate void RadialMenuEntryDelegate(/*RadialMenuEntry pEntry,*/ Pings pPingId);
     [SerializeField] TextMeshProUGUI Label;
@@ -15,8 +15,13 @@ public class RadialMenuEntry : NetworkBehaviour, IPointerClickHandler, IPointerE
 
     RectTransform Rect;
     RadialMenuEntryDelegate Callback;
-    [SerializeField] protected Pings PingId;
-    
+    [SerializeField] Pings PingId;
+
+    NetworkRunner m_Runner;
+    private void Awake()
+    {
+        m_Runner = FindObjectOfType<NetworkRunner>();
+    }
     private void Start()
     {
         Rect = Icon.GetComponent<RectTransform>();
@@ -50,9 +55,19 @@ public class RadialMenuEntry : NetworkBehaviour, IPointerClickHandler, IPointerE
         //communication.PlacePing_RPC(this, this.PingId);
         //Callback?.Invoke(/*this.gameObject.GetComponent<RadialMenuEntry>(),*/ PingId);
     }
+    Player m_Player;
     public void OnPointerEnter(PointerEventData eventData)
     {
-        FindObjectOfType<PlayerCommunication>().SetPingToDisplay(PingId);
+        m_Player = FindObjectOfType<Player>();
+
+        m_Player.GetComponent<PlayerCommunication>().SetPingToDisplay(PingId);
+        Debug.Log($"passing the ping: {PingId}");
+        if (m_Player.HasInputAuthority)
+        {
+            m_Player.GetComponent<PlayerCommunication>().SetPingToDisplay(PingId);
+            Debug.Log($"passing the ping: {PingId}");
+        }
+        //FindObjectOfType<PlayerCommunication>().SetPingToDisplay(PingId);
         //Debug.LogError($"PingID is: {PingId}");
         ///Animation using DG.Tweening
         ///Rect.DOSComplete();

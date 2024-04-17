@@ -13,8 +13,8 @@ public class Health : NetworkBehaviour, IDamageable
     [Header("change detectors")]
     //change Detector
     private ChangeDetector _changes;
-    [SerializeField] [Networked] float HealthPoints { get; set; }
-    [SerializeField] [Networked] bool isDead { get; set; }
+    [Networked] float HealthPoints { get; set; }
+    [Networked] bool isDead { get; set; }
 
     const float maxHealthPoints = 100f;
 
@@ -22,15 +22,13 @@ public class Health : NetworkBehaviour, IDamageable
     public bool isPlayer;
     private void Start()
     {
-        _changes = GetChangeDetector(ChangeDetector.Source.SimulationState);
-        HealthPoints = maxHealthPoints;
-        isDead = false;
-        fillImage.fillAmount = HealthPoints / maxHealthPoints;
-        isPlayer = this.TryGetComponent(out Player _player);
+        //    _changes = GetChangeDetector(ChangeDetector.Source.SimulationState);
+        //    isDead = false;
+        //    fillImage.fillAmount = HealthPoints / maxHealthPoints;
+        //    isPlayer = this.TryGetComponent(out Player _player);
     }
     public override void Spawned()
     {
-        if (!Runner.IsServer) return;
         _changes = GetChangeDetector(ChangeDetector.Source.SimulationState);
         HealthPoints = maxHealthPoints;
         isDead = false;
@@ -43,11 +41,10 @@ public class Health : NetworkBehaviour, IDamageable
         HealthUI.SetActive(true);
         HealthUI.transform.LookAt(FindObjectOfType<Camera>().transform.position);
 
-        fillImage.fillAmount = HealthPoints / maxHealthPoints;
     }
     public override void FixedUpdateNetwork()
     {
-
+        fillImage.fillAmount = HealthPoints / maxHealthPoints;
     }
     public override void Render()
     {
@@ -81,7 +78,7 @@ public class Health : NetworkBehaviour, IDamageable
     }
     static void OnBoolChanged(bool oldValue, bool value)
     {
-        Debug.Log($"{Time.time} On boolean Changed \n old value {oldValue} \n new value{value}");
+        //Debug.Log($"{Time.time} On boolean Changed \n old value {oldValue} \n new value{value}");
 
     }
     public void OnTakeDamage(float pDamage)
@@ -89,7 +86,7 @@ public class Health : NetworkBehaviour, IDamageable
         if (isDead) return;
         
         HealthPoints -= pDamage;
-        Debug.Log($"{Time.deltaTime} {transform.name} took damaage and has {HealthPoints} left ");
+        //Debug.Log($"{Time.deltaTime} {transform.name} took damaage and has {HealthPoints} left ");
 
         if (HealthPoints<=0)
         {

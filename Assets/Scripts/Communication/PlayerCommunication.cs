@@ -6,43 +6,40 @@ using Fusion;
 public class PlayerCommunication : NetworkBehaviour
 {
     
-    [SerializeField] NetworkObject debugObject;
+     NetworkObject debugObject;
     //bool placePing;
-
+    bool openMenu;
     //[Header("Ping Info")]
     NetworkObject pingVisual;
-    [Networked] Pings pingID { get; set; }
+    //Runner reference
+    //NetworkRunner Runner;
+    Pings pingID { get; set; }
     private void Start()
     {
-        //Debug.LogWarning($"this object {nameof(PlayerCommunication)} is in the scene");
+        //Runner = FindObjectOfType<NetworkRunner>();
     }
     private void Update()
     {
-        //if (!placePing) return;
-        if (Input.GetKeyUp(KeyCode.V) /*&& HasInputAuthority*/)
-        {
-            RPC_SendMessage( MousePosition.InWorldRayPosition);
-            //pingID = SetPingToDisplay(pingID);
-            Debug.LogError($"Ping that will be passed to the object: {pingID}");
-        }
-        
+
+    }
+    public void SetPingMenuInteraction(bool _value)
+    {
+        openMenu = _value;
     }
     public void SetPingToDisplay(Pings pPing)
     {
         pingID = pPing;
-        //Debug.LogWarning($"{pingID} is assigned {pPing}");
-        //return pingID;
-        //placePing = true;
+        RPC_SendMessage(pPing, MousePosition.InWorldRayPosition);
+        Debug.Log($"{pingID} is assigned {pPing}");
     }
-    [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
-    public void RPC_SendMessage( Vector3 pVector, RpcInfo info = default)
+    [Rpc(sources: RpcSources.All, targets: RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
+    public void RPC_SendMessage(Pings pPingID ,Vector3 pVector, RpcInfo info = default)
     {
-        
-        RPC_RelayMessage( pVector, info.Source);
+        CommunicationManager.visualsDictionary.TryGetValue(pPingID, out NetworkObject visual);
+        RPC_RelayMessage( pVector, visual, info.Source);
     }
-
     [Rpc(RpcSources.StateAuthority, RpcTargets.All, HostMode = RpcHostMode.SourceIsServer)]
-    public void RPC_RelayMessage( Vector3 pVector,PlayerRef messageSource)
+    public void RPC_RelayMessage( Vector3 pVector,NetworkObject pVisual ,PlayerRef messageSource)
     {
         string message = "";
         
@@ -55,9 +52,9 @@ public class PlayerCommunication : NetworkBehaviour
             message = $"other player: vector = {pVector}\n PingID = {pingID}";
         }
         Debug.LogWarning(message);
+        
 
-        NetworkObject ping = Runner.Spawn(debugObject, pVector, Quaternion.identity);
+        NetworkObject ping = Runner.Spawn(pVisual, pVector, Quaternion.identity);
         ping.GetComponent<DestroyPing>().SetPing(pingID);
-
     }
 }

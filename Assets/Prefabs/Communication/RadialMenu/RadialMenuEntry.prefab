@@ -71,8 +71,7 @@ MonoBehaviour:
   ObjectInterest: 1
   Flags: 786433
   NestedObjects: []
-  NetworkedBehaviours:
-  - {fileID: 5457408488773303618}
+  NetworkedBehaviours: []
 --- !u!1 &2779721519386861167
 GameObject:
   m_ObjectHideFlags: 0

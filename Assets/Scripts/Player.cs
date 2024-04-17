@@ -41,6 +41,9 @@ public class Player : NetworkBehaviour
 
     //movement direction
     Vector3 forward;
+
+    //animation booleans
+    bool isCarrying = false;
     //getter/setter for isAttacking which automatically sets the variables to start the timer and animation
     public bool IsAttacking
     {
@@ -151,6 +154,7 @@ public class Player : NetworkBehaviour
             //return;
         }
 
+        isCarrying = m_Collector.GetCarryingBool();
         //move the character
         m_CharacterController.Move(forward);
         anim.SetBool("Moving", m_CharacterController.Velocity != Vector3.zero);
