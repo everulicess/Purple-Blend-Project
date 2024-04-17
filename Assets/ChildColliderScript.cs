@@ -2,43 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Fusion;
 
-public class ChildColliderScript : MonoBehaviour
+public class ChildColliderScript : NetworkBehaviour
 {
     private BaseEnemy enemy;
+    private static Collider[] _colliders = new Collider[9];
+    [SerializeField] LayerMask LayerMask;
+    [SerializeField] float colliderSize;
+    private string thisTag;
 
     private void Start()
     {
         enemy = GetComponentInParent<BaseEnemy>();
+        thisTag = this.gameObject.tag;
     }
-
-    private void OnTriggerEnter(Collider other)
+    public override void FixedUpdateNetwork()
     {
-        other.TryGetComponent(out Player obj);
-        if (obj == null) return;
-        if (CompareTag("HitBox"))
-        {
-            enemy.InRangeSetter(true);
-        }
-        else if (CompareTag("DetectionArea"))
-        {
-            Debug.Log("detected");
-            enemy.TargetSetter(true, other.GetComponent<Player>());
-        }
-    }
+        int collisions = Runner.GetPhysicsScene().OverlapSphere(new Vector3(transform.position.x, 0, transform.position.z), colliderSize, _colliders, LayerMask, QueryTriggerInteraction.Collide);
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        switch (thisTag)
         {
-            if (CompareTag("HitBox"))
-            {
-                enemy.InRangeSetter(false);
-            }
-            else if (CompareTag("DetectionArea"))
-            {
-                enemy.TargetSetter(false, other.GetComponent<Player>());
-            }
+            case "HitBox":
+                for (int i = 0; i < collisions; i++)
+                {
+                    if (_colliders[i] != null)
+                    {
+                        enemy.InRangeSetter(true);
+                        break;
+                    }
+                    else enemy.InRangeSetter(false);
+                }
+                ; break;
+            case "DetectionArea":
+                for (int i = 0; i < collisions; i++)
+                {
+                    enemy.TargetSetter(_colliders);
+                }
+                ; break;
+
+            default:
+                ; break;
         }
     }
 }

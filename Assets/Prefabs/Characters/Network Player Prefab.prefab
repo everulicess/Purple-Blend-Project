@@ -20,7 +20,6 @@ GameObject:
   - component: {fileID: -7509562787672207929}
   - component: {fileID: -3934953189958981407}
   - component: {fileID: 717622672262634564}
-  - component: {fileID: 2320474407272221357}
   m_Layer: 7
   m_Name: Network Player Prefab
   m_TagString: Player
@@ -267,18 +266,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0e17f8c173e40fc4d8ea7ffe6746d22c, type: 2}
   hitbox: {fileID: 8930525562460017052}
   point: {x: 0, y: 0, z: 0}
---- !u!114 &2320474407272221357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2244119501597336846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a14dc2243daa4b84ea66504618a4dc71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2257954025410530783
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ public class Player : NetworkBehaviour
     public static Vector3 m_MousePosition;
     private NetworkCharacterController m_CharacterController;
     private Animator anim;
+    private CombatController m_CombatController;
 
     //the time the attack animation locks the player's rotation
     private float attackLength = 1.6f;
@@ -67,6 +68,7 @@ public class Player : NetworkBehaviour
         anim = GetComponent<Animator>();
         m_Collector = GetComponent<Collector>();
         m_Health = GetComponent<Health>();
+        m_CombatController = GetComponent<CombatController>();
         //cam = FindObjectOfType<Camera>();
     }
     public override void FixedUpdateNetwork()
@@ -135,6 +137,7 @@ public class Player : NetworkBehaviour
        
         if (data.buttons.IsSet(MyButtons.LeftClick)) 
         {
+            m_CombatController.Attack();
             // apply the impact force:
             if (knockBackCounter<=0)
             {

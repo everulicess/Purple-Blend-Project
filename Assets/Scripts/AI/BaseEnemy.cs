@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Fusion;
 
-public class BaseEnemy : MonoBehaviour
+public class BaseEnemy : NetworkBehaviour
 {
-    private List<Player> targets = new List<Player>();
+    private Player[] targets = new Player[9];
     private Player target;
     private NavMeshAgent agent;
     private bool inRange = false;
@@ -17,7 +18,7 @@ public class BaseEnemy : MonoBehaviour
         combatController = gameObject.GetComponent<CombatController>();
     }
 
-    void Update()
+    public override void FixedUpdateNetwork()
     {
         if (target)
         {
@@ -38,19 +39,20 @@ public class BaseEnemy : MonoBehaviour
         inRange = set;
     }
 
-    public void TargetSetter(bool add, Player set)
+    public void TargetSetter(Collider[] set)
     {
-        if (add)
+        if (set[0] != null)
         {
-            targets.Add(set);
-            target = targets[0];
-        } else
-        {
-            targets.Remove(set);
-            if (targets.Count > 1)
+            Player[] playerTargets = new Player[9];
+            for (int i = 0; i < set.Length; i++)
             {
-                target = targets[0];
+                if (set[i] != null)
+                {
+                    playerTargets[i] = set[i].GetComponent<Player>();
+                }
             }
-        }
+            targets = playerTargets;
+            target = targets[0];
+        } else target = null;
     }
 }

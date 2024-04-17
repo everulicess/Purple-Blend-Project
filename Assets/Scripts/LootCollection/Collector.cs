@@ -80,7 +80,6 @@ public class Collector : NetworkBehaviour
             if (collectable != null)
             {
                 collectable.TryInteracting(this);
-                Debug.Log($"{Time.time} {this.name} has collected {collectable.name}");
                 // Pickup was successful, activating timer.
                 //_activationTimer = TickTimer.CreateFromSeconds(Runner, Cooldown);
                 break;
