@@ -29,12 +29,6 @@ public class MousePosition : MonoBehaviour
         {
             _rect.position = Input.mousePosition;
         }
-        //if (Input.GetKeyDown(KeyCode.B))
-        //{
-        //    Vector3 offsetTry = FindObjectOfType<LocalCamera>().GetComponentInChildren<Camera>().ScreenToWorldPoint(_rect.position);
-        //    InWorldRayPosition = offsetTry;
-
-        //}
 
         if (Input.GetKeyDown(KeyCode.V))
         {

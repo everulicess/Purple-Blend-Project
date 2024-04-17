@@ -85,16 +85,21 @@ public class Player : NetworkBehaviour
         //exit if there is no input
         if (!GetInput(out NetworkInputData data)) return;
 
-        //initiate attack with mouse click (also checks if the player is already attacking so the animation does not restart)
-        if (data.buttons.IsSet(MyButtons.LeftClick) && !IsAttacking) IsAttacking = true;
-
         var dir = MousePosition.InWorldRayPosition - transform.position;
         dir.Normalize();
-        //Vector3 forward = Vector3.zero;
+
         KnockBackHandler(data);
-        if (IsAttacking)
+
+        //initiate attack with mouse click (also checks if the player is already attacking so the animation does not restart)
+        if (data.buttons.IsSet(MyButtons.LeftClick) && !IsAttacking)
         {
+            IsAttacking = true;
             FaceTo();
+            // apply the impact force:
+            if (knockBackCounter <= 0)
+            {
+                forward = ApplyForce(forward, dir);
+            }
         }
 
         //movement blending variables
@@ -102,15 +107,6 @@ public class Player : NetworkBehaviour
 
         //Interaction using E
         m_Collector.SetInteractionBool(data.buttons.IsSet(MyButtons.InteractButton));
-
-        if (data.buttons.IsSet(MyButtons.LeftClick))
-        {
-            // apply the impact force:
-            if (knockBackCounter <= 0)
-            {
-                forward = ApplyForce(forward, dir);
-            }
-        }
 
         isCarrying = m_Collector.GetCarryingBool();
         anim.SetBool("isCarrying", isCarrying);
