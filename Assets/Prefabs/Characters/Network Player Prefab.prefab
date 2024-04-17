@@ -42,7 +42,6 @@ Transform:
   m_Children:
   - {fileID: 2999459875607391821}
   - {fileID: 2627143927177756995}
-  - {fileID: 8078895455858871908}
   - {fileID: 113996326152513545}
   - {fileID: 2189896439542562298}
   m_Father: {fileID: 0}
@@ -191,10 +190,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 91701927173731694}
-  TotalWords: 4
+  TotalWords: 5
   ApplyTiming: 2
   SyncSettings: 79
-  StateHashes: 0000000074c37e9447705ba32b1a167c794069558a18fce4c26c9b035daf077246988a14b29b95915931f8d945c12130ee7bda32bc57e948784bdd452a67ee3f542ad3ab0606e0d1
+  StateHashes: 0000000074c37e9447705ba32b1a167c794069558a18fce4c26c9b035daf077246988a14b29b95915931f8d945c12130ee7bda32bc57e948784bdd452a67ee3f542ad3ab0606e0d1958341e2030740158fdb216eab765ef4
   TriggerHashes: 000000000d286c4037013a39
 --- !u!114 &280890212787123914
 MonoBehaviour:
@@ -229,7 +228,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51dedd782c65c924e924f84c65d0e85c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugObject: {fileID: 5181428273564063880, guid: 6d379561705db3245ac91b2b3b710692, type: 3}
 --- !u!114 &-3934953189958981407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,8 +242,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthUI: {fileID: 5730471777365015584}
   fillImage: {fileID: 2964182712778820534}
-  _HealthPoints: 0
-  _isDead: 0
   isPlayer: 1
 --- !u!114 &717622672262634564
 MonoBehaviour:
@@ -425,11 +421,11 @@ Transform:
   m_GameObject: {fileID: 7916595526166394597}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.399, z: 0.598}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6435882370432190310}
+  m_Father: {fileID: 9093336647654514509}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8930525562460017052
 GameObject:
@@ -1269,12 +1265,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5405376566640005031, guid: b21d7c1ceb1bb7145bee3017c9398aee, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8078895455858871908}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b21d7c1ceb1bb7145bee3017c9398aee, type: 3}
 --- !u!4 &113996326152513545 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3793504044722714851, guid: b21d7c1ceb1bb7145bee3017c9398aee, type: 3}
+  m_PrefabInstance: {fileID: 3833061196600266986}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &9093336647654514509 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5405376566640005031, guid: b21d7c1ceb1bb7145bee3017c9398aee, type: 3}
   m_PrefabInstance: {fileID: 3833061196600266986}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4272109008573587565
