@@ -43,7 +43,7 @@ public class CombatController : NetworkBehaviour
         hitbox.AddComponent<SetTargets>();
     }
 
-    public override void FixedUpdateNetwork()
+    private void Update()
     {
         //FaceTarget();
         // Combo timer. When it reaches 0, the combo counter resets.
