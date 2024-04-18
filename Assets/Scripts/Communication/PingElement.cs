@@ -21,7 +21,7 @@ public class PingElement : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Selected(Pings.None);
+        Selected(Pings.GreatJob);
     }
 
     public void Selected(Pings _pingID)

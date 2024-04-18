@@ -129,16 +129,11 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     {
     }
     float playersJoined = 0f;
-    bool roomsInitialized = false;
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
         if (!runner.IsServer) return;
         if (SceneManager.GetActiveScene().name == "MenuScene") return;
-        //if (playersJoined<=1)
-        //{
-        //    StartCoroutine(FindObjectOfType<RoomSpawner>().GenerateMap());
-        //    roomsInitialized = true;
-        //}
+        
         Vector3 playerPos = new(/*(player.RawEncoded % runner.Config.Simulation.PlayerCount) * */0 + playersJoined, 0f, 0f);
 
         NetworkObject networkObject = runner.Spawn(networkPrefabRef, playerPos, Quaternion.identity, player);

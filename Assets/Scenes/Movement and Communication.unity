@@ -6558,26 +6558,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   communicationLibrary:
-    Ping1:
+    Attack_Ping:
       Prefab: {fileID: 5181428273564063880, guid: 6d379561705db3245ac91b2b3b710692, type: 3}
-      Sound: {fileID: 8300000, guid: 3eed0311f2f5a6343b4a478ac21dc19d, type: 3}
-      Icon: {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
-    Ping2:
-      Prefab: {fileID: -1282070134898298644, guid: a786c0e224a6957469705e91d53538e2, type: 3}
-      Sound: {fileID: 8300000, guid: 28e9f6569d2db8a4babcd2a3bca33201, type: 3}
-      Icon: {fileID: 2800000, guid: 8958b450dee843f41a091a734ed43ccd, type: 3}
-    Ping3:
-      Prefab: {fileID: -7401854581237916255, guid: 9545098410e22dc49a9140ea9503fb5e, type: 3}
-      Sound: {fileID: 8300000, guid: 3eed0311f2f5a6343b4a478ac21dc19d, type: 3}
-      Icon: {fileID: 2800000, guid: 24a22d21fe312f44892796563f01c302, type: 3}
-    Ping4:
-      Prefab: {fileID: -1282070134898298644, guid: a786c0e224a6957469705e91d53538e2, type: 3}
-      Sound: {fileID: 8300000, guid: 3eed0311f2f5a6343b4a478ac21dc19d, type: 3}
-      Icon: {fileID: 2800000, guid: 43725de47547036498287ad504fe9f9d, type: 3}
-    Ping5:
-      Prefab: {fileID: -7401854581237916255, guid: 9545098410e22dc49a9140ea9503fb5e, type: 3}
-      Sound: {fileID: 8300000, guid: 28e9f6569d2db8a4babcd2a3bca33201, type: 3}
-      Icon: {fileID: 2800000, guid: 3ffdd609e3329cb46a9ac335d4539399, type: 3}
+      Sound: {fileID: 0}
+      Icon: {fileID: 2800000, guid: 4f1e2ea614a9d8a479ddf7c9230d198a, type: 3}
+    Loot_Ping:
+      Prefab: {fileID: 5181428273564063880, guid: 1f59fccc08d662b45a4c8de3b947ce87, type: 3}
+      Sound: {fileID: 0}
+      Icon: {fileID: 0}
+    GreatJob_Ping:
+      Prefab: {fileID: 5181428273564063880, guid: 7f9998c93e3043140a93ef0ab20f6f7b, type: 3}
+      Sound: {fileID: 0}
+      Icon: {fileID: 0}
+    Thanks_Ping:
+      Prefab: {fileID: 5181428273564063880, guid: b353a79ae9e13df49b56079f2580eeba, type: 3}
+      Sound: {fileID: 0}
+      Icon: {fileID: 2800000, guid: 43221f8b72c5d084dbac7d6d5a290d8f, type: 3}
+    Help_Ping:
+      Prefab: {fileID: 5181428273564063880, guid: 78bf47d4181a7174fb7a992a6821bce0, type: 3}
+      Sound: {fileID: 0}
+      Icon: {fileID: 0}
+    NeedToDeposit_Ping:
+      Prefab: {fileID: 5181428273564063880, guid: b7c951ff51c483846a11c60bb297e28f, type: 3}
+      Sound: {fileID: 0}
+      Icon: {fileID: 0}
+    FollowMe:
+      Prefab: {fileID: 5181428273564063880, guid: b46f5ab2bc14b6148b1d522e1e55edce, type: 3}
+      Sound: {fileID: 0}
+      Icon: {fileID: 0}
   radialMenu: {fileID: 1155057973}
 --- !u!4 &963096546
 Transform:

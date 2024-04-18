@@ -6,11 +6,13 @@ using Fusion;
 
 public enum Pings
 {
-    None,
-    MissingPing,
-    LocationPing,
-    NewPing,
-    AnotherPing
+    Attack,
+    Loot,
+    GreatJob,
+    Thanks,
+    Help,
+    NeedToDeposit,
+    FollowMe
 }
 [Serializable]
 public class PingInfo
@@ -23,11 +25,13 @@ public class PingInfo
 public struct CommunicationLibrary
 {
     [Header("Pings")]
-    public PingInfo Ping1;
-    public PingInfo Ping2;
-    public PingInfo Ping3;
-    public PingInfo Ping4;
-    public PingInfo Ping5;
+    public PingInfo Attack_Ping;
+    public PingInfo Loot_Ping;
+    public PingInfo GreatJob_Ping;
+    public PingInfo Thanks_Ping;
+    public PingInfo Help_Ping;
+    public PingInfo NeedToDeposit_Ping;
+    public PingInfo FollowMe;
 }
 public class CommunicationManager : MonoBehaviour
 {
@@ -69,25 +73,31 @@ public class CommunicationManager : MonoBehaviour
     private void InitializeDictionaries()
     {
         //Sounds
-        audioDictionary.Add(Pings.MissingPing, communicationLibrary.Ping1.Sound);
-        audioDictionary.Add(Pings.LocationPing, communicationLibrary.Ping2.Sound);
-        audioDictionary.Add(Pings.None, communicationLibrary.Ping3.Sound);
-        audioDictionary.Add(Pings.AnotherPing, communicationLibrary.Ping4.Sound);
-        audioDictionary.Add(Pings.NewPing, communicationLibrary.Ping5.Sound);
+        audioDictionary.Add(Pings.Attack, communicationLibrary.Attack_Ping.Sound);
+        audioDictionary.Add(Pings.Loot, communicationLibrary.Loot_Ping.Sound);
+        audioDictionary.Add(Pings.GreatJob, communicationLibrary.GreatJob_Ping.Sound);
+        audioDictionary.Add(Pings.Thanks, communicationLibrary.Thanks_Ping.Sound);
+        audioDictionary.Add(Pings.Help, communicationLibrary.Help_Ping.Sound);
+        audioDictionary.Add(Pings.NeedToDeposit, communicationLibrary.NeedToDeposit_Ping.Sound);
+        audioDictionary.Add(Pings.FollowMe, communicationLibrary.FollowMe.Sound);
 
         //Visuals
-        visualsDictionary.Add(Pings.MissingPing, communicationLibrary.Ping1.Prefab);
-        visualsDictionary.Add(Pings.LocationPing, communicationLibrary.Ping2.Prefab);
-        visualsDictionary.Add(Pings.None, communicationLibrary.Ping3.Prefab);
-        visualsDictionary.Add(Pings.AnotherPing, communicationLibrary.Ping4.Prefab);
-        visualsDictionary.Add(Pings.NewPing, communicationLibrary.Ping5.Prefab);
+        visualsDictionary.Add(Pings.Attack, communicationLibrary.Attack_Ping.Prefab);
+        visualsDictionary.Add(Pings.Loot, communicationLibrary.Loot_Ping.Prefab);
+        visualsDictionary.Add(Pings.GreatJob, communicationLibrary.GreatJob_Ping.Prefab);
+        visualsDictionary.Add(Pings.Thanks, communicationLibrary.Thanks_Ping.Prefab);
+        visualsDictionary.Add(Pings.Help, communicationLibrary.Help_Ping.Prefab);
+        visualsDictionary.Add(Pings.NeedToDeposit, communicationLibrary.NeedToDeposit_Ping.Prefab);
+        visualsDictionary.Add(Pings.FollowMe, communicationLibrary.FollowMe.Prefab);
 
         //Icons
-        IconsDictionary.Add(Pings.MissingPing, communicationLibrary.Ping1.Icon);
-        IconsDictionary.Add(Pings.LocationPing, communicationLibrary.Ping2.Icon);
-        IconsDictionary.Add(Pings.None, communicationLibrary.Ping3.Icon);
-        IconsDictionary.Add(Pings.AnotherPing, communicationLibrary.Ping4.Icon);
-        IconsDictionary.Add(Pings.NewPing, communicationLibrary.Ping5.Icon);
+        IconsDictionary.Add(Pings.Attack, communicationLibrary.Attack_Ping.Icon);
+        IconsDictionary.Add(Pings.Loot, communicationLibrary.Loot_Ping.Icon);
+        IconsDictionary.Add(Pings.GreatJob, communicationLibrary.GreatJob_Ping.Icon);
+        IconsDictionary.Add(Pings.Thanks, communicationLibrary.Thanks_Ping.Icon);
+        IconsDictionary.Add(Pings.Help, communicationLibrary.Help_Ping.Icon);
+        IconsDictionary.Add(Pings.NeedToDeposit, communicationLibrary.NeedToDeposit_Ping.Icon);
+        IconsDictionary.Add(Pings.FollowMe, communicationLibrary.FollowMe.Icon);
     }
 }
 
