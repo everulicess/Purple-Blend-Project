@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5168952840568892493}
-  - component: {fileID: -5866443146312257707}
   m_Layer: 0
   m_Name: Grunt_Prefab
   m_TagString: Untagged
@@ -33,27 +32,6 @@ Transform:
   - {fileID: 1902413355185102139}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &-5866443146312257707
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3574127527309277034}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: e37d29a60030ae1498cb108ce7e3cf31, type: 3}
-  m_Controller: {fileID: 9100000, guid: 4dcb31333d0a5fe4eac4433837fe2805, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &2156102309572590288
 PrefabInstance:
   m_ObjectHideFlags: 0

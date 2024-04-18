@@ -311,12 +311,14 @@ GameObject:
   - component: {fileID: 7221360909114659344}
   - component: {fileID: 3653183240019664865}
   - component: {fileID: 579595755809297139}
+  - component: {fileID: 848346325129777837}
   - component: {fileID: 8596117185337293986}
   - component: {fileID: 5327369626551268864}
   - component: {fileID: 450433305955062855}
   - component: {fileID: 892737452660225522}
+  - component: {fileID: 3529413438912071545}
   m_Layer: 10
-  m_Name: Enemy
+  m_Name: Networked_Grunt_Prefab
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -412,6 +414,7 @@ MonoBehaviour:
   - {fileID: 8596117185337293986}
   - {fileID: 5327369626551268864}
   - {fileID: 450433305955062855}
+  - {fileID: 3529413438912071545}
   - {fileID: 7554403614334816194}
   - {fileID: 2626482965023948275}
 --- !u!114 &7794257480930343302
@@ -502,6 +505,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!95 &848346325129777837
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8865195289033986722}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: e37d29a60030ae1498cb108ce7e3cf31, type: 3}
+  m_Controller: {fileID: 9100000, guid: 4dcb31333d0a5fe4eac4433837fe2805, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &8596117185337293986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,6 +590,24 @@ MonoBehaviour:
   m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!114 &3529413438912071545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8865195289033986722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 848346325129777837}
+  TotalWords: 1
+  ApplyTiming: 2
+  SyncSettings: 79
+  StateHashes: 000000003649cbdc15f9c87ac0878abf65c36d0082e4624d6c86aa38
+  TriggerHashes: 00000000
 --- !u!1001 &2027437079393196037
 PrefabInstance:
   m_ObjectHideFlags: 0
