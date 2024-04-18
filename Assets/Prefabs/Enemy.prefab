@@ -122,7 +122,7 @@ MonoBehaviour:
   LayerMask:
     serializedVersion: 2
     m_Bits: 128
-  colliderSize: 1
+  colliderSize: 2
 --- !u!1 &827874422598691190
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,8 +546,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthUI: {fileID: 1078982833039329241}
   fillImage: {fileID: 7520181157103333455}
-  _HealthPoints: 0
-  _isDead: 0
   isPlayer: 0
 --- !u!114 &892737452660225522
 MonoBehaviour:

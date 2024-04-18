@@ -24,15 +24,8 @@ public class ChildColliderScript : NetworkBehaviour
         switch (thisTag)
         {
             case "HitBox":
-                for (int i = 0; i < collisions; i++)
-                {
-                    if (!_colliders[i]) enemy.InRangeSetter(false);
-                    else
-                    {
-                        enemy.InRangeSetter(true);
-                        break;
-                    }
-                }
+                if (collisions > 1) enemy.InRangeSetter(true);
+                else enemy.InRangeSetter(false);
                 ; break;
             case "DetectionArea":
                 for (int i = 0; i < collisions; i++)

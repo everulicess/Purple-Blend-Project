@@ -25,7 +25,8 @@ public class BaseEnemy : NetworkBehaviour
             if (inRange)
             {
                 combatController.Attack();
-            } else
+            }
+            else
             {
                 agent.destination = target.gameObject.transform.position;
                 Vector3 targetLookAt = new Vector3(target.gameObject.transform.position.x, this.transform.position.y, target.gameObject.transform.position.z);
