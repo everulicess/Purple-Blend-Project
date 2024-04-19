@@ -16,7 +16,7 @@ public class Health : NetworkBehaviour, IDamageable
     [Networked] float HealthPoints { get; set; }
     [Networked] bool isDead { get; set; }
 
-    const float maxHealthPoints = 100f;
+    [SerializeField] float maxHealthPoints = 100f;
 
     bool isInitailized;
     public bool isPlayer;

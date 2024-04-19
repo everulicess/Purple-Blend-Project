@@ -570,6 +570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthUI: {fileID: 1078982833039329241}
   fillImage: {fileID: 7520181157103333455}
+  maxHealthPoints: 50
   isPlayer: 0
 --- !u!114 &892737452660225522
 MonoBehaviour:
