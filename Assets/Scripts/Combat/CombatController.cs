@@ -45,7 +45,6 @@ public class CombatController : NetworkBehaviour
 
     private void Update()
     {
-        //FaceTarget();
         // Combo timer. When it reaches 0, the combo counter resets.
         if (comboTimerIsRunning)
         {
@@ -60,18 +59,6 @@ public class CombatController : NetworkBehaviour
                 comboTimeRemaining = comboMaxTime;
                 comboTimerIsRunning = false;
             }
-        }
-    }
-
-    // NEEDS TO BE MOVED TO PLAYER CONTROLLER
-    private void FaceTarget()
-    {
-        // Turns the player towards the clicked spot.
-        if (point != null)
-        {
-            Vector3 direction = (point - transform.position).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
         }
     }
 
