@@ -60,8 +60,6 @@ public class CommunicationManager : MonoBehaviour
         {
             radialMenu.Open();
             radialMenu.transform.position = PingMenuPosition;
-            //Debug.LogWarning($"spawning menu vector: {radialMenu.transform.position}");
-            //Cursor.visible = false;
         }
         else
         {

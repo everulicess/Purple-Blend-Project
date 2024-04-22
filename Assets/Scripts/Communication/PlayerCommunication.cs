@@ -5,14 +5,13 @@ using Fusion;
 
 public class PlayerCommunication : NetworkBehaviour
 {
-    
     Pings pingID { get; set; }
   
     public void SetPingToDisplay(Pings pPing)
     {
         pingID = pPing;
         RPC_SendMessage(pPing, MousePosition.InWorldRayPosition);
-        Debug.Log($"{pingID} is assigned {pPing}");
+        //Debug.Log($"{pingID} is assigned {pPing}");
     }
     [Rpc(sources: RpcSources.All, targets: RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
     public void RPC_SendMessage(Pings pPingID ,Vector3 pVector, RpcInfo info = default)
@@ -33,11 +32,11 @@ public class PlayerCommunication : NetworkBehaviour
         {
             message = $"other player: vector = {pVector}\n PingID = {pingID}";
         }
-        Debug.LogWarning(message);
+        //Debug.LogWarning(message);
         CommunicationManager.audioDictionary.TryGetValue(pPingID, out AudioClip sound);
 
         NetworkObject ping = Runner.Spawn(pVisual, pVector, Quaternion.identity);
-        AudioSource.PlayClipAtPoint(sound, pVector);
-        ping.GetComponent<DestroyPing>().SetPing(pingID);
+        //AudioSource.PlayClipAtPoint(sound, pVector);
+        ping.GetComponent<PingHandler>().SetPing(pingID);
     }
 }

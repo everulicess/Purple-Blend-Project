@@ -12,7 +12,6 @@ public class NetworkRunnerHandler : MonoBehaviour
 {
     public NetworkRunner networkRunnerPrefab;
     NetworkRunner networkRunner;
-
     private void Awake()
     {
         NetworkRunner networkRunnerInScene = FindObjectOfType<NetworkRunner>();
@@ -67,7 +66,6 @@ public class NetworkRunnerHandler : MonoBehaviour
             CustomLobbyName = "Sunken Spoils Lobby",
             SceneManager = sceneManager,
             PlayerCount = pPlayerCount,
-            
             //ConnectionToken = pConnectionToken
         }
         );
@@ -84,7 +82,7 @@ public class NetworkRunnerHandler : MonoBehaviour
             HostMigrationToken = pHostMigrationToken,
             HostMigrationResume = HostMigrationResume
         }
-        );;
+        );
     }
     void HostMigrationResume(NetworkRunner pRunner)
     {

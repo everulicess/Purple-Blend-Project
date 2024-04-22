@@ -78,6 +78,7 @@ public class CombatController : NetworkBehaviour
         targets.Clear();
             foreach (Health item in list)
             {
+                if (item == null) return;
                 targets.Add(item);
                 Debug.Log($"{item.name} has been added to the list");
             }

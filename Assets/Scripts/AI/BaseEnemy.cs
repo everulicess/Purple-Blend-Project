@@ -28,20 +28,20 @@ public class BaseEnemy : NetworkBehaviour
             if (inRange)
             {
                 combatController.Attack();
-                anim.SetBool("Attacking", true);
+                //anim.SetBool("Attacking", true);
             }
             else
             {
                 agent.destination = target.gameObject.transform.position;
                 Vector3 targetLookAt = new Vector3(target.gameObject.transform.position.x, this.transform.position.y, target.gameObject.transform.position.z);
                 transform.LookAt(targetLookAt);
-                anim.SetBool("Attacking", false);
-                anim.SetBool("Moving", true);
+                //anim.SetBool("Attacking", false);
+                //anim.SetBool("Moving", true);
             }
         }
         else
         {
-            anim.SetBool("Moving", false);
+            //anim.SetBool("Moving", false);
         }
     }
 

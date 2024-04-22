@@ -8,7 +8,8 @@ public class Deposit : NetworkBehaviour
 {
     [Networked] float globalGold { get; set; }
     [SerializeField] TextMeshProUGUI TMP_GlobalGold;
-    public override void FixedUpdateNetwork()
+  
+    public override void Render()
     {
         UpdateGlobalGold_RPC(0f);
     }

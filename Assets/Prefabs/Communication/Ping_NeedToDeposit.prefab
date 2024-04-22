@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyingTime: 2
+  myPing: 5
 --- !u!114 &5181428273564063880
 MonoBehaviour:
   m_ObjectHideFlags: 0

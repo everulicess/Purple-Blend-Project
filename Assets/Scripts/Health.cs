@@ -39,8 +39,7 @@ public class Health : NetworkBehaviour, IDamageable
     private void Update()
     {
         HealthUI.SetActive(true);
-        HealthUI.transform.LookAt(FindObjectOfType<Camera>().transform.position);
-
+        HealthUI.transform.rotation = Quaternion.Euler(30, 45, 0);
     }
     public override void FixedUpdateNetwork()
     {
@@ -48,7 +47,11 @@ public class Health : NetworkBehaviour, IDamageable
     }
     public override void Render()
     {
-        //if (isDead)Runner.Despawn(this.gameObject.GetComponent<NetworkObject>());
+        if (isDead && !isPlayer)
+        { 
+            Runner.Despawn(this.gameObject.GetComponent<NetworkObject>());
+            return;
+        }
 
         foreach (var change in _changes.DetectChanges(this, out var previousBuffer, out var currentBuffer))
         {

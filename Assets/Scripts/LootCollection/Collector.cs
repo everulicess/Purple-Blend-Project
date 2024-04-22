@@ -18,12 +18,15 @@ public class Collector : NetworkBehaviour
     //Coins
     [Range(1f, 500f)]
     [SerializeField] float pocketCapacity;
-    [Networked] float carriedPocketLoot { get; set; }
+    [Networked] float CarriedPocketLoot { get; set; }
+    int CollectedCoins;
+    readonly float coinsValue = 25f;
 
     //Relics
     [Range(1, 4)]
     [SerializeField] int relicCapacity;
     int carriedRelics;
+    readonly float relicValue = 50f;
 
     //Treasure
     bool carryingTreasure = false;
@@ -44,9 +47,9 @@ public class Collector : NetworkBehaviour
         if (HasInputAuthority)
         {
             pocketUI.SetActive(true);
-            pocketUI.transform.LookAt(FindObjectOfType<Camera>().transform.position);
+            pocketUI.transform.rotation = Quaternion.Euler(30, 45, 0);
 
-            currentFill = carriedPocketLoot;
+            currentFill = CarriedPocketLoot;
             currentPocketBar.fillAmount = currentFill / pocketCapacity;
         }
         else
@@ -59,34 +62,18 @@ public class Collector : NetworkBehaviour
         return carryingTreasure;
     }
     private static Collider[] _colliders = new Collider[20];
-    private static List<LagCompensatedHit> _hits = new();
     [SerializeField] LayerMask LayerMask;
     public override void FixedUpdateNetwork()
     {
-        var hitboxes = Runner.LagCompensation.RaycastAll(new Vector3(transform.position.x, 0, transform.position.z), transform.forward, 30f, player: Object.InputAuthority, _hits, LayerMask, clearHits: true);
-        for (int i = 0; i < hitboxes; i++)
-        {
-            // Check for Collectable component on collider game object or any parent.
-            var collectable = _hits[i].Hitbox.GetComponentInParent<Collectable>();
-            Debug.Log($"{Time.time} {this.name} has collected {collectable.name}");
-
-
-            if (collectable != null)
-            {
-                break;
-            }
-        }
         int collisions = Runner.GetPhysicsScene().OverlapSphere(new Vector3(transform.position.x,0,transform.position.z), 1f, _colliders, LayerMask, QueryTriggerInteraction.Collide);
         for (int i = 0; i < collisions; i++)
         {
             // Check for Collectable component on collider game object or any parent.
-            var collectable = _colliders[i].GetComponentInParent<Collectable>();
+            _colliders[i].TryGetComponent(out Collectable _collectable);
+            var collectable = _collectable;
             if (collectable != null)
             {
                 collectable.TryInteracting(this);
-                // Pickup was successful, activating timer.
-                //_activationTimer = TickTimer.CreateFromSeconds(Runner, Cooldown);
-                break;
             }
         }
     }
@@ -96,15 +83,30 @@ public class Collector : NetworkBehaviour
         {
             switch (change)
             {
-                case nameof(carriedPocketLoot):
-                    var reader = GetPropertyReader<float>(nameof(carriedPocketLoot));
+                case nameof(CarriedPocketLoot):
+                    var reader = GetPropertyReader<float>(nameof(CarriedPocketLoot));
                     var (previous, current) = reader.Read(previousBuffer, currentBuffer);
+                    OnCarriedPocketChange(previous, current)
                     ;break;
                 default:
                     break;
             }
         }
     }
+
+    private void OnCarriedPocketChange(float previous, float current)
+    {
+        if (previous < current)
+        {
+            Debug.Log("Increasing Gold");
+        }
+        else
+        {
+            Debug.Log("Decreasing Gold");
+
+        }
+    }
+
     public void SetInteractionBool(bool pIsInteracting)
     {
         isInteracting = pIsInteracting;
@@ -113,25 +115,6 @@ public class Collector : NetworkBehaviour
     {
         net_objectPickedup = pObjectToPickup;
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        other.TryGetComponent<Deposit>(out Deposit _deposit);
-        if (_deposit != null)
-        {
-            if (totalPlayerGold <= 0) return;
-            carriedPocketLoot = 0;
-            carriedRelics = 0;
-            _deposit.UpdateGlobalGold_RPC(totalPlayerGold);
-            totalPlayerGold = 0;
-        }
-        //return;
-        //other.TryGetComponent<Collectable>(out Collectable _collectable);
-        //if (_collectable != null)
-        //{
-        //    Debug.LogError($"is colliding with this {_collectable.name}");
-        //    _collectable.TryInteracting(this);
-        //}
-    }
     /// <summary>
     /// Checks if the player has enough space for more gold, then picks it up
     /// </summary>
@@ -139,13 +122,13 @@ public class Collector : NetworkBehaviour
     /// <param name="amountToIncrease"></param> increasing amount
     public void CollectCoins(Collectable pCoin, float amountToIncrease)
     {
-        if (carriedPocketLoot > (pocketCapacity-amountToIncrease)) return;
-        
-        totalPlayerGold += amountToIncrease;
-        carriedPocketLoot += amountToIncrease;
-        Debug.LogWarning($"COLLECTING COINS");
-        carriedPocketLoot = Mathf.Clamp(carriedPocketLoot, 0f, pocketCapacity);
+        if (CarriedPocketLoot > (pocketCapacity-amountToIncrease)) return;
         pCoin.DeleteObject();
+        CollectedCoins++;
+        CarriedPocketLoot = CollectedCoins * coinsValue;
+        totalPlayerGold = CarriedPocketLoot + (carriedRelics*relicValue);
+        CarriedPocketLoot = Mathf.Clamp(CarriedPocketLoot, 0f, pocketCapacity);
+        Debug.Log($"collected coins: {CollectedCoins}");
     }
     /// <summary>
     /// Checks if the player is trying to interact and if there is anough space for the relic
@@ -162,7 +145,8 @@ public class Collector : NetworkBehaviour
                 return;
             }
             carriedRelics++;
-            totalPlayerGold += pAmountToIncrease;
+            totalPlayerGold = (carriedRelics * relicValue);
+            //totalPlayerGold += pAmountToIncrease;
             pRelic.DeleteObject();
         }
     }
@@ -188,8 +172,44 @@ public class Collector : NetworkBehaviour
             //pTreasure.transform.position = carryPoint.position;
         }
     }
+    bool hasEntered1 = true;
 
-   
+    private void OnTriggerStay(Collider other)
+    {
+        hasEntered1 = true;
+        other.TryGetComponent(out Collectable _collectable);
+        if (_collectable != null)
+        {
+            if (hasEntered1 == false) return;
+            if (hasEntered1)
+            {
+                Debug.LogError($"HAS {other.name} ENTERED? {hasEntered1} and this player has: {CarriedPocketLoot} in his pockets");
+                _collectable.TryInteracting(this);
+                hasEntered1 = false;
+            }
+        }
+
+        other.TryGetComponent(out Deposit _deposit);
+        if (_deposit != null)
+        {
+            bool hasEntered = true;
+            if (hasEntered)
+            {
+                if(totalPlayerGold <= 0) return;
+                CarriedPocketLoot = 0;
+                carriedRelics = 0;
+                CollectedCoins = 0;
+                _deposit.UpdateGlobalGold_RPC(totalPlayerGold);
+                totalPlayerGold = 0;
+                hasEntered = false;
+            }
+            else
+            {
+                Debug.LogError($"HAS {other.name} ENTERED? {hasEntered}");
+                return;
+            }
+        }
+    }
     private void Pickup()
     {
         GameObject _cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
