@@ -12,7 +12,7 @@ public class SessionListUIHandler : MonoBehaviour
 
     public GameObject SessionItemListPrefab;
     public VerticalLayoutGroup VerticalLayoutGroup;
-
+    
     private void Awake()
     {
         ClearList();
@@ -33,7 +33,8 @@ public class SessionListUIHandler : MonoBehaviour
 
         addedSessionInfoUIItem.SetInformation(pSessionInfo);
 
-        addedSessionInfoUIItem.OnJoinSession += AddedSessionInfoListUIItem_OnJoinSession;
+        MainMenuManager mainMenu = FindObjectOfType<MainMenuManager>();
+        mainMenu.OnJoinSession += AddedSessionInfoListUIItem_OnJoinSession;
 
     }
 
@@ -43,7 +44,7 @@ public class SessionListUIHandler : MonoBehaviour
         networkRunnerHandler.JoinGame(obj);
 
         MainMenuManager mainMenuManager = FindObjectOfType<MainMenuManager>();
-        mainMenuManager.OnJoinningServer();
+        mainMenuManager.OnJoiningServer();
     }
 
     public void OnNoSessionFound()

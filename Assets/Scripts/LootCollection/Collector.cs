@@ -183,7 +183,7 @@ public class Collector : NetworkBehaviour
             if (hasEntered1 == false) return;
             if (hasEntered1)
             {
-                Debug.LogError($"HAS {other.name} ENTERED? {hasEntered1} and this player has: {CarriedPocketLoot} in his pockets");
+                //Debug.LogError($"HAS {other.name} ENTERED? {hasEntered1} and this player has: {CarriedPocketLoot} in his pockets");
                 _collectable.TryInteracting(this);
                 hasEntered1 = false;
             }
@@ -205,7 +205,6 @@ public class Collector : NetworkBehaviour
             }
             else
             {
-                Debug.LogError($"HAS {other.name} ENTERED? {hasEntered}");
                 return;
             }
         }

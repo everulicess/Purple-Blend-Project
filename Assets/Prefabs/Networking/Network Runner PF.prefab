@@ -59,4 +59,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   networkRunner: {fileID: 0}
   networkPrefabRef:
+    RawGuidValue: 0abb4620683f14f4c9a1aff7bd5d2a39
+  networkPrefabRef_TheMule:
+    RawGuidValue: 0abb4620683f14f4c9a1aff7bd5d2a39
+  networkPrefabRef_TheBoomstick:
     RawGuidValue: 91b7f14a791887445a97f60cac7629d3
+  networkPrefabRef_TheSiren:
+    RawGuidValue: d37356c108e0ce64aad82e9f09b9a99a

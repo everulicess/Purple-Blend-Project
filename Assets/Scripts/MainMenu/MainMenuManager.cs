@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using Fusion;
+using System;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -12,9 +13,22 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] GameObject StartGamePanel;
     [SerializeField] GameObject SessionBrowserPanel;
     [SerializeField] GameObject statusPanel;
+    [SerializeField] GameObject characterSelectionPanel;
 
     [SerializeField] TMP_InputField sessionName;
 
+    SessionInfo m_sessionInfo;
+
+    public event Action<SessionInfo> OnJoinSession;
+    private void Start()
+    {
+        HideAllPanels();
+    }
+    public void SetMySessionInfo(SessionInfo _sessionInfo)
+    {
+        m_sessionInfo = _sessionInfo;
+        OnCharacterSelectionStarted();
+    }
     public void ToggleStartGameObject()
     {
         if (sessionName.text != string.Empty)
@@ -46,6 +60,7 @@ public class MainMenuManager : MonoBehaviour
         SessionBrowserPanel.SetActive(false);
         StartGamePanel.SetActive(false);
         statusPanel.SetActive(false);
+        characterSelectionPanel.SetActive(false);
     }
 
     public void OnCreateNewGameClicked()
@@ -65,10 +80,21 @@ public class MainMenuManager : MonoBehaviour
 
         statusPanel.SetActive(true);
     }
-    public void OnJoinningServer()
+    public void OnCharacterSelectionStarted()
+    {
+        HideAllPanels();
+
+        characterSelectionPanel.SetActive(true);
+    }
+    public void OnJoiningServer()
     {
         HideAllPanels();
 
         statusPanel.SetActive(true);
+    }
+
+    public void OnCharacterSelectionDone()
+    {
+        OnJoinSession?.Invoke(m_sessionInfo);
     }
 }

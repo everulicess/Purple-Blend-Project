@@ -14,6 +14,11 @@ public class SessionInfoListUIItem : MonoBehaviour
 
     SessionInfo sessionInfo;
 
+    MainMenuManager mainMenuManager;
+    private void Start()
+    {
+        mainMenuManager = FindObjectOfType<MainMenuManager>();
+    }
     public event Action<SessionInfo> OnJoinSession;
 
     public void SetInformation(SessionInfo pSessionInfo)
@@ -21,7 +26,7 @@ public class SessionInfoListUIItem : MonoBehaviour
         this.sessionInfo = pSessionInfo;
 
         SessionNameText.text = pSessionInfo.Name;
-        PlayerCountText.text = $"{pSessionInfo.PlayerCount.ToString()} / {pSessionInfo.MaxPlayers.ToString()}";
+        PlayerCountText.text = $"{pSessionInfo.PlayerCount} / {pSessionInfo.MaxPlayers}";
 
         bool isJoinButtonActive = true;
         if (pSessionInfo.PlayerCount >= pSessionInfo.MaxPlayers)
@@ -32,6 +37,8 @@ public class SessionInfoListUIItem : MonoBehaviour
 
     public void OnClick()
     {
+        mainMenuManager.SetMySessionInfo(sessionInfo);
+
         OnJoinSession?.Invoke(sessionInfo);
     }
 

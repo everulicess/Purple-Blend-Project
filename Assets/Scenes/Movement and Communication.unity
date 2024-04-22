@@ -6438,7 +6438,7 @@ MonoBehaviour:
     Help_Ping:
       Prefab: {fileID: 5181428273564063880, guid: 78bf47d4181a7174fb7a992a6821bce0, type: 3}
       Sound: {fileID: 0}
-      Icon: {fileID: 0}
+      Icon: {fileID: 2800000, guid: f77b8ad3616376e42b67bea7852afd5e, type: 3}
     NeedToDeposit_Ping:
       Prefab: {fileID: 5181428273564063880, guid: b7c951ff51c483846a11c60bb297e28f, type: 3}
       Sound: {fileID: 0}
@@ -13817,6 +13817,10 @@ PrefabInstance:
       propertyPath: SortKey
       value: 1121520219
       objectReference: {fileID: 0}
+    - target: {fileID: 4902316943231103159, guid: 5502be38764112c4fa76fb156593e3c8, type: 3}
+      propertyPath: TMP_GlobalGold
+      value: 
+      objectReference: {fileID: 356192961}
     - target: {fileID: 6889594464383576257, guid: 5502be38764112c4fa76fb156593e3c8, type: 3}
       propertyPath: SortKey
       value: 1224334620

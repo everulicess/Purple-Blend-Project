@@ -11,6 +11,9 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     public NetworkRunner networkRunner;
     [SerializeField] NetworkPrefabRef networkPrefabRef;
+    [SerializeField] NetworkPrefabRef networkPrefabRef_TheMule;
+    [SerializeField] NetworkPrefabRef networkPrefabRef_TheBoomstick;
+    [SerializeField] NetworkPrefabRef networkPrefabRef_TheSiren;
 
     private Dictionary<PlayerRef, NetworkObject> spawnCharacter = new Dictionary<PlayerRef, NetworkObject>();
     float playersJoined = 0f;
@@ -25,6 +28,17 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     private void Awake()
     {
         sessionListUIHandler = FindObjectOfType<SessionListUIHandler>(true);
+        switch (Characters)
+        {
+            case Characters.TheMule:
+                break;
+            case Characters.TheBoomstick:
+                break;
+            case Characters.TheSiren:
+                break;
+            default:
+                break;
+        }
     }
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
@@ -57,7 +71,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     {
         if (!runner.IsServer) return;
         if (SceneManager.GetActiveScene().name == "MenuScene") return;
-
+        Debug.LogError(PlayerPrefs.GetString("Character"));
         Vector3 playerPos = new(/*(player.RawEncoded % runner.Config.Simulation.PlayerCount) * */0 + playersJoined, 0f, 0f);
 
         NetworkObject networkObject = runner.Spawn(networkPrefabRef, playerPos, Quaternion.identity, player);

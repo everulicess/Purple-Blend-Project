@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: -3934953189958981407}
   - component: {fileID: 717622672262634564}
   m_Layer: 7
-  m_Name: Network Player Prefab
+  m_Name: Network The Mule Prefab
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortKey: 3509608268
+  SortKey: 1306410884
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
@@ -242,6 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthUI: {fileID: 5730471777365015584}
   fillImage: {fileID: 2964182712778820534}
+  maxHealthPoints: 100
   isPlayer: 1
 --- !u!114 &717622672262634564
 MonoBehaviour:
