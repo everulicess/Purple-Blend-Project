@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 937645739349912451}
   - component: {fileID: 5938680281621598301}
   m_Layer: 5
-  m_Name: Player Pocket
+  m_Name: ProgressBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

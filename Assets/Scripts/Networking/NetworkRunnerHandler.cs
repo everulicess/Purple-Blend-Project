@@ -119,7 +119,7 @@ public class NetworkRunnerHandler : MonoBehaviour
     {
         Debug.Log($"Create session {pSessionName} scene {pSceneName} build index {SceneUtility.GetBuildIndexByScenePath($"scenes/{pSceneName}")}");
 
-        var clientTask = InitializeNetworkRunner(networkRunner, GameMode.Host, pSessionName, NetAddress.Any(), SceneRef.FromIndex(SceneUtility.GetBuildIndexByScenePath($"scenes/{pSceneName}")), 3);
+        var clientTask = InitializeNetworkRunner(networkRunner, GameMode.Host, pSessionName, NetAddress.Any(), SceneRef.FromIndex(SceneUtility.GetBuildIndexByScenePath($"scenes/{pSceneName}")), 9);
     }
 
     public void JoinGame(SessionInfo pSessionInfo)

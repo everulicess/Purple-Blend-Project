@@ -7,9 +7,14 @@ using Fusion;
 public class Collector : NetworkBehaviour
 {
     //UI
+    [Header("User Interface")]
+    [Header("Pocket")]
     [SerializeField] GameObject pocketUI;
     [SerializeField] Image totalPocketBar;
     [SerializeField] Image currentPocketBar;
+    [Header("Interact")]
+    [SerializeField] GameObject InteractUI;
+
     [Networked] float currentFill { get; set; }
 
     //Storage variables
@@ -27,6 +32,7 @@ public class Collector : NetworkBehaviour
     [SerializeField] int relicCapacity;
     int carriedRelics;
     readonly float relicValue = 50f;
+    
 
     //Treasure
     bool carryingTreasure = false;
@@ -41,6 +47,7 @@ public class Collector : NetworkBehaviour
     public override void Spawned()
     {
         _changes = GetChangeDetector(ChangeDetector.Source.SimulationState);
+        InteractUI.SetActive(false);
     }
     private void Update()
     {
@@ -79,6 +86,8 @@ public class Collector : NetworkBehaviour
     }
     public override void Render()
     {
+        InteractUI.transform.rotation = Quaternion.Euler(30f, 45f, 0);
+
         foreach (var change in _changes.DetectChanges(this, out var previousBuffer,out var currentBuffer))
         {
             switch (change)
@@ -136,6 +145,8 @@ public class Collector : NetworkBehaviour
     /// <param name="pRelic"></param> refrence to the relic, to destroy it if it's collected
     public void CollectRelic(Collectable pRelic, float pAmountToIncrease)
     {
+        InteractUI.transform.position = new(pRelic.transform.position.x, pRelic.transform.position.y + 1f, pRelic.transform.position.z);
+        InteractUI.SetActive(true);
         if (isInteracting)
         {
             //If the player has a relic slot left
@@ -148,6 +159,7 @@ public class Collector : NetworkBehaviour
             totalPlayerGold = (carriedRelics * relicValue);
             //totalPlayerGold += pAmountToIncrease;
             pRelic.DeleteObject();
+            InteractUI.SetActive(false);
         }
     }
     public bool CanPickUp()
@@ -156,12 +168,16 @@ public class Collector : NetworkBehaviour
     }
     public void CollectTreasure(Collectable pTreasure, Rigidbody pRigidBody, BoxCollider pCollider)
     {
+        InteractUI.transform.position = new(pTreasure.transform.position.x, pTreasure.transform.position.y + 1f, pTreasure.transform.position.z);
+        InteractUI.SetActive(true);
         if (isInteracting)
         {
             carryingTreasure = !carryingTreasure;
             pRigidBody.useGravity = !carryingTreasure;
             pRigidBody.isKinematic = !carryingTreasure;
             pCollider.enabled = !carryingTreasure;
+
+            InteractUI.SetActive(false);
         }
         //treasure = carryingTreasure ? pTreasure.gameObject : null;
 
@@ -170,6 +186,8 @@ public class Collector : NetworkBehaviour
             treasure = net_objectPickedup.gameObject;
             treasure.transform.SetPositionAndRotation(carryPoint.position, carryPoint.rotation);
             //pTreasure.transform.position = carryPoint.position;
+
+            InteractUI.SetActive(false);
         }
     }
     bool hasEntered1 = true;
@@ -180,7 +198,6 @@ public class Collector : NetworkBehaviour
         other.TryGetComponent(out Collectable _collectable);
         if (_collectable != null)
         {
-            if (hasEntered1 == false) return;
             if (hasEntered1)
             {
                 //Debug.LogError($"HAS {other.name} ENTERED? {hasEntered1} and this player has: {CarriedPocketLoot} in his pockets");
@@ -192,23 +209,34 @@ public class Collector : NetworkBehaviour
         other.TryGetComponent(out Deposit _deposit);
         if (_deposit != null)
         {
-            bool hasEntered = true;
-            if (hasEntered)
-            {
-                if(totalPlayerGold <= 0) return;
-                CarriedPocketLoot = 0;
-                carriedRelics = 0;
-                CollectedCoins = 0;
-                _deposit.UpdateGlobalGold_RPC(totalPlayerGold);
-                totalPlayerGold = 0;
-                hasEntered = false;
-            }
-            else
-            {
-                return;
-            }
+            Deposit(_deposit);
+        }
+        else
+        {
+            InteractUI.SetActive(false);
+        }
+        //if (_deposit == null && _collectable == null)
+        //{
+        //    InteractUI.SetActive(false);
+        //}
+    }
+
+    private void Deposit(Deposit _deposit)
+    {
+        InteractUI.transform.position = new(_deposit.transform.position.x, _deposit.transform.position.y + 2f, _deposit.transform.position.z);
+        InteractUI.SetActive(true);
+        if (isInteracting)
+        {
+            if (totalPlayerGold <= 0) return;
+            CarriedPocketLoot = 0;
+            carriedRelics = 0;
+            CollectedCoins = 0;
+            _deposit.UpdateGlobalGold_RPC(totalPlayerGold);
+            totalPlayerGold = 0;
+            InteractUI.SetActive(false);
         }
     }
+
     private void Pickup()
     {
         GameObject _cube = GameObject.CreatePrimitive(PrimitiveType.Cube);

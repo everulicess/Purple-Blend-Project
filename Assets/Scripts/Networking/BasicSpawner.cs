@@ -72,7 +72,6 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         if (!runner.IsServer) return;
         if (SceneManager.GetActiveScene().name == "MenuScene") return;
         networkPrefabRef = GetCharacterToSpawn(PlayerPrefs.GetString("Character"));
-        Debug.LogError($"Character spawning: {networkPrefabRef}");
         Vector3 playerPos = new(/*(player.RawEncoded % runner.Config.Simulation.PlayerCount) * */0 + playersJoined, 0f, 0f);
 
         NetworkObject networkObject = runner.Spawn(networkPrefabRef, playerPos, Quaternion.identity, player);
