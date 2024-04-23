@@ -25,10 +25,12 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     bool TestingButtonQPressed = false;
     bool LeftClickPressed = false;
     bool RightClickPressed = false;
+
+    Characters pref;
     private void Awake()
     {
         sessionListUIHandler = FindObjectOfType<SessionListUIHandler>(true);
-        switch (Characters)
+        switch (pref)
         {
             case Characters.TheMule:
                 break;
