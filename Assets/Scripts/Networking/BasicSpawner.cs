@@ -10,7 +10,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 {
 
     public NetworkRunner networkRunner;
-    [SerializeField] NetworkPrefabRef networkPrefabRef;
+    NetworkPrefabRef networkPrefabRef;
     [SerializeField] NetworkPrefabRef networkPrefabRef_TheMule;
     [SerializeField] NetworkPrefabRef networkPrefabRef_TheBoomstick;
     [SerializeField] NetworkPrefabRef networkPrefabRef_TheSiren;
@@ -26,21 +26,19 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     bool LeftClickPressed = false;
     bool RightClickPressed = false;
 
-    Characters pref;
+    NetworkPrefabRef GetCharacterToSpawn(string characterToSpawn)
+    {
+        return characterToSpawn switch
+        {
+            nameof(Characters.TheMule) => networkPrefabRef_TheMule,
+            nameof(Characters.TheBoomstick) => networkPrefabRef_TheBoomstick,
+            nameof(Characters.TheSiren) => networkPrefabRef_TheSiren,
+            _ => networkPrefabRef_TheBoomstick,
+        };
+    }
     private void Awake()
     {
         sessionListUIHandler = FindObjectOfType<SessionListUIHandler>(true);
-        switch (pref)
-        {
-            case Characters.TheMule:
-                break;
-            case Characters.TheBoomstick:
-                break;
-            case Characters.TheSiren:
-                break;
-            default:
-                break;
-        }
     }
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
@@ -73,7 +71,8 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     {
         if (!runner.IsServer) return;
         if (SceneManager.GetActiveScene().name == "MenuScene") return;
-        Debug.LogError(PlayerPrefs.GetString("Character"));
+        networkPrefabRef = GetCharacterToSpawn(PlayerPrefs.GetString("Character"));
+        Debug.LogError($"Character spawning: {networkPrefabRef}");
         Vector3 playerPos = new(/*(player.RawEncoded % runner.Config.Simulation.PlayerCount) * */0 + playersJoined, 0f, 0f);
 
         NetworkObject networkObject = runner.Spawn(networkPrefabRef, playerPos, Quaternion.identity, player);

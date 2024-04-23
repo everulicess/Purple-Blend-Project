@@ -9,10 +9,9 @@ using Fusion;
 public class ClassSelectionHandler : MonoBehaviour
 {
     [SerializeField] Button JoinSessionButton;
-    [SerializeField] List<Characters> characters = new();
-    GameObject currentObject;
+    List<Characters> characters = new();
     int currentCharacter;
-    [SerializeField] GameObject[] thingsToHide;
+    [SerializeField] GameObject[] PanelToHide;
 
     [SerializeField] Transform characterPosition;
 
@@ -20,25 +19,20 @@ public class ClassSelectionHandler : MonoBehaviour
     [SerializeField] NetworkObject TheMule;
     [SerializeField] NetworkObject TheBoomstick;
     [SerializeField] NetworkObject TheSiren;
-
     private void Start()
     {
-        //JoinSessionButton.enabled = false;
         characters = Enum.GetValues(typeof(Characters)).Cast<Characters>().ToList();
+        ShowCharacter();
     }
     public void NextCharacter()
     {
-        //characters[currentCharacter].gameObject.SetActive(false);
         currentCharacter++;
         if (currentCharacter >= characters.Count)
         {
             currentCharacter = 0;
         }
         ShowCharacter();
-        //characters[currentCharacter].gameObject.SetActive(true);
-        //ShowCharacter();
     }
-
     private void ShowCharacter()
     {
         switch (currentCharacter)
@@ -47,53 +41,43 @@ public class ClassSelectionHandler : MonoBehaviour
                 HideAllCharacters();
                 TheMule.gameObject.SetActive(true);
                 PlayerPrefs.DeleteKey("Character");
-                PlayerPrefs.SetString("Character", Characters.TheMule.ToString());
+                PlayerPrefs.SetString("Character", nameof(Characters.TheMule));
 
                 break;
             case 1:
                 HideAllCharacters();
                 TheBoomstick.gameObject.SetActive(true);
                 PlayerPrefs.DeleteKey("Character");
-                PlayerPrefs.SetString("Character", Characters.TheBoomstick.ToString());
+                PlayerPrefs.SetString("Character", nameof(Characters.TheBoomstick));
                 break;
             case 2:
                 HideAllCharacters();
                 TheSiren.gameObject.SetActive(true);
                 PlayerPrefs.DeleteKey("Character");
-                PlayerPrefs.SetString("Character", Characters.TheSiren.ToString());
+                PlayerPrefs.SetString("Character", nameof(Characters.TheSiren));
                 break;
             default:
                 break;
         }
     }
-
     private void HideAllCharacters()
     {
         TheMule.gameObject.SetActive(false);
         TheBoomstick.gameObject.SetActive(false);
         TheSiren.gameObject.SetActive(false);
     }
-
     public void PreviousCharacter()
     {
-        //characters[currentCharacter].gameObject.SetActive(false);
         currentCharacter--;
         if (currentCharacter < 0)
         {
             currentCharacter = characters.Count - 1;
         }
         ShowCharacter();
-        //characters[currentCharacter].gameObject.SetActive(true);
-
-        //ShowCharacter();
-    }
-    public void OnCharacterSelected()
-    {
-        JoinSessionButton.enabled = true;
     }
     private void OnEnable()
     {
-        foreach (GameObject item in thingsToHide)
+        foreach (GameObject item in PanelToHide)
         {
             item.SetActive(false);
         }  
