@@ -22,7 +22,6 @@ public class ClassSelectionHandler : MonoBehaviour
     private void Start()
     {
         characters = Enum.GetValues(typeof(Characters)).Cast<Characters>().ToList();
-        ShowCharacter();
     }
     public void NextCharacter()
     {
@@ -80,6 +79,7 @@ public class ClassSelectionHandler : MonoBehaviour
         foreach (GameObject item in PanelToHide)
         {
             item.SetActive(false);
-        }  
+        }
+        ShowCharacter();
     }
 }

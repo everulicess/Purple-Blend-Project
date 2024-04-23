@@ -14,6 +14,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] GameObject SessionBrowserPanel;
     [SerializeField] GameObject statusPanel;
     [SerializeField] GameObject characterSelectionPanel;
+    [SerializeField] GameObject JoinSessionPanel;
 
     [SerializeField] TMP_InputField sessionName;
 
@@ -61,6 +62,7 @@ public class MainMenuManager : MonoBehaviour
         StartGamePanel.SetActive(false);
         statusPanel.SetActive(false);
         characterSelectionPanel.SetActive(false);
+        JoinSessionPanel.SetActive(false);
     }
 
     public void OnCreateNewGameClicked()
@@ -69,6 +71,7 @@ public class MainMenuManager : MonoBehaviour
         HideAllPanels();
 
         StartGamePanel.SetActive(true);
+        characterSelectionPanel.SetActive(true);
     }
     public void OnStartNewSessionClicked()
     {
@@ -85,6 +88,7 @@ public class MainMenuManager : MonoBehaviour
         HideAllPanels();
 
         characterSelectionPanel.SetActive(true);
+        JoinSessionPanel.SetActive(true);
     }
     public void OnJoiningServer()
     {
