@@ -13921,7 +13921,7 @@ PrefabInstance:
     - target: {fileID: 1195009757078235280, guid: 9c6f121357c325c42a4500fb3ef3a13d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a6767ffd0e8359e4584dccb164ba3f6f, type: 2}
+      objectReference: {fileID: 2100000, guid: 1f5a1a029ec0911489113b9af48e33f2, type: 2}
     - target: {fileID: 2047536174521678567, guid: 9c6f121357c325c42a4500fb3ef3a13d, type: 3}
       propertyPath: m_Name
       value: StartRoom
