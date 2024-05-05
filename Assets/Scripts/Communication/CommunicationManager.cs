@@ -6,6 +6,7 @@ using Fusion;
 
 public enum Pings
 {
+    None,
     Attack,
     Loot,
     GreatJob,
@@ -17,9 +18,14 @@ public enum Pings
 [Serializable]
 public class PingInfo
 {
-    [Tooltip("3D visual for the ping")] public NetworkObject Prefab;
-    [Tooltip("It will be played when the ping is placed")] public AudioClip Sound;
-    [Tooltip("Icon that will be displayed in the Menu")] public Texture Icon;
+    [Tooltip("3D visual for the ping")] 
+    public NetworkObject Prefab;
+
+    [Tooltip("It will be played when the ping is placed")] 
+    public AudioClip Sound;
+
+    [Tooltip("Icon that will be displayed in the Menu")] 
+    public Texture Icon;
 }
 [Serializable]
 public struct CommunicationLibrary
@@ -41,33 +47,10 @@ public class CommunicationManager : MonoBehaviour
     public static Dictionary<Pings, NetworkObject> visualsDictionary = new();
     public static Dictionary<Pings, Texture> IconsDictionary = new();
 
-    public static Vector3 PingMenuPosition;
-
-    [SerializeField] RadialMenu radialMenu;
     private void Awake()
     {
-        radialMenu = FindObjectOfType<RadialMenu>();
         InitializeDictionaries();
     }
-    void Update()
-    {
-        MenuToggle();
-    }
-    
-    private void MenuToggle()
-    {
-        if (Input.GetKey(KeyCode.V))
-        {
-            radialMenu.Open();
-            radialMenu.transform.position = PingMenuPosition;
-        }
-        else
-        {
-            radialMenu.Close();
-            PingMenuPosition = Input.mousePosition;
-        }
-    }
-
     private void InitializeDictionaries()
     {
         //Sounds

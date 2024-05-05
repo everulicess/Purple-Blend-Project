@@ -15,8 +15,8 @@ public class MousePosition : MonoBehaviour
         {
             _rect = GetComponent<RectTransform>();
 
-            if (!Application.isEditor)
-                Cursor.visible = false;
+            //if (!Application.isEditor)
+            //    Cursor.visible = false;
             //Cursor.lockState = _cursorLockState;
         }
         else
@@ -32,23 +32,23 @@ public class MousePosition : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.V))
         {
-            Ray ray = FindObjectOfType<LocalCamera>().GetComponentInChildren<Camera>().ScreenPointToRay(_rect.position);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                if (hit.collider.gameObject.layer != 8) return;
+            //Ray ray = FindObjectOfType<LocalCamera>().GetComponentInChildren<Camera>().ScreenPointToRay(_rect.position);
+            //if (Physics.Raycast(ray, out RaycastHit hit))
+            //{
+            //    if (hit.collider.gameObject.layer != 8) return;
 
-                Vector3 offset = new(hit.point.x, hit.point.y + 0.1f, hit.point.z);
-                InWorldRayPosition = offset;
-            }
+            //    Vector3 offset = new(hit.point.x, hit.point.y + 0.1f, hit.point.z);
+            //    InWorldRayPosition = offset;
+            //}
         }
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = FindObjectOfType<LocalCamera>().GetComponentInChildren<Camera>().ScreenPointToRay(_rect.position);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                Vector3 offset = new(hit.point.x, hit.point.y + 0.1f, hit.point.z);
-                InWorldRayPosition = offset;
-            }
+            //Ray ray = FindObjectOfType<LocalCamera>().GetComponentInChildren<Camera>().ScreenPointToRay(_rect.position);
+            //if (Physics.Raycast(ray, out RaycastHit hit))
+            //{
+            //    Vector3 offset = new(hit.point.x, hit.point.y + 0.1f, hit.point.z);
+            //    InWorldRayPosition = offset;
+            //}
         }
     }
 }

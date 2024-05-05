@@ -7,8 +7,12 @@ using Fusion;
     typeof(NetworkMecanimAnimator),
     typeof(Collector)
     )]
-public class Player : NetworkBehaviour
+public class Player : NetworkBehaviour, IPlayerLeft
 {
+    public static Player Local { get; set; }
+
+    public static Camera PlayerCamera { get; set; }
+
     [SerializeField] private float turnSpeed = 360f;
     [SerializeField] CharacterStatsScrObj Character;
     [SerializeField] private Transform camTarget;
@@ -32,12 +36,8 @@ public class Player : NetworkBehaviour
 
     Collector m_Collector;
     Health m_Health;
-
-    [Header("knockBack variables")]
+    BasicSpawner basicSpawner;
     //Knockback and Push variables
-    float knockBackCounter;
-    [SerializeField] float knockBackTime = 5f;
-    [SerializeField] float knockBackForce = 100f;
 
     //movement direction
     Vector3 forward;
@@ -57,10 +57,12 @@ public class Player : NetworkBehaviour
     }
     public override void Spawned()
     {
-        if (HasInputAuthority)
+        if (Object.HasInputAuthority)
         {
+            Local = this;
             localCamera = Instantiate(cam);
             localCamera.GetComponent<LocalCamera>().SetTarget(camTarget);
+            PlayerCamera = localCamera.GetComponentInChildren<Camera>();
         }
     }
 
@@ -73,6 +75,11 @@ public class Player : NetworkBehaviour
         m_Health = GetComponent<Health>();
         m_CombatController = GetComponent<CombatController>();
     }
+    private void Start()
+    {
+        if (!HasInputAuthority) return;
+            basicSpawner = FindObjectOfType<BasicSpawner>();
+    }
     public override void FixedUpdateNetwork()
     {
         //count down attack time and end the attack once it hits 0
@@ -83,25 +90,18 @@ public class Player : NetworkBehaviour
         }
 
         //exit if there is no input
-        if (!GetInput(out NetworkInputData data)) return;
-
-        var dir = MousePosition.InWorldRayPosition - transform.position;
-        dir.Normalize();
+        if (!GetInput(out NetworkInputData data) && !Runner.IsForward) return;
 
         KnockBackHandler(data);
 
         //initiate attack with mouse click (also checks if the player is already attacking so the animation does not restart)
-        if (data.buttons.IsSet(MyButtons.LeftClick) && !IsAttacking)
+        if (data.buttons.IsSet(MyButtons.AttackButton) /*&& !IsAttacking*/)
         {
             IsAttacking = true;
-            FaceTo();
-            // apply the impact force:
-            if (knockBackCounter <= 0)
-            {
-                forward = ApplyForce(forward, dir);
-            }
-        }
+            FaceTo(data);
 
+        }
+            
         //movement blending variables
         WalkAnim();
 
@@ -115,7 +115,7 @@ public class Player : NetworkBehaviour
         m_CharacterController.Move(forward);
         anim.SetBool("Moving", m_CharacterController.Velocity != Vector3.zero);
     }
-
+    
     private void WalkAnim()
     {
         if (m_CharacterController.Velocity == Vector3.zero)
@@ -138,11 +138,23 @@ public class Player : NetworkBehaviour
     private void KnockBackHandler(NetworkInputData data)
     {
         //check for the knockback, if there is no knockback then the player will be able to move
-        if (knockBackCounter <= 0)
-        {
-            if (data.direction != Vector3.zero)
+        
+            //if (data.direction != Vector3.zero)
+            //{
+            //    forward = skew * data.direction;
+            //    //rotate the character unless it is currently attacking. The NetworkCharacterController's rotation speed should be 0 so it doesn't interfere with this.
+            //    if (!IsAttacking)
+            //    {
+            //        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(forward, Vector3.up), turnSpeed * Runner.DeltaTime);
+            //    }
+            //}
+            //else
+            //{
+            //    forward = Vector3.zero;
+            //}
+        if (data.movementInput != Vector3.zero)
             {
-                forward = skew * data.direction;
+                forward = skew * data.movementInput;
                 //rotate the character unless it is currently attacking. The NetworkCharacterController's rotation speed should be 0 so it doesn't interfere with this.
                 if (!IsAttacking)
                 {
@@ -153,25 +165,25 @@ public class Player : NetworkBehaviour
             {
                 forward = Vector3.zero;
             }
-        }
-        //if there is a knockback then the player won't be able to move until the knockback is done
-        else
-        {
-            knockBackCounter -= Runner.DeltaTime;
-
-        }
+        forward.Normalize();
     }
-
-    private void FaceTo()
+    private void FaceTo(NetworkInputData _data)
     {
-        Vector3 direction = (MousePosition.InWorldRayPosition - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        if (Player.Local == null) 
+            return;
+
+        Vector3 relativePos = new(_data.pointToLookAt.x - transform.position.x, 0f, _data.pointToLookAt.z - transform.position.z);
+        Quaternion lookRotation = Quaternion.LookRotation(relativePos, Vector3.up);
+
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Runner.DeltaTime * 90);
     }
-    public Vector3 ApplyForce( Vector3 pMoveDirection, Vector3 pForceDirection)
+
+    //Handles what happens when the player leaves
+    public void PlayerLeft(PlayerRef player)
     {
-        knockBackCounter = knockBackTime;
-        //Debug.LogWarning($"knockback!!!!!!!!!");
-        return pForceDirection * knockBackForce;
+        if (player == Object.InputAuthority)
+        {
+            Runner.Despawn(Object);
+        }
     }
 }

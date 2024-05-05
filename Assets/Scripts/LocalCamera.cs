@@ -10,19 +10,19 @@ public class LocalCamera : MonoBehaviour
     [SerializeField] private float distance = 5f;
     [SerializeField] private float maxDistance = 10f;
     [SerializeField] private float minDistance = 1f;
+
     [Header("Speeds")]
     [SerializeField] private float smoothSpeed = 5f;
     [SerializeField] private float scrollSensitivity = 1;
+
     [Header("Rotation")]
     [SerializeField] private float camXRotationt = 30f;
     [SerializeField] private float camYRotation = 45f;
-    private void Start()
-    {
-        this.gameObject.name = $"{this.name} + {target.GetComponentInParent<Player>().gameObject.name}";
-    }
+    
     private void LateUpdate()
     {
-        if (target == null) return;
+        if (target == null) 
+            return;
 
         float num = Input.GetAxis("Mouse ScrollWheel");
         distance -= num * scrollSensitivity;

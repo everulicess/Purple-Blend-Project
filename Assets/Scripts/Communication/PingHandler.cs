@@ -6,10 +6,8 @@ using Fusion;
 
 public class PingHandler : NetworkBehaviour
 {
-    TickTimer life;
-    [SerializeField] float destroyingTime;
+    float destroyingTime;
     NetworkObject ThisObject;
-    [SerializeField] Pings myPing;
 
     private void Awake()
     {
@@ -19,17 +17,9 @@ public class PingHandler : NetworkBehaviour
     {
         ThisObject = GetComponent<NetworkObject>();
     }
-    public void SetPing(Pings pPingID)
-    {
-        myPing = pPingID;
-    }
     public void Init()
     {
-        CommunicationManager.audioDictionary.TryGetValue(myPing, out AudioClip audio);
-        if (audio == null) return;
-        Debug.Log($"playing this sound: {audio}");
-        AudioSource.PlayClipAtPoint(audio, transform.position);
-        destroyingTime = 3f;
+        destroyingTime = 1.5f;
     }
     public override void FixedUpdateNetwork()
     {

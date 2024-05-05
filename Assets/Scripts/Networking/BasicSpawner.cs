@@ -10,30 +10,28 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 {
 
     public NetworkRunner networkRunner;
-    NetworkPrefabRef networkPrefabRef;
-    [SerializeField] NetworkPrefabRef networkPrefabRef_TheMule;
-    [SerializeField] NetworkPrefabRef networkPrefabRef_TheBoomstick;
-    [SerializeField] NetworkPrefabRef networkPrefabRef_TheSiren;
+    //character classes
+    Player networkPlayerPrefab;
+    [SerializeField] Player TheMule;
+    [SerializeField] Player TheBoomstick;
+    [SerializeField] Player TheSiren;
 
     private Dictionary<PlayerRef, NetworkObject> spawnCharacter = new Dictionary<PlayerRef, NetworkObject>();
     float playersJoined = 0f;
 
+    //Session List
     SessionListUIHandler sessionListUIHandler;
-    //Booleans for reseting input
-    bool PingButtonPressed = false;
-    bool InteractButtonPressed = false;
-    bool TestingButtonQPressed = false;
-    bool LeftClickPressed = false;
-    bool RightClickPressed = false;
 
-    NetworkPrefabRef GetCharacterToSpawn(string characterToSpawn)
+    //Input
+    CharacterInputHandler characterInputHandler;
+    Player GetCharacter(string characterToSpawn)
     {
         return characterToSpawn switch
         {
-            nameof(Characters.TheMule) => networkPrefabRef_TheMule,
-            nameof(Characters.TheBoomstick) => networkPrefabRef_TheBoomstick,
-            nameof(Characters.TheSiren) => networkPrefabRef_TheSiren,
-            _ => networkPrefabRef_TheBoomstick,
+            nameof(Characters.TheMule) => TheMule,
+            nameof(Characters.TheBoomstick) => TheBoomstick,
+            nameof(Characters.TheSiren) => TheSiren,
+            _ => TheBoomstick,
         };
     }
     private void Awake()
@@ -42,50 +40,34 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     }
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
-        var data = new NetworkInputData();
+        if (characterInputHandler == null && Player.Local != null)
+        {
+            characterInputHandler = Player.Local.GetComponent<CharacterInputHandler>();
+            Debug.LogWarning($"getting Input Handler");
 
-        data.buttons.Set(MyButtons.PingsButton, Input.GetKeyDown(KeyCode.V) || PingButtonPressed);
-        data.buttons.Set(MyButtons.InteractButton, Input.GetKeyDown(KeyCode.E) || InteractButtonPressed);
-        data.buttons.Set(MyButtons.TestingButtonQ, Input.GetKeyDown(KeyCode.Q) || TestingButtonQPressed);
-        data.buttons.Set(MyButtons.LeftClick, Input.GetMouseButtonDown(0) || LeftClickPressed);
-        data.buttons.Set(MyButtons.RightClick, Input.GetMouseButtonDown(1) || RightClickPressed);
-        data.direction = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        input.Set(data);
-
-        //reset input
-        InteractButtonPressed = false;
-        TestingButtonQPressed = false;
-        PingButtonPressed = false;
-        LeftClickPressed = false;
-        RightClickPressed = false;
-    }
-    private void Update()
-    {
-        TestingButtonQPressed = Input.GetKeyDown(KeyCode.Q);
-        PingButtonPressed = Input.GetKeyDown(KeyCode.V);
-        InteractButtonPressed = Input.GetKeyDown(KeyCode.E);
-        LeftClickPressed = Input.GetMouseButtonDown(0);
-        RightClickPressed = Input.GetMouseButtonDown(1);
+        }
+        if (characterInputHandler != null)
+        {
+            input.Set(characterInputHandler.GetNetworkInput());
+        }
     }
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-        if (!runner.IsServer) return;
-        if (SceneManager.GetActiveScene().name == "MenuScene") return;
-        networkPrefabRef = GetCharacterToSpawn(PlayerPrefs.GetString("Character"));
+        if (!runner.IsServer) 
+            return;
+        if (SceneManager.GetActiveScene().name == "MenuScene") 
+            return;
+
+        networkPlayerPrefab = GetCharacter(PlayerPrefs.GetString("Character"));
+
         Vector3 playerPos = new(/*(player.RawEncoded % runner.Config.Simulation.PlayerCount) * */0 + playersJoined, 0f, 0f);
 
-        NetworkObject networkObject = runner.Spawn(networkPrefabRef, playerPos, Quaternion.identity, player);
+        runner.Spawn(networkPlayerPrefab, playerPos, Quaternion.identity, player);
 
         playersJoined++;
-        spawnCharacter.Add(player, networkObject);
     }
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
-        if (spawnCharacter.TryGetValue(player, out NetworkObject networkObject))
-        {
-            runner.Despawn(networkObject);
-            spawnCharacter.Remove(player);
-        }
     }
     public async void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken)
     {
@@ -140,7 +122,6 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player)
     {
     }
-    
     public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress)
     {
     }
@@ -153,7 +134,6 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnSceneLoadStart(NetworkRunner runner)
     {
     }
-    
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)
     {
     }

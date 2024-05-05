@@ -6,16 +6,20 @@ using UnityEngine.UI;
 using TMPro;
 //using DG.Tweening;
 
-public class RadialMenuEntry : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class RadialMenuEntry : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] TextMeshProUGUI Label;
     [SerializeField] RawImage Icon;
 
-    Player m_Player;
+    [SerializeField]Player m_Player { get; set; }
 
     //RectTransform Rect;
     [SerializeField] Pings PingId;
 
+    private void Start()
+    {
+        m_Player.GetComponent<PlayerCommunication>().SetPingToDisplay(Pings.None);
+    }
     public void SetLabel(string pText)
     {
         Label.text = pText;
@@ -23,36 +27,35 @@ public class RadialMenuEntry : MonoBehaviour, IPointerClickHandler, IPointerEnte
     public void SetPing(Pings pPingId)
     {
         PingId = pPingId;
-    }
-    public Pings GetPingID()
+    } 
+    public void SetPlayer(Player pPlayer)
     {
-        return PingId;
-    }
-    public Texture GetIcon()
-    {
-        return (Icon.texture);
+        m_Player = pPlayer;
     }
     public void SetIcon(Texture pIcon)
     {
         Icon.texture = pIcon;
     }
-    public void OnPointerClick(PointerEventData eventData)
-    {
-    }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        m_Player = FindObjectOfType<Player>();
-
         m_Player.GetComponent<PlayerCommunication>().SetPingToDisplay(PingId);
-        //Debug.Log($"passing the ping: {PingId}");
-        
+
+        //visual change for chosen ping
+        this.transform.localScale *= 1.25f;
+
+
         ///Animation using DG.Tweening
         ///Rect.DOSComplete();
         ///Rect.DOScale(vector3.one*1.5f,3f).SetEase(Ease.OutQuad);
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        //FindObjectOfType<PlayerCommunication>().SetPingToDisplay(PingId);
+        //visual reset for chosen ping
+        this.transform.localScale /= 1.25f;
+        
+        //
+        m_Player.GetComponent<PlayerCommunication>().SetPingToDisplay(Pings.None);
+
         ///Animation using DG.Tweening
         ///Rect.DOSComplete();
         ///Rect.DOScale(vector3.one,3f).SetEase(Ease.OutQuad);

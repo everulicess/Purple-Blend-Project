@@ -34,7 +34,6 @@ public class SessionInfoListUIItem : MonoBehaviour
 
         JoinButton.gameObject.SetActive(isJoinButtonActive);
     }
-
     public void OnClick()
     {
         mainMenuManager.SetMySessionInfo(sessionInfo);

@@ -2666,7 +2666,7 @@ GameObject:
   - component: {fileID: 361062154530443736}
   - component: {fileID: 3212770992262226114}
   - component: {fileID: 4636051998503311930}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Death Bridge Side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5096,7 +5096,7 @@ GameObject:
   - component: {fileID: 6823958158063269425}
   - component: {fileID: 1769261068517822429}
   - component: {fileID: 7655423424423457573}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: OverlapArea
   m_TagString: Rooms
   m_Icon: {fileID: 0}
