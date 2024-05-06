@@ -25,8 +25,6 @@ public class CharacterInputHandler : SimulationBehaviour
     }
     private void Update()
     {
-        if (!m_Player.Object.HasInputAuthority)
-            return;
 
         //Collect Input
         //Movement input
