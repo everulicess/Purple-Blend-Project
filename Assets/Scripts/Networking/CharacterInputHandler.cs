@@ -35,16 +35,20 @@ public class CharacterInputHandler : SimulationBehaviour
             InteractButtonPressed = true;
         
         //Open Ping Menu using "V"
-        if (Input.GetKey(KeyCode.V))
+        //if (Input.GetKey(KeyCode.V))
+        //    PingButtonPressed = true;
+        //if (Input.GetKeyUp(KeyCode.V))
+        //    PingButtonReleased = true;
+        if (Input.GetMouseButton(2))
             PingButtonPressed = true;
-        if (Input.GetKeyUp(KeyCode.V))
+        if (Input.GetMouseButtonUp(2))
             PingButtonReleased = true;
 
         //Attack left mouse button
         if (Input.GetMouseButtonDown(0))
             LeftClickPressed = true;
 
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.V))
+        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(2))
         {
             SetInWorldMousePosition();
         }

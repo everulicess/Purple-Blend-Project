@@ -35,7 +35,7 @@ public class PlayerCommunication : NetworkBehaviour
     }
     private void MenuToggle(NetworkInputData data)
     {
-        if (Input.GetKey(KeyCode.V))
+        if (Input.GetMouseButton(2))
         {
             radialMenu.Open();
             radialMenu.transform.position = PingMenuPosition;

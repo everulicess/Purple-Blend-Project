@@ -63,18 +63,16 @@ public class Player : NetworkBehaviour, IPlayerLeft
             localCamera = Instantiate(cam);
             localCamera.GetComponent<LocalCamera>().SetTarget(camTarget);
             PlayerCamera = localCamera.GetComponentInChildren<Camera>();
+
+            m_CharacterController = GetComponent<NetworkCharacterController>();
+            m_CharacterController.maxSpeed = Character.MovementStats.MovementSpeed;
+            anim = GetComponent<Animator>();
+            m_Collector = GetComponent<Collector>();
+            m_Health = GetComponent<Health>();
+            m_CombatController = GetComponent<CombatController>();
         }
     }
 
-    private void Awake()
-    {
-        m_CharacterController = GetComponent<NetworkCharacterController>();
-        m_CharacterController.maxSpeed = Character.MovementStats.MovementSpeed;
-        anim = GetComponent<Animator>();
-        m_Collector = GetComponent<Collector>();
-        m_Health = GetComponent<Health>();
-        m_CombatController = GetComponent<CombatController>();
-    }
     private void Start()
     {
         if (!HasInputAuthority) return;
