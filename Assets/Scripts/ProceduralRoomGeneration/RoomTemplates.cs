@@ -32,7 +32,6 @@ public class RoomTemplates : NetworkBehaviour
             if (!doorAvailability[i])
             {
                 Runner.Despawn(transform.GetChild(2).GetChild(i).gameObject.GetComponent<NetworkObject>());
-                //Destroy(transform.GetChild(2).GetChild(i).gameObject);
             }
         }
     }
