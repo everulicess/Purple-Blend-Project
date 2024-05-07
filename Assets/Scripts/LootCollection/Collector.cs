@@ -8,14 +8,17 @@ public class Collector : NetworkBehaviour
 {
     //UI
     [Header("User Interface")]
-    [Header("Pocket")]
+    [Header("Coins Pocket")]
     [SerializeField] GameObject pocketInGameUI;
     [SerializeField] GameObject pocketHUDUI;
     [SerializeField] Image[] currentPocketBar;
+    [Header("Relic Spots")]
+    [SerializeField] GameObject relicInGameUI;
+    [SerializeField] GameObject relictHUDUI;
+    Image[] relicSpotsHUD;
+    Image[] relicSpotsInGame;
     [Header("Interact")]
     [SerializeField] GameObject InteractUI;
-
-    [Networked] float currentFill { get; set; }
 
     //Storage variables
     ChangeDetector _changes;
@@ -30,7 +33,7 @@ public class Collector : NetworkBehaviour
     //Relics
     [Range(1, 4)]
     [SerializeField] int relicCapacity;
-    int carriedRelics;
+    [Networked] int carriedRelics { get; set; }
     readonly float relicValue = 50f;
     
 
@@ -48,28 +51,35 @@ public class Collector : NetworkBehaviour
     {
         _changes = GetChangeDetector(ChangeDetector.Source.SimulationState);
         InteractUI.SetActive(false);
+        relicSpotsHUD = relictHUDUI.GetComponentsInChildren<Image>();
+        relicSpotsInGame = relicInGameUI.GetComponentsInChildren<Image>();
     }
     private void Update()
     {
         
+
         if (Player.Local)
         {
+            //Coin bar
             pocketHUDUI.SetActive(HasInputAuthority);
             pocketInGameUI.SetActive(!HasInputAuthority);
+
+            //Relic Spots
+            relictHUDUI.SetActive(HasInputAuthority);
+            relicInGameUI.SetActive(!HasInputAuthority);
+
         }
         else
         {
             pocketHUDUI.SetActive(false);
             pocketInGameUI.SetActive(true);
-        }
 
-        //currentFill = CarriedPocketLoot;
-        foreach (Image image in currentPocketBar)
-        {
-            image.fillAmount = CarriedPocketLoot / pocketCapacity;
+            relictHUDUI.SetActive(false);
+            relicInGameUI.SetActive(true);
         }
 
         pocketInGameUI.transform.rotation = Quaternion.Euler(30, 45, 0);
+        relicInGameUI.transform.rotation = Quaternion.Euler(30, 45, 0);
     }
     public bool GetCarryingBool()
     {
@@ -89,6 +99,18 @@ public class Collector : NetworkBehaviour
             {
                 collectable.TryInteracting(this);
             }
+
+            _colliders[i].TryGetComponent(out Deposit _deposit);
+            var deposit = _deposit;
+            if (deposit != null)
+            {
+                Deposit(deposit);
+                Debug.LogWarning($"putting money there");
+            }
+            else
+            {
+                InteractUI.SetActive(false);
+            }
         }
     }
     public override void Render()
@@ -104,14 +126,41 @@ public class Collector : NetworkBehaviour
                     var (previous, current) = reader.Read(previousBuffer, currentBuffer);
                     OnCarriedPocketChange(previous, current)
                     ;break;
+                case nameof(carriedRelics):
+                    var intReader = GetPropertyReader<int>(nameof(carriedRelics));
+                    var (previousInt, currentInt) = intReader.Read(previousBuffer, currentBuffer);
+                    OnCarriedRelicsChange(previousInt,currentInt)
+                    ;break;
                 default:
                     break;
             }
         }
     }
+    private void OnCarriedRelicsChange(int previous, int current)
+    {
+        if (previous < current)
+        {
+            relicSpotsHUD[carriedRelics - 1].color = Color.yellow;
+            relicSpotsInGame[carriedRelics - 1].color = Color.yellow;
+        }
 
+        if (current < previous)
+        {
+            foreach (Image image in relicSpotsHUD)
+                image.color = Color.white;
+
+            foreach (Image image in relicSpotsInGame)
+                image.color = Color.white;
+        }
+            
+
+    }
     private void OnCarriedPocketChange(float previous, float current)
     {
+        foreach (Image image in currentPocketBar)
+        {
+            image.fillAmount = CarriedPocketLoot / pocketCapacity;
+        }
         if (previous < current)
         {
             Debug.Log("Increasing Gold");
@@ -142,7 +191,6 @@ public class Collector : NetworkBehaviour
         pCoin.DeleteObject();
         CollectedCoins++;
         CarriedPocketLoot = CollectedCoins * coinsValue;
-        //totalPlayerGold = CarriedPocketLoot + (carriedRelics*relicValue);
         CarriedPocketLoot = Mathf.Clamp(CarriedPocketLoot, 0f, pocketCapacity);
         Debug.Log($"collected coins: {CollectedCoins}");
     }
@@ -197,36 +245,32 @@ public class Collector : NetworkBehaviour
             InteractUI.SetActive(false);
         }
     }
-    bool hasEntered1 = true;
+    //bool hasEntered1 = true;
 
-    private void OnTriggerStay(Collider other)
-    {
-        hasEntered1 = true;
-        other.TryGetComponent(out Collectable _collectable);
-        if (_collectable != null)
-        {
-            if (hasEntered1)
-            {
-                //Debug.LogError($"HAS {other.name} ENTERED? {hasEntered1} and this player has: {CarriedPocketLoot} in his pockets");
-                _collectable.TryInteracting(this);
-                hasEntered1 = false;
-            }
-        }
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    hasEntered1 = true;
+    //    other.TryGetComponent(out Collectable _collectable);
+    //    if (_collectable != null)
+    //    {
+    //        if (hasEntered1)
+    //        {
+    //            //Debug.LogError($"HAS {other.name} ENTERED? {hasEntered1} and this player has: {CarriedPocketLoot} in his pockets");
+    //            _collectable.TryInteracting(this);
+    //            hasEntered1 = false;
+    //        }
+    //    }
 
-        other.TryGetComponent(out Deposit _deposit);
-        if (_deposit != null)
-        {
-            Deposit(_deposit);
-        }
-        else
-        {
-            InteractUI.SetActive(false);
-        }
-        //if (_deposit == null && _collectable == null)
-        //{
-        //    InteractUI.SetActive(false);
-        //}
-    }
+    //    other.TryGetComponent(out Deposit _deposit);
+    //    if (_deposit != null)
+    //    {
+    //        Deposit(_deposit);
+    //    }
+    //    else
+    //    {
+    //        InteractUI.SetActive(false);
+    //    }
+    //}
 
     private void Deposit(Deposit _deposit)
     {
@@ -242,6 +286,10 @@ public class Collector : NetworkBehaviour
             _deposit.UpdateGlobalGold(totalPlayerGold);
             totalPlayerGold = 0;
             InteractUI.SetActive(false);
+            foreach (Image image in relicSpotsHUD)
+            {
+                image.color = Color.white;
+            }
         }
     }
 
