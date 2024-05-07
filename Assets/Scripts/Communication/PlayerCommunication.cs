@@ -10,13 +10,13 @@ public class PlayerCommunication : NetworkBehaviour
     Player m_Player;
     [SerializeField] RadialMenu radialMenu;
     Vector3 PingMenuPosition;
-
-    private void Start()
+    public override void Spawned()
     {
         if (Player.Local == null)
             return;
         m_Player = GetComponent<Player>();
     }
+        
     public override void FixedUpdateNetwork()
     {
         if (Player.Local == null)

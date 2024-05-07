@@ -9,7 +9,7 @@ public interface IDamageable
     /// Call when dealing damage, need to call the "Damage_ToHostRPC" to communicate the action to everyone.
     /// Call it when dealing damage
     /// </summary>
-    void OnTakeDamage(float pDamage);
+    void OnTakeDamage(byte pDamage);
     /// <summary>
     /// RPC that should be called when dealing damage, holds the call to "Damage_toClientsRPC"
     /// RPC send to the server, needs to use the fusion namespace, and have 

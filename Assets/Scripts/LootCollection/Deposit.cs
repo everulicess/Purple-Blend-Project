@@ -7,25 +7,43 @@ using TMPro;
 public class Deposit : NetworkBehaviour
 {
     [Networked] float globalGold { get; set; }
-    [SerializeField] TextMeshProUGUI TMP_GlobalGold;
-  
-    public override void Render()
-    {
-        UpdateGlobalGold_RPC(0f);
-    }
+    TextMeshProUGUI TMP_GlobalGold;
+
+    ChangeDetector changes;
+
     public override void Spawned()
     {
+        TMP_GlobalGold = GameObject.Find("Gold Collected").GetComponentInChildren<TextMeshProUGUI>();
+        TMP_GlobalGold.text = globalGold.ToString();
+        changes = GetChangeDetector(ChangeDetector.Source.SimulationState);
+    }
+    public override void Render()
+    {
+        UpdateGlobalGold(0f);
+        foreach (var change in changes.DetectChanges(this, out var previousBuffer, out var currentBuffer))
+        {
+            switch (change)
+            {
+                case nameof(globalGold):
+                    var floatReader = GetPropertyReader<float>(nameof(globalGold));
+                    var (previousFloat, currentFloat) = floatReader.Read(previousBuffer, currentBuffer);
+                    OnGoldUpdated(previousFloat, currentFloat);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    private void OnGoldUpdated(float previousValue, float currentValue)
+    {
+        if (previousValue !> currentValue)
+            return;
+
         TMP_GlobalGold.text = globalGold.ToString();
     }
-    [Rpc(sources: RpcSources.All, targets: RpcTargets.StateAuthority)]
-   public void UpdateGlobalGold_RPC(float pAmountToIncrease) 
-    {
-        UpdateGlobalGoldForClients_RPC(pAmountToIncrease);
-    }
-    [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.All)]
-    public void UpdateGlobalGoldForClients_RPC(float pAmountToIncrease)
+
+    public void UpdateGlobalGold(float pAmountToIncrease)
     {
         globalGold += pAmountToIncrease;
-        TMP_GlobalGold.text = globalGold.ToString();
     }
 }

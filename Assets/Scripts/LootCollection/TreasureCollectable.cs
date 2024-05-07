@@ -34,7 +34,7 @@ public class TreasureCollectable : Collectable
         other.TryGetComponent<Deposit>(out Deposit _deposit);
         if (_deposit != null)
         {
-            _deposit.UpdateGlobalGold_RPC(goldValue);
+            _deposit.UpdateGlobalGold(goldValue);
             DeleteObject();
         }
     }

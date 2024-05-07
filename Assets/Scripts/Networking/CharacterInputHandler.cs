@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
-public class CharacterInputHandler : SimulationBehaviour
+public class CharacterInputHandler : NetworkBehaviour
 {
     Vector3 moveInputVector = Vector3.zero;
     Vector3 mouseWorldPosition;
@@ -32,7 +32,11 @@ public class CharacterInputHandler : SimulationBehaviour
 
         //Interaction using "E"
         if (Input.GetKeyDown(KeyCode.E))
-            InteractButtonPressed = true;
+            InteractButtonPressed = true; 
+        
+        //Testing button "Q"
+        if (Input.GetKeyDown(KeyCode.Q))
+            TestingButtonQPressed = true;
         
         //Open Ping Menu using "V"
         //if (Input.GetKey(KeyCode.V))
@@ -79,7 +83,7 @@ public class CharacterInputHandler : SimulationBehaviour
         //networkInputData.isAttackingPressed = LeftClickPressed;
         networkInputData.buttons.Set(MyButtons.AttackButton, LeftClickPressed);
 
-        networkInputData.buttons.Set(MyButtons.TestingButtonQ, Input.GetKeyDown(KeyCode.Q) || TestingButtonQPressed);
+        networkInputData.buttons.Set(MyButtons.TestingButtonQ, TestingButtonQPressed);
 
         //Reset variables after reading their values
         InteractButtonPressed = false;

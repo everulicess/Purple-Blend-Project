@@ -63,14 +63,14 @@ public class Player : NetworkBehaviour, IPlayerLeft
             localCamera = Instantiate(cam);
             localCamera.GetComponent<LocalCamera>().SetTarget(camTarget);
             PlayerCamera = localCamera.GetComponentInChildren<Camera>();
-
-            m_CharacterController = GetComponent<NetworkCharacterController>();
-            m_CharacterController.maxSpeed = Character.MovementStats.MovementSpeed;
-            anim = GetComponent<Animator>();
-            m_Collector = GetComponent<Collector>();
-            m_Health = GetComponent<Health>();
-            m_CombatController = GetComponent<CombatController>();
         }
+
+        m_CharacterController = GetComponent<NetworkCharacterController>();
+        m_CharacterController.maxSpeed = Character.MovementStats.MovementSpeed;
+        anim = GetComponent<Animator>();
+        m_Collector = GetComponent<Collector>();
+        m_Health = GetComponent<Health>();
+        m_CombatController = GetComponent<CombatController>();
     }
 
     private void Start()
@@ -97,7 +97,6 @@ public class Player : NetworkBehaviour, IPlayerLeft
         {
             IsAttacking = true;
             FaceTo(data);
-
         }
             
         //movement blending variables
@@ -174,6 +173,14 @@ public class Player : NetworkBehaviour, IPlayerLeft
         Quaternion lookRotation = Quaternion.LookRotation(relativePos, Vector3.up);
 
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Runner.DeltaTime * 90);
+    }
+    private void OnEnable()
+    {
+        m_CharacterController.Teleport(new Vector3(0,1,0));
+    }
+    public void OnRespawn()
+    {
+        m_CharacterController.Teleport(Vector3.zero);
     }
 
     //Handles what happens when the player leaves

@@ -9,9 +9,9 @@ public class Collector : NetworkBehaviour
     //UI
     [Header("User Interface")]
     [Header("Pocket")]
-    [SerializeField] GameObject pocketUI;
-    [SerializeField] Image totalPocketBar;
-    [SerializeField] Image currentPocketBar;
+    [SerializeField] GameObject pocketInGameUI;
+    [SerializeField] GameObject pocketHUDUI;
+    [SerializeField] Image[] currentPocketBar;
     [Header("Interact")]
     [SerializeField] GameObject InteractUI;
 
@@ -51,18 +51,25 @@ public class Collector : NetworkBehaviour
     }
     private void Update()
     {
-        if (HasInputAuthority)
+        
+        if (Player.Local)
         {
-            pocketUI.SetActive(true);
-            pocketUI.transform.rotation = Quaternion.Euler(30, 45, 0);
-
-            currentFill = CarriedPocketLoot;
-            currentPocketBar.fillAmount = currentFill / pocketCapacity;
+            pocketHUDUI.SetActive(HasInputAuthority);
+            pocketInGameUI.SetActive(!HasInputAuthority);
         }
         else
         {
-            pocketUI.SetActive(false);
+            pocketHUDUI.SetActive(false);
+            pocketInGameUI.SetActive(true);
         }
+
+        //currentFill = CarriedPocketLoot;
+        foreach (Image image in currentPocketBar)
+        {
+            image.fillAmount = CarriedPocketLoot / pocketCapacity;
+        }
+
+        pocketInGameUI.transform.rotation = Quaternion.Euler(30, 45, 0);
     }
     public bool GetCarryingBool()
     {
@@ -135,7 +142,7 @@ public class Collector : NetworkBehaviour
         pCoin.DeleteObject();
         CollectedCoins++;
         CarriedPocketLoot = CollectedCoins * coinsValue;
-        totalPlayerGold = CarriedPocketLoot + (carriedRelics*relicValue);
+        //totalPlayerGold = CarriedPocketLoot + (carriedRelics*relicValue);
         CarriedPocketLoot = Mathf.Clamp(CarriedPocketLoot, 0f, pocketCapacity);
         Debug.Log($"collected coins: {CollectedCoins}");
     }
@@ -156,7 +163,7 @@ public class Collector : NetworkBehaviour
                 return;
             }
             carriedRelics++;
-            totalPlayerGold = (carriedRelics * relicValue);
+            //totalPlayerGold = (carriedRelics * relicValue);
             //totalPlayerGold += pAmountToIncrease;
             pRelic.DeleteObject();
             InteractUI.SetActive(false);
@@ -223,6 +230,7 @@ public class Collector : NetworkBehaviour
 
     private void Deposit(Deposit _deposit)
     {
+        totalPlayerGold = (CollectedCoins * coinsValue) + (carriedRelics * relicValue);
         InteractUI.transform.position = new(_deposit.transform.position.x, _deposit.transform.position.y + 2f, _deposit.transform.position.z);
         InteractUI.SetActive(true);
         if (isInteracting)
@@ -231,7 +239,7 @@ public class Collector : NetworkBehaviour
             CarriedPocketLoot = 0;
             carriedRelics = 0;
             CollectedCoins = 0;
-            _deposit.UpdateGlobalGold_RPC(totalPlayerGold);
+            _deposit.UpdateGlobalGold(totalPlayerGold);
             totalPlayerGold = 0;
             InteractUI.SetActive(false);
         }

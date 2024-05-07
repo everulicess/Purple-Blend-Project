@@ -7,100 +7,167 @@ public class Health : NetworkBehaviour, IDamageable
 {
     [Header("Health User Interface")]
     //UI
-    [SerializeField] GameObject HealthUI;
-    [SerializeField] Image fillImage;
+    [SerializeField] GameObject HealthInGameUI;
+    [SerializeField] GameObject HealthHUDUI;
+    [SerializeField] Image[] fillImages;
 
     [Header("change detectors")]
     //change Detector
     private ChangeDetector _changes;
-    [Networked] float HealthPoints { get; set; }
+    [Networked] byte HealthPoints { get; set; }
     [Networked] bool isDead { get; set; }
 
-    [SerializeField] float maxHealthPoints = 100f;
+    const float reviveTime = 5f;
+    float currentReviveTime;
+    [SerializeField] byte maxHealthPoints = 100;
 
     bool isInitailized;
-    public bool isPlayer;
-    private void Start()
-    {
-        //    _changes = GetChangeDetector(ChangeDetector.Source.SimulationState);
-        //    isDead = false;
-        //    fillImage.fillAmount = HealthPoints / maxHealthPoints;
-        //    isPlayer = this.TryGetComponent(out Player _player);
-    }
+     bool isPlayer;
+
+    [SerializeField] GameObject model;
     public override void Spawned()
     {
         _changes = GetChangeDetector(ChangeDetector.Source.SimulationState);
         HealthPoints = maxHealthPoints;
         isDead = false;
-        fillImage.fillAmount = HealthPoints / maxHealthPoints;
         isPlayer = this.TryGetComponent(out Player _player);
         isInitailized = true;
+
+        HealthUIHandle();
+        UpdateHealthBar();
+    }
+    void UpdateHealthBar()
+    {
+        foreach (Image image in fillImages)
+        {
+            image.fillAmount = HealthPoints / maxHealthPoints;
+        }
     }
     private void Update()
     {
-        HealthUI.SetActive(true);
-        HealthUI.transform.rotation = Quaternion.Euler(30, 45, 0);
+        //if (!isInitailized)
+        //    return;
+        //if (isDead)
+        //    return;
+        HealthUIHandle();
     }
+
+    private void HealthUIHandle()
+    {
+        if (isPlayer)
+        {
+            if (Player.Local)
+            {
+                HealthHUDUI.SetActive(HasInputAuthority);
+                HealthInGameUI.SetActive(!HasInputAuthority);
+            }
+            else
+            {
+                HealthHUDUI.SetActive(false);
+                HealthInGameUI.SetActive(true);
+            }
+        }
+        else
+        {
+            HealthHUDUI.SetActive(false);
+        }
+        HealthInGameUI.transform.rotation = Quaternion.Euler(30, 45, 0);
+    }
+
     public override void FixedUpdateNetwork()
     {
-        fillImage.fillAmount = HealthPoints / maxHealthPoints;
+        if (currentReviveTime >= 0)
+        {
+            currentReviveTime -= Time.deltaTime;
+            if (currentReviveTime < 0)
+                isDead = false;
+        }
+
+        //UpdateHealthBar();
     }
     public override void Render()
     {
-        if (isDead && !isPlayer)
-        { 
-            Runner.Despawn(this.gameObject.GetComponent<NetworkObject>());
-            return;
-        }
-
         foreach (var change in _changes.DetectChanges(this, out var previousBuffer, out var currentBuffer))
         {
             switch (change)
             {
                 case nameof(HealthPoints):
-                    var reader = GetPropertyReader<float>(nameof(HealthPoints));
-                    var (previous, current) = reader.Read(previousBuffer, currentBuffer);
-                    OnHealthChanged(previous, current);
+                    var byteReader = GetPropertyReader<byte>(nameof(HealthPoints));
+                    var (previousByte, currentByte) = byteReader.Read(previousBuffer, currentBuffer);
+                    OnHealthChanged(previousByte, currentByte);
                     break;
                 case nameof(isDead):
-                    var reader2 = GetPropertyReader<bool>(nameof(isDead));
-                    var (previous2, current2) = reader2.Read(previousBuffer, currentBuffer);
-                    OnBoolChanged(previous2, current2);
+                    var boolReader = GetPropertyReader<bool>(nameof(isDead));
+                    var (previousBool, currentBool) = boolReader.Read(previousBuffer, currentBuffer);
+                    OnBoolChanged(previousBool, currentBool);
                     ;break;
             }
         }
     }
-
-     void OnHealthChanged(float oldValue, float value)
+     void OnBoolChanged(bool oldValue, bool value)
     {
-        if (value<oldValue)
+        if (value)
+            OnDeath();
+        else if (!value && oldValue)
+            OnRevive();
+    }
+    private void OnDeath()
+    {
+        if (isPlayer)
         {
-            OnHPReduced();
+            model.GetComponentInParent<Player>().enabled = false;
         }
-        //Debug.Log($"{Time.time} On Health Changed \n old value {oldValue} \n new value{value}");
-    }
-    static void OnBoolChanged(bool oldValue, bool value)
-    {
-        //Debug.Log($"{Time.time} On boolean Changed \n old value {oldValue} \n new value{value}");
+        else
+        {
+            model.GetComponentInParent<BaseEnemy>().enabled = false;
+            //Runner.Despawn(this.gameObject.GetComponent<NetworkObject>());
+        }
+        HealthInGameUI.SetActive(false);
+        model.SetActive(false);
 
+        currentReviveTime = reviveTime;
     }
-    public void OnTakeDamage(float pDamage)
+
+    private void OnRevive()
     {
-        if (isDead) return;
+        if (isPlayer)
+        {
+            model.GetComponentInParent<Player>().enabled = true;
+            model.GetComponentInParent<Player>().OnRespawn();
+        }
+        else
+        {
+            model.GetComponentInParent<BaseEnemy>().enabled = true;
+        }
+        HealthPoints = maxHealthPoints;
+        HealthInGameUI.SetActive(true);
+        model.SetActive(true);
+    }
+    void OnHealthChanged(byte oldValue, byte value)
+    {
+        if (value < oldValue)
+            OnHPReduced();
+    }
+    public void OnTakeDamage(byte pDamage)
+    {
+        if (isDead) 
+            return;
+
+        if (pDamage > HealthPoints)
+            pDamage = HealthPoints;
         
         HealthPoints -= pDamage;
-        //Debug.Log($"{Time.deltaTime} {transform.name} took damaage and has {HealthPoints} left ");
 
-        if (HealthPoints<=0)
+        if (HealthPoints <= 0)
         {
             isDead = true;
         }
     }
     public void OnHPReduced()
     {
-        if (!isInitailized) return;
-        fillImage.fillAmount = HealthPoints / maxHealthPoints;
-
+        if (!isInitailized) 
+            return;
+        UpdateHealthBar();
     }
     private void OnHPIncreased()
     {

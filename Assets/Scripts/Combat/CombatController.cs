@@ -12,7 +12,7 @@ public class CombatController : NetworkBehaviour
     public List<AttackTypesScrObj> attackTypes = new();
     public GameObject hitbox;
 
-    private float damage;
+    private byte damage;
     private float knockback;
     private float playerPush;
     private bool isAttacking;
