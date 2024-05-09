@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
+using System;
+
 [RequireComponent(
     typeof(NetworkCharacterController),
     typeof(NetworkMecanimAnimator),
@@ -36,7 +38,6 @@ public class Player : NetworkBehaviour, IPlayerLeft
 
     Collector m_Collector;
     Health m_Health;
-    BasicSpawner basicSpawner;
     //Knockback and Push variables
 
     //movement direction
@@ -76,10 +77,12 @@ public class Player : NetworkBehaviour, IPlayerLeft
     private void Start()
     {
         if (!HasInputAuthority) return;
-            basicSpawner = FindObjectOfType<BasicSpawner>();
     }
     public override void FixedUpdateNetwork()
     {
+        HandleDeath();
+        if (m_Health.isDead)
+            return;
         //count down attack time and end the attack once it hits 0
         if (IsAttacking && attackTime > 0)
         {
@@ -111,8 +114,18 @@ public class Player : NetworkBehaviour, IPlayerLeft
         //move the character
         m_CharacterController.Move(forward);
         anim.SetBool("Moving", m_CharacterController.Velocity != Vector3.zero);
+        if(data.buttons.IsSet(MyButtons.TestingButtonQ))
+            m_Health.OnTakeDamage(10);
     }
-    
+
+    private void HandleDeath()
+    {
+        if (m_Health.isDead)
+        {
+            m_CharacterController.Teleport(new Vector3(0,-0.8f,0));
+        }
+    }
+
     private void WalkAnim()
     {
         if (m_CharacterController.Velocity == Vector3.zero)

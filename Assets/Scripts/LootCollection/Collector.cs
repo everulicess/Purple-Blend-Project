@@ -56,8 +56,6 @@ public class Collector : NetworkBehaviour
     }
     private void Update()
     {
-        
-
         if (Player.Local)
         {
             //Coin bar
@@ -105,7 +103,6 @@ public class Collector : NetworkBehaviour
             if (deposit != null)
             {
                 Deposit(deposit);
-                Debug.LogWarning($"putting money there");
             }
             else
             {

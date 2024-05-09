@@ -43,7 +43,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         if (characterInputHandler == null && Player.Local != null)
         {
             characterInputHandler = Player.Local.GetComponent<CharacterInputHandler>();
-            Debug.LogWarning($"getting Input Handler");
+            //Debug.LogWarning($"getting Input Handler");
 
         }
         if (characterInputHandler != null)

@@ -3,26 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 using UnityEngine.UI;
+using TMPro;
 public class Health : NetworkBehaviour, IDamageable
 {
     [Header("Health User Interface")]
     //UI
     [SerializeField] GameObject HealthInGameUI;
     [SerializeField] GameObject HealthHUDUI;
+    [SerializeField] GameObject DeadUI;
+    TextMeshProUGUI respawnTimer;
     [SerializeField] Image[] fillImages;
 
     [Header("change detectors")]
     //change Detector
     private ChangeDetector _changes;
     [Networked] byte HealthPoints { get; set; }
-    [Networked] bool isDead { get; set; }
+    [Networked] public bool isDead { get; set; }
 
     const float reviveTime = 5f;
     float currentReviveTime;
     [SerializeField] byte maxHealthPoints = 100;
 
     bool isInitailized;
-     bool isPlayer;
+    bool isPlayer;
 
     [SerializeField] GameObject model;
     public override void Spawned()
@@ -40,15 +43,12 @@ public class Health : NetworkBehaviour, IDamageable
     {
         foreach (Image image in fillImages)
         {
-            image.fillAmount = HealthPoints / maxHealthPoints;
+            image.fillAmount = (float)(HealthPoints) / (float)(maxHealthPoints);
+            //Debug.LogWarning($"healthpoints: {HealthPoints} \n max health: {maxHealthPoints} \n fill amount: {image.fillAmount}");
         }
     }
     private void Update()
     {
-        //if (!isInitailized)
-        //    return;
-        //if (isDead)
-        //    return;
         HealthUIHandle();
     }
 
@@ -58,6 +58,7 @@ public class Health : NetworkBehaviour, IDamageable
         {
             if (Player.Local)
             {
+                DeadUI.SetActive(HasInputAuthority && currentReviveTime > 0);
                 HealthHUDUI.SetActive(HasInputAuthority);
                 HealthInGameUI.SetActive(!HasInputAuthority);
             }
@@ -69,7 +70,7 @@ public class Health : NetworkBehaviour, IDamageable
         }
         else
         {
-            HealthHUDUI.SetActive(false);
+            HealthInGameUI.SetActive(true);
         }
         HealthInGameUI.transform.rotation = Quaternion.Euler(30, 45, 0);
     }
@@ -78,12 +79,11 @@ public class Health : NetworkBehaviour, IDamageable
     {
         if (currentReviveTime >= 0)
         {
+            DeadUI.GetComponentInChildren<TextMeshProUGUI>().text = $"Respawn in: \n {currentReviveTime.ToString("0")}";
             currentReviveTime -= Time.deltaTime;
             if (currentReviveTime < 0)
                 isDead = false;
         }
-
-        //UpdateHealthBar();
     }
     public override void Render()
     {
@@ -113,14 +113,18 @@ public class Health : NetworkBehaviour, IDamageable
     }
     private void OnDeath()
     {
-        if (isPlayer)
+        if(!isPlayer)
         {
-            model.GetComponentInParent<Player>().enabled = false;
+            model.GetComponentInParent<BaseEnemy>().enabled = false;
+            Runner.Despawn(this.gameObject.GetComponent<NetworkObject>());
         }
         else
         {
-            model.GetComponentInParent<BaseEnemy>().enabled = false;
-            //Runner.Despawn(this.gameObject.GetComponent<NetworkObject>());
+
+            //if (Player.Local)
+            //    DeadUI.SetActive(true);
+            //else
+            //    DeadUI.SetActive(false);
         }
         HealthInGameUI.SetActive(false);
         model.SetActive(false);
@@ -132,25 +136,28 @@ public class Health : NetworkBehaviour, IDamageable
     {
         if (isPlayer)
         {
+            //DeadUI.SetActive(false);
             model.GetComponentInParent<Player>().enabled = true;
-            model.GetComponentInParent<Player>().OnRespawn();
+            //model.GetComponentInParent<Player>().OnRespawn();
         }
         else
         {
             model.GetComponentInParent<BaseEnemy>().enabled = true;
         }
         HealthPoints = maxHealthPoints;
+        UpdateHealthBar();
         HealthInGameUI.SetActive(true);
         model.SetActive(true);
     }
     void OnHealthChanged(byte oldValue, byte value)
     {
+        UpdateHealthBar();
         if (value < oldValue)
             OnHPReduced();
     }
     public void OnTakeDamage(byte pDamage)
     {
-        if (isDead) 
+        if (HealthPoints <= 0) 
             return;
 
         if (pDamage > HealthPoints)
@@ -158,16 +165,16 @@ public class Health : NetworkBehaviour, IDamageable
         
         HealthPoints -= pDamage;
 
-        if (HealthPoints <= 0)
-        {
-            isDead = true;
-        }
+        
     }
     public void OnHPReduced()
     {
         if (!isInitailized) 
             return;
-        UpdateHealthBar();
+        if (HealthPoints <= 0)
+        {
+            isDead = true;
+        }
     }
     private void OnHPIncreased()
     {
