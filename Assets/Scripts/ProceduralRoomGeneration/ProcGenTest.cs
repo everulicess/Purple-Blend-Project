@@ -1,3 +1,4 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,8 @@ public class ProcGenTest : MonoBehaviour
 {
     [SerializeField] private Vector2 gridSize;
     [SerializeField] private int dungeonSize;
+    [SerializeField] private Vector2 startPos;
+    [SerializeField] private int offset;
     [SerializeField] private List<GameObject> rooms = new List<GameObject>();
 
     private List<List<bool[]>> matrix = new List<List<bool[]>>();
@@ -33,7 +36,7 @@ public class ProcGenTest : MonoBehaviour
         }
 
         int roomCount = 0;
-        Vector2 startRoomIndex = new Vector2(50, 50);
+        Vector2 startRoomIndex = startPos;
         generatedRooms.Add(startRoomIndex);
         while (roomCount < dungeonSize)
         {
@@ -91,7 +94,7 @@ public class ProcGenTest : MonoBehaviour
         for (int i = 0; i < generatedRooms.Count - 1; i++)
         {
             GameObject room = Instantiate(rooms[0]);
-            room.transform.position = new Vector3(generatedRooms[i].x * 20, 0f, generatedRooms[i].y * 20);
+            room.transform.position = new Vector3((generatedRooms[i].x * offset) - (generatedRooms[0].x * offset), 0f, (generatedRooms[i].y * offset)- (generatedRooms[0].y * offset));
             int roomX = (int)generatedRooms[i].x;
             int roomY = (int)generatedRooms[i].y;
             for (int door = 0; door < 4; door++)
