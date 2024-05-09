@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4902316943231103159}
   - component: {fileID: 4555251692298759625}
   - component: {fileID: 6398626904823130408}
+  - component: {fileID: 2270868532938110139}
   m_Layer: 0
   m_Name: Deposit
   m_TagString: Untagged
@@ -48,7 +49,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 398cfa36a01df7a479cd41c895f8f338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TMP_GlobalGold: {fileID: 0}
 --- !u!114 &4555251692298759625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +67,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 4902316943231103159}
+  - {fileID: 2270868532938110139}
 --- !u!65 &6398626904823130408
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -88,6 +89,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.358828, y: 1.4852364, z: 2.4787006}
   m_Center: {x: 0.0037243962, y: -0.2426182, z: -0.049270153}
+--- !u!114 &2270868532938110139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320396313998365387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1039544458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Config: 3
+  BroadRadius: 0
+  Offset: {x: 0, y: 0, z: 0}
+  GizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  Hitboxes: []
 --- !u!1 &1249582220428509507
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,10 +288,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2108713946343486813, guid: 98e1858e8ae52244db8694ad97ccaaa0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2424217419033961182}
   m_SourcePrefab: {fileID: 100100000, guid: 98e1858e8ae52244db8694ad97ccaaa0, type: 3}
 --- !u!4 &4224791974993398744 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6912589723684740650, guid: 98e1858e8ae52244db8694ad97ccaaa0, type: 3}
   m_PrefabInstance: {fileID: 7300064861740439026}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8650467625147474095 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2108713946343486813, guid: 98e1858e8ae52244db8694ad97ccaaa0, type: 3}
+  m_PrefabInstance: {fileID: 7300064861740439026}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2424217419033961182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8650467625147474095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1014831617, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 1
+  SphereRadius: 0
+  CapsuleRadius: 0
+  BoxExtents: {x: 1, y: 1, z: 1}
+  CapsuleExtents: 0
+  Offset: {x: 0, y: 0, z: 0}
+  Root: {fileID: 0}
+  GizmosColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

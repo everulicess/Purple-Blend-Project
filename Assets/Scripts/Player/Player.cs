@@ -176,7 +176,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
     }
     private void OnEnable()
     {
-        m_CharacterController.Teleport(new Vector3(0,1,0));
+        //m_CharacterController.Teleport(new Vector3(0,1,0));
     }
     public void OnRespawn()
     {
