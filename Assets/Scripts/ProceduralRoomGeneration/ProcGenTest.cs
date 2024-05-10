@@ -5,19 +5,22 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ProcGenTest : MonoBehaviour
+public class ProcGenTest : NetworkBehaviour
 {
     [SerializeField] private Vector2 gridSize;
     [SerializeField] private int dungeonSize;
     [SerializeField] private Vector2 startPos;
     [SerializeField] private int offset;
     [SerializeField] private List<GameObject> rooms = new List<GameObject>();
+    [SerializeField] private List<NetworkObject> net_Rooms = new();
 
     private List<List<bool[]>> matrix = new List<List<bool[]>>();
     private List<Vector2> generatedRooms = new List<Vector2>();
 
-    private void Start()
+    [Networked] bool areRoomsSpawned { get; set; }
+    public override void Spawned()
     {
+        if (areRoomsSpawned) return;
         GenerateGrid();
     }
 
@@ -93,17 +96,18 @@ public class ProcGenTest : MonoBehaviour
     {
         for (int i = 0; i < generatedRooms.Count - 1; i++)
         {
-            GameObject room = Instantiate(rooms[0]);
-            room.transform.position = new Vector3((generatedRooms[i].x * offset) - (generatedRooms[0].x * offset), 0f, (generatedRooms[i].y * offset)- (generatedRooms[0].y * offset));
-            int roomX = (int)generatedRooms[i].x;
-            int roomY = (int)generatedRooms[i].y;
+            NetworkObject net_room = Runner.Spawn(net_Rooms[0]);
+            net_room.transform.position = new Vector3((generatedRooms[i].x * offset) - (generatedRooms[0].x * offset), 0f, (generatedRooms[i].y * offset)- (generatedRooms[0].y * offset));
+            int net_roomX = (int)generatedRooms[i].x;
+            int net_roomY = (int)generatedRooms[i].y;
             for (int door = 0; door < 4; door++)
             {
-                if (matrix[roomX][roomY][door])
+                if (matrix[net_roomX][net_roomY][door])
                 {
-                    Destroy(room.transform.GetChild(2).gameObject.transform.GetChild(door).gameObject);
+                    Runner.Despawn(net_room.transform.GetChild(2).gameObject.transform.GetChild(door).GetComponent<NetworkObject>());
                 }
             }
         }
+        areRoomsSpawned = true;
     }
 }
