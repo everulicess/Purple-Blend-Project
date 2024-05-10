@@ -21,7 +21,7 @@ public class Health : NetworkBehaviour, IDamageable
     [Networked] public bool isDead { get; set; }
 
     const float reviveTime = 5f;
-    float currentReviveTime;
+    [Networked]float currentReviveTime { get; set; }
     [SerializeField] byte maxHealthPoints = 100;
 
     bool isInitailized;
@@ -80,7 +80,7 @@ public class Health : NetworkBehaviour, IDamageable
         if (currentReviveTime >= 0)
         {
             DeadUI.GetComponentInChildren<TextMeshProUGUI>().text = $"Respawn in: \n {currentReviveTime.ToString("0")}";
-            currentReviveTime -= Time.deltaTime;
+            currentReviveTime -= Runner.DeltaTime;
             if (currentReviveTime < 0)
                 isDead = false;
         }
