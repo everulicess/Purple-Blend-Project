@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5764180913856816724}
   - component: {fileID: 1387823430075205555}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall3-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4726096256678028406}
   - component: {fileID: 2723453479272859597}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall2-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1371741047496241698}
   - component: {fileID: 6504248141070117398}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall4-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3755883818234342684}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -366,7 +366,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8928004616765303514}
   - component: {fileID: 1316503506559012465}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall4-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -419,7 +419,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5692783670390195192}
   - component: {fileID: 617587805121689904}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall3-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,7 +513,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4642188966397587841}
   - component: {fileID: 3385085354575872889}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall2-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -935,7 +935,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6961871986115203272}
   - component: {fileID: 7262020074613255453}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall1-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -988,7 +988,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4013357220211466021}
   - component: {fileID: 1617135200930365265}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall1-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1074,7 +1074,7 @@ GameObject:
   - component: {fileID: 221897334764461210}
   - component: {fileID: 8345124367029833513}
   - component: {fileID: 1703493704459509107}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TestRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
