@@ -103,7 +103,7 @@ public class ProcGenTest : NetworkBehaviour
             {
                 if (matrix[net_roomX][net_roomY][door])
                 {
-                    Runner.Despawn(net_room.transform.GetChild(2).gameObject.transform.GetChild(door).GetComponent<NetworkObject>());
+                    Runner.Despawn(net_room.transform.GetChild(3).gameObject.transform.GetChild(door).GetComponent<NetworkObject>());
                 }
             }
         }

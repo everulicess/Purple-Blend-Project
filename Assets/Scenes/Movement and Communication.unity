@@ -7477,11 +7477,9 @@ MonoBehaviour:
   gridSize: {x: 500, y: 500}
   dungeonSize: 20
   startPos: {x: 50, y: 50}
-  offset: 20
-  rooms:
-  - {fileID: 3939010933494063174, guid: 037e7e3ebe271e843a3481a15305ae7a, type: 3}
+  offset: 40
   net_Rooms:
-  - {fileID: 3212770992262226114, guid: 037e7e3ebe271e843a3481a15305ae7a, type: 3}
+  - {fileID: 1703493704459509107, guid: f3bbf3edfcf4ff34193ee32cf5938724, type: 3}
 --- !u!4 &1193862571
 Transform:
   m_ObjectHideFlags: 0
@@ -7511,7 +7509,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SortKey: 3745707689
   ObjectInterest: 1
-  Flags: 1
+  Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 1193862570}
