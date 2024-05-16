@@ -320,7 +320,7 @@ MonoBehaviour:
   - {fileID: 3362694299446480417}
   _isDead: 0
   maxHealthPoints: 100
-  model: {fileID: 0}
+  model: {fileID: 755707749715191414}
 --- !u!114 &717622672262634564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2118,6 +2118,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a925f05597aceb14591b2f3909ce659d, type: 3}
+--- !u!1 &755707749715191414 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6996068792918032822, guid: a925f05597aceb14591b2f3909ce659d, type: 3}
+  m_PrefabInstance: {fileID: 7740517543497689024}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1105877102500308199 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7220126637644251943, guid: a925f05597aceb14591b2f3909ce659d, type: 3}
