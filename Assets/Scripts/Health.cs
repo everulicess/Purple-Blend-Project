@@ -77,6 +77,8 @@ public class Health : NetworkBehaviour, IDamageable
 
     public override void FixedUpdateNetwork()
     {
+        if (!isPlayer)
+            return;
         if (currentReviveTime >= 0)
         {
             DeadUI.GetComponentInChildren<TextMeshProUGUI>().text = $"Respawn in: \n {currentReviveTime.ToString("0")}";
@@ -118,14 +120,6 @@ public class Health : NetworkBehaviour, IDamageable
             model.GetComponentInParent<BaseEnemy>().enabled = false;
             Runner.Despawn(this.gameObject.GetComponent<NetworkObject>());
         }
-        else
-        {
-
-            //if (Player.Local)
-            //    DeadUI.SetActive(true);
-            //else
-            //    DeadUI.SetActive(false);
-        }
         HealthInGameUI.SetActive(false);
         model.SetActive(false);
 
@@ -136,9 +130,7 @@ public class Health : NetworkBehaviour, IDamageable
     {
         if (isPlayer)
         {
-            //DeadUI.SetActive(false);
             model.GetComponentInParent<Player>().enabled = true;
-            //model.GetComponentInParent<Player>().OnRespawn();
         }
         else
         {

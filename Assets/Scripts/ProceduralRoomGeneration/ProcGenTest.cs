@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class ProcGenTest : NetworkBehaviour
@@ -12,9 +13,12 @@ public class ProcGenTest : NetworkBehaviour
     [SerializeField] private Vector2 startPos;
     [SerializeField] private int offset;
     [SerializeField] private List<NetworkObject> net_Rooms = new();
+    [SerializeField] private NavMeshSurface navMeshSurface;
 
     private List<List<bool[]>> matrix = new List<List<bool[]>>();
     private List<Vector2> generatedRooms = new List<Vector2>();
+
+    private List<NetworkObject> rooms = new List<NetworkObject>();
 
     [Networked] bool areRoomsSpawned { get; set; }
     public override void Spawned()
@@ -96,7 +100,7 @@ public class ProcGenTest : NetworkBehaviour
         for (int i = 0; i < generatedRooms.Count - 1; i++)
         {
             NetworkObject net_room = Runner.Spawn(net_Rooms[0]);
-            net_room.transform.position = new Vector3((generatedRooms[i].x * offset) - (generatedRooms[0].x * offset), 0f, (generatedRooms[i].y * offset)- (generatedRooms[0].y * offset));
+            net_room.transform.position = new Vector3((generatedRooms[i].x * offset) - (generatedRooms[0].x * offset), 0f, (generatedRooms[i].y * offset) - (generatedRooms[0].y * offset));
             int net_roomX = (int)generatedRooms[i].x;
             int net_roomY = (int)generatedRooms[i].y;
             for (int door = 0; door < 4; door++)
@@ -106,7 +110,18 @@ public class ProcGenTest : NetworkBehaviour
                     Runner.Despawn(net_room.transform.GetChild(3).gameObject.transform.GetChild(door).GetComponent<NetworkObject>());
                 }
             }
+            rooms.Add(net_room);
         }
         areRoomsSpawned = true;
+        Invoke(nameof(BuildNavMesh), 0.05f);
+    }
+
+    private void BuildNavMesh()
+    {
+        navMeshSurface.BuildNavMesh();
+        for(int i = 0; i < generatedRooms.Count; i++)
+        {
+            rooms[i].gameObject.transform.GetChild(4).gameObject.SetActive(true);
+        }
     }
 }

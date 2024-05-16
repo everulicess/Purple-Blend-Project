@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4555251692298759625}
   - component: {fileID: 6398626904823130408}
   - component: {fileID: 2270868532938110139}
+  - component: {fileID: 3772665346202163305}
   m_Layer: 0
   m_Name: Deposit
   m_TagString: Untagged
@@ -102,10 +103,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Config: 3
-  BroadRadius: 0
+  BroadRadius: 1.7320508
   Offset: {x: 0, y: 0, z: 0}
   GizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  Hitboxes: []
+  Hitboxes:
+  - {fileID: 2424217419033961182}
+--- !u!54 &3772665346202163305
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320396313998365387}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &1249582220428509507
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,5 +350,5 @@ MonoBehaviour:
   BoxExtents: {x: 1, y: 1, z: 1}
   CapsuleExtents: 0
   Offset: {x: 0, y: 0, z: 0}
-  Root: {fileID: 0}
+  Root: {fileID: 2270868532938110139}
   GizmosColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

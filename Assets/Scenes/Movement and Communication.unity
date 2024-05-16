@@ -180,7 +180,7 @@ Transform:
   m_GameObject: {fileID: 20829245}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.58, y: -0.3065058, z: 1.15}
+  m_LocalPosition: {x: -2.58, y: 0, z: 1.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7480,6 +7480,7 @@ MonoBehaviour:
   offset: 40
   net_Rooms:
   - {fileID: 1703493704459509107, guid: f3bbf3edfcf4ff34193ee32cf5938724, type: 3}
+  navMeshSurface: {fileID: 20829246}
 --- !u!4 &1193862571
 Transform:
   m_ObjectHideFlags: 0

@@ -50,7 +50,7 @@ public class Collector : NetworkBehaviour
     public override void Spawned()
     {
         _changes = GetChangeDetector(ChangeDetector.Source.SimulationState);
-        InteractUI.SetActive(false);
+        //InteractUI.SetActive(false);
         relicSpotsHUD = relictHUDUI.GetComponentsInChildren<Image>();
         relicSpotsInGame = relicInGameUI.GetComponentsInChildren<Image>();
     }
@@ -106,7 +106,7 @@ public class Collector : NetworkBehaviour
             }
             else
             {
-                InteractUI.SetActive(false);
+                //InteractUI.SetActive(false);
             }
         }
     }
@@ -198,7 +198,6 @@ public class Collector : NetworkBehaviour
     public void CollectRelic(Collectable pRelic, float pAmountToIncrease)
     {
         InteractUI.transform.position = new(pRelic.transform.position.x, pRelic.transform.position.y + 1f, pRelic.transform.position.z);
-        InteractUI.SetActive(true);
         if (isInteracting)
         {
             //If the player has a relic slot left
@@ -211,7 +210,7 @@ public class Collector : NetworkBehaviour
             //totalPlayerGold = (carriedRelics * relicValue);
             //totalPlayerGold += pAmountToIncrease;
             pRelic.DeleteObject();
-            InteractUI.SetActive(false);
+            //InteractUI.SetActive(false);
         }
     }
     public bool CanPickUp()
@@ -221,7 +220,6 @@ public class Collector : NetworkBehaviour
     public void CollectTreasure(Collectable pTreasure, Rigidbody pRigidBody, BoxCollider pCollider)
     {
         InteractUI.transform.position = new(pTreasure.transform.position.x, pTreasure.transform.position.y + 1f, pTreasure.transform.position.z);
-        InteractUI.SetActive(true);
         if (isInteracting)
         {
             carryingTreasure = !carryingTreasure;
@@ -229,7 +227,7 @@ public class Collector : NetworkBehaviour
             pRigidBody.isKinematic = !carryingTreasure;
             pCollider.enabled = !carryingTreasure;
 
-            InteractUI.SetActive(false);
+            //InteractUI.SetActive(false);
         }
         //treasure = carryingTreasure ? pTreasure.gameObject : null;
 
@@ -239,50 +237,40 @@ public class Collector : NetworkBehaviour
             treasure.transform.SetPositionAndRotation(carryPoint.position, carryPoint.rotation);
             //pTreasure.transform.position = carryPoint.position;
 
-            InteractUI.SetActive(false);
+            //InteractUI.SetActive(false);
         }
     }
-    //bool hasEntered1 = true;
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.LogError($"interacting UI layer {other.gameObject.layer} \n object {other.gameObject.name}");
 
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    hasEntered1 = true;
-    //    other.TryGetComponent(out Collectable _collectable);
-    //    if (_collectable != null)
-    //    {
-    //        if (hasEntered1)
-    //        {
-    //            //Debug.LogError($"HAS {other.name} ENTERED? {hasEntered1} and this player has: {CarriedPocketLoot} in his pockets");
-    //            _collectable.TryInteracting(this);
-    //            hasEntered1 = false;
-    //        }
-    //    }
+        if (other.gameObject.layer == 9) 
+        {
+            InteractUI.SetActive(true);
+        }
 
-    //    other.TryGetComponent(out Deposit _deposit);
-    //    if (_deposit != null)
-    //    {
-    //        Deposit(_deposit);
-    //    }
-    //    else
-    //    {
-    //        InteractUI.SetActive(false);
-    //    }
-    //}
-
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer==9)
+        {
+            InteractUI.SetActive(false);
+        }
+        Debug.LogError($"interacting UI collectable {other.gameObject.name} \n deposit {other.gameObject.name}");
+    }
     private void Deposit(Deposit _deposit)
     {
         totalPlayerGold = (CollectedCoins * coinsValue) + (carriedRelics * relicValue);
         InteractUI.transform.position = new(_deposit.transform.position.x, _deposit.transform.position.y + 2f, _deposit.transform.position.z);
-        InteractUI.SetActive(true);
         if (isInteracting)
         {
+            //InteractUI.SetActive(false);
             if (totalPlayerGold <= 0) return;
             CarriedPocketLoot = 0;
             carriedRelics = 0;
             CollectedCoins = 0;
             _deposit.UpdateGlobalGold(totalPlayerGold);
             totalPlayerGold = 0;
-            InteractUI.SetActive(false);
             foreach (Image image in relicSpotsHUD)
             {
                 image.color = Color.white;
