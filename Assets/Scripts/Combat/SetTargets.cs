@@ -22,7 +22,10 @@ public class SetTargets : MonoBehaviour
         // Adds object to potential list of targets.
         if (health != null)
         {
-            targets.Add(health);
+            if (!targets.Contains(health))
+            {
+                targets.Add(health);
+            }
         }
         m_CombatController.UpdateTargetList(targets, true);
     }
