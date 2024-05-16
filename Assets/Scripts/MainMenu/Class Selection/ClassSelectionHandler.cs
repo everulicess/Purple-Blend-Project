@@ -19,6 +19,7 @@ public class ClassSelectionHandler : MonoBehaviour
     [SerializeField] NetworkObject TheMule;
     [SerializeField] NetworkObject TheBoomstick;
     [SerializeField] NetworkObject TheSiren;
+
     private void Start()
     {
         characters = Enum.GetValues(typeof(Characters)).Cast<Characters>().ToList();
@@ -58,6 +59,7 @@ public class ClassSelectionHandler : MonoBehaviour
             default:
                 break;
         }
+        PlayerPrefs.Save();
     }
     private void HideAllCharacters()
     {
