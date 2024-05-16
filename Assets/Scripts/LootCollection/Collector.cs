@@ -177,6 +177,7 @@ public class Collector : NetworkBehaviour
     {
         net_objectPickedup = pObjectToPickup;
     }
+    bool isCoin;
     /// <summary>
     /// Checks if the player has enough space for more gold, then picks it up
     /// </summary>
@@ -184,6 +185,7 @@ public class Collector : NetworkBehaviour
     /// <param name="amountToIncrease"></param> increasing amount
     public void CollectCoins(Collectable pCoin, float amountToIncrease)
     {
+        isCoin = true;
         if (CarriedPocketLoot > (pocketCapacity-amountToIncrease)) return;
         pCoin.DeleteObject();
         CollectedCoins++;
@@ -197,6 +199,8 @@ public class Collector : NetworkBehaviour
     /// <param name="pRelic"></param> refrence to the relic, to destroy it if it's collected
     public void CollectRelic(Collectable pRelic, float pAmountToIncrease)
     {
+        isCoin = false;
+
         InteractUI.transform.position = new(pRelic.transform.position.x, pRelic.transform.position.y + 1f, pRelic.transform.position.z);
         if (isInteracting)
         {
@@ -210,7 +214,7 @@ public class Collector : NetworkBehaviour
             //totalPlayerGold = (carriedRelics * relicValue);
             //totalPlayerGold += pAmountToIncrease;
             pRelic.DeleteObject();
-            //InteractUI.SetActive(false);
+            InteractUI.SetActive(false);
         }
     }
     public bool CanPickUp()
@@ -219,6 +223,8 @@ public class Collector : NetworkBehaviour
     }
     public void CollectTreasure(Collectable pTreasure, Rigidbody pRigidBody, BoxCollider pCollider)
     {
+        isCoin = false;
+
         InteractUI.transform.position = new(pTreasure.transform.position.x, pTreasure.transform.position.y + 1f, pTreasure.transform.position.z);
         if (isInteracting)
         {
@@ -244,7 +250,7 @@ public class Collector : NetworkBehaviour
     {
         Debug.LogError($"interacting UI layer {other.gameObject.layer} \n object {other.gameObject.name}");
 
-        if (other.gameObject.layer == 9) 
+        if (other.gameObject.layer == 9&&!isCoin) 
         {
             InteractUI.SetActive(true);
         }
@@ -260,6 +266,7 @@ public class Collector : NetworkBehaviour
     }
     private void Deposit(Deposit _deposit)
     {
+        isCoin = false;
         totalPlayerGold = (CollectedCoins * coinsValue) + (carriedRelics * relicValue);
         InteractUI.transform.position = new(_deposit.transform.position.x, _deposit.transform.position.y + 2f, _deposit.transform.position.z);
         if (isInteracting)
