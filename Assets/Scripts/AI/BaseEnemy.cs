@@ -14,34 +14,55 @@ public class BaseEnemy : NetworkBehaviour
     private bool inRange = false;
     private CombatController combatController;
     private Animator anim;
+    
+    [SerializeField]private float speed = 8f;
+
+    //PLACEHOLDER QUICK FIX
+    private float attackTimer;
+    private float attackMaxTime = 0.5f;
+    private bool canAttack = true;
 
     void Start()
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
         combatController = gameObject.GetComponent<CombatController>();
+        attackTimer = attackMaxTime;
+        anim = gameObject.GetComponent<Animator>();
+        agent.speed = speed;
     }
 
     public override void FixedUpdateNetwork()
     {
+        if (attackTimer > 0f && !canAttack)
+        {
+            attackTimer -= Time.deltaTime;
+        } else if (attackTimer <= 0f && !canAttack)
+        {
+            attackTimer = 0f;
+            canAttack = true;
+        }
         if (target)
         {
-            if (inRange)
+            if (inRange && canAttack)
             {
                 combatController.Attack();
-                //anim.SetBool("Attacking", true);
+                attackTimer = attackMaxTime;
+                canAttack = false;
+                anim.SetBool("Attacking", true);
             }
             else
             {
                 agent.destination = target.gameObject.transform.position;
                 Vector3 targetLookAt = new Vector3(target.gameObject.transform.position.x, this.transform.position.y, target.gameObject.transform.position.z);
                 transform.LookAt(targetLookAt);
-                //anim.SetBool("Attacking", false);
-                //anim.SetBool("Moving", true);
+                anim.SetBool("Attacking", false);
+                anim.SetBool("Moving", true);
             }
         }
         else
         {
-            //anim.SetBool("Moving", false);
+            anim.SetBool("Moving", false);
+            anim.SetBool("Attacking", false);
         }
     }
 

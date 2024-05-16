@@ -2585,7 +2585,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
+  m_Color: {r: 0.3828765, g: 0.8490566, b: 0.7340735, a: 1}
   m_Intensity: 0.6
   m_Range: 10
   m_SpotAngle: 30
@@ -8305,7 +8305,7 @@ Transform:
   m_GameObject: {fileID: 1420267608}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.97999996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13289,71 +13289,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa37ae7e88033854faf7c35cc63621a8, type: 3}
---- !u!1001 &3467930439448542226
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8073582485224174918, guid: 9e4d41d53fc369a408b802cf54d3f67a, type: 3}
-      propertyPath: SortKey
-      value: 1573162720
-      objectReference: {fileID: 0}
-    - target: {fileID: 8593018603654398642, guid: 9e4d41d53fc369a408b802cf54d3f67a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8593018603654398642, guid: 9e4d41d53fc369a408b802cf54d3f67a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.659
-      objectReference: {fileID: 0}
-    - target: {fileID: 8593018603654398642, guid: 9e4d41d53fc369a408b802cf54d3f67a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.76
-      objectReference: {fileID: 0}
-    - target: {fileID: 8593018603654398642, guid: 9e4d41d53fc369a408b802cf54d3f67a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8593018603654398642, guid: 9e4d41d53fc369a408b802cf54d3f67a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8593018603654398642, guid: 9e4d41d53fc369a408b802cf54d3f67a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8593018603654398642, guid: 9e4d41d53fc369a408b802cf54d3f67a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8593018603654398642, guid: 9e4d41d53fc369a408b802cf54d3f67a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8593018603654398642, guid: 9e4d41d53fc369a408b802cf54d3f67a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8593018603654398642, guid: 9e4d41d53fc369a408b802cf54d3f67a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8865195289033986722, guid: 9e4d41d53fc369a408b802cf54d3f67a, type: 3}
-      propertyPath: m_Name
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 8865195289033986722, guid: 9e4d41d53fc369a408b802cf54d3f67a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9e4d41d53fc369a408b802cf54d3f67a, type: 3}
 --- !u!1001 &5502567390853957992
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13376,7 +13311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2815175679812139550, guid: 5502be38764112c4fa76fb156593e3c8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.9
+      value: 0.54
       objectReference: {fileID: 0}
     - target: {fileID: 2815175679812139550, guid: 5502be38764112c4fa76fb156593e3c8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13444,7 +13379,6 @@ SceneRoots:
   - {fileID: 835383301}
   - {fileID: 5502567390853957992}
   - {fileID: 1420267609}
-  - {fileID: 3467930439448542226}
   - {fileID: 20829247}
   - {fileID: 18100839835551865}
   - {fileID: 999707382}
