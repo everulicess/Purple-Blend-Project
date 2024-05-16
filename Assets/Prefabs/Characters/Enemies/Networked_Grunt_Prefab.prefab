@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 9bd26cabf7d17a543a45bb106ecef2ac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -552,8 +552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   comboMaxTime: 1
   attackTypes:
-  - {fileID: 11400000, guid: fbd0099305d371b4cba9bcc282a3870f, type: 2}
-  - {fileID: 11400000, guid: 0e17f8c173e40fc4d8ea7ffe6746d22c, type: 2}
+  - {fileID: 11400000, guid: e09f88e6bce1d8246b3f5fe6bc4a6291, type: 2}
   hitbox: {fileID: 771044456922951676}
   point: {x: 0, y: 0, z: 0}
 --- !u!114 &450433305955062855
@@ -570,8 +569,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthInGameUI: {fileID: 2635485708699110291}
   HealthHUDUI: {fileID: 0}
+  DeadUI: {fileID: 0}
   fillImages:
   - {fileID: 4771420358997064709}
+  _isDead: 0
   maxHealthPoints: 50
   model: {fileID: 3295294916876906351}
 --- !u!114 &892737452660225522
