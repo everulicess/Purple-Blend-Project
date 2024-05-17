@@ -118,18 +118,25 @@ public class ProcGenTest : NetworkBehaviour
             rooms.Add(net_room);
         }
         areRoomsSpawned = true;
-        Invoke(nameof(BuildNavMesh), 0.05f);
+        Invoke(nameof(StartEnemySpawning), 0.05f);
     }
 
-    private void BuildNavMesh()
+    private void StartEnemySpawning()
     {
-        navMeshSurface.BuildNavMesh();
+        Invoke(nameof(NaveMeshBuild), 0.03f);
         for (int i = 0; i < generatedRooms.Count; i++)
         {
             for (int spawner = 0; spawner < rooms[i].transform.GetChild(4).childCount; spawner++)
             {
+                Debug.LogError(rooms[i].transform.GetChild(4).transform.GetChild(spawner).name);
                 rooms[i].transform.GetChild(4).transform.GetChild(spawner).GetComponent<BaseSpawner>().SpawnEnemy();
+
             }
         }
+    }
+
+    private void NaveMeshBuild()
+    {
+        navMeshSurface.BuildNavMesh();
     }
 }
