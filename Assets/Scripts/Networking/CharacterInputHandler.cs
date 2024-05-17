@@ -112,7 +112,7 @@ public class CharacterInputHandler : NetworkBehaviour
 
             mouseWorldPosition = new(hit.point.x, hit.point.y, hit.point.z);
             
-            Debug.LogError($"Raycasting, the ray hit {hit.collider.gameObject.name}");
+            //Debug.LogError($"Raycasting, the ray hit {hit.collider.gameObject.name}");
         }
     }
 }

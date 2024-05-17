@@ -39,27 +39,28 @@ public class ClassSelectionHandler : MonoBehaviour
         {
             case 0:
                 HideAllCharacters();
-                TheMule.gameObject.SetActive(true);
                 PlayerPrefs.DeleteKey("Character");
+                TheMule.gameObject.SetActive(true);
                 PlayerPrefs.SetString("Character", nameof(Characters.TheMule));
-
+                PlayerPrefs.Save();
                 break;
             case 1:
                 HideAllCharacters();
-                TheBoomstick.gameObject.SetActive(true);
                 PlayerPrefs.DeleteKey("Character");
+                TheBoomstick.gameObject.SetActive(true);
                 PlayerPrefs.SetString("Character", nameof(Characters.TheBoomstick));
+                PlayerPrefs.Save();
                 break;
             case 2:
                 HideAllCharacters();
                 TheSiren.gameObject.SetActive(true);
                 PlayerPrefs.DeleteKey("Character");
                 PlayerPrefs.SetString("Character", nameof(Characters.TheSiren));
+                PlayerPrefs.Save();
                 break;
             default:
                 break;
         }
-        PlayerPrefs.Save();
     }
     private void HideAllCharacters()
     {

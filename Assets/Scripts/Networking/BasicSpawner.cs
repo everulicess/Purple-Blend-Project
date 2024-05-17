@@ -26,6 +26,8 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     CharacterInputHandler characterInputHandler;
     Player GetCharacter(string characterToSpawn)
     {
+        if (!PlayerPrefs.HasKey("Character"))
+            return null;
         return characterToSpawn switch
         {
             nameof(Characters.TheMule) => TheMule,
@@ -59,6 +61,8 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             return;
 
         networkPlayerPrefab = GetCharacter(PlayerPrefs.GetString("Character"));
+        PlayerPrefs.DeleteKey("Character");
+
 
         Vector3 playerPos = new(/*(player.RawEncoded % runner.Config.Simulation.PlayerCount) * */0 + playersJoined, 0f, 0f);
 
