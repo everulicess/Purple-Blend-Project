@@ -22,15 +22,15 @@ public class BaseEnemy : NetworkBehaviour
     private float attackMaxTime = 0.5f;
     private bool canAttack = true;
 
-    void Start()
+    public override void Spawned()
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
+        agent.enabled = true;
         combatController = gameObject.GetComponent<CombatController>();
         attackTimer = attackMaxTime;
         anim = gameObject.GetComponent<Animator>();
         agent.speed = speed;
     }
-
     public override void FixedUpdateNetwork()
     {
         if (attackTimer > 0f && !canAttack)

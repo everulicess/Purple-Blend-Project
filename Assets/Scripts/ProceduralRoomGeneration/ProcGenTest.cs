@@ -124,7 +124,7 @@ public class ProcGenTest : NetworkBehaviour
     private void BuildNavMesh()
     {
         navMeshSurface.BuildNavMesh();
-        for(int i = 0; i < generatedRooms.Count; i++)
+        for (int i = 0; i < generatedRooms.Count; i++)
         {
             for (int spawner = 0; spawner < rooms[i].transform.GetChild(4).childCount; spawner++)
             {
