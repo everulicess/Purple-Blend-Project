@@ -99,7 +99,12 @@ public class ProcGenTest : NetworkBehaviour
     {
         for (int i = 0; i < generatedRooms.Count - 1; i++)
         {
-            NetworkObject net_room = Runner.Spawn(net_Rooms[0]);
+            int roomIndex = 0;
+            if (i != 0)
+            {
+                roomIndex = Random.Range(1, net_Rooms.Count);
+            }
+            NetworkObject net_room = Runner.Spawn(net_Rooms[roomIndex]);
             net_room.transform.position = new Vector3((generatedRooms[i].x * offset) - (generatedRooms[0].x * offset), 0f, (generatedRooms[i].y * offset) - (generatedRooms[0].y * offset));
             int net_roomX = (int)generatedRooms[i].x;
             int net_roomY = (int)generatedRooms[i].y;
