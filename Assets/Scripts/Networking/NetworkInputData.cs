@@ -9,6 +9,7 @@ enum MyButtons
     PingsButtonReleased,
     InteractButton,
     AttackButton,
+    DodgeButton,
     TestingButtonQ
 }
 public struct NetworkInputData : INetworkInput

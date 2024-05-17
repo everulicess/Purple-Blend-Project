@@ -3,7 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 using System;
-
+//enum PlayerState
+//{
+//    Walking_State,
+//    Attacking_State,
+//    Dodging_State,
+//    Dead_State
+//}
 [RequireComponent(
     typeof(NetworkCharacterController),
     typeof(NetworkMecanimAnimator),
@@ -56,6 +62,8 @@ public class Player : NetworkBehaviour, IPlayerLeft
             anim.SetBool("Attacking", isAttacking);
         }
     }
+
+    bool isDodging = false;
     public override void Spawned()
     {
         if (Object.HasInputAuthority)
@@ -87,7 +95,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
         if (IsAttacking && attackTime > 0)
         {
             attackTime -= Time.deltaTime;
-            if (attackTime <= 0) IsAttacking = false;
+            if (attackTime <= 0 && !isDodging) IsAttacking = false;
         }
 
         //exit if there is no input
@@ -96,7 +104,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
         KnockBackHandler(data);
 
         //initiate attack with mouse click (also checks if the player is already attacking so the animation does not restart)
-        if (data.buttons.IsSet(MyButtons.AttackButton) /*&& !IsAttacking*/)
+        if (data.buttons.IsSet(MyButtons.AttackButton) && !IsAttacking && !isDodging) 
         {
             IsAttacking = true;
             FaceTo(data);
@@ -104,6 +112,9 @@ public class Player : NetworkBehaviour, IPlayerLeft
             
         //movement blending variables
         WalkAnim();
+
+        if (data.buttons.IsSet(MyButtons.DodgeButton) && !isDodging)
+            Dodge(data);
 
         //Interaction using E
         m_Collector.SetInteractionBool(data.buttons.IsSet(MyButtons.InteractButton));
@@ -114,8 +125,38 @@ public class Player : NetworkBehaviour, IPlayerLeft
         //move the character
         m_CharacterController.Move(forward);
         anim.SetBool("Moving", m_CharacterController.Velocity != Vector3.zero);
+
+
         if(data.buttons.IsSet(MyButtons.TestingButtonQ))
             m_Health.OnTakeDamage(10);
+    }
+
+    private void Dodge(NetworkInputData data)
+    {
+        isDodging = true;
+
+        Debug.LogError($"{Time.deltaTime} Dodging");
+        StartCoroutine(Dodging(data));
+    }
+    IEnumerator Dodging(NetworkInputData data)
+    {
+        //forward = skew * data.movementInput*500f;
+        m_CharacterController.acceleration *= 3f;
+        m_CharacterController.maxSpeed *= 3f;
+        IsAttacking = false;
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(forward, Vector3.up), turnSpeed * 90f);
+        yield return new WaitForSeconds(0.5f);
+        m_CharacterController.acceleration = 0f;
+        m_CharacterController.maxSpeed = 0f;
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(forward, Vector3.up), turnSpeed * 90f);
+
+        IsAttacking = false;
+        yield return new WaitForSeconds(1f);
+        m_CharacterController.acceleration = Character.MovementStats.MovementSpeed;
+        m_CharacterController.maxSpeed = Character.MovementStats.MovementSpeed;
+        isDodging = false;
+       
+
     }
 
     private void HandleDeath()
@@ -148,34 +189,22 @@ public class Player : NetworkBehaviour, IPlayerLeft
     private void KnockBackHandler(NetworkInputData data)
     {
         //check for the knockback, if there is no knockback then the player will be able to move
-        
-            //if (data.direction != Vector3.zero)
-            //{
-            //    forward = skew * data.direction;
-            //    //rotate the character unless it is currently attacking. The NetworkCharacterController's rotation speed should be 0 so it doesn't interfere with this.
-            //    if (!IsAttacking)
-            //    {
-            //        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(forward, Vector3.up), turnSpeed * Runner.DeltaTime);
-            //    }
-            //}
-            //else
-            //{
-            //    forward = Vector3.zero;
-            //}
-        if (data.movementInput != Vector3.zero)
+
+        if (data.movementInput != Vector3.zero && !isDodging) 
+        {
+            forward = skew * data.movementInput;
+            //rotate the character unless it is currently attacking. The NetworkCharacterController's rotation speed should be 0 so it doesn't interfere with this.
+            if (!IsAttacking)
             {
-                forward = skew * data.movementInput;
-                //rotate the character unless it is currently attacking. The NetworkCharacterController's rotation speed should be 0 so it doesn't interfere with this.
-                if (!IsAttacking)
-                {
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(forward, Vector3.up), turnSpeed * Runner.DeltaTime);
-                }
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(forward, Vector3.up), turnSpeed * Runner.DeltaTime);
             }
-            else
-            {
-                forward = Vector3.zero;
-            }
-        forward.Normalize();
+            forward.Normalize();
+        }
+        else if (!isDodging)
+        {
+            forward = Vector3.zero;
+        }
+
     }
     private void FaceTo(NetworkInputData _data)
     {
@@ -187,13 +216,9 @@ public class Player : NetworkBehaviour, IPlayerLeft
 
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Runner.DeltaTime * 90);
     }
-    private void OnEnable()
-    {
-        //m_CharacterController.Teleport(new Vector3(0,1,0));
-    }
     public void OnRespawn()
     {
-        m_CharacterController.Teleport(Vector3.zero);
+        m_CharacterController.Teleport(new Vector3(0f, 1f, 0f));
     }
 
     //Handles what happens when the player leaves

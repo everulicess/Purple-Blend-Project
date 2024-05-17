@@ -26,7 +26,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     CharacterInputHandler characterInputHandler;
     Player GetCharacter(string characterToSpawn)
     {
-        if (!PlayerPrefs.HasKey("Character"))
+        if (!PlayerPrefs.HasKey("Character")&& SceneManager.GetActiveScene().name == "MenuScene")
             return null;
         return characterToSpawn switch
         {
