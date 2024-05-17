@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-465704938101750061
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
+  m_Name: ColorAdjustments
+  m_EditorClassIdentifier: 
+  active: 1
+  postExposure:
+    m_OverrideState: 1
+    m_Value: 1.01
+  contrast:
+    m_OverrideState: 1
+    m_Value: 12
+  colorFilter:
+    m_OverrideState: 0
+    m_Value: {r: 0.9692584, g: 1.4782934, b: 1.019865, a: 1}
+  hueShift:
+    m_OverrideState: 0
+    m_Value: -28
+  saturation:
+    m_OverrideState: 1
+    m_Value: -24
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,6 +43,71 @@ MonoBehaviour:
   components:
   - {fileID: 7998356102044368529}
   - {fileID: 8580644184465749877}
+  - {fileID: 6818453035332802377}
+  - {fileID: -465704938101750061}
+  - {fileID: 3301078830708521690}
+--- !u!114 &3301078830708521690
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
+  m_Name: Tonemapping
+  m_EditorClassIdentifier: 
+  active: 1
+  mode:
+    m_OverrideState: 1
+    m_Value: 2
+  neutralHDRRangeReductionMode:
+    m_OverrideState: 0
+    m_Value: 2
+  acesPreset:
+    m_OverrideState: 0
+    m_Value: 3
+  hueShiftAmount:
+    m_OverrideState: 0
+    m_Value: 0
+  detectPaperWhite:
+    m_OverrideState: 0
+    m_Value: 0
+  paperWhite:
+    m_OverrideState: 0
+    m_Value: 300
+  detectBrightnessLimits:
+    m_OverrideState: 0
+    m_Value: 1
+  minNits:
+    m_OverrideState: 0
+    m_Value: 0.005
+  maxNits:
+    m_OverrideState: 0
+    m_Value: 1000
+--- !u!114 &6818453035332802377
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
+  m_Name: LiftGammaGain
+  m_EditorClassIdentifier: 
+  active: 1
+  lift:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 0.95009935, z: 0.825126, w: 0.010695192}
+  gamma:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 0.98106235, z: 0.97666353, w: -0.3315508}
+  gain:
+    m_OverrideState: 1
+    m_Value: {x: 0.95070773, y: 0.98208946, z: 1, w: 1}
 --- !u!114 &7998356102044368529
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -27,25 +120,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   skipIterations:
     m_OverrideState: 0
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 2.79
+    m_Value: 2.77
   intensity:
     m_OverrideState: 1
-    m_Value: 0.9
+    m_Value: 0.55
   scatter:
     m_OverrideState: 1
-    m_Value: 0.34
+    m_Value: 0.243
   clamp:
     m_OverrideState: 0
     m_Value: 65472
   tint:
-    m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_OverrideState: 1
+    m_Value: {r: 0.6509434, g: 0.48820755, b: 0.48820755, a: 1}
   highQualityFiltering:
     m_OverrideState: 0
     m_Value: 0
@@ -77,22 +170,22 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.7927828, y: 0.8507686, z: 1, w: 0.22459893}
+    m_Value: {x: 0.64756775, y: 0.779061, z: 1, w: 0.72192514}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.7677458, z: 0.60075307, w: 0.5187166}
+    m_Value: {x: 1, y: 0.8963742, z: 0.46182036, w: 1}
   highlights:
-    m_OverrideState: 0
-    m_Value: {x: 1, y: 0.7005173, z: 0.89416546, w: 0.47058824}
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 0.6732255, z: 0.96171063, w: 0.000000007410738}
   shadowsStart:
     m_OverrideState: 1
-    m_Value: 2.11
+    m_Value: 1.48
   shadowsEnd:
     m_OverrideState: 1
-    m_Value: 4.28
+    m_Value: 6.15
   highlightsStart:
     m_OverrideState: 1
-    m_Value: 0.55
+    m_Value: 0.23
   highlightsEnd:
     m_OverrideState: 1
     m_Value: 1.62
