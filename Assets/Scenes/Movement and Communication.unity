@@ -4470,6 +4470,10 @@ PrefabInstance:
       propertyPath: SortKey
       value: 1693456363
       objectReference: {fileID: 0}
+    - target: {fileID: 4462035548805117137, guid: c499816185b750648ae7d7dd0307f547, type: 3}
+      propertyPath: SortKey
+      value: 2899778175
+      objectReference: {fileID: 0}
     - target: {fileID: 5251012649174150129, guid: c499816185b750648ae7d7dd0307f547, type: 3}
       propertyPath: m_Name
       value: TestRelic
@@ -4970,6 +4974,10 @@ PrefabInstance:
       propertyPath: Hitboxes.Array.data[0]
       value: 
       objectReference: {fileID: 622189542}
+    - target: {fileID: 4462035548805117137, guid: c499816185b750648ae7d7dd0307f547, type: 3}
+      propertyPath: SortKey
+      value: 1198797056
+      objectReference: {fileID: 0}
     - target: {fileID: 5251012649174150129, guid: c499816185b750648ae7d7dd0307f547, type: 3}
       propertyPath: m_Name
       value: TestRelic (3)
@@ -7133,6 +7141,10 @@ PrefabInstance:
     - target: {fileID: -6803665204951536225, guid: c499816185b750648ae7d7dd0307f547, type: 3}
       propertyPath: SortKey
       value: 1547344404
+      objectReference: {fileID: 0}
+    - target: {fileID: 4462035548805117137, guid: c499816185b750648ae7d7dd0307f547, type: 3}
+      propertyPath: SortKey
+      value: 2753666216
       objectReference: {fileID: 0}
     - target: {fileID: 5251012649174150129, guid: c499816185b750648ae7d7dd0307f547, type: 3}
       propertyPath: m_Name
@@ -9617,6 +9629,10 @@ PrefabInstance:
       propertyPath: SortKey
       value: 3775297390
       objectReference: {fileID: 0}
+    - target: {fileID: 4462035548805117137, guid: c499816185b750648ae7d7dd0307f547, type: 3}
+      propertyPath: SortKey
+      value: 686651906
+      objectReference: {fileID: 0}
     - target: {fileID: 5251012649174150129, guid: c499816185b750648ae7d7dd0307f547, type: 3}
       propertyPath: m_Name
       value: TestRelic (1)
@@ -11589,6 +11605,10 @@ PrefabInstance:
       propertyPath: SortKey
       value: 338676753
       objectReference: {fileID: 0}
+    - target: {fileID: 4462035548805117137, guid: c499816185b750648ae7d7dd0307f547, type: 3}
+      propertyPath: SortKey
+      value: 1544998565
+      objectReference: {fileID: 0}
     - target: {fileID: 5251012649174150129, guid: c499816185b750648ae7d7dd0307f547, type: 3}
       propertyPath: m_Name
       value: TestRelic (2)
@@ -11888,6 +11908,10 @@ PrefabInstance:
     - target: {fileID: -6803665204951536225, guid: c499816185b750648ae7d7dd0307f547, type: 3}
       propertyPath: SortKey
       value: 2282558263
+      objectReference: {fileID: 0}
+    - target: {fileID: 4462035548805117137, guid: c499816185b750648ae7d7dd0307f547, type: 3}
+      propertyPath: SortKey
+      value: 3488880075
       objectReference: {fileID: 0}
     - target: {fileID: 5251012649174150129, guid: c499816185b750648ae7d7dd0307f547, type: 3}
       propertyPath: m_Name

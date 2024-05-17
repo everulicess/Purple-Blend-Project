@@ -15,7 +15,7 @@ public class BaseEnemy : NetworkBehaviour
     private CombatController combatController;
     private Animator anim;
     
-    [SerializeField]private float speed = 8f;
+    [SerializeField] private float speed = 8f;
 
     //PLACEHOLDER QUICK FIX
     private float attackTimer;

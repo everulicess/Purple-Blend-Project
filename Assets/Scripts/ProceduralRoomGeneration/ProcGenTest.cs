@@ -121,7 +121,10 @@ public class ProcGenTest : NetworkBehaviour
         navMeshSurface.BuildNavMesh();
         for(int i = 0; i < generatedRooms.Count; i++)
         {
-            rooms[i].gameObject.transform.GetChild(4).gameObject.SetActive(true);
+            for (int spawner = 0; spawner < rooms[i].transform.GetChild(4).childCount; spawner++)
+            {
+                rooms[i].transform.GetChild(4).transform.GetChild(spawner).GetComponent<BaseSpawner>().SpawnEnemy();
+            }
         }
     }
 }
