@@ -94,6 +94,7 @@ public class CombatController : NetworkBehaviour
     {
         SetAttackData();
         // Enables attack area's MeshRenderer to show the attack happening.
+        Debug.Log("attacking test");
         hitbox.gameObject.GetComponent<MeshRenderer>().enabled = true;
         DamageTargets();
         IncreaseComboCounter();
@@ -103,7 +104,6 @@ public class CombatController : NetworkBehaviour
     // Checks through the list of objects within the targets list to damage them all.
     private void DamageTargets()
     {
-        Debug.Log("testing");
         foreach (Health target in targets)
         {
             if (target != null)
