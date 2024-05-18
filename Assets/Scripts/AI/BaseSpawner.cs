@@ -12,6 +12,12 @@ public class BaseSpawner : NetworkBehaviour
 
     public void SpawnEnemy()
     {
+        if (transform.root.name == "SpawnRoom(Updated)")
+        {
+            Debug.LogError(transform.root.name);
+            return;
+
+        }
         spawnedEnemy = Runner.Spawn(enemy, transform.position);
     }
 }

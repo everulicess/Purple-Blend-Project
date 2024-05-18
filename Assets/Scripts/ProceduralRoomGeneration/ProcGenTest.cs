@@ -128,9 +128,12 @@ public class ProcGenTest : NetworkBehaviour
         {
             for (int spawner = 0; spawner < rooms[i].transform.GetChild(4).childCount; spawner++)
             {
-                Debug.LogError(rooms[i].transform.GetChild(4).transform.GetChild(spawner).name);
-                rooms[i].transform.GetChild(4).transform.GetChild(spawner).GetComponent<BaseSpawner>().SpawnEnemy();
-
+                if(rooms[i].transform.GetChild(4).childCount != 0)
+                {
+                    rooms[i].transform.GetChild(4).transform.GetChild(spawner).TryGetComponent(out BaseSpawner baseSpawner);
+                    if (baseSpawner != null)
+                        baseSpawner.SpawnEnemy();
+                }
             }
         }
     }
