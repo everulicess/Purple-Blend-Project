@@ -134,6 +134,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
     private void Dodge(NetworkInputData data)
     {
         isDodging = true;
+        anim.SetTrigger("Dash");
 
         Debug.LogError($"{Time.deltaTime} Dodging");
         StartCoroutine(Dodging(data));
@@ -141,8 +142,8 @@ public class Player : NetworkBehaviour, IPlayerLeft
     IEnumerator Dodging(NetworkInputData data)
     {
         //forward = skew * data.movementInput*500f;
-        m_CharacterController.acceleration *= 3f;
-        m_CharacterController.maxSpeed *= 3f;
+        m_CharacterController.acceleration *= 2f;
+        m_CharacterController.maxSpeed *= 2f;
         IsAttacking = false;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(forward, Vector3.up), turnSpeed * 90f);
         yield return new WaitForSeconds(0.5f);
@@ -151,7 +152,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(forward, Vector3.up), turnSpeed * 90f);
 
         IsAttacking = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
         m_CharacterController.acceleration = Character.MovementStats.MovementSpeed;
         m_CharacterController.maxSpeed = Character.MovementStats.MovementSpeed;
         isDodging = false;
