@@ -64,9 +64,9 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         PlayerPrefs.DeleteKey("Character");
 
 
-        Vector3 playerPos = new Vector3(0, 3f, 0);
+        Vector3 playerPos = new Vector3(0, 3f, playersJoined+2f);
 
-        runner.Spawn(networkPlayerPrefab, new Vector3(0, -2f, 0), Quaternion.identity, player);
+        runner.Spawn(networkPlayerPrefab,playerPos, Quaternion.identity, player);
 
         playersJoined++;
     }
