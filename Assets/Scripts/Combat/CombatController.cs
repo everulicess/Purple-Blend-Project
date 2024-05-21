@@ -94,7 +94,6 @@ public class CombatController : NetworkBehaviour
     {
         SetAttackData();
         // Enables attack area's MeshRenderer to show the attack happening.
-        Debug.Log("attacking test");
         hitbox.gameObject.GetComponent<MeshRenderer>().enabled = true;
         DamageTargets();
         IncreaseComboCounter();
@@ -113,7 +112,7 @@ public class CombatController : NetworkBehaviour
                 target.TryGetComponent(out IDamageable damageable);
                 if (damageable == null) return;
                 damageable.OnTakeDamage(damage);
-                Debug.Log($"Dealing {damage} damage to {target.name}");
+                //Debug.Log($"Dealing {damage} damage to {target.name}");
             }
         }
     }

@@ -539,6 +539,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  acceleration: 10
+  stoppingDistance: 2
+  attackMaxTime: 1
 --- !u!114 &5327369626551268864
 MonoBehaviour:
   m_ObjectHideFlags: 0
