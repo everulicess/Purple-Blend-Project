@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 using System;
+using TMPro;
 //enum PlayerState
 //{
 //    Walking_State,
@@ -63,7 +64,13 @@ public class Player : NetworkBehaviour, IPlayerLeft
         }
     }
 
+    [Header("Dodge variables")]
     bool isDodging = false;
+    bool canDodge = true;
+    float dodgeTime = 0.2f;
+    float dodgeCooldown = 10f;
+    float currentDodgeCooldown;
+    [SerializeField] TextMeshProUGUI counterText;
     public override void Spawned()
     {
         if (Object.HasInputAuthority)
@@ -79,11 +86,6 @@ public class Player : NetworkBehaviour, IPlayerLeft
         m_Collector = GetComponent<Collector>();
         m_Health = GetComponent<Health>();
         m_CombatController = GetComponent<CombatController>();
-    }
-
-    private void Start()
-    {
-        if (!HasInputAuthority) return;
     }
     public override void FixedUpdateNetwork()
     {
@@ -114,6 +116,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
 
         if (data.buttons.IsSet(MyButtons.DodgeButton) && !isDodging)
             Dodge(data);
+        ResetDodge();
 
         //Interaction using E
         m_Collector.SetInteractionBool(data.buttons.IsSet(MyButtons.InteractButton));
@@ -132,10 +135,10 @@ public class Player : NetworkBehaviour, IPlayerLeft
 
     private void Dodge(NetworkInputData data)
     {
-        isDodging = true;
+        
+        if (!canDodge)
+            return;
         anim.SetTrigger("Dash");
-
-        Debug.LogError($"{Time.deltaTime} Dodging");
         StartCoroutine(Dodging(data));
     }
     IEnumerator Dodging(NetworkInputData data)
@@ -145,26 +148,42 @@ public class Player : NetworkBehaviour, IPlayerLeft
         m_CharacterController.maxSpeed *= 2f;
         IsAttacking = false;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(forward, Vector3.up), turnSpeed * 90f);
+        isDodging = true;
+        canDodge = false;
         yield return new WaitForSeconds(0.5f);
         m_CharacterController.acceleration = 0f;
         m_CharacterController.maxSpeed = 0f;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(forward, Vector3.up), turnSpeed * 90f);
-
+        isDodging = true;
         IsAttacking = false;
-        yield return new WaitForSeconds(0.2f);
+        canDodge = false;
+        yield return new WaitForSeconds(dodgeTime);
+
+        //starts countdown
+        isDodging = false;
+        canDodge = false;
+
         m_CharacterController.acceleration = Character.MovementStats.MovementSpeed;
         m_CharacterController.maxSpeed = Character.MovementStats.MovementSpeed;
-        isDodging = false;
-       
-
+        currentDodgeCooldown = dodgeCooldown;
+    }
+    private void ResetDodge()
+    {
+        if (currentDodgeCooldown > 0)
+        {
+            currentDodgeCooldown -= Runner.DeltaTime;
+            counterText.text = currentDodgeCooldown.ToString("0.0");
+        }
+        else
+        {
+            canDodge = true;
+        }
     }
 
     private void HandleDeath()
     {
         if (m_Health.isDead)
-        {
             m_CharacterController.Teleport(new Vector3(0, 1.5f, 0));
-        }
     }
 
     private void WalkAnim()
