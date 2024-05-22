@@ -277,7 +277,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 5
+  m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2626482965023948275
 MonoBehaviour:
@@ -452,10 +452,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.45899022
-  m_Height: 1.7135512
+  m_Radius: 0.76
+  m_Height: 2.98
   m_Direction: 1
-  m_Center: {x: 0, y: -0.2, z: 0.041009784}
+  m_Center: {x: 0, y: 1.48, z: 0.041009784}
 --- !u!195 &3653183240019664865
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -514,8 +514,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8865195289033986722}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: e37d29a60030ae1498cb108ce7e3cf31, type: 3}
-  m_Controller: {fileID: 9100000, guid: 4dcb31333d0a5fe4eac4433837fe2805, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 4343caeaec892f24c90fcfaaa46a565f, type: 3}
+  m_Controller: {fileID: 9100000, guid: 8ffc7f34426c756439c015654a46930e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -538,8 +538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c956dfc8fa44324ba6d522cbe9cc569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  acceleration: 10
+  speed: 6
+  acceleration: 6
   stoppingDistance: 2
   attackMaxTime: 1
 --- !u!114 &5327369626551268864
@@ -577,7 +577,7 @@ MonoBehaviour:
   fillImages:
   - {fileID: 4771420358997064709}
   _isDead: 0
-  maxHealthPoints: 50
+  maxHealthPoints: 100
   model: {fileID: 0}
 --- !u!114 &892737452660225522
 MonoBehaviour:
@@ -614,7 +614,7 @@ MonoBehaviour:
   TotalWords: 1
   ApplyTiming: 2
   SyncSettings: 79
-  StateHashes: 000000003649cbdc15f9c87ac0878abf65c36d0082e4624d6c86aa38
+  StateHashes: 000000003649cbdc15f9c87ac0878abf65c36d0082e4624d6c86aa38aa1b49c2366c3db5
   TriggerHashes: 00000000
 --- !u!1001 &7571580088057386069
 PrefabInstance:
