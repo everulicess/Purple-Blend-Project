@@ -133,6 +133,7 @@ public class Collector : NetworkBehaviour
     }
     private void OnCarriedRelicsChange(int previous, int current)
     {
+        Debug.LogError(carriedRelics);
         if (previous < current)
             RelicsUIUpdate();
 
@@ -153,7 +154,7 @@ public class Collector : NetworkBehaviour
 
     private void RelicsUIUpdate()
     {
-        for (int image = 0; image < carriedRelics; image++)
+        for (int image = 0; image < carriedRelics-1; image++)
         {
             relicSpotsHUD[image].color = Color.yellow;
             relicSpotsInGame[image].color = Color.yellow;

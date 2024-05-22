@@ -103,7 +103,6 @@ public class CombatController : NetworkBehaviour
     // Checks through the list of objects within the targets list to damage them all.
     private void DamageTargets()
     {
-        Debug.Log("testing");
         foreach (Health target in targets)
         {
             if (target != null)
@@ -113,7 +112,7 @@ public class CombatController : NetworkBehaviour
                 target.TryGetComponent(out IDamageable damageable);
                 if (damageable == null) return;
                 damageable.OnTakeDamage(damage);
-                Debug.Log($"Dealing {damage} damage to {target.name}");
+                //Debug.Log($"Dealing {damage} damage to {target.name}");
             }
         }
     }

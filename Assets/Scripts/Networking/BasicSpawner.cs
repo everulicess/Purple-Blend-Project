@@ -26,19 +26,24 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     CharacterInputHandler characterInputHandler;
     Player GetCharacter(string characterToSpawn)
     {
-        if (!PlayerPrefs.HasKey("Character")&& SceneManager.GetActiveScene().name == "MenuScene")
+        if (!PlayerPrefs.HasKey("Character") && SceneManager.GetActiveScene().name == "MenuScene")
             return null;
         return characterToSpawn switch
         {
             nameof(Characters.TheMule) => TheMule,
             nameof(Characters.TheBoomstick) => TheBoomstick,
             nameof(Characters.TheSiren) => TheSiren,
-            _ => TheBoomstick,
+            _ => throw new NotImplementedException()
         };
+        
+
     }
     private void Awake()
     {
         sessionListUIHandler = FindObjectOfType<SessionListUIHandler>(true);
+    }
+    private void Start()
+    {
     }
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
@@ -59,14 +64,13 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             return;
         if (SceneManager.GetActiveScene().name == "MenuScene") 
             return;
-
         networkPlayerPrefab = GetCharacter(PlayerPrefs.GetString("Character"));
-        PlayerPrefs.DeleteKey("Character");
+        //PlayerPrefs.DeleteKey("Character");
 
 
-        Vector3 playerPos = new(/*(player.RawEncoded % runner.Config.Simulation.PlayerCount) * */0 + playersJoined, 0f, 0f);
+        Vector3 playerPos = new Vector3(0, 3f, playersJoined+2f);
 
-        runner.Spawn(networkPlayerPrefab, playerPos, Quaternion.identity, player);
+        runner.Spawn(networkPlayerPrefab,playerPos, Quaternion.identity, player);
 
         playersJoined++;
     }
@@ -134,12 +138,22 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     }
     public void OnSceneLoadDone(NetworkRunner runner)
     {
+        
     }
     public void OnSceneLoadStart(NetworkRunner runner)
     {
     }
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)
     {
+        Debug.LogError($"HOST LEFT THE GAME RRRAAAAAAHHHHH {shutdownReason}");
+
+        StartCoroutine(HostLeft());
+    }
+    IEnumerator HostLeft()
+    {
+        SceneManager.LoadScene(0);
+
+        yield return new WaitForSeconds(1f);
     }
     public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message)
     {

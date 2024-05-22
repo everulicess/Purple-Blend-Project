@@ -15,11 +15,12 @@ public class BaseEnemy : NetworkBehaviour
     private CombatController combatController;
     private Animator anim;
     
-    [SerializeField] private float speed = 8f;
+    [SerializeField] private float speed;
+    [SerializeField] private float acceleration;
+    [SerializeField] private float stoppingDistance;
 
-    //PLACEHOLDER QUICK FIX
+    [SerializeField] private float attackMaxTime;
     private float attackTimer;
-    private float attackMaxTime = 0.5f;
     private bool canAttack = true;
 
     public override void Spawned()
@@ -30,6 +31,8 @@ public class BaseEnemy : NetworkBehaviour
         attackTimer = attackMaxTime;
         anim = gameObject.GetComponent<Animator>();
         agent.speed = speed;
+        agent.acceleration = acceleration;
+        agent.stoppingDistance = stoppingDistance;
     }
     public override void FixedUpdateNetwork()
     {
@@ -43,16 +46,15 @@ public class BaseEnemy : NetworkBehaviour
         }
         if (target)
         {
+            agent.destination = target.gameObject.transform.position;
             if (inRange && canAttack)
             {
-                combatController.Attack();
                 attackTimer = attackMaxTime;
                 canAttack = false;
                 anim.SetBool("Attacking", true);
             }
             else
             {
-                agent.destination = target.gameObject.transform.position;
                 Vector3 targetLookAt = new Vector3(target.gameObject.transform.position.x, this.transform.position.y, target.gameObject.transform.position.z);
                 transform.LookAt(targetLookAt);
                 anim.SetBool("Attacking", false);

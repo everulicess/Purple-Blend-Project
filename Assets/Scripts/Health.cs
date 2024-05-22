@@ -44,7 +44,6 @@ public class Health : NetworkBehaviour, IDamageable
         foreach (Image image in fillImages)
         {
             image.fillAmount = (float)(HealthPoints) / (float)(maxHealthPoints);
-            //Debug.LogWarning($"healthpoints: {HealthPoints} \n max health: {maxHealthPoints} \n fill amount: {image.fillAmount}");
         }
     }
     private void Update()

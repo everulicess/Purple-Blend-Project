@@ -14,7 +14,6 @@ public class SetTargets : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log($"COLLIDING WITH {other.name}");
         if (m_CombatController == null) return;
         if (other.CompareTag(thisObjectTag)) return;
         //Gets the Health script
