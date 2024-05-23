@@ -26,6 +26,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     CharacterInputHandler characterInputHandler;
     Player GetCharacter(string characterToSpawn)
     {
+        //Debug.LogError(characterToSpawn + " ----------------------------------------------");
         if (!PlayerPrefs.HasKey("Character") && SceneManager.GetActiveScene().name == "MenuScene")
             return null;
         return characterToSpawn switch
@@ -64,7 +65,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             return;
         if (SceneManager.GetActiveScene().name == "MenuScene") 
             return;
-        networkPlayerPrefab = GetCharacter(PlayerPrefs.GetString("Character"));
+        networkPlayerPrefab = GetCharacter(PlayerPrefs.GetString("Character","No Character Selected"));
         //PlayerPrefs.DeleteKey("Character");
 
 
@@ -145,7 +146,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     }
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)
     {
-        Debug.LogError($"HOST LEFT THE GAME RRRAAAAAAHHHHH {shutdownReason}");
+        //Debug.LogError($"HOST LEFT THE GAME RRRAAAAAAHHHHH {shutdownReason}");
 
         StartCoroutine(HostLeft());
     }
