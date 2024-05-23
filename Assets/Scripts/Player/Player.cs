@@ -90,6 +90,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
     public override void FixedUpdateNetwork()
     {
         HandleDeath();
+        Falling();
         if (m_Health.isDead)
             return;
         //count down attack time and end the attack once it hits 0
@@ -184,6 +185,11 @@ public class Player : NetworkBehaviour, IPlayerLeft
     {
         if (m_Health.isDead)
             m_CharacterController.Teleport(new Vector3(0, 1.5f, 0));
+    }
+    private void Falling()
+    {
+        if (transform.position.y <= -1.5f)
+            m_Health.OnTakeDamage(250);
     }
 
     private void WalkAnim()
