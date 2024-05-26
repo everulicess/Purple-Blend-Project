@@ -154,7 +154,7 @@ public class Collector : NetworkBehaviour
 
     private void RelicsUIUpdate()
     {
-        for (int image = 0; image < carriedRelics-1; image++)
+        for (int image = 0; image < carriedRelics; image++)
         {
             relicSpotsHUD[image].color = Color.yellow;
             relicSpotsInGame[image].color = Color.yellow;

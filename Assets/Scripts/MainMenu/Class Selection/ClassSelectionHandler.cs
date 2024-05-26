@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Fusion;
 
 public class ClassSelectionHandler : MonoBehaviour
 {
+    public static UnityAction<Characters> OnCharacterSet;
     [SerializeField] Button JoinSessionButton;
     List<Characters> characters = new();
     int currentCharacter;
@@ -22,8 +24,31 @@ public class ClassSelectionHandler : MonoBehaviour
 
     private void Start()
     {
+        MainMenuManager.OnBeginGame += SetCharacterSelected;
         characters = Enum.GetValues(typeof(Characters)).Cast<Characters>().ToList();
     }
+
+    private void SetCharacterSelected(bool arg0)
+    {
+        if (!arg0)
+            return;
+        switch (currentCharacter)
+        {
+            case 0:
+                OnCharacterSet?.Invoke(Characters.TheMule);
+                break;
+            case 1:
+                OnCharacterSet?.Invoke(Characters.TheBoomstick);
+
+                break;
+            case 2:
+                OnCharacterSet?.Invoke(Characters.TheSiren);
+                break;
+            default:
+                break;
+        }
+    }
+
     public void NextCharacter()
     {
         currentCharacter++;
@@ -42,25 +67,23 @@ public class ClassSelectionHandler : MonoBehaviour
                 PlayerPrefs.DeleteKey("Character");
                 TheMule.gameObject.SetActive(true);
                 PlayerPrefs.SetString("Character", nameof(Characters.TheMule));
-                PlayerPrefs.Save();
                 break;
             case 1:
                 HideAllCharacters();
                 PlayerPrefs.DeleteKey("Character");
                 TheBoomstick.gameObject.SetActive(true);
                 PlayerPrefs.SetString("Character", nameof(Characters.TheBoomstick));
-                PlayerPrefs.Save();
                 break;
             case 2:
                 HideAllCharacters();
                 TheSiren.gameObject.SetActive(true);
                 PlayerPrefs.DeleteKey("Character");
                 PlayerPrefs.SetString("Character", nameof(Characters.TheSiren));
-                PlayerPrefs.Save();
                 break;
             default:
                 break;
         }
+        PlayerPrefs.Save();
     }
     private void HideAllCharacters()
     {
@@ -80,9 +103,7 @@ public class ClassSelectionHandler : MonoBehaviour
     private void OnEnable()
     {
         foreach (GameObject item in PanelToHide)
-        {
             item.SetActive(false);
-        }
         ShowCharacter();
     }
 }

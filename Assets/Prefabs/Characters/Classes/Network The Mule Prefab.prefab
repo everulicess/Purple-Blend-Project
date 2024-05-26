@@ -135,6 +135,7 @@ MonoBehaviour:
   camTarget: {fileID: 2627143927177756995}
   attackLength: 0.1
   cam: {fileID: 7072012241765596909, guid: ed809da431a1cdb4890e5d69d1035499, type: 3}
+  dodgeCooldown: 3
   counterText: {fileID: 7329604799020370806}
 --- !u!136 &6075541524490898695
 CapsuleCollider:
@@ -253,7 +254,7 @@ MonoBehaviour:
   HealthHUDUI: {fileID: 1960438600091886863}
   DeadUI: {fileID: 8251820922933950820}
   fillImages:
-  - {fileID: 9047939758319719065}
+  - {fileID: 7435807005395502130}
   - {fileID: 9047939758319719065}
   _isDead: 0
   maxHealthPoints: 100
@@ -2579,6 +2580,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 937645739349912451, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
   m_PrefabInstance: {fileID: 6567484182314655608}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7435807005395502130 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4329418304506125130, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
+  m_PrefabInstance: {fileID: 6567484182314655608}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6893760228541768686
 PrefabInstance:
   m_ObjectHideFlags: 0
