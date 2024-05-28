@@ -5,6 +5,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using Unity.AI.Navigation;
 using UnityEngine;
+using TMPro;
 
 public class ProcGenTest : NetworkBehaviour
 {
@@ -14,6 +15,9 @@ public class ProcGenTest : NetworkBehaviour
     [SerializeField] private int offset;
     [SerializeField] private List<NetworkObject> net_Rooms = new();
     [SerializeField] private NavMeshSurface navMeshSurface;
+
+    //DEBUGGING ONLY
+    [SerializeField] private TextMeshProUGUI debugText;
 
     private List<List<bool[]>> matrix = new List<List<bool[]>>();
     private List<Vector2> generatedRooms = new List<Vector2>();
@@ -118,12 +122,12 @@ public class ProcGenTest : NetworkBehaviour
             rooms.Add(net_room);
         }
         areRoomsSpawned = true;
-        Invoke(nameof(StartEnemySpawning), 0.05f);
+        Invoke(nameof(StartEnemySpawning), 1f);
     }
 
     private void StartEnemySpawning()
     {
-        Invoke(nameof(NaveMeshBuild), 0.03f);
+        Invoke(nameof(NaveMeshBuild), 0.5f);
         for (int i = 0; i < generatedRooms.Count; i++)
         {
             for (int spawner = 0; spawner < rooms[i].transform.GetChild(4).childCount; spawner++)
@@ -141,5 +145,6 @@ public class ProcGenTest : NetworkBehaviour
     private void NaveMeshBuild()
     {
         navMeshSurface.BuildNavMesh();
+        debugText.text = navMeshSurface.navMeshData.ToString();
     }
 }
