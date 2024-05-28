@@ -24,7 +24,7 @@ public class ClassSelectionHandler : MonoBehaviour
 
     private void Start()
     {
-        MainMenuManager.OnBeginGame += SetCharacterSelected;
+        //MainMenuManager.OnBeginGame += SetCharacterSelected;
         characters = Enum.GetValues(typeof(Characters)).Cast<Characters>().ToList();
     }
 
