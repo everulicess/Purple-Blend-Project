@@ -10,7 +10,8 @@ enum MyButtons
     InteractButton,
     AttackButton,
     DodgeButton,
-    TestingButtonQ
+    TestingButtonQ,
+    MenuButton
 }
 public struct NetworkInputData : INetworkInput
 {

@@ -25,6 +25,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
     [SerializeField] private float turnSpeed = 360f;
     [SerializeField] CharacterStatsScrObj Character;
     [SerializeField] private Transform camTarget;
+    [SerializeField] private GameObject escapeMenu;
     //[SerializeField]Characters currentCharacter;
 
     public static Vector3 m_MousePosition;
@@ -111,9 +112,13 @@ public class Player : NetworkBehaviour, IPlayerLeft
             IsAttacking = true;
             FaceTo(data);
         }
-            
-        //movement blending variables
-        WalkAnim();
+
+        //Open the menu when menu button pressed
+        if (data.buttons.IsSet(MyButtons.MenuButton))
+            OpenMenu();
+
+            //movement blending variables
+            WalkAnim();
 
         if (data.buttons.IsSet(MyButtons.DodgeButton) && !isDodging)
             Dodge(data);
@@ -129,7 +134,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
         m_CharacterController.Move(forward);
         anim.SetBool("Moving", m_CharacterController.Velocity != Vector3.zero);
 
-
+        // Test button to damage player character
         if(data.buttons.IsSet(MyButtons.TestingButtonQ))
             m_Health.OnTakeDamage(10);
     }
@@ -253,5 +258,11 @@ public class Player : NetworkBehaviour, IPlayerLeft
         {
             Runner.Despawn(Object);
         }
+    }
+
+    //Open player menu when pressing escape
+    public void OpenMenu()
+    {
+        escapeMenu.gameObject.SetActive(!escapeMenu.activeInHierarchy);
     }
 }

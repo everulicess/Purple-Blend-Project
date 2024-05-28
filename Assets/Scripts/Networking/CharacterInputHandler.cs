@@ -15,6 +15,7 @@ public class CharacterInputHandler : NetworkBehaviour
     bool InteractButtonPressed = false;
     bool LeftClickPressed = false;
     bool DodgeButtonPressed = false;
+    bool MenuButtonPressed = false;
     //testing button
     bool TestingButtonQPressed = false;
 
@@ -53,6 +54,10 @@ public class CharacterInputHandler : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
             DodgeButtonPressed = true;
 
+        //Menu Escape Button
+        if (Input.GetKeyDown(KeyCode.Escape))
+            MenuButtonPressed = true;
+
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(2))
         {
             SetInWorldMousePosition();
@@ -90,6 +95,9 @@ public class CharacterInputHandler : NetworkBehaviour
         //testingButton
         networkInputData.buttons.Set(MyButtons.TestingButtonQ, TestingButtonQPressed);
 
+        //MenuButton
+        networkInputData.buttons.Set(MyButtons.MenuButton, MenuButtonPressed);
+
         //Reset variables after reading their values
         InteractButtonPressed = false;
         PingButtonPressed = false;
@@ -97,6 +105,7 @@ public class CharacterInputHandler : NetworkBehaviour
         PingButtonReleased = false;
         DodgeButtonPressed = false;
         TestingButtonQPressed = false;
+        MenuButtonPressed = false;
         return networkInputData;
     }
     public void SetInWorldMousePosition()

@@ -9,12 +9,15 @@ using System;
 
 public class MainMenuManager : MonoBehaviour
 {
+    // If you create a new panel, put it here.
     [Header("Panels")]
     [SerializeField] GameObject StartGamePanel;
     [SerializeField] GameObject SessionBrowserPanel;
-    [SerializeField] GameObject statusPanel;
+    [SerializeField] GameObject StatusPanel;
     [SerializeField] GameObject characterSelectionPanel;
     [SerializeField] GameObject JoinSessionPanel;
+    [SerializeField] GameObject SettingsPanel;
+    [SerializeField] GameObject MainMenuPanel;
 
     [SerializeField] TMP_InputField sessionName;
 
@@ -24,6 +27,7 @@ public class MainMenuManager : MonoBehaviour
     private void Start()
     {
         HideAllPanels();
+        MainMenuPanel.SetActive(true);
     }
     public void SetMySessionInfo(SessionInfo _sessionInfo)
     {
@@ -56,13 +60,40 @@ public class MainMenuManager : MonoBehaviour
         FindObjectOfType<SessionListUIHandler>(true).OnLookingForGameSessions();
 
     }
+
+    // Daans work on quitting the game.
+    public void OnQuitGameClicked()
+    {
+        Application.Quit();
+    }
+
+    public void OnSettingsClicked()
+    {
+        HideAllPanels();
+        SettingsPanel.SetActive(true);
+
+    }
+
+    public void MainMenu()
+    {
+        HideAllPanels();
+        MainMenuPanel.SetActive(true);
+
+    }
+
+    // End of Daans work.
+
+
+    // Add your panel here for deactivation
     void HideAllPanels()
     {
         SessionBrowserPanel.SetActive(false);
         StartGamePanel.SetActive(false);
-        statusPanel.SetActive(false);
+        StatusPanel.SetActive(false);
         characterSelectionPanel.SetActive(false);
         JoinSessionPanel.SetActive(false);
+        SettingsPanel.SetActive(false);
+        MainMenuPanel.SetActive(false);
     }
 
     public void OnCreateNewGameClicked()
@@ -81,7 +112,7 @@ public class MainMenuManager : MonoBehaviour
 
         HideAllPanels();
 
-        statusPanel.SetActive(true);
+        StatusPanel.SetActive(true);
     }
     public void OnCharacterSelectionStarted()
     {
@@ -94,7 +125,7 @@ public class MainMenuManager : MonoBehaviour
     {
         HideAllPanels();
 
-        statusPanel.SetActive(true);
+        StatusPanel.SetActive(true);
     }
 
     public void OnCharacterSelectionDone()
