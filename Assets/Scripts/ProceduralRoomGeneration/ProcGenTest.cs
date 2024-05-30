@@ -16,9 +16,6 @@ public class ProcGenTest : NetworkBehaviour
     [SerializeField] private List<NetworkObject> net_Rooms = new();
     [SerializeField] private NavMeshSurface navMeshSurface;
 
-    //DEBUGGING ONLY
-    [SerializeField] private TextMeshProUGUI debugText;
-
     private List<List<bool[]>> matrix = new List<List<bool[]>>();
     private List<Vector2> generatedRooms = new List<Vector2>();
 
@@ -145,6 +142,5 @@ public class ProcGenTest : NetworkBehaviour
     private void NaveMeshBuild()
     {
         navMeshSurface.BuildNavMesh();
-        debugText.text = navMeshSurface.navMeshData.ToString();
     }
 }
