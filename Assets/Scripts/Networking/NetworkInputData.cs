@@ -9,6 +9,7 @@ enum MyButtons
     PingsButtonReleased,
     InteractButton,
     AttackButton,
+    SpecialButton,
     DodgeButton,
     TestingButtonQ,
     MenuButton

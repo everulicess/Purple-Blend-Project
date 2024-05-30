@@ -105,7 +105,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
         if (!GetInput(out NetworkInputData data) && !Runner.IsForward) return;
 
         KnockBackHandler(data);
-
+        if (m_CombatController.ranged) m_CombatController.attackArea.transform.position = data.pointToLookAt;
         //initiate attack with mouse click (also checks if the player is already attacking so the animation does not restart)
         if (data.buttons.IsSet(MyButtons.AttackButton) && !IsAttacking && !isDodging) 
         {

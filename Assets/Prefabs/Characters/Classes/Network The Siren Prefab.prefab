@@ -336,12 +336,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 390aadc7612c2914ea49aa77fc7e933a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ranged: 1
   comboMaxTime: 2
   attackTypes:
   - {fileID: 11400000, guid: fbd0099305d371b4cba9bcc282a3870f, type: 2}
   - {fileID: 11400000, guid: cedaf195cdbed1d49b2b5c3ded274111, type: 2}
   - {fileID: 11400000, guid: 0e17f8c173e40fc4d8ea7ffe6746d22c, type: 2}
   hitbox: {fileID: 8930525562460017052}
+  attackArea: {fileID: 0}
   point: {x: 0, y: 0, z: 0}
 --- !u!114 &-3602829353502127559
 MonoBehaviour:

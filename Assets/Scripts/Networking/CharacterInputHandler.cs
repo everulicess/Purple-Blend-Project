@@ -13,7 +13,8 @@ public class CharacterInputHandler : NetworkBehaviour
     bool PingButtonPressed = false;
     bool PingButtonReleased = false;
     bool InteractButtonPressed = false;
-    bool LeftClickPressed = false;
+    bool AttackButtonPressed = false;
+    bool SpecialButtonPressed = false;
     bool DodgeButtonPressed = false;
     bool MenuButtonPressed = false;
     //testing button
@@ -48,7 +49,11 @@ public class CharacterInputHandler : NetworkBehaviour
 
         //Attack left mouse button
         if (Input.GetMouseButtonDown(0))
-            LeftClickPressed = true;
+            AttackButtonPressed = true;
+
+        //Special right mouse button
+        if (Input.GetMouseButtonDown(1))
+            SpecialButtonPressed = true;
 
         //Dodge Space Bar
         if (Input.GetKeyDown(KeyCode.Space))
@@ -87,7 +92,10 @@ public class CharacterInputHandler : NetworkBehaviour
 
         //Attacking LMB
         //networkInputData.isAttackingPressed = LeftClickPressed;
-        networkInputData.buttons.Set(MyButtons.AttackButton, LeftClickPressed);
+        networkInputData.buttons.Set(MyButtons.AttackButton, AttackButtonPressed);
+
+        //Special RMB
+        networkInputData.buttons.Set(MyButtons.SpecialButton, SpecialButtonPressed);
 
         //Dodge Button Space Bar
         networkInputData.buttons.Set(MyButtons.DodgeButton, DodgeButtonPressed);
@@ -101,7 +109,8 @@ public class CharacterInputHandler : NetworkBehaviour
         //Reset variables after reading their values
         InteractButtonPressed = false;
         PingButtonPressed = false;
-        LeftClickPressed = false;
+        AttackButtonPressed = false;
+        SpecialButtonPressed = false;
         PingButtonReleased = false;
         DodgeButtonPressed = false;
         TestingButtonQPressed = false;

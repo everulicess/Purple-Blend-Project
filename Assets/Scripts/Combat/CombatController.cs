@@ -8,6 +8,8 @@ using Fusion;
 
 public class CombatController : NetworkBehaviour
 {
+    public bool ranged;
+
     public float comboMaxTime;
     public List<AttackTypesScrObj> attackTypes = new();
     public GameObject hitbox;
@@ -21,6 +23,8 @@ public class CombatController : NetworkBehaviour
     private float comboTimeRemaining;
     private bool comboTimerIsRunning = false;
     private AttackTypesScrObj curAttack;
+
+    public GameObject attackArea;
 
     public Vector3 point;
     private float lookRotationSpeed = 8f;
@@ -41,6 +45,7 @@ public class CombatController : NetworkBehaviour
         gameObject.transform.Find("AttackArea").GetComponent<MeshFilter>().mesh = curAttack.colliderShape;
         comboTimeRemaining = comboMaxTime;
         hitbox.AddComponent<SetTargets>();
+        attackArea = gameObject.transform.Find("AttackArea").gameObject;
     }
 
     private void Update()
@@ -124,8 +129,8 @@ public class CombatController : NetworkBehaviour
         damage = curAttack.damage;
         knockback = curAttack.knockback;
         playerPush = curAttack.playerPush * 100;
-        gameObject.transform.Find("AttackArea").GetComponent<MeshCollider>().sharedMesh = curAttack.colliderShape;
-        gameObject.transform.Find("AttackArea").GetComponent<MeshFilter>().mesh = curAttack.colliderShape;
+        attackArea.GetComponent<MeshCollider>().sharedMesh = curAttack.colliderShape;
+        attackArea.GetComponent<MeshFilter>().mesh = curAttack.colliderShape;
     }
 
     // Increases the combo counter or resets it if it is done.

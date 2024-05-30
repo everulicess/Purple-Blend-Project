@@ -271,6 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 390aadc7612c2914ea49aa77fc7e933a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ranged: 0
   comboMaxTime: 2
   attackTypes:
   - {fileID: 11400000, guid: fbd0099305d371b4cba9bcc282a3870f, type: 2}
@@ -1031,7 +1032,7 @@ Transform:
   m_GameObject: {fileID: 8930525562460017052}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.38268343, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: 0.06999996, y: 1.41, z: 1.3693402}
+  m_LocalPosition: {x: 0, y: 1.5, z: 1.3}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
