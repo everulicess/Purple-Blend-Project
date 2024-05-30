@@ -13,6 +13,7 @@ public class CombatController : NetworkBehaviour
     public float comboMaxTime;
     public List<AttackTypesScrObj> attackTypes = new();
     public GameObject hitbox;
+    private SetTargets setTargets;
 
     private byte damage;
     private float knockback;
@@ -44,11 +45,11 @@ public class CombatController : NetworkBehaviour
         gameObject.transform.Find("AttackArea").GetComponent<MeshCollider>().sharedMesh = curAttack.colliderShape;
         gameObject.transform.Find("AttackArea").GetComponent<MeshFilter>().mesh = curAttack.colliderShape;
         comboTimeRemaining = comboMaxTime;
-        hitbox.AddComponent<SetTargets>();
+        setTargets = hitbox.AddComponent<SetTargets>();
         attackArea = gameObject.transform.Find("AttackArea").gameObject;
     }
 
-    private void Update()
+    public override void FixedUpdateNetwork()
     {
         // Combo timer. When it reaches 0, the combo counter resets.
         if (comboTimerIsRunning)
@@ -78,7 +79,7 @@ public class CombatController : NetworkBehaviour
         }
     }
 
-    public void UpdateTargetList(List<Health> list, bool isAdding) 
+    public void UpdateTargetList(List<Health> list) 
     {
         targets.Clear();
             foreach (Health item in list)
@@ -154,5 +155,6 @@ public class CombatController : NetworkBehaviour
         // Allows player to attack again and disables the attack area's MeshRenderer.
         isAttacking = false;
         hitbox.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        setTargets.ClearTargets();
     }
 }

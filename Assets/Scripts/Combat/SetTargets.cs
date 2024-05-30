@@ -12,7 +12,8 @@ public class SetTargets : MonoBehaviour
         m_CombatController = GetComponentInParent<CombatController>();
         thisObjectTag = m_CombatController.tag;
     }
-    private void OnTriggerEnter(Collider other)
+
+    private void OnTriggerStay(Collider other)
     {
         if (m_CombatController == null) return;
         if (other.CompareTag(thisObjectTag)) return;
@@ -26,11 +27,11 @@ public class SetTargets : MonoBehaviour
                 targets.Add(health);
             }
         }
-        m_CombatController.UpdateTargetList(targets, true);
+        m_CombatController.UpdateTargetList(targets);
     }
-    private void OnTriggerExit(Collider other)
+    public void ClearTargets()
     {
         if (m_CombatController == null) return;
-        targets.Remove(other.gameObject.GetComponent<Health>());
+        targets.Clear();
     }
 }

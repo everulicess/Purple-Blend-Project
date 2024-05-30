@@ -119,10 +119,14 @@ public class Health : NetworkBehaviour, IDamageable
             model.GetComponentInParent<BaseEnemy>().enabled = false;
             Runner.Despawn(this.gameObject.GetComponent<NetworkObject>());
         }
+        else
+        {
+            currentReviveTime = reviveTime;
+
+        }
         HealthInGameUI.SetActive(false);
         model.SetActive(false);
 
-        currentReviveTime = reviveTime;
     }
 
     private void OnRevive()

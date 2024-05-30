@@ -6213,11 +6213,11 @@ MonoBehaviour:
     Loot_Ping:
       Prefab: {fileID: 5181428273564063880, guid: 1f59fccc08d662b45a4c8de3b947ce87, type: 3}
       Sound: {fileID: 8300000, guid: 28e9f6569d2db8a4babcd2a3bca33201, type: 3}
-      Icon: {fileID: 0}
+      Icon: {fileID: 2800000, guid: c3c58c3293a3c4141a1bd3057c6df25e, type: 3}
     GreatJob_Ping:
       Prefab: {fileID: 5181428273564063880, guid: 7f9998c93e3043140a93ef0ab20f6f7b, type: 3}
       Sound: {fileID: 8300000, guid: 3eed0311f2f5a6343b4a478ac21dc19d, type: 3}
-      Icon: {fileID: 0}
+      Icon: {fileID: 2800000, guid: d75d3db47eaf3ea4ebac3e25c824b2e7, type: 3}
     Thanks_Ping:
       Prefab: {fileID: 5181428273564063880, guid: b353a79ae9e13df49b56079f2580eeba, type: 3}
       Sound: {fileID: 8300000, guid: 28e9f6569d2db8a4babcd2a3bca33201, type: 3}
@@ -6229,7 +6229,7 @@ MonoBehaviour:
     NeedToDeposit_Ping:
       Prefab: {fileID: 5181428273564063880, guid: b7c951ff51c483846a11c60bb297e28f, type: 3}
       Sound: {fileID: 8300000, guid: 28e9f6569d2db8a4babcd2a3bca33201, type: 3}
-      Icon: {fileID: 0}
+      Icon: {fileID: 2800000, guid: 93f2de7c800d5d941a16e68f89fb97e6, type: 3}
     FollowMe:
       Prefab: {fileID: 5181428273564063880, guid: b46f5ab2bc14b6148b1d522e1e55edce, type: 3}
       Sound: {fileID: 8300000, guid: 3eed0311f2f5a6343b4a478ac21dc19d, type: 3}

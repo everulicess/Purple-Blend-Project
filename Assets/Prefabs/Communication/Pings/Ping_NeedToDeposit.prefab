@@ -47,8 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fef3cb55073657649b0e3e6116fa2c52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyingTime: 2
-  myPing: 5
 --- !u!114 &5181428273564063880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,7 +249,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4379871c896cb47159ca30caed15cf45, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 93f2de7c800d5d941a16e68f89fb97e6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
