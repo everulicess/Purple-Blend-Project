@@ -895,6 +895,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_1_Prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 3331653429833546851, guid: b425f1f994cf11240b6ee50d2d7488ba, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5994119049950951429, guid: b425f1f994cf11240b6ee50d2d7488ba, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.71
@@ -935,6 +939,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6482011339170722483, guid: b425f1f994cf11240b6ee50d2d7488ba, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -956,6 +964,10 @@ PrefabInstance:
     - target: {fileID: 3331653429833546851, guid: b425f1f994cf11240b6ee50d2d7488ba, type: 3}
       propertyPath: m_Name
       value: Rock_1_Prefab (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3331653429833546851, guid: b425f1f994cf11240b6ee50d2d7488ba, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5994119049950951429, guid: b425f1f994cf11240b6ee50d2d7488ba, type: 3}
       propertyPath: m_LocalScale.x
@@ -1013,6 +1025,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6482011339170722483, guid: b425f1f994cf11240b6ee50d2d7488ba, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1031,6 +1047,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4969021603179425325}
     m_Modifications:
+    - target: {fileID: 2076812592156303949, guid: b250d1384a821664bab5bf6d23493ba3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5389068974903960747, guid: b250d1384a821664bab5bf6d23493ba3, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.36
@@ -1083,6 +1103,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door1
       objectReference: {fileID: 0}
+    - target: {fileID: 5471959168487373257, guid: b250d1384a821664bab5bf6d23493ba3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1101,9 +1125,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4473312708211793624}
     m_Modifications:
+    - target: {fileID: 2260072225392719440, guid: b75cb6b022224ff459fc31f44dac5d11, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6227787958396684499, guid: b75cb6b022224ff459fc31f44dac5d11, type: 3}
       propertyPath: m_Name
       value: Door_Frame_Prefab (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6227787958396684499, guid: b75cb6b022224ff459fc31f44dac5d11, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6949178790537174547, guid: b75cb6b022224ff459fc31f44dac5d11, type: 3}
       propertyPath: m_LocalScale.x
@@ -1171,6 +1203,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4969021603179425325}
     m_Modifications:
+    - target: {fileID: 2076812592156303949, guid: b250d1384a821664bab5bf6d23493ba3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5389068974903960747, guid: b250d1384a821664bab5bf6d23493ba3, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.36
@@ -1223,6 +1259,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door2
       objectReference: {fileID: 0}
+    - target: {fileID: 5471959168487373257, guid: b250d1384a821664bab5bf6d23493ba3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1241,9 +1281,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4473312708211793624}
     m_Modifications:
+    - target: {fileID: 2260072225392719440, guid: b75cb6b022224ff459fc31f44dac5d11, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6227787958396684499, guid: b75cb6b022224ff459fc31f44dac5d11, type: 3}
       propertyPath: m_Name
       value: Door_Frame_Prefab (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6227787958396684499, guid: b75cb6b022224ff459fc31f44dac5d11, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6949178790537174547, guid: b75cb6b022224ff459fc31f44dac5d11, type: 3}
       propertyPath: m_LocalScale.x
@@ -1311,9 +1359,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4473312708211793624}
     m_Modifications:
+    - target: {fileID: 2260072225392719440, guid: b75cb6b022224ff459fc31f44dac5d11, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6227787958396684499, guid: b75cb6b022224ff459fc31f44dac5d11, type: 3}
       propertyPath: m_Name
       value: Door_Frame_Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6227787958396684499, guid: b75cb6b022224ff459fc31f44dac5d11, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6949178790537174547, guid: b75cb6b022224ff459fc31f44dac5d11, type: 3}
       propertyPath: m_LocalScale.x
@@ -1429,6 +1485,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6733177361254619370, guid: 18a98d1e3a19f0844bbe468f6e6c0390, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -1439730007547781893, guid: 18a98d1e3a19f0844bbe468f6e6c0390, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1445,10 +1505,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnRoom 1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 18a98d1e3a19f0844bbe468f6e6c0390, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7071182760956848314, guid: 18a98d1e3a19f0844bbe468f6e6c0390, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1f5a1a029ec0911489113b9af48e33f2, type: 2}
+    - target: {fileID: 8513859187771203891, guid: 18a98d1e3a19f0844bbe468f6e6c0390, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1511,6 +1579,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barrel_2_Prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 5428015464963879148, guid: f7059d5a8d0700645870c330f33cac19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6463763311878084770, guid: f7059d5a8d0700645870c330f33cac19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1529,9 +1605,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4473312708211793624}
     m_Modifications:
+    - target: {fileID: 2260072225392719440, guid: b75cb6b022224ff459fc31f44dac5d11, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6227787958396684499, guid: b75cb6b022224ff459fc31f44dac5d11, type: 3}
       propertyPath: m_Name
       value: Door_Frame_Prefab (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6227787958396684499, guid: b75cb6b022224ff459fc31f44dac5d11, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6949178790537174547, guid: b75cb6b022224ff459fc31f44dac5d11, type: 3}
       propertyPath: m_LocalScale.x
@@ -1599,9 +1683,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4473312708211793624}
     m_Modifications:
+    - target: {fileID: 3075945685285730561, guid: a9d44aa225d325f4f85623fcc2a73448, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3331653429833546851, guid: a9d44aa225d325f4f85623fcc2a73448, type: 3}
       propertyPath: m_Name
       value: Rock_2_Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 3331653429833546851, guid: a9d44aa225d325f4f85623fcc2a73448, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5994119049950951429, guid: a9d44aa225d325f4f85623fcc2a73448, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1701,9 +1793,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3225300028377464628, guid: 67155ab4c2963974cbbf4ff9ee67896e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4936602009109002760, guid: 67155ab4c2963974cbbf4ff9ee67896e, type: 3}
       propertyPath: m_Name
       value: Rock_3_Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936602009109002760, guid: 67155ab4c2963974cbbf4ff9ee67896e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1723,6 +1823,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4969021603179425325}
     m_Modifications:
+    - target: {fileID: 2076812592156303949, guid: b250d1384a821664bab5bf6d23493ba3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5389068974903960747, guid: b250d1384a821664bab5bf6d23493ba3, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.36
@@ -1775,6 +1879,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door3
       objectReference: {fileID: 0}
+    - target: {fileID: 5471959168487373257, guid: b250d1384a821664bab5bf6d23493ba3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1793,9 +1901,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4473312708211793624}
     m_Modifications:
+    - target: {fileID: 3075945685285730561, guid: a9d44aa225d325f4f85623fcc2a73448, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3331653429833546851, guid: a9d44aa225d325f4f85623fcc2a73448, type: 3}
       propertyPath: m_Name
       value: Rock_2_Prefab (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3331653429833546851, guid: a9d44aa225d325f4f85623fcc2a73448, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5994119049950951429, guid: a9d44aa225d325f4f85623fcc2a73448, type: 3}
       propertyPath: m_LocalScale.x
@@ -1871,6 +1987,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4969021603179425325}
     m_Modifications:
+    - target: {fileID: 2076812592156303949, guid: b250d1384a821664bab5bf6d23493ba3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5389068974903960747, guid: b250d1384a821664bab5bf6d23493ba3, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.36
@@ -1923,6 +2043,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door0
       objectReference: {fileID: 0}
+    - target: {fileID: 5471959168487373257, guid: b250d1384a821664bab5bf6d23493ba3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1944,6 +2068,14 @@ PrefabInstance:
     - target: {fileID: 1886491342338796310, guid: 6696380e56aab994eab46cbe1f677854, type: 3}
       propertyPath: m_Name
       value: Rock_4_Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 1886491342338796310, guid: 6696380e56aab994eab46cbe1f677854, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3414390952811673755, guid: 6696380e56aab994eab46cbe1f677854, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7601550566330445228, guid: 6696380e56aab994eab46cbe1f677854, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2006,6 +2138,14 @@ PrefabInstance:
     - target: {fileID: 351001603456559821, guid: 56c7a895d1977d84f927b6bcf373fa63, type: 3}
       propertyPath: m_Name
       value: Pillar_Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 351001603456559821, guid: 56c7a895d1977d84f927b6bcf373fa63, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850975571834433563, guid: 56c7a895d1977d84f927b6bcf373fa63, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6673900499212537152, guid: 56c7a895d1977d84f927b6bcf373fa63, type: 3}
       propertyPath: m_LocalScale.x
@@ -2113,9 +2253,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 299769364386997761, guid: fec78d7c4ea90084285ae1e9e7ebf1de, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2633841160248866725, guid: fec78d7c4ea90084285ae1e9e7ebf1de, type: 3}
       propertyPath: m_Name
       value: Barrel_1_Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633841160248866725, guid: fec78d7c4ea90084285ae1e9e7ebf1de, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
