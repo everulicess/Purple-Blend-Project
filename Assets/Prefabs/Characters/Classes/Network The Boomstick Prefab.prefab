@@ -434,7 +434,7 @@ MonoBehaviour:
   relictHUDUI: {fileID: 5754079781430920513}
   InteractUI: {fileID: 7273799226762355125}
   pocketCapacity: 100
-  relicCapacity: 2
+  relicCapacity: 1
   carryPoint: {fileID: 8078895455858871908}
   LayerMask:
     serializedVersion: 2

@@ -26,7 +26,7 @@ public class TreasureCollectable : Collectable
     }
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
-        playerCollector.SetInteractionBool(false);
+        //playerCollector.SetInteractionBool(false);
         base.Despawned(runner, hasState);
     }
     private void OnTriggerEnter(Collider other)

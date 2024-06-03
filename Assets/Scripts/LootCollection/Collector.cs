@@ -133,14 +133,12 @@ public class Collector : NetworkBehaviour
     }
     private void OnCarriedRelicsChange(int previous, int current)
     {
-        Debug.LogError(carriedRelics);
+        //Debug.LogError($"previous: {previous} current: {current}");
         if (previous < current)
             RelicsUIUpdate();
 
-        if (carriedRelics==0)
-        {
+        if (current<previous)
             ResetRelicsUI();
-        }
     }
 
     private void ResetRelicsUI()
@@ -200,14 +198,17 @@ public class Collector : NetworkBehaviour
     {
         isCoin = false;
         InteractUI.transform.position = new(pRelic.transform.position.x, pRelic.transform.position.y + 1f, pRelic.transform.position.z);
+        
         if (isInteracting)
         {
-            //If the player has a relic slot left
-            if (carriedRelics >= relicCapacity)
+            if (carriedRelics == relicCapacity)
                 return;
-            carriedRelics++;
+            //If the player has a relic slot left
             pRelic.DeleteObject();
+            carriedRelics++;
             InteractUI.SetActive(false);
+            Debug.LogError($"carried relics: {carriedRelics} capacity: {relicCapacity}");
+
         }
     }
     public bool CanPickUp()

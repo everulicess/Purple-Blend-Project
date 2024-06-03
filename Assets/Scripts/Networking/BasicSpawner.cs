@@ -15,7 +15,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     [SerializeField] Player TheMule;
     [SerializeField] Player TheBoomstick;
     [SerializeField] Player TheSiren;
-
+    [SerializeField]NetworkObject TestObject;
     private Dictionary<PlayerRef, NetworkObject> spawnCharacter = new Dictionary<PlayerRef, NetworkObject>();
     float playersJoined = 0f;
 
@@ -65,13 +65,13 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             return;
         if (SceneManager.GetActiveScene().name == "MenuScene") 
             return;
-        networkPlayerPrefab = GetCharacter(PlayerPrefs.GetString("Character","No Character Selected"));
+        //networkPlayerPrefab = GetCharacter(PlayerPrefs.GetString("Character","No Character Selected"));
         //PlayerPrefs.DeleteKey("Character");
 
 
         Vector3 playerPos = new Vector3(0, 3f, playersJoined+2f);
 
-        runner.Spawn(networkPlayerPrefab,playerPos, Quaternion.identity, player);
+        runner.Spawn(TestObject,playerPos, Quaternion.identity, player);
 
         playersJoined++;
     }

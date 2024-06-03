@@ -220,7 +220,7 @@ MonoBehaviour:
   relictHUDUI: {fileID: 4088070440632760029}
   InteractUI: {fileID: 5828116268135088533}
   pocketCapacity: 100
-  relicCapacity: 2
+  relicCapacity: 4
   carryPoint: {fileID: 8078895455858871908}
   LayerMask:
     serializedVersion: 2
@@ -278,6 +278,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cedaf195cdbed1d49b2b5c3ded274111, type: 2}
   - {fileID: 11400000, guid: 0e17f8c173e40fc4d8ea7ffe6746d22c, type: 2}
   hitbox: {fileID: 8930525562460017052}
+  attackArea: {fileID: 0}
   point: {x: 0, y: 0, z: 0}
 --- !u!114 &3081060940803887086
 MonoBehaviour:

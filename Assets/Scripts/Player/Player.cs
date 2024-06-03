@@ -4,13 +4,7 @@ using UnityEngine;
 using Fusion;
 using System;
 using TMPro;
-//enum PlayerState
-//{
-//    Walking_State,
-//    Attacking_State,
-//    Dodging_State,
-//    Dead_State
-//}
+
 [RequireComponent(
     typeof(NetworkCharacterController),
     typeof(NetworkMecanimAnimator),
@@ -188,8 +182,10 @@ public class Player : NetworkBehaviour, IPlayerLeft
 
     private void HandleDeath()
     {
-        if (m_Health.isDead)
+        if (!m_Health.isDead)
+            return;
             m_CharacterController.Teleport(new Vector3(0, 1.5f, 0));
+
     }
     private void Falling()
     {

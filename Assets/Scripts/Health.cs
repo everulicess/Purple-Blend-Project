@@ -6,12 +6,11 @@ using UnityEngine.UI;
 using TMPro;
 public class Health : NetworkBehaviour, IDamageable
 {
-    [Header("Health User Interface")]
-    //UI
+    [Header("health user interface")]
+    //ui
     [SerializeField] GameObject HealthInGameUI;
     [SerializeField] GameObject HealthHUDUI;
     [SerializeField] GameObject DeadUI;
-    TextMeshProUGUI respawnTimer;
     [SerializeField] Image[] fillImages;
 
     [Header("change detectors")]
@@ -59,13 +58,15 @@ public class Health : NetworkBehaviour, IDamageable
             {
                 DeadUI.SetActive(HasInputAuthority && currentReviveTime > 0);
                 HealthHUDUI.SetActive(HasInputAuthority);
-                HealthInGameUI.SetActive(!HasInputAuthority);
+                //HealthInGameUI.SetActive(!HasInputAuthority);
             }
             else
             {
                 HealthHUDUI.SetActive(false);
-                HealthInGameUI.SetActive(true);
+                //HealthInGameUI.SetActive(isDead && !HasInputAuthority);
             }
+            HealthInGameUI.SetActive(Player.Local? !HasInputAuthority : isDead);
+
         }
         else
         {
