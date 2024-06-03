@@ -714,6 +714,7 @@ GameObject:
   - component: {fileID: 4344658983916882345}
   - component: {fileID: 3679831321788609499}
   - component: {fileID: 6205907880985822525}
+  - component: {fileID: 730459717735253969}
   m_Layer: 5
   m_Name: ScreenHUD
   m_TagString: Untagged
@@ -806,6 +807,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &730459717735253969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7204706242513291299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef72d9a2da7edb498a04655549014aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MenuPanel: {fileID: 6908274228702730215}
+  VolumeSlider: {fileID: 5590921669623949194}
+  MenuScene: 0
 --- !u!1 &7916595526166394597
 GameObject:
   m_ObjectHideFlags: 0
@@ -2365,6 +2381,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8583087161034130618}
     m_Modifications:
+    - target: {fileID: 1121740997152934622, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1121740997152934622, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1121740997152934622, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 730459717735253969}
+    - target: {fileID: 1121740997152934622, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1121740997152934622, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnVolumeChanged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1121740997152934622, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InGameMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1121740997152934622, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2150704201871456947, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
       propertyPath: m_Name
       value: MenuPanel
@@ -2453,6 +2497,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3843537852480688635, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 730459717735253969}
+    - target: {fileID: 3843537852480688635, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnQuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 3843537852480688635, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InGameMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3978177890649215778, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 730459717735253969}
+    - target: {fileID: 3978177890649215778, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnQuitGameSession
+      objectReference: {fileID: 0}
+    - target: {fileID: 3978177890649215778, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InGameMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5585432903724911444, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 730459717735253969}
+    - target: {fileID: 5585432903724911444, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MenuToggle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5585432903724911444, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InGameMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7639155795527983457, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -2466,6 +2546,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
+--- !u!114 &5590921669623949194 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1121740997152934622, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
+  m_PrefabInstance: {fileID: 4757992381070126420}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6753317598092286913 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2287637638139377301, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}

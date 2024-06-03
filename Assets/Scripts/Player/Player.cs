@@ -32,7 +32,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
     private NetworkCharacterController m_CharacterController;
     private Animator anim;
     private CombatController m_CombatController;
-
+    InGameMenu m_InGameMenu;
     //the time the attack animation locks the player's rotation
     [SerializeField] private float attackLength = 1.6f;
     private float attackTime = 0f;
@@ -81,6 +81,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
             localCamera.GetComponent<LocalCamera>().SetTarget(camTarget);
             PlayerCamera = localCamera.GetComponentInChildren<Camera>();
         }
+        m_InGameMenu = GetComponentInChildren<InGameMenu>();
         m_CharacterController = GetComponent<NetworkCharacterController>();
         m_CharacterController.maxSpeed = Character.MovementStats.MovementSpeed;
         anim = GetComponent<Animator>();
@@ -114,11 +115,10 @@ public class Player : NetworkBehaviour, IPlayerLeft
         }
 
         //Open the menu when menu button pressed
-        if (data.buttons.IsSet(MyButtons.MenuButton))
-            OpenMenu();
+        m_InGameMenu.SetMenuInteraction(data.buttons.IsSet(MyButtons.MenuButton));
 
-            //movement blending variables
-            WalkAnim();
+        //movement blending variables
+        WalkAnim();
 
         if (data.buttons.IsSet(MyButtons.DodgeButton) && !isDodging)
             Dodge(data);
