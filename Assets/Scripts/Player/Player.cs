@@ -80,6 +80,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
             localCamera = Instantiate(cam);
             localCamera.GetComponent<LocalCamera>().SetTarget(camTarget);
             PlayerCamera = localCamera.GetComponentInChildren<Camera>();
+            Debug.LogError($"RPC with character is {PlayerPrefs.GetString("Character")}");
         }
         m_InGameMenu = GetComponentInChildren<InGameMenu>();
         m_CharacterController = GetComponent<NetworkCharacterController>();
