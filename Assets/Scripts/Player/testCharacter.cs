@@ -8,20 +8,19 @@ public class testCharacter : NetworkBehaviour
 {
     static testCharacter test_Character;
     [SerializeField] TextMeshProUGUI displayText;
+    NetworkString<_32> chosenCharacter;
     string msg;
     public override void Spawned()
     {
         if (Object.HasInputAuthority)
         {
+            chosenCharacter = PlayerPrefs.GetString("Character");
             test_Character = this;
-            if (testCharacter.test_Character)
-            {
-                msg = $"My Selected Character is {PlayerPrefs.GetString("Character")}";
-                displayText.gameObject.SetActive(HasInputAuthority);
-                Debug.LogError(msg);
-                displayText.text = msg;
-                RPC_SendMessage(PlayerPrefs.GetString("Character"));
-            }
+            msg = $"My Selected Character is {PlayerPrefs.GetString("Character")}";
+            displayText.gameObject.SetActive(HasInputAuthority);
+            Debug.LogError($"{msg}\n {chosenCharacter}");
+            displayText.text = msg;
+            RPC_SendMessage(PlayerPrefs.GetString("Character"));
         }
     }
     public override void FixedUpdateNetwork()
