@@ -95,10 +95,10 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1152
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -554,10 +554,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 390aadc7612c2914ea49aa77fc7e933a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ranged: 0
+  special: 0
   comboMaxTime: 1
   attackTypes:
   - {fileID: 11400000, guid: e09f88e6bce1d8246b3f5fe6bc4a6291, type: 2}
+  specialType: {fileID: 0}
   hitbox: {fileID: 771044456922951676}
+  attackArea: {fileID: 0}
   point: {x: 0, y: 0, z: 0}
 --- !u!114 &450433305955062855
 MonoBehaviour:

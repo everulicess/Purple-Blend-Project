@@ -117,7 +117,7 @@ public class CombatController : NetworkBehaviour
             float damageValue = damage;
             if (target != null)
             {
-                isHealing = damage < 0;
+                isHealing = damageValue < 0;
                 Vector3 target_tp = target.transform.position;
                 Vector3 knockbackVector = (target_tp - gameObject.transform.position).normalized;
                 target.TryGetComponent(out IDamageable damageable);
