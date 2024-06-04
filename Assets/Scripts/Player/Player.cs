@@ -113,6 +113,12 @@ public class Player : NetworkBehaviour, IPlayerLeft
             IsAttacking = true;
             FaceTo(data);
         }
+        if (data.buttons.IsSet(MyButtons.SpecialButton) && !IsAttacking && !isDodging)
+        {
+            IsAttacking = true;
+            m_CombatController.special = true;
+            FaceTo(data);
+        }
 
         //Open the menu when menu button pressed
         m_InGameMenu.SetMenuInteraction(data.buttons.IsSet(MyButtons.MenuButton));

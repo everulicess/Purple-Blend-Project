@@ -63,7 +63,7 @@ public class CharacterInputHandler : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
             MenuButtonPressed = true;
 
-        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(2))
+        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(2) || Input.GetMouseButtonDown(1))
         {
             SetInWorldMousePosition();
         }
