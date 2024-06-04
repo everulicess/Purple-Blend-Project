@@ -18,5 +18,6 @@ public class CoinsCollectable : Collectable
     public override void Interact()
     {
         playerCollector.CollectCoins(this, goldValue);
+
     }
 }

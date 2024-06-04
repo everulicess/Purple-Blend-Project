@@ -6185,9 +6185,10 @@ GameObject:
   m_Component:
   - component: {fileID: 963096546}
   - component: {fileID: 963096545}
+  - component: {fileID: 963096548}
   - component: {fileID: 963096547}
   m_Layer: 0
-  m_Name: PingManager
+  m_Name: LibrariesManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6266,6 +6267,21 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours: []
+--- !u!114 &963096548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963096544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f3c34927ada0f048beba48921049816, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - Name: 0
+    SoundToPlay: {fileID: 8300000, guid: 28e9f6569d2db8a4babcd2a3bca33201, type: 3}
 --- !u!1 &968484509
 GameObject:
   m_ObjectHideFlags: 0
