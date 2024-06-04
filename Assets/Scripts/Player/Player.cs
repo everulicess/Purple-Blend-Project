@@ -74,6 +74,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
             localCamera = Instantiate(cam);
             localCamera.GetComponent<LocalCamera>().SetTarget(camTarget);
             PlayerCamera = localCamera.GetComponentInChildren<Camera>();
+            Debug.LogError($"RPC with character is {PlayerPrefs.GetString("Character")}");
         }
         m_InGameMenu = GetComponentInChildren<InGameMenu>();
         m_CharacterController = GetComponent<NetworkCharacterController>();
@@ -105,6 +106,12 @@ public class Player : NetworkBehaviour, IPlayerLeft
         if (data.buttons.IsSet(MyButtons.AttackButton) && !IsAttacking && !isDodging) 
         {
             IsAttacking = true;
+            FaceTo(data);
+        }
+        if (data.buttons.IsSet(MyButtons.SpecialButton) && !IsAttacking && !isDodging)
+        {
+            IsAttacking = true;
+            m_CombatController.special = true;
             FaceTo(data);
         }
 

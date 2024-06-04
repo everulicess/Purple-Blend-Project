@@ -9,13 +9,15 @@ using Fusion;
 public class CombatController : NetworkBehaviour
 {
     public bool ranged;
+    public bool special;
 
     public float comboMaxTime;
     public List<AttackTypesScrObj> attackTypes = new();
+    public AttackTypesScrObj specialType;
     public GameObject hitbox;
     private SetTargets setTargets;
 
-    private byte damage;
+    private float damage;
     private float knockback;
     private float playerPush;
     private bool isAttacking;
@@ -109,15 +111,23 @@ public class CombatController : NetworkBehaviour
     // Checks through the list of objects within the targets list to damage them all.
     private void DamageTargets()
     {
+        bool isHealing = false;
         foreach (Health target in targets)
         {
+            float damageValue = damage;
             if (target != null)
             {
+                isHealing = damageValue < 0;
                 Vector3 target_tp = target.transform.position;
                 Vector3 knockbackVector = (target_tp - gameObject.transform.position).normalized;
                 target.TryGetComponent(out IDamageable damageable);
                 if (damageable == null) return;
-                damageable.OnTakeDamage(damage);
+                if (target.CompareTag(tag))
+                {
+                    damageValue = isHealing ? damage : 0;
+                } else damageValue = isHealing ? 0 : damage;
+                
+                damageable.OnTakeDamage(damageValue);
                 //Debug.Log($"Dealing {damage} damage to {target.name}");
             }
         }
@@ -126,7 +136,8 @@ public class CombatController : NetworkBehaviour
     // Sets the attack data to the correct attack within the combo.
     private void SetAttackData()
     {
-        curAttack = attackTypes[comboCounter];
+        if (!special) curAttack = attackTypes[comboCounter];
+        else curAttack = specialType;
         damage = curAttack.damage;
         knockback = curAttack.knockback;
         playerPush = curAttack.playerPush * 100;
@@ -154,6 +165,7 @@ public class CombatController : NetworkBehaviour
     {
         // Allows player to attack again and disables the attack area's MeshRenderer.
         isAttacking = false;
+        special = false;
         hitbox.gameObject.GetComponent<MeshRenderer>().enabled = false;
         setTargets.ClearTargets();
     }

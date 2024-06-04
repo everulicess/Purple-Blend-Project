@@ -16,12 +16,12 @@ public class Health : NetworkBehaviour, IDamageable
     [Header("change detectors")]
     //change Detector
     private ChangeDetector _changes;
-    [Networked] byte HealthPoints { get; set; }
+    [Networked] float HealthPoints { get; set; }
     [Networked] public bool isDead { get; set; }
 
     const float reviveTime = 5f;
     [Networked]float currentReviveTime { get; set; }
-    [SerializeField] byte maxHealthPoints = 100;
+    [SerializeField] float maxHealthPoints = 100;
 
     bool isInitailized;
     bool isPlayer;
@@ -94,9 +94,9 @@ public class Health : NetworkBehaviour, IDamageable
             switch (change)
             {
                 case nameof(HealthPoints):
-                    var byteReader = GetPropertyReader<byte>(nameof(HealthPoints));
-                    var (previousByte, currentByte) = byteReader.Read(previousBuffer, currentBuffer);
-                    OnHealthChanged(previousByte, currentByte);
+                    var floatReader = GetPropertyReader<float>(nameof(HealthPoints));
+                    var (previousFloat, currentFloat) = floatReader.Read(previousBuffer, currentBuffer);
+                    OnHealthChanged(previousFloat, currentFloat);
                     break;
                 case nameof(isDead):
                     var boolReader = GetPropertyReader<bool>(nameof(isDead));
@@ -145,13 +145,13 @@ public class Health : NetworkBehaviour, IDamageable
         HealthInGameUI.SetActive(true);
         model.SetActive(true);
     }
-    void OnHealthChanged(byte oldValue, byte value)
+    void OnHealthChanged(float oldValue, float value)
     {
         UpdateHealthBar();
         if (value < oldValue)
             OnHPReduced();
     }
-    public void OnTakeDamage(byte pDamage)
+    public void OnTakeDamage(float pDamage)
     {
         if (HealthPoints <= 0) 
             return;
