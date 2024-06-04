@@ -7538,11 +7538,15 @@ MonoBehaviour:
   gridSize: {x: 500, y: 500}
   dungeonSize: 20
   startPos: {x: 50, y: 50}
-  offset: 40
+  offset: 30
   net_Rooms:
-  - {fileID: 1703493704459509107, guid: e3bf857360c852047ae459197be5cec6, type: 3}
-  - {fileID: 1703493704459509107, guid: f3bbf3edfcf4ff34193ee32cf5938724, type: 3}
-  - {fileID: 1703493704459509107, guid: 9281e86c1fb72ea4c93a8c70a98680c1, type: 3}
+  - {fileID: 2784021426514672902, guid: 71c974cd4915ae94cb2ee69f67884d34, type: 3}
+  - {fileID: 4920744507227033036, guid: b7ed5b819a99b8a4fb277743f2455381, type: 3}
+  - {fileID: 689751694398652942, guid: bd3a3090d7149ff49b4de19d9cff4f34, type: 3}
+  - {fileID: 6259258659904121503, guid: e9a9347f58051c142849cfcfedd5df7d, type: 3}
+  - {fileID: 2551506226179750213, guid: 76fa85f52b9ff824ea6cf4f0ec71de74, type: 3}
+  - {fileID: 8100749371925439408, guid: f1362c74c798f524ba36b7f18478d86b, type: 3}
+  - {fileID: 4620815820868623339, guid: 36677bd8989a51f42baf845806f59ef2, type: 3}
   navMeshSurface: {fileID: 20829246}
 --- !u!4 &1193862571
 Transform:
