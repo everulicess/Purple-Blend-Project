@@ -161,6 +161,7 @@ public class Collector : NetworkBehaviour
 
     private void OnCarriedPocketChange(float previous, float current)
     {
+
         foreach (Image image in currentPocketBar)
         {
             image.fillAmount = CarriedPocketLoot / pocketCapacity;
@@ -189,6 +190,8 @@ public class Collector : NetworkBehaviour
         CollectedCoins++;
         CarriedPocketLoot = CollectedCoins * coinsValue;
         CarriedPocketLoot = Mathf.Clamp(CarriedPocketLoot, 0f, pocketCapacity);
+        SoundManager.RPC_PlaySound(SoundName.Name1, this.transform.position);
+
     }
     /// <summary>
     /// Checks if the player is trying to interact and if there is anough space for the relic

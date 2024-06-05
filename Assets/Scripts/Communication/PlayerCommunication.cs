@@ -68,19 +68,29 @@ public class PlayerCommunication : NetworkBehaviour
     }
 
     //remote procediral call sent from the server to the client, synchronizes everyone
-    [Rpc(RpcSources.StateAuthority, RpcTargets.All/*, HostMode = RpcHostMode.SourceIsServer*/)]
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, HostMode = RpcHostMode.SourceIsServer)]
     public void RPC_PlacePingServerToClients( Vector3 pVector, Pings pPingID, PlayerRef messageSource)
     {
+        //gets the ping's audio
+        CommunicationManager.audioDictionary.TryGetValue(pPingID, out AudioClip sound);
+
         //gets the ping's visual
         CommunicationManager.visualsDictionary.TryGetValue(pPingID, out NetworkObject visual);
 
-        //gets the ping's audio
-        CommunicationManager.audioDictionary.TryGetValue(pPingID, out AudioClip sound);
+        if (messageSource == Runner.LocalPlayer)
+        {
+            //playing the sound
+            AudioSource.PlayClipAtPoint(sound, pVector);
+        }
+        else
+        {
+            //playing the sound
+            AudioSource.PlayClipAtPoint(sound, pVector);
+        }
         
         //Spawning the ping
         Runner.Spawn(visual, pVector, Quaternion.identity);
 
-        //playing the sound
-        AudioSource.PlayClipAtPoint(sound, pVector);
+        
     }
 }
