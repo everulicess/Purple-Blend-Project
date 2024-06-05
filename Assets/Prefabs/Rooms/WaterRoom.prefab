@@ -457,10 +457,62 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7545391525876234083, guid: c04a60e91a87c324eb30dae22763b03a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d3601e0e1b3782e429abb4666b2fb812, type: 2}
+    - target: {fileID: -7545391525876234083, guid: c04a60e91a87c324eb30dae22763b03a, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3a0f3de0e2806e1478a27844270135c4, type: 2}
+    - target: {fileID: -7545391525876234083, guid: c04a60e91a87c324eb30dae22763b03a, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 652ccf7aed2d41f4caf670360079186c, type: 2}
+    - target: {fileID: -6596783068602618935, guid: c04a60e91a87c324eb30dae22763b03a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d3601e0e1b3782e429abb4666b2fb812, type: 2}
+    - target: {fileID: -6596783068602618935, guid: c04a60e91a87c324eb30dae22763b03a, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3a0f3de0e2806e1478a27844270135c4, type: 2}
+    - target: {fileID: -6596783068602618935, guid: c04a60e91a87c324eb30dae22763b03a, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 652ccf7aed2d41f4caf670360079186c, type: 2}
+    - target: {fileID: -2482210422451474754, guid: c04a60e91a87c324eb30dae22763b03a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d3601e0e1b3782e429abb4666b2fb812, type: 2}
+    - target: {fileID: -2482210422451474754, guid: c04a60e91a87c324eb30dae22763b03a, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3a0f3de0e2806e1478a27844270135c4, type: 2}
+    - target: {fileID: -2482210422451474754, guid: c04a60e91a87c324eb30dae22763b03a, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 652ccf7aed2d41f4caf670360079186c, type: 2}
     - target: {fileID: 919132149155446097, guid: c04a60e91a87c324eb30dae22763b03a, type: 3}
       propertyPath: m_Name
       value: WaterRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 7410566369134238719, guid: c04a60e91a87c324eb30dae22763b03a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d3601e0e1b3782e429abb4666b2fb812, type: 2}
+    - target: {fileID: 7410566369134238719, guid: c04a60e91a87c324eb30dae22763b03a, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3a0f3de0e2806e1478a27844270135c4, type: 2}
+    - target: {fileID: 7410566369134238719, guid: c04a60e91a87c324eb30dae22763b03a, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 652ccf7aed2d41f4caf670360079186c, type: 2}
+    - target: {fileID: 9018870951099210322, guid: c04a60e91a87c324eb30dae22763b03a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 670ee8e64e7b9b945aa31fce3099c818, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

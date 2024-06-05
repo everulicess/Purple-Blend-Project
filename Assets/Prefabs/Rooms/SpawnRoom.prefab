@@ -866,10 +866,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1439730007547781893, guid: 7c4271bd4f33e5847b1db3dd585bc2be, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3a0f3de0e2806e1478a27844270135c4, type: 2}
+    - target: {fileID: -1439730007547781893, guid: 7c4271bd4f33e5847b1db3dd585bc2be, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: e6b1beb524c5fea4482ffcbc506269cb, type: 2}
+    - target: {fileID: -1439730007547781893, guid: 7c4271bd4f33e5847b1db3dd585bc2be, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 652ccf7aed2d41f4caf670360079186c, type: 2}
     - target: {fileID: 919132149155446097, guid: 7c4271bd4f33e5847b1db3dd585bc2be, type: 3}
       propertyPath: m_Name
       value: SpawnRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 7071182760956848314, guid: 7c4271bd4f33e5847b1db3dd585bc2be, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d7afed6cc974d52439b5bd2d071585f6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
