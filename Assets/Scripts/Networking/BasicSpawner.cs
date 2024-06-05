@@ -67,7 +67,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             return;
         networkPlayerPrefab = GetCharacter(PlayerPrefs.GetString("Character","No Character Selected"));
         //PlayerPrefs.DeleteKey("Character");
-
+        networkPlayerPrefab.SetUserID(player);
 
         Vector3 playerPos = new Vector3(0, 3f, playersJoined+2f);
 

@@ -72,6 +72,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
     float dodgeCooldown = 10f;
     float currentDodgeCooldown;
     [SerializeField] TextMeshProUGUI counterText;
+    PlayerRef myUserID;
     public override void Spawned()
     {
         if (Object.HasInputAuthority)
@@ -89,6 +90,11 @@ public class Player : NetworkBehaviour, IPlayerLeft
         m_Collector = GetComponent<Collector>();
         m_Health = GetComponent<Health>();
         m_CombatController = GetComponent<CombatController>();
+    }
+    public void SetUserID(PlayerRef ID)
+    {
+        myUserID = ID;
+        Debug.LogError($"MY player ID is {ID}");
     }
     public override void FixedUpdateNetwork()
     {
