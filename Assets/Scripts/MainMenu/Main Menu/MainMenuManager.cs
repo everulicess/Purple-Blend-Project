@@ -18,6 +18,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] GameObject JoinSessionPanel;
     [SerializeField] GameObject SettingsPanel;
     [SerializeField] GameObject MainMenuPanel;
+    [SerializeField] GameObject TutorialPanel;
 
     [SerializeField] TMP_InputField sessionName;
 
@@ -67,6 +68,13 @@ public class MainMenuManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void OnTutorialClicked()
+    {
+        HideAllPanels();
+
+        TutorialPanel.SetActive(true);
+    }
+
     public void OnSettingsClicked()
     {
         HideAllPanels();
@@ -94,6 +102,7 @@ public class MainMenuManager : MonoBehaviour
         JoinSessionPanel.SetActive(false);
         SettingsPanel.SetActive(false);
         MainMenuPanel.SetActive(false);
+        TutorialPanel.SetActive(false);
     }
 
     public void OnCreateNewGameClicked()
@@ -114,6 +123,7 @@ public class MainMenuManager : MonoBehaviour
 
         StatusPanel.SetActive(true);
     }
+
     public void OnCharacterSelectionStarted()
     {
         HideAllPanels();
