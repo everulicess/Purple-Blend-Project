@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5935967192951635053}
   - component: {fileID: 3951591085376277297}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3510040926204644308}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Stairs_Top_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7445866022619072212}
   - component: {fileID: 4955573496182901531}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hitbox2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,6 +195,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 023d6e7feed4f08428d15eb58465c770, type: 3}
       propertyPath: m_Name
       value: StairsTop
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 023d6e7feed4f08428d15eb58465c770, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

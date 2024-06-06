@@ -16,18 +16,28 @@ public class MapManager : NetworkBehaviour
     [SerializeField] private List<NetworkObject> net_Rooms = new();
     [SerializeField] private NavMeshSurface navMeshSurface;
 
+    private float endCountdownTime;
+    [SerializeField] private float maxEndCountdownTime;
+
     private List<List<bool[]>> matrix = new List<List<bool[]>>();
     private List<Vector2> generatedRooms = new List<Vector2>();
 
     private List<NetworkObject> rooms = new List<NetworkObject>();
 
     [Networked] public float totalGold { get; set; }
+    public bool canGameEnd;
+    public bool canStartCountdown;
 
     [Networked] bool areRoomsSpawned { get; set; }
     public override void Spawned()
     {
         if (areRoomsSpawned) return;
         GenerateGrid();
+    }
+
+    public override void FixedUpdateNetwork()
+    {
+        if (canStartCountdown) EndGameCountdown();
     }
 
     private void GenerateGrid()
@@ -123,21 +133,23 @@ public class MapManager : NetworkBehaviour
         }
         areRoomsSpawned = true;
         Invoke(nameof(StartEnemySpawning), 1f);
-        Debug.Log(totalGold);
     }
 
     private void StartEnemySpawning()
     {
         Invoke(nameof(NaveMeshBuild), 0.5f);
-        for (int i = 0; i < generatedRooms.Count; i++)
+        for (int i = 0; i < generatedRooms.Count-1; i++)
         {
-            for (int spawner = 0; spawner < rooms[i].transform.GetChild(4).childCount; spawner++)
+            if (rooms[i].transform.GetChild(4).childCount > 0)
             {
-                if(rooms[i].transform.GetChild(4).childCount != 0)
+                for (int spawner = 0; spawner < rooms[i].transform.GetChild(4).childCount; spawner++)
                 {
-                    rooms[i].transform.GetChild(4).transform.GetChild(spawner).TryGetComponent(out BaseSpawner baseSpawner);
-                    if (baseSpawner != null)
-                        baseSpawner.SpawnEnemy();
+                    if (rooms[i].transform.GetChild(4).childCount != 0)
+                    {
+                        rooms[i].transform.GetChild(4).transform.GetChild(spawner).TryGetComponent(out BaseSpawner baseSpawner);
+                        if (baseSpawner != null)
+                            baseSpawner.SpawnEnemy();
+                    }
                 }
             }
         }
@@ -146,6 +158,7 @@ public class MapManager : NetworkBehaviour
     private void NaveMeshBuild()
     {
         navMeshSurface.BuildNavMesh();
+        GameObject.Find("Deposit").GetComponent<Deposit>().UpdateTotalMapGold();
     }
 
     private void AddGoldCount(NetworkObject curRoom)
@@ -157,6 +170,26 @@ public class MapManager : NetworkBehaviour
             {
                 totalGold += collectables.transform.GetChild(g).GetComponent<Collectable>().goldValue;
             }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+         if (canGameEnd)
+        {
+            other.GetComponent<Player>().canEndGame = true;
+        }
+    }
+
+    private void EndGameCountdown()
+    {
+        if (endCountdownTime > 0)
+        {
+            endCountdownTime -= Time.deltaTime;
+        } else
+        {
+            endCountdownTime = 0;
+            Runner.Shutdown();
         }
     }
 }

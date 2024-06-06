@@ -7,6 +7,7 @@ enum MyButtons
 {
     PingsButton,
     PingsButtonReleased,
+    PartyButton,
     InteractButton,
     AttackButton,
     SpecialButton,

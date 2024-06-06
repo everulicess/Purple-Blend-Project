@@ -17,6 +17,7 @@ public class CharacterInputHandler : NetworkBehaviour
     bool SpecialButtonPressed = false;
     bool DodgeButtonPressed = false;
     bool MenuButtonPressed = false;
+    bool PartyButtonPressed = false;
     //testing button
     bool TestingButtonQPressed = false;
 
@@ -46,6 +47,10 @@ public class CharacterInputHandler : NetworkBehaviour
             PingButtonPressed = true;
         if (Input.GetMouseButtonUp(2))
             PingButtonReleased = true;
+
+        //Button for ending game
+        if (Input.GetKeyDown(KeyCode.P))
+            PartyButtonPressed = true;
 
         //Attack left mouse button
         if (Input.GetMouseButtonDown(0))
@@ -90,6 +95,9 @@ public class CharacterInputHandler : NetworkBehaviour
         //Ping Button released
         networkInputData.buttons.Set(MyButtons.PingsButtonReleased, PingButtonReleased);
 
+        //Party button (end game)
+        networkInputData.buttons.Set(MyButtons.PartyButton, PartyButtonPressed);
+
         //Attacking LMB
         //networkInputData.isAttackingPressed = LeftClickPressed;
         networkInputData.buttons.Set(MyButtons.AttackButton, AttackButtonPressed);
@@ -115,6 +123,7 @@ public class CharacterInputHandler : NetworkBehaviour
         DodgeButtonPressed = false;
         TestingButtonQPressed = false;
         MenuButtonPressed = false;
+        PartyButtonPressed = false;
         return networkInputData;
     }
     public void SetInWorldMousePosition()

@@ -38,6 +38,8 @@ public class Player : NetworkBehaviour, IPlayerLeft
     GameObject localCamera;
     private bool isAttacking = false;
 
+    public bool canEndGame;
+
     Collector m_Collector;
     Health m_Health;
     //Knockback and Push variables
@@ -145,6 +147,10 @@ public class Player : NetworkBehaviour, IPlayerLeft
         // Test button to damage player character
         if(data.buttons.IsSet(MyButtons.TestingButtonQ))
             m_Health.OnTakeDamage(10);
+
+        //For ending game
+        if (canEndGame && data.buttons.IsSet(MyButtons.PartyButton))
+            EndGameCountdown();
     }
 
     private void Dodge(NetworkInputData data)
@@ -274,5 +280,10 @@ public class Player : NetworkBehaviour, IPlayerLeft
     public void OpenMenu()
     {
         escapeMenu.gameObject.SetActive(!escapeMenu.activeInHierarchy);
+    }
+
+    private void EndGameCountdown()
+    {
+        GameObject.Find("MapManager").GetComponent<MapManager>().canStartCountdown = true;
     }
 }
