@@ -134,13 +134,13 @@ public class Health : NetworkBehaviour, IDamageable
         if (isPlayer)
         {
             model.GetComponentInParent<Player>().enabled = true;
+            HealthPoints = maxHealthPoints;
+            UpdateHealthBar();
         }
         else
         {
             model.GetComponentInParent<BaseEnemy>().enabled = true;
         }
-        HealthPoints = maxHealthPoints;
-        UpdateHealthBar();
         HealthInGameUI.SetActive(true);
         model.SetActive(true);
     }

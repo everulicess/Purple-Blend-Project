@@ -471,7 +471,7 @@ MonoBehaviour:
   - {fileID: 1458037904619353440}
   _isDead: 0
   maxHealthPoints: 100
-  model: {fileID: 0}
+  model: {fileID: 7557073420346008603}
 --- !u!114 &717622672262634564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,7 +493,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0e17f8c173e40fc4d8ea7ffe6746d22c, type: 2}
   specialType: {fileID: 0}
   hitbox: {fileID: 8930525562460017052}
-  attackArea: {fileID: 0}
+  attackArea: {fileID: 8930525562460017052}
   point: {x: 0, y: 0, z: 0}
 --- !u!114 &-3939159237397215304
 MonoBehaviour:
@@ -2490,5 +2490,10 @@ PrefabInstance:
 --- !u!4 &410415477762405664 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9187086718258645966, guid: 35a49dc41ab151a418bf6eb0a39a065a, type: 3}
+  m_PrefabInstance: {fileID: 8848728852262665966}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7557073420346008603 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1309736321116838645, guid: 35a49dc41ab151a418bf6eb0a39a065a, type: 3}
   m_PrefabInstance: {fileID: 8848728852262665966}
   m_PrefabAsset: {fileID: 0}

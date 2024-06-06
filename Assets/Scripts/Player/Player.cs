@@ -207,7 +207,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
     private void Falling()
     {
         if (transform.position.y <= -7f)
-            m_Health.OnTakeDamage(250);
+            m_Health.OnTakeDamage(100);
     }
 
     private void WalkAnim()
