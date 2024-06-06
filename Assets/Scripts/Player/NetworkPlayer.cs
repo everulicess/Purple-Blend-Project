@@ -15,15 +15,15 @@ public class NetworkPlayer : NetworkBehaviour
 
     [Header("Classes Data")]
     [SerializeField] CharacterData[] ClassesData;
-    [HideInInspector] public CharacterData m_CharacterData;
+    [HideInInspector] public CharacterData m_CharacterData { get; set; }
     Animator m_Animator;
-
-    GameObject m_Model { get; set; }
+    [Networked] private Characters m_Character { get; set; }
+    [Networked] bool isInitialized { get; set; }
     // Start is called before the first frame update
     void Start()
     {
         //Subscribe to an event when character selection is done
-        ClassSelection.OnCharacterSet += SpawnTheModel;
+        ClassSelection.OnCharacterSet += SetCharacterData;
         SelectionMenuHandler();
     }
     public override void Spawned()
@@ -36,11 +36,14 @@ public class NetworkPlayer : NetworkBehaviour
         {
             ClassSelecionCanvas.SetActive(false);
         }
-        foreach (CharacterData item in ClassesData)
-        {
-            item.Model.SetActive(false);
-        }
         m_Animator = GetComponent<Animator>();
+
+        if (isInitialized)
+        {
+            RPC_EnableModel(m_Character);
+            m_Animator.avatar = m_CharacterData.CharacterAvatar;
+            m_Animator.runtimeAnimatorController = m_CharacterData.AnimationController;
+        }
     }
     private void SelectionMenuHandler()
     {
@@ -51,22 +54,23 @@ public class NetworkPlayer : NetworkBehaviour
         else
         {
             ClassSelecionCanvas.SetActive(false);
-
         }
     }
-    public void SpawnTheModel(Characters nameOfSpawningModel)
+    public void SetCharacterData(Characters nameOfSpawningModel)
     {
-        //RPC_SpawnModel(nameOfSpawningModel);
-        
+        Debug.LogError($"Has Input Authority {HasInputAuthority}");
+        if (!Object.HasInputAuthority)
+            return;
+        if (!NetworkPlayer.Local)
+            return;
         foreach (CharacterData data in ClassesData)
         {
             if (data.Name == nameOfSpawningModel)
             {
-                m_Model = data.Model;
-                m_CharacterData = data;
+                m_Character = data.Name;
             }
         }
-        ClassSelection.OnCharacterSet -= SpawnTheModel;
+        ClassSelection.OnCharacterSet -= SetCharacterData;
         InitializeCharacterData();
     }
     private void InitializeCharacterData()
@@ -75,42 +79,49 @@ public class NetworkPlayer : NetworkBehaviour
             return;
         if (!HasInputAuthority)
             return;
-        //model activation
-        RPC_EnableModel();
-        m_Animator.avatar = m_CharacterData.CharacterAvatar;
-        m_Animator.runtimeAnimatorController = m_CharacterData.AnimationController;
+        RPC_EnableModel(m_Character);
+        
+        isInitialized = true;
+        
     }
-    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
-    public void RPC_EnableModel( RpcInfo info = default)
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
+    public void RPC_EnableModel(Characters myCharacter, RpcInfo info = default)
     {
-        RPC_RelayenableModel( info.Source);
+        RPC_RelayenableModel(myCharacter, info.Source);
     }
 
-    [Rpc(RpcSources.StateAuthority, RpcTargets.All/*, HostMode = RpcHostMode.SourceIsServer*/)]
-    public void RPC_RelayenableModel(PlayerRef messageSource)
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, HostMode = RpcHostMode.SourceIsServer)]
+    public void RPC_RelayenableModel(Characters myCharacter, PlayerRef messageSource)
     {
         string debugMsg = " ";
-        foreach (CharacterData data in ClassesData)
+        if (messageSource == Runner.LocalPlayer)
         {
-            if (data.Model == m_Model)
+            RPCForeachLoop(myCharacter);
+            debugMsg += $"You said: {m_CharacterData.Model}\n with character {m_Character}\n";
+        }
+        else
+        {
+            RPCForeachLoop(myCharacter);
+            debugMsg += $"Some other player said: {m_CharacterData.Model}\nwith character {m_Character}\n";
+        }
+        m_Animator.avatar = m_CharacterData.CharacterAvatar;
+        m_Animator.runtimeAnimatorController = m_CharacterData.AnimationController;
+        Debug.LogError(debugMsg);
+    }
+
+    private void RPCForeachLoop(Characters myCharacter)
+    {
+        foreach (CharacterData item in ClassesData)
+        {
+            if (myCharacter == item.Name)
             {
-                m_Model.SetActive(true);
-                Debug.LogError(m_Model);
+                m_CharacterData = item;
+            }
+            else
+            {
+                Runner.Despawn(item.Model);
             }
         }
-
-        //if (messageSource == Runner.LocalPlayer)
-        //{
-        //    m_CharacterData.Model.SetActive(true);
-
-        //    debugMsg += $"You said: {m_CharacterData.Model}\n";
-        //}
-        //else
-        //{
-
-        //    debugMsg += $"Some other player said: {m_CharacterData.Model}\n";
-        //}
-        Debug.LogError(debugMsg);
     }
 }
 [Serializable]
@@ -121,9 +132,10 @@ public struct CharacterData
     public CharacterStatsScrObj StatsData;
 
     [Header("Player Model")]
-    public GameObject Model;
+    public NetworkObject Model;
 
     [Header("Animations Data")]
     public AnimatorController AnimationController;
     public Avatar CharacterAvatar;
+
 }
