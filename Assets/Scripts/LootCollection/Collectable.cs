@@ -8,7 +8,7 @@ public class Collectable : NetworkBehaviour
 {
     public NetworkObject net_ThisObject;
     protected Collector playerCollector;
-    [SerializeField] protected float goldValue;
+    public float goldValue;
     public virtual void TryInteracting(Collector p_Collector)
     {
         playerCollector = p_Collector;

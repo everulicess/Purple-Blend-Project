@@ -16,7 +16,6 @@ public class SetTargets : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (m_CombatController == null) return;
-        if (other.CompareTag(thisObjectTag)) return;
         //Gets the Health script
         other.TryGetComponent(out Health health);
         // Adds object to potential list of targets.

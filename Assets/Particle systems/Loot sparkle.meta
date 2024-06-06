@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Particle systems/Loot sparkle.meta
 guid: 47b7eb9604b5b6248b2de54c14ba61f8
+========
+guid: ed00ebfa8fa987b458949c40113b7a9c
+>>>>>>>> Merging-branches:Assets/Particle systems/Pit fog.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

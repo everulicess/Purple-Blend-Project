@@ -7,7 +7,10 @@ using TMPro;
 public class Deposit : NetworkBehaviour
 {
     [Networked] float globalGold { get; set; }
-    TextMeshProUGUI TMP_GlobalGold;
+    private TextMeshProUGUI TMP_GlobalGold;
+    private TextMeshProUGUI TMP_GoldPercentage;
+    private float goldPercentage;
+    private float totalMapGold;
 
     ChangeDetector changes;
 
@@ -15,6 +18,9 @@ public class Deposit : NetworkBehaviour
     {
         TMP_GlobalGold = GameObject.Find("Gold Collected").GetComponentInChildren<TextMeshProUGUI>();
         TMP_GlobalGold.text = globalGold.ToString();
+        TMP_GoldPercentage = GameObject.Find("Gold Percentage").GetComponent<TextMeshProUGUI>();
+        TMP_GoldPercentage.text = goldPercentage.ToString() + "%";
+        totalMapGold = GameObject.Find("MapManager").GetComponent<MapManager>().totalGold;
         changes = GetChangeDetector(ChangeDetector.Source.SimulationState);
     }
     public override void Render()
@@ -40,10 +46,14 @@ public class Deposit : NetworkBehaviour
             return;
 
         TMP_GlobalGold.text = globalGold.ToString();
+        TMP_GoldPercentage.text = goldPercentage.ToString("0.0") + "%";
     }
 
     public void UpdateGlobalGold(float pAmountToIncrease)
     {
+        totalMapGold = GameObject.Find("MapManager").GetComponent<MapManager>().totalGold;
         globalGold += pAmountToIncrease;
+        goldPercentage = (globalGold / totalMapGold) * 100;
+        Debug.Log(goldPercentage);
     }
 }

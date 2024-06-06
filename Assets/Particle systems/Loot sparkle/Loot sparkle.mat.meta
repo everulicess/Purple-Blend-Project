@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Particle systems/Loot sparkle/Loot sparkle.mat.meta
 guid: 8a4feca25a5bb1440b29076dc049c933
 NativeFormatImporter:
+========
+guid: f0f875e14e94b8847b0fefac06ed93f8
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> Merging-branches:Assets/Models/Characters/BoomstickFBX.meta
   externalObjects: {}
   mainObjectFileID: 2100000
   userData: 

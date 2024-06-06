@@ -96,7 +96,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0
+  m_StepOffset: 2
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
@@ -272,12 +272,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ranged: 0
+  special: 0
   comboMaxTime: 2
   attackTypes:
   - {fileID: 11400000, guid: fbd0099305d371b4cba9bcc282a3870f, type: 2}
   - {fileID: 11400000, guid: cedaf195cdbed1d49b2b5c3ded274111, type: 2}
   - {fileID: 11400000, guid: 0e17f8c173e40fc4d8ea7ffe6746d22c, type: 2}
+  specialType: {fileID: 0}
   hitbox: {fileID: 8930525562460017052}
+  attackArea: {fileID: 0}
   point: {x: 0, y: 0, z: 0}
 --- !u!114 &3081060940803887086
 MonoBehaviour:
@@ -1114,10 +1117,10 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 1152
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 160
+    m_Bits: 32
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0

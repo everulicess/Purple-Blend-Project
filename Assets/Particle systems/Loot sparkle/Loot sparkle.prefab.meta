@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Particle systems/Loot sparkle/Loot sparkle.prefab.meta
 guid: 008e3d76e66f0a843b5d1212e8c42182
 PrefabImporter:
+========
+guid: d2def448910fda94f80e54c6b1b8e4e0
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> Merging-branches:Assets/Prefabs/VFX.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

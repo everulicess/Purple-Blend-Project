@@ -72,6 +72,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
     float dodgeCooldown = 10f;
     float currentDodgeCooldown;
     [SerializeField] TextMeshProUGUI counterText;
+    PlayerRef myUserID;
     public override void Spawned()
     {
         if (Object.HasInputAuthority)
@@ -80,6 +81,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
             localCamera = Instantiate(cam);
             localCamera.GetComponent<LocalCamera>().SetTarget(camTarget);
             PlayerCamera = localCamera.GetComponentInChildren<Camera>();
+            //Debug.LogError($"RPC with character is {PlayerPrefs.GetString("Character")}");
         }
         m_InGameMenu = GetComponentInChildren<InGameMenu>();
         m_CharacterController = GetComponent<NetworkCharacterController>();
@@ -88,6 +90,11 @@ public class Player : NetworkBehaviour, IPlayerLeft
         m_Collector = GetComponent<Collector>();
         m_Health = GetComponent<Health>();
         m_CombatController = GetComponent<CombatController>();
+    }
+    public void SetUserID(PlayerRef ID)
+    {
+        myUserID = ID;
+        Debug.LogError($"MY player ID is {ID}");
     }
     public override void FixedUpdateNetwork()
     {
@@ -111,6 +118,12 @@ public class Player : NetworkBehaviour, IPlayerLeft
         if (data.buttons.IsSet(MyButtons.AttackButton) && !IsAttacking && !isDodging) 
         {
             IsAttacking = true;
+            FaceTo(data);
+        }
+        if (data.buttons.IsSet(MyButtons.SpecialButton) && !IsAttacking && !isDodging)
+        {
+            IsAttacking = true;
+            m_CombatController.special = true;
             FaceTo(data);
         }
 
@@ -193,8 +206,8 @@ public class Player : NetworkBehaviour, IPlayerLeft
     }
     private void Falling()
     {
-        if (transform.position.y <= -1.5f)
-            m_Health.OnTakeDamage(250);
+        if (transform.position.y <= -7f)
+            m_Health.OnTakeDamage(100);
     }
 
     private void WalkAnim()
