@@ -8,7 +8,7 @@ using TMPro;
 [RequireComponent(
     typeof(NetworkCharacterController),
     typeof(NetworkMecanimAnimator),
-    typeof(Collector)
+    typeof(CharacterInputHandler)
     )]
 public class Player : NetworkBehaviour, IPlayerLeft
 {
@@ -79,7 +79,8 @@ public class Player : NetworkBehaviour, IPlayerLeft
         }
         m_InGameMenu = GetComponentInChildren<InGameMenu>();
         m_CharacterController = GetComponent<NetworkCharacterController>();
-        m_CharacterController.maxSpeed = Character.MovementStats.MovementSpeed;
+        //m_CharacterController.maxSpeed = Character.MovementStats.MovementSpeed;
+        m_CharacterController.maxSpeed = 5;
         anim = GetComponent<Animator>();
         m_Collector = GetComponent<Collector>();
         m_Health = GetComponent<Health>();

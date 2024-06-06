@@ -7,28 +7,27 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using Fusion;
 
-public class ClassSelectionHandler : MonoBehaviour
+public class ClassSelection : MonoBehaviour
 {
     public static UnityAction<Characters> OnCharacterSet;
     List<Characters> characters = new();
     int currentCharacter;
-    [SerializeField] GameObject[] PanelToHide;
-
-
+    bool selectionDone { get; set; }
     [Header("Characters")]
-    [SerializeField] NetworkObject TheMule;
-    [SerializeField] NetworkObject TheBoomstick;
-    [SerializeField] NetworkObject TheSiren;
+    [SerializeField] GameObject TheMule;
+    [SerializeField] GameObject TheBoomstick;
+    [SerializeField] GameObject TheSiren;
 
     private void Start()
     {
         characters = Enum.GetValues(typeof(Characters)).Cast<Characters>().ToList();
     }
-
-    private void SetCharacterSelected()
+   
+    public void SetCharacterSelected()
     {
         if (!NetworkPlayer.Local)
             return;
+        Destroy(gameObject);
         switch (currentCharacter)
         {
             case 0:
@@ -61,26 +60,19 @@ public class ClassSelectionHandler : MonoBehaviour
         {
             case 0:
                 HideAllCharacters();
-                //PlayerPrefs.DeleteKey("Character");
                 TheMule.gameObject.SetActive(true);
-                //PlayerPrefs.SetString("Character", nameof(Characters.TheMule));
                 break;
             case 1:
                 HideAllCharacters();
-                //PlayerPrefs.DeleteKey("Character");
                 TheBoomstick.gameObject.SetActive(true);
-                //PlayerPrefs.SetString("Character", nameof(Characters.TheBoomstick));
                 break;
             case 2:
                 HideAllCharacters();
                 TheSiren.gameObject.SetActive(true);
-                //PlayerPrefs.DeleteKey("Character");
-                //PlayerPrefs.SetString("Character", nameof(Characters.TheSiren));
                 break;
             default:
                 break;
         }
-        //PlayerPrefs.Save();
     }
     private void HideAllCharacters()
     {
@@ -99,8 +91,6 @@ public class ClassSelectionHandler : MonoBehaviour
     }
     private void OnEnable()
     {
-        foreach (GameObject item in PanelToHide)
-            item.SetActive(false);
         ShowCharacter();
     }
 }

@@ -61,4 +61,4 @@ MonoBehaviour:
   TheMule: {fileID: 8905188441464483676, guid: 0abb4620683f14f4c9a1aff7bd5d2a39, type: 3}
   TheBoomstick: {fileID: 8905188441464483676, guid: 91b7f14a791887445a97f60cac7629d3, type: 3}
   TheSiren: {fileID: 8905188441464483676, guid: d37356c108e0ce64aad82e9f09b9a99a, type: 3}
-  TestObject: {fileID: 2779597690464500530, guid: 9856ad1d3eda7624ba474bbcce130216, type: 3}
+  TestObject: {fileID: 1485486381354398839, guid: 9ab9f9ec613a0ae4597007dcf2002fe3, type: 3}

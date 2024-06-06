@@ -21,7 +21,7 @@ public class PlayerCommunication : NetworkBehaviour
     {
         if (Player.Local == null)
             return;
-        if (!m_Player.Object.HasInputAuthority)
+        if (!Object.HasInputAuthority)
             return;
 
         if (!GetInput(out NetworkInputData data)) 
@@ -51,7 +51,7 @@ public class PlayerCommunication : NetworkBehaviour
     public void SetPingToDisplay(Pings pPing)
     {
         //check if it's a player
-        if (!m_Player.Object.HasInputAuthority) 
+        if (!Object.HasInputAuthority) 
             return;
 
         pingID = pPing;

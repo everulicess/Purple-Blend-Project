@@ -11,10 +11,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     public NetworkRunner networkRunner;
     //character classes
-    Player networkPlayerPrefab;
-    [SerializeField] Player TheMule;
-    [SerializeField] Player TheBoomstick;
-    [SerializeField] Player TheSiren;
+
     [SerializeField]NetworkObject TestObject;
     private Dictionary<PlayerRef, NetworkObject> spawnCharacter = new Dictionary<PlayerRef, NetworkObject>();
     float playersJoined = 0f;
@@ -24,21 +21,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     //Input
     CharacterInputHandler characterInputHandler;
-    Player GetCharacter(string characterToSpawn)
-    {
-        //Debug.LogError(characterToSpawn + " ----------------------------------------------");
-        if (!PlayerPrefs.HasKey("Character") && SceneManager.GetActiveScene().name == "MenuScene")
-            return null;
-        return characterToSpawn switch
-        {
-            nameof(Characters.TheMule) => TheMule,
-            nameof(Characters.TheBoomstick) => TheBoomstick,
-            nameof(Characters.TheSiren) => TheSiren,
-            _ => throw new NotImplementedException()
-        };
-        
-
-    }
+    
     private void Awake()
     {
         sessionListUIHandler = FindObjectOfType<SessionListUIHandler>(true);
@@ -65,9 +48,6 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             return;
         if (SceneManager.GetActiveScene().name == "MenuScene") 
             return;
-        //networkPlayerPrefab = GetCharacter(PlayerPrefs.GetString("Character","No Character Selected"));
-        //PlayerPrefs.DeleteKey("Character");
-        networkPlayerPrefab.SetUserID(player);
 
         Vector3 playerPos = new Vector3(0, 3f, playersJoined+2f);
 
