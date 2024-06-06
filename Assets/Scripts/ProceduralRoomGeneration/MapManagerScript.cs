@@ -22,6 +22,7 @@ public class MapManager : NetworkBehaviour
     private List<NetworkObject> rooms = new List<NetworkObject>();
 
     [Networked] public float totalGold { get; set; }
+    public bool canGameEnd;
 
     [Networked] bool areRoomsSpawned { get; set; }
     public override void Spawned()
@@ -129,15 +130,18 @@ public class MapManager : NetworkBehaviour
     private void StartEnemySpawning()
     {
         Invoke(nameof(NaveMeshBuild), 0.5f);
-        for (int i = 0; i < generatedRooms.Count; i++)
+        for (int i = 0; i < generatedRooms.Count-1; i++)
         {
-            for (int spawner = 0; spawner < rooms[i].transform.GetChild(4).childCount; spawner++)
+            if (rooms[i].transform.GetChild(4).childCount > 0)
             {
-                if(rooms[i].transform.GetChild(4).childCount != 0)
+                for (int spawner = 0; spawner < rooms[i].transform.GetChild(4).childCount; spawner++)
                 {
-                    rooms[i].transform.GetChild(4).transform.GetChild(spawner).TryGetComponent(out BaseSpawner baseSpawner);
-                    if (baseSpawner != null)
-                        baseSpawner.SpawnEnemy();
+                    if (rooms[i].transform.GetChild(4).childCount != 0)
+                    {
+                        rooms[i].transform.GetChild(4).transform.GetChild(spawner).TryGetComponent(out BaseSpawner baseSpawner);
+                        if (baseSpawner != null)
+                            baseSpawner.SpawnEnemy();
+                    }
                 }
             }
         }
@@ -158,5 +162,10 @@ public class MapManager : NetworkBehaviour
                 totalGold += collectables.transform.GetChild(g).GetComponent<Collectable>().goldValue;
             }
         }
+    }
+
+    private void GameEnd()
+    {
+
     }
 }
