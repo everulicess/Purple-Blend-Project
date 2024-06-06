@@ -309,7 +309,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 2
+  m_StepOffset: 0.5
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
@@ -349,6 +349,7 @@ MonoBehaviour:
   escapeMenu: {fileID: 3034934771009336272}
   attackLength: 0.1
   cam: {fileID: 7072012241765596909, guid: ed809da431a1cdb4890e5d69d1035499, type: 3}
+  canEndGame: 0
   counterText: {fileID: 1837605720445970249}
 --- !u!136 &6075541524490898695
 CapsuleCollider:
