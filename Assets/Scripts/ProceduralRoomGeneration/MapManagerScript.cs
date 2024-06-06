@@ -7,7 +7,7 @@ using Unity.AI.Navigation;
 using UnityEngine;
 using TMPro;
 
-public class ProcGenTest : NetworkBehaviour
+public class MapManager : NetworkBehaviour
 {
     [SerializeField] private Vector2 gridSize;
     [SerializeField] private int dungeonSize;
@@ -20,6 +20,8 @@ public class ProcGenTest : NetworkBehaviour
     private List<Vector2> generatedRooms = new List<Vector2>();
 
     private List<NetworkObject> rooms = new List<NetworkObject>();
+
+    [Networked] public float totalGold { get; set; }
 
     [Networked] bool areRoomsSpawned { get; set; }
     public override void Spawned()
@@ -116,10 +118,12 @@ public class ProcGenTest : NetworkBehaviour
                     Runner.Despawn(net_room.transform.GetChild(3).gameObject.transform.GetChild(door).GetComponent<NetworkObject>());
                 }
             }
+            AddGoldCount(net_room);
             rooms.Add(net_room);
         }
         areRoomsSpawned = true;
         Invoke(nameof(StartEnemySpawning), 1f);
+        Debug.Log(totalGold);
     }
 
     private void StartEnemySpawning()
@@ -142,5 +146,17 @@ public class ProcGenTest : NetworkBehaviour
     private void NaveMeshBuild()
     {
         navMeshSurface.BuildNavMesh();
+    }
+
+    private void AddGoldCount(NetworkObject curRoom)
+    {
+        GameObject collectables = curRoom.transform.GetChild(5).gameObject;
+        for (int g = 0; g < collectables.transform.childCount; g++)
+        {
+            if (collectables.transform.GetChild(g).GetComponent<Collectable>())
+            {
+                totalGold += collectables.transform.GetChild(g).GetComponent<Collectable>().goldValue;
+            }
+        }
     }
 }
