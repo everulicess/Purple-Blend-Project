@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6673900499212537152}
   - component: {fileID: -6358742180191387325}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pillar_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,6 +109,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: cde7d2e2b9ffcfa4b98021e3aef37e17, type: 3}
       propertyPath: m_Name
       value: Pillar
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cde7d2e2b9ffcfa4b98021e3aef37e17, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
