@@ -8,8 +8,7 @@ public class Deposit : NetworkBehaviour
 {
     [Networked] float globalGold { get; set; }
     private TextMeshProUGUI TMP_GlobalGold;
-    private TextMeshProUGUI TMP_GoldPercentage;
-    private float goldPercentage;
+    private float goldGoal;
     private float totalMapGold;
     private MapManager mapManager;
 
@@ -19,10 +18,9 @@ public class Deposit : NetworkBehaviour
     {
         mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
         TMP_GlobalGold = GameObject.Find("Gold Collected").GetComponentInChildren<TextMeshProUGUI>();
-        TMP_GlobalGold.text = globalGold.ToString();
-        TMP_GoldPercentage = GameObject.Find("Gold Percentage").GetComponent<TextMeshProUGUI>();
-        TMP_GoldPercentage.text = goldPercentage.ToString() + "%";
         totalMapGold = mapManager.totalGold;
+        goldGoal = totalMapGold / 2;
+        TMP_GlobalGold.text = $"{globalGold}/{goldGoal}";
         changes = GetChangeDetector(ChangeDetector.Source.SimulationState);
     }
     public override void Render()
@@ -47,18 +45,21 @@ public class Deposit : NetworkBehaviour
         if (previousValue !> currentValue)
             return;
 
-        TMP_GlobalGold.text = globalGold.ToString();
-        TMP_GoldPercentage.text = goldPercentage.ToString("0.0") + "%";
+        TMP_GlobalGold.text = $"{globalGold}/{goldGoal}";
     }
-
     public void UpdateGlobalGold(float pAmountToIncrease)
     {
         totalMapGold = mapManager.totalGold;
         globalGold += pAmountToIncrease;
-        goldPercentage = (globalGold / totalMapGold) * 100;
-        if (goldPercentage >= 50)
+        goldGoal = totalMapGold / 2;
+        if (globalGold >= goldGoal)
         {
             mapManager.canGameEnd = true;
         }
+    }
+
+    public void UpdateTotalMapGold()
+    {
+        TMP_GlobalGold.text = $"{globalGold}/{goldGoal}";
     }
 }
