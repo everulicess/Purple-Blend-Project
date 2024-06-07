@@ -184,7 +184,6 @@ public class MapManager : NetworkBehaviour
             other.GetComponent<Player>().canEndGame = true;
         }
     }
-
     private void EndGameCountdown()
     {
         if (endCountdownTime > 0)
@@ -196,7 +195,8 @@ public class MapManager : NetworkBehaviour
             MuleDance.SetActive(true);
             SirenDance.SetActive(true);
             BoomstickDance.SetActive(true);
-            GameObject.Find("Player").GetComponent < Player.ChangeCamera();
+            //GameObject.Find("Player").GetComponent <Player>().ChangeCamera();
+            FindObjectOfType<Player>().ChangeCamera();
             //Runner.Shutdown();
         }
     }

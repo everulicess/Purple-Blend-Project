@@ -291,7 +291,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
         GameObject.Find("MapManager").GetComponent<MapManager>().canStartCountdown = true;
     }
 
-    private void ChangeCamera()
+    public void ChangeCamera()
     {
         cam.SetActive(false);
         endCam.SetActive(true);
