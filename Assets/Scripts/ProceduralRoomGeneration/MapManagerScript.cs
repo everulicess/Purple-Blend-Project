@@ -15,7 +15,11 @@ public class MapManager : NetworkBehaviour
     [SerializeField] private int offset;
     [SerializeField] private List<NetworkObject> net_Rooms = new();
     [SerializeField] private NavMeshSurface navMeshSurface;
-
+    //Endgame dancing
+    [SerializeField] private GameObject MuleDance;
+    [SerializeField] private GameObject SirenDance;
+    [SerializeField] private GameObject BoomstickDance;
+    //
     private float endCountdownTime;
     [SerializeField] private float maxEndCountdownTime;
 
@@ -189,7 +193,11 @@ public class MapManager : NetworkBehaviour
         } else
         {
             endCountdownTime = 0;
-            Runner.Shutdown();
+            MuleDance.SetActive(true);
+            SirenDance.SetActive(true);
+            BoomstickDance.SetActive(true);
+            GameObject.Find("Player").GetComponent < Player.ChangeCamera();
+            //Runner.Shutdown();
         }
     }
 }

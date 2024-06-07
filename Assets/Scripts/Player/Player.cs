@@ -41,6 +41,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
     private readonly Quaternion skew = Quaternion.Euler(0, 45, 0);
 
     [SerializeField] GameObject cam;
+    [SerializeField] GameObject endCam;
     GameObject localCamera;
     private bool isAttacking = false;
 
@@ -288,5 +289,11 @@ public class Player : NetworkBehaviour, IPlayerLeft
     private void EndGameCountdown()
     {
         GameObject.Find("MapManager").GetComponent<MapManager>().canStartCountdown = true;
+    }
+
+    private void ChangeCamera()
+    {
+        cam.SetActive(false);
+        endCam.SetActive(true);
     }
 }
