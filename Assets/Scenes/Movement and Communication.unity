@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7062,6 +7062,9 @@ MonoBehaviour:
   - {fileID: 8100749371925439408, guid: f1362c74c798f524ba36b7f18478d86b, type: 3}
   - {fileID: 4620815820868623339, guid: 36677bd8989a51f42baf845806f59ef2, type: 3}
   navMeshSurface: {fileID: 20829246}
+  MuleDance: {fileID: 0}
+  SirenDance: {fileID: 0}
+  BoomstickDance: {fileID: 0}
   maxEndCountdownTime: 5
   _totalGold: 0
   canGameEnd: 0
