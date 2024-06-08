@@ -72,7 +72,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
     bool isDodging = false;
     bool canDodge = true;
     float dodgeTime = 0.2f;
-    float dodgeCooldown = 10f;
+    float dodgeCooldown = 3f;
     float currentDodgeCooldown;
     [SerializeField] TextMeshProUGUI counterText;
     PlayerRef myUserID;
@@ -133,7 +133,6 @@ public class Player : NetworkBehaviour, IPlayerLeft
 
         if (data.buttons.IsSet(MyButtons.DodgeButton) && !isDodging)
             Dodge(data);
-        ResetDodge();
 
         //Interaction using E
         m_Collector.SetInteractionBool(data.buttons.IsSet(MyButtons.InteractButton));
@@ -153,7 +152,11 @@ public class Player : NetworkBehaviour, IPlayerLeft
         if (canEndGame && data.buttons.IsSet(MyButtons.PartyButton))
             EndGameCountdown();
     }
+    private void Update()
+    {
+        ResetDodge();
 
+    }
     private void Dodge(NetworkInputData data)
     {
         
@@ -192,7 +195,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
     {
         if (currentDodgeCooldown > 0)
         {
-            currentDodgeCooldown -= Runner.DeltaTime;
+            currentDodgeCooldown -= Time.deltaTime;
             counterText.text = currentDodgeCooldown.ToString("0.0");
         }
         else
