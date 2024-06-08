@@ -55,6 +55,10 @@ public class Collector : NetworkBehaviour
         relicSpotsInGame = relicInGameUI.GetComponentsInChildren<Image>();
         RelicsUIUpdate();
         OnCarriedPocketChange(0, 1);
+        if (Player.Local)
+        {
+            CarriedPocketLoot = 0;
+        }
     }
     private void Update()
     {
