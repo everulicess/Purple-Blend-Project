@@ -1509,9 +1509,9 @@ GameObject:
   - component: {fileID: 1103896055911264908}
   - component: {fileID: 9002599310421917074}
   - component: {fileID: 4089965848517890455}
+  - component: {fileID: 1183131773836672217}
   - component: {fileID: 670566111972039557}
   - component: {fileID: 3806513637618292944}
-  - component: {fileID: 1183131773836672217}
   - component: {fileID: 377796069833347128}
   - component: {fileID: 7189814888746850756}
   - component: {fileID: 7697160831159712749}
@@ -1594,16 +1594,27 @@ MonoBehaviour:
     Model: {fileID: 2505786419938195453}
     AnimationController: {fileID: 9100000, guid: 591d410195729a64697a63eaeb361ef3, type: 2}
     CharacterAvatar: {fileID: 9000000, guid: 6967c77fb4e279441814e6bdb763674c, type: 3}
-  - Name: 2
-    StatsData: {fileID: 11400000, guid: 3d8ac073263b2bc47aea08280ea88043, type: 2}
-    Model: {fileID: 8890269989420567679}
-    AnimationController: {fileID: 9100000, guid: 488ac54ec6737d04f850c4367658c77a, type: 2}
-    CharacterAvatar: {fileID: 9000000, guid: fb1606a4056b13f4ea84bf74783d7c71, type: 3}
   - Name: 1
     StatsData: {fileID: 11400000, guid: c21266e585e919b41b10409d88097509, type: 2}
     Model: {fileID: 2733693263997277682}
     AnimationController: {fileID: 9100000, guid: 8ffc7f34426c756439c015654a46930e, type: 2}
     CharacterAvatar: {fileID: 9000000, guid: 4343caeaec892f24c90fcfaaa46a565f, type: 3}
+  - Name: 2
+    StatsData: {fileID: 11400000, guid: 3d8ac073263b2bc47aea08280ea88043, type: 2}
+    Model: {fileID: 8890269989420567679}
+    AnimationController: {fileID: 9100000, guid: 488ac54ec6737d04f850c4367658c77a, type: 2}
+    CharacterAvatar: {fileID: 9000000, guid: fb1606a4056b13f4ea84bf74783d7c71, type: 3}
+  Components:
+    m_NetworkCharacterController: {fileID: 4089965848517890455}
+    m_CharacterController: {fileID: 9002599310421917074}
+    m_Animator: {fileID: 1183131773836672217}
+    m_NetworkAnimator: {fileID: 670566111972039557}
+    m_Player: {fileID: 3806513637618292944}
+    m_Health: {fileID: 377796069833347128}
+    m_CharacterInputHandler: {fileID: 7189814888746850756}
+    m_CombatController: {fileID: 7697160831159712749}
+    m_PlayerCommunication: {fileID: 1803561057118086009}
+    m_Collector: {fileID: 1881039352488583462}
 --- !u!143 &9002599310421917074
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1648,44 +1659,6 @@ MonoBehaviour:
   braking: 400
   maxSpeed: 6
   rotationSpeed: 0
---- !u!114 &670566111972039557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6446052993945574948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Animator: {fileID: 1183131773836672217}
-  TotalWords: 0
-  ApplyTiming: 2
-  SyncSettings: 79
-  StateHashes: 
-  TriggerHashes: 
---- !u!114 &3806513637618292944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6446052993945574948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95929a67334595943b010b255285fc94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 360
-  Character: {fileID: 11400000, guid: 6135ebfec20cf754093bf17873487e75, type: 2}
-  camTarget: {fileID: 7119400449723272008}
-  escapeMenu: {fileID: 1387436524892417084}
-  attackLength: 1.6
-  cam: {fileID: 7072012241765596909, guid: ed809da431a1cdb4890e5d69d1035499, type: 3}
-  canEndGame: 0
-  counterText: {fileID: 2966122141017780397}
 --- !u!95 &1183131773836672217
 Animator:
   serializedVersion: 5
@@ -1707,6 +1680,43 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &670566111972039557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6446052993945574948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 1183131773836672217}
+  TotalWords: 0
+  ApplyTiming: 2
+  SyncSettings: 127
+  StateHashes: 
+  TriggerHashes: 
+--- !u!114 &3806513637618292944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6446052993945574948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95929a67334595943b010b255285fc94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnSpeed: 360
+  camTarget: {fileID: 7119400449723272008}
+  escapeMenu: {fileID: 1387436524892417084}
+  attackLength: 1.6
+  cam: {fileID: 7072012241765596909, guid: ed809da431a1cdb4890e5d69d1035499, type: 3}
+  canEndGame: 0
+  counterText: {fileID: 2966122141017780397}
 --- !u!114 &377796069833347128
 MonoBehaviour:
   m_ObjectHideFlags: 0

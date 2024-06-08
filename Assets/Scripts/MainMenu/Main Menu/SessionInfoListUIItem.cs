@@ -36,7 +36,6 @@ public class SessionInfoListUIItem : MonoBehaviour
     }
     public void OnClick()
     {
-        mainMenuManager.SetMySessionInfo(sessionInfo);
         OnJoinSession?.Invoke(sessionInfo);
     }
 
