@@ -14,7 +14,6 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] GameObject StartGamePanel;
     [SerializeField] GameObject SessionBrowserPanel;
     [SerializeField] GameObject StatusPanel;
-    [SerializeField] GameObject characterSelectionPanel;
     [SerializeField] GameObject JoinSessionPanel;
     [SerializeField] GameObject SettingsPanel;
     [SerializeField] GameObject MainMenuPanel;
@@ -22,18 +21,10 @@ public class MainMenuManager : MonoBehaviour
 
     [SerializeField] TMP_InputField sessionName;
 
-    SessionInfo m_sessionInfo;
-
-    public event Action<SessionInfo> OnJoinSession;
     private void Start()
     {
         HideAllPanels();
         MainMenuPanel.SetActive(true);
-    }
-    public void SetMySessionInfo(SessionInfo _sessionInfo)
-    {
-        m_sessionInfo = _sessionInfo;
-        OnCharacterSelectionStarted();
     }
     public void ToggleStartGameObject()
     {
@@ -98,7 +89,6 @@ public class MainMenuManager : MonoBehaviour
         SessionBrowserPanel.SetActive(false);
         StartGamePanel.SetActive(false);
         StatusPanel.SetActive(false);
-        characterSelectionPanel.SetActive(false);
         JoinSessionPanel.SetActive(false);
         SettingsPanel.SetActive(false);
         MainMenuPanel.SetActive(false);
@@ -111,7 +101,6 @@ public class MainMenuManager : MonoBehaviour
         HideAllPanels();
 
         StartGamePanel.SetActive(true);
-        characterSelectionPanel.SetActive(true);
     }
     public void OnStartNewSessionClicked()
     {
@@ -123,23 +112,10 @@ public class MainMenuManager : MonoBehaviour
 
         StatusPanel.SetActive(true);
     }
-
-    public void OnCharacterSelectionStarted()
-    {
-        HideAllPanels();
-
-        characterSelectionPanel.SetActive(true);
-        JoinSessionPanel.SetActive(true);
-    }
     public void OnJoiningServer()
     {
         HideAllPanels();
 
         StatusPanel.SetActive(true);
-    }
-
-    public void OnCharacterSelectionDone()
-    {
-        OnJoinSession?.Invoke(m_sessionInfo);
     }
 }

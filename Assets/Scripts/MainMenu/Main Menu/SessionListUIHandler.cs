@@ -33,9 +33,7 @@ public class SessionListUIHandler : MonoBehaviour
 
         addedSessionInfoUIItem.SetInformation(pSessionInfo);
 
-        MainMenuManager mainMenu = FindObjectOfType<MainMenuManager>();
-        mainMenu.OnJoinSession += AddedSessionInfoListUIItem_OnJoinSession;
-
+        SessionInfoListUIItem.OnJoinSession += AddedSessionInfoListUIItem_OnJoinSession;
     }
 
     private void AddedSessionInfoListUIItem_OnJoinSession(SessionInfo obj)

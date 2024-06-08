@@ -19,7 +19,7 @@ public class SessionInfoListUIItem : MonoBehaviour
     {
         mainMenuManager = FindObjectOfType<MainMenuManager>();
     }
-    public event Action<SessionInfo> OnJoinSession;
+    public static event Action<SessionInfo> OnJoinSession;
 
     public void SetInformation(SessionInfo pSessionInfo)
     {
@@ -36,7 +36,6 @@ public class SessionInfoListUIItem : MonoBehaviour
     }
     public void OnClick()
     {
-        mainMenuManager.SetMySessionInfo(sessionInfo);
         OnJoinSession?.Invoke(sessionInfo);
     }
 
