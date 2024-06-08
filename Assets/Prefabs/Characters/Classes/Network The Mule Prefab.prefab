@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: -3934953189958981407}
   - component: {fileID: 717622672262634564}
   - component: {fileID: 3081060940803887086}
+  - component: {fileID: 7750434166967836995}
   m_Layer: 7
   m_Name: Network The Mule Prefab
   m_TagString: Player
@@ -149,6 +150,7 @@ MonoBehaviour:
   - {fileID: -3934953189958981407}
   - {fileID: 717622672262634564}
   - {fileID: 3081060940803887086}
+  - {fileID: 7750434166967836995}
 --- !u!143 &3577616919058033287
 CharacterController:
   m_ObjectHideFlags: 0
@@ -371,6 +373,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b625ecaf2fe4bc46aa02da2db1d0bf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7750434166967836995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2244119501597336846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2e9d3c1a612dc047a890c0b4ab19ef5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HUDUIPanel: {fileID: 7204706242513291299}
+  InGameUIPanel: {fileID: 2827210788846103123}
 --- !u!1 &2257954025410530783
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,6 +1561,11 @@ GameObject:
 --- !u!1 &6908274228702730215 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5439671107980970330, guid: 2d9cf11d6d5898f41ba78a4dfb1191d6, type: 3}
+  m_PrefabInstance: {fileID: 1486898996426743485}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7204706242513291299 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8601528829018494622, guid: 2d9cf11d6d5898f41ba78a4dfb1191d6, type: 3}
   m_PrefabInstance: {fileID: 1486898996426743485}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &7286040928297609524 stripped
