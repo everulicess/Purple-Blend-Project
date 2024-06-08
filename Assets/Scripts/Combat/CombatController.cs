@@ -27,6 +27,7 @@ public class CombatController : NetworkBehaviour
     private bool comboTimerIsRunning = false;
     private AttackTypesScrObj curAttack;
 
+    private Animator animator;
     public GameObject attackArea;
 
     public Vector3 point;
@@ -49,6 +50,7 @@ public class CombatController : NetworkBehaviour
         comboTimeRemaining = comboMaxTime;
         setTargets = hitbox.AddComponent<SetTargets>();
         attackArea = gameObject.transform.Find("AttackArea").gameObject;
+        animator = GetComponent<Animator>();
     }
 
     public override void FixedUpdateNetwork()
@@ -62,8 +64,9 @@ public class CombatController : NetworkBehaviour
             }
             else
             {
-                Debug.Log("combo reset");
+                Debug.Log("combot reset");
                 comboCounter = 0;
+                animator.SetInteger("Combo", comboCounter);
                 comboTimeRemaining = comboMaxTime;
                 comboTimerIsRunning = false;
             }
@@ -160,6 +163,7 @@ public class CombatController : NetworkBehaviour
             comboTimeRemaining = 0;
             comboTimerIsRunning = false;
         }
+        animator.SetInteger("Combo", comboCounter);
     }
     private void DisableIsAttacking()
     {

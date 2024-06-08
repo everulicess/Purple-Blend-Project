@@ -134,8 +134,9 @@ MonoBehaviour:
   Character: {fileID: 11400000, guid: 6135ebfec20cf754093bf17873487e75, type: 2}
   camTarget: {fileID: 2627143927177756995}
   escapeMenu: {fileID: 6908274228702730215}
-  attackLength: 0.1
+  attackLength: 0.7
   cam: {fileID: 7072012241765596909, guid: ed809da431a1cdb4890e5d69d1035499, type: 3}
+  endCam: {fileID: 0}
   canEndGame: 0
   counterText: {fileID: 7329604799020370806}
 --- !u!136 &6075541524490898695
@@ -195,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 91701927173731694}
-  TotalWords: 5
+  TotalWords: 6
   ApplyTiming: 2
   SyncSettings: 79
   StateHashes: 0000000074c37e9447705ba32b1a167c794069555c6631b39e14f0118a18fce4c26c9b035daf077246988a14b29b95915931f8d945c12130ee7bda32bc57e948784bdd452a67ee3f542ad3ab0606e0d1e4a496ce958341e2030740158fdb216eab765ef4
@@ -274,7 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ranged: 0
   special: 0
-  comboMaxTime: 2
+  comboMaxTime: 1.5
   attackTypes:
   - {fileID: 11400000, guid: fbd0099305d371b4cba9bcc282a3870f, type: 2}
   - {fileID: 11400000, guid: cedaf195cdbed1d49b2b5c3ded274111, type: 2}
