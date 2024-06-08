@@ -94,11 +94,6 @@ public class Player : NetworkBehaviour, IPlayerLeft
         m_Health = GetComponent<Health>();
         m_CombatController = GetComponent<CombatController>();
     }
-    public void SetUserID(PlayerRef ID)
-    {
-        myUserID = ID;
-        Debug.LogError($"MY player ID is {ID}");
-    }
     public override void FixedUpdateNetwork()
     {
         HandleDeath();

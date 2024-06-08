@@ -12,39 +12,20 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     public NetworkRunner networkRunner;
     //character classes
     Player networkPlayerPrefab;
-    [SerializeField] Player TheMule;
-    [SerializeField] Player TheBoomstick;
-    [SerializeField] Player TheSiren;
+    [SerializeField] List<Player> Characters_Prefabs = new(); 
 
     private Dictionary<PlayerRef, NetworkObject> spawnCharacter = new Dictionary<PlayerRef, NetworkObject>();
-    float playersJoined = 0f;
+    int playersJoined = 0;
 
     //Session List
     SessionListUIHandler sessionListUIHandler;
 
     //Input
     CharacterInputHandler characterInputHandler;
-    Player GetCharacter(string characterToSpawn)
-    {
-        //Debug.LogError(characterToSpawn + " ----------------------------------------------");
-        if (!PlayerPrefs.HasKey("Character") && SceneManager.GetActiveScene().name == "MenuScene")
-            return null;
-        return characterToSpawn switch
-        {
-            nameof(Characters.TheMule) => TheMule,
-            nameof(Characters.TheBoomstick) => TheBoomstick,
-            nameof(Characters.TheSiren) => TheSiren,
-            _ => throw new NotImplementedException()
-        };
-        
-
-    }
+    
     private void Awake()
     {
         sessionListUIHandler = FindObjectOfType<SessionListUIHandler>(true);
-    }
-    private void Start()
-    {
     }
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
@@ -65,15 +46,15 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             return;
         if (SceneManager.GetActiveScene().name == "MenuScene") 
             return;
-        networkPlayerPrefab = GetCharacter(PlayerPrefs.GetString("Character","No Character Selected"));
-        //PlayerPrefs.DeleteKey("Character");
-        networkPlayerPrefab.SetUserID(player);
+        playersJoined++;
+        if (playersJoined > Characters_Prefabs.Count-1)
+            playersJoined = 0;
+        networkPlayerPrefab = Characters_Prefabs[playersJoined];
 
         Vector3 playerPos = new Vector3(0, 3f, playersJoined+2f);
 
         runner.Spawn(networkPlayerPrefab,playerPos, Quaternion.identity, player);
 
-        playersJoined++;
     }
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
