@@ -54,7 +54,7 @@ public class Collector : NetworkBehaviour
         relicSpotsHUD = relictHUDUI.GetComponentsInChildren<Image>();
         relicSpotsInGame = relicInGameUI.GetComponentsInChildren<Image>();
         RelicsUIUpdate();
-        OnCarriedPocketChange(0, 1);
+        OnCarriedPocketChange();
         if (Player.Local)
         {
             CarriedPocketLoot = 0;
@@ -123,7 +123,7 @@ public class Collector : NetworkBehaviour
                 case nameof(CarriedPocketLoot):
                     var reader = GetPropertyReader<float>(nameof(CarriedPocketLoot));
                     var (previous, current) = reader.Read(previousBuffer, currentBuffer);
-                    OnCarriedPocketChange(previous, current)
+                    OnCarriedPocketChange()
                     ;break;
                 case nameof(carriedRelics):
                     var intReader = GetPropertyReader<int>(nameof(carriedRelics));
@@ -165,7 +165,7 @@ public class Collector : NetworkBehaviour
         }
     }
 
-    private void OnCarriedPocketChange(float previous, float current)
+    private void OnCarriedPocketChange()
     {
 
         foreach (Image image in currentPocketBar)

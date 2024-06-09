@@ -12,7 +12,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     public NetworkRunner networkRunner;
     //character classes
     Player networkPlayerPrefab;
-    [SerializeField] List<Player> Characters_Prefabs = new(); 
+    [SerializeField] List<Player> Characters_Prefabs = new();
 
     private Dictionary<PlayerRef, NetworkObject> spawnCharacter = new Dictionary<PlayerRef, NetworkObject>();
     int playersJoined = 0;
@@ -22,7 +22,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     //Input
     CharacterInputHandler characterInputHandler;
-    
+
     private void Awake()
     {
         sessionListUIHandler = FindObjectOfType<SessionListUIHandler>(true);
@@ -42,18 +42,18 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     }
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-        if (!runner.IsServer) 
+        if (!runner.IsServer)
             return;
-        if (SceneManager.GetActiveScene().name == "MenuScene") 
+        if (SceneManager.GetActiveScene().name == "MenuScene")
             return;
         playersJoined++;
-        if (playersJoined > Characters_Prefabs.Count-1)
+        if (playersJoined > Characters_Prefabs.Count - 1)
             playersJoined = 0;
         networkPlayerPrefab = Characters_Prefabs[playersJoined];
 
-        Vector3 playerPos = new Vector3(0, 3f, playersJoined+2f);
+        Vector3 playerPos = new Vector3(0, 3.5f, playersJoined + 2f);
 
-        runner.Spawn(networkPlayerPrefab,playerPos, Quaternion.identity, player);
+        runner.Spawn(networkPlayerPrefab, playerPos, Quaternion.identity, player);
 
     }
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
@@ -100,8 +100,8 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason)
     {
     }
-    
-    
+
+
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input)
     {
     }
@@ -120,7 +120,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     }
     public void OnSceneLoadDone(NetworkRunner runner)
     {
-        
+
     }
     public void OnSceneLoadStart(NetworkRunner runner)
     {

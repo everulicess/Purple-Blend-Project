@@ -200,6 +200,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
         }
         else
         {
+            counterText.text = "0";
             canDodge = true;
         }
     }
