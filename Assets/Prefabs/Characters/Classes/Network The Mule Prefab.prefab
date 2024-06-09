@@ -298,7 +298,7 @@ MonoBehaviour:
   relicInGameUI: {fileID: 4903873315415699787}
   relictHUDUI: {fileID: 4088070440632760029}
   InteractUI: {fileID: 5828116268135088533}
-  pocketCapacity: 100
+  pocketCapacity: 250
   relicCapacity: 2
   carryPoint: {fileID: 8078895455858871908}
   LayerMask:

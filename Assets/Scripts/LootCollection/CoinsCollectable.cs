@@ -17,7 +17,6 @@ public class CoinsCollectable : Collectable
     }
     public override void Interact()
     {
-        Debug.LogError($"{gameObject} in interacting");
         playerCollector.CollectCoins(this, goldValue);
     }
 }
