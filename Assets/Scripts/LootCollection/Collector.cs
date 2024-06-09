@@ -137,7 +137,6 @@ public class Collector : NetworkBehaviour
     }
     private void OnCarriedRelicsChange(int previous, int current)
     {
-        Debug.LogError(carriedRelics);
         if (previous < current)
             RelicsUIUpdate();
 

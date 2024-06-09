@@ -7954,6 +7954,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1400269304}
   - component: {fileID: 1400269303}
+  - component: {fileID: 1400269305}
   m_Layer: 10
   m_Name: Ceiling
   m_TagString: Untagged
@@ -7980,7 +7981,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 75, y: 2, z: 75}
+  m_Size: {x: 300, y: 2, z: 200}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1400269304
 Transform:
@@ -7997,6 +7998,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1400269305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400269302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &1415990873
 GameObject:
   m_ObjectHideFlags: 0
