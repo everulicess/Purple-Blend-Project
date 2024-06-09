@@ -1,0 +1,128 @@
+#usda 1.0
+(
+    "Exported from Adobe Substance 3D Painter 9.1.2"
+    defaultPrim = "RootNode"
+)
+
+def "RootNode"
+{
+    def Scope "material"
+    {
+        def Material "Material" (
+            customData = {
+                dictionary adobe = {
+                    dictionary painter = {
+                        asset painterProject_spp = @D:/BlenderModels/Seaweed/SeaweedGroupTextureTry.spp@
+                    }
+                }
+            }
+        )
+        {
+            asset inputs:basecolor_tex = @SeaweedGroupTextureTry_textures/SeaweedGroup_Material_BaseColor.png@
+            asset inputs:compositedNormalDX_tex = @SeaweedGroupTextureTry_textures/SeaweedGroup_Material_Normal.png@
+            asset inputs:emissive_tex = @SeaweedGroupTextureTry_textures/SeaweedGroup_Material_Emissive.png@
+            asset inputs:height_tex = @SeaweedGroupTextureTry_textures/SeaweedGroup_Material_Height.png@
+            asset inputs:metallic_tex = @SeaweedGroupTextureTry_textures/SeaweedGroup_Material_Metallic.png@
+            asset inputs:opacity_tex = @SeaweedGroupTextureTry_textures/SeaweedGroup_Material_BaseColor.png@
+            asset inputs:roughness_tex = @SeaweedGroupTextureTry_textures/SeaweedGroup_Material_Roughness.png@
+            token outputs:displacement.connect = </RootNode/material/Material/UsdPreviewSurface/ShaderUsdPreviewSurface.outputs:displacement>
+            token outputs:surface.connect = </RootNode/material/Material/UsdPreviewSurface/ShaderUsdPreviewSurface.outputs:surface>
+
+            def NodeGraph "UsdPreviewSurface"
+            {
+                def Shader "ShaderUsdPreviewSurface"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    float3 inputs:diffuseColor.connect = </RootNode/material/Material/UsdPreviewSurface/diffuseColorTextureShader.outputs:rgb>
+                    float3 inputs:emissive.connect = </RootNode/material/Material/UsdPreviewSurface/emissiveTextureShader.outputs:rgb>
+                    float inputs:metallic.connect = </RootNode/material/Material/UsdPreviewSurface/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </RootNode/material/Material/UsdPreviewSurface/normalTextureShader.outputs:rgb>
+                    float inputs:opacity.connect = </RootNode/material/Material/UsdPreviewSurface/opacityTextureShader.outputs:a>
+                    float inputs:roughness.connect = </RootNode/material/Material/UsdPreviewSurface/roughnessTextureShader.outputs:r>
+                    token outputs:displacement
+                    token outputs:surface
+                }
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname = "st"
+                    float2 outputs:result
+                }
+
+                def Shader "diffuseColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </RootNode/material/Material.inputs:basecolor_tex>
+                    float2 inputs:st.connect = </RootNode/material/Material/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "roughnessTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </RootNode/material/Material.inputs:roughness_tex>
+                    float2 inputs:st.connect = </RootNode/material/Material/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "metallicTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </RootNode/material/Material.inputs:metallic_tex>
+                    float2 inputs:st.connect = </RootNode/material/Material/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "emissiveTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </RootNode/material/Material.inputs:emissive_tex>
+                    float2 inputs:st.connect = </RootNode/material/Material/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "opacityTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </RootNode/material/Material.inputs:opacity_tex>
+                    float2 inputs:st.connect = </RootNode/material/Material/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:a
+                }
+
+                def Shader "normalTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </RootNode/material/Material.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
+                    float2 inputs:st.connect = </RootNode/material/Material/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    normal3f outputs:rgb
+                }
+            }
+        }
+    }
+}
+
+over "SeaweedGroup"
+{
+    over "SeaweedGroup" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </RootNode/material/Material>
+    }
+}
+
