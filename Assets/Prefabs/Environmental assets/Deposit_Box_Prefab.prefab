@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6912589723684740650
 Transform:
@@ -109,6 +109,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e516f1e82d9376f43b06f7cadbae9a81, type: 3}
       propertyPath: m_Name
       value: Loot_bucket_spawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e516f1e82d9376f43b06f7cadbae9a81, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

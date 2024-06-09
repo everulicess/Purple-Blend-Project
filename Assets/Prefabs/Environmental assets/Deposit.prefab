@@ -19,7 +19,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2815175679812139550
 Transform:
@@ -153,7 +153,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!4 &425999993402338197
 Transform:
@@ -273,6 +273,14 @@ PrefabInstance:
     - target: {fileID: 2108713946343486813, guid: 98e1858e8ae52244db8694ad97ccaaa0, type: 3}
       propertyPath: m_Name
       value: Deposit_Box_Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 2108713946343486813, guid: 98e1858e8ae52244db8694ad97ccaaa0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6385462981519426789, guid: 98e1858e8ae52244db8694ad97ccaaa0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6912589723684740650, guid: 98e1858e8ae52244db8694ad97ccaaa0, type: 3}
       propertyPath: m_LocalPosition.x
