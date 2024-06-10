@@ -196,7 +196,6 @@ public class Collector : NetworkBehaviour
         CarriedPocketLoot = CollectedCoins * coinsValue;
         CarriedPocketLoot = Mathf.Clamp(CarriedPocketLoot, 0f, pocketCapacity);
         SoundManager.RPC_PlaySound(SoundName.CoinsPickup, this.transform.position);
-
     }
     /// <summary>
     /// Checks if the player is trying to interact and if there is anough space for the relic

@@ -22,7 +22,18 @@ public class BaseEnemy : NetworkBehaviour
     [SerializeField] private float attackMaxTime;
     private float attackTimer;
     private bool canAttack = true;
+    [SerializeField] private CharacterEffectsScrObj effects;
+    private AudioSource _audioSource;
 
+    private AudioSource audioSource
+    {
+        get
+        {
+            if (_audioSource == null)
+                _audioSource = GetComponent<AudioSource>();
+            return _audioSource;
+        }
+    }
     public override void Spawned()
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
@@ -88,5 +99,11 @@ public class BaseEnemy : NetworkBehaviour
             targets = playerTargets;
             target = targets[0];
         } else target = null;
+    }
+
+    //Sound
+    public void PlayFootstepSound()
+    {
+        audioSource.PlayOneShot(effects.Footsteps_Sound);
     }
 }

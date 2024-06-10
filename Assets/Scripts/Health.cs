@@ -28,6 +28,18 @@ public class Health : NetworkBehaviour, IDamageable
     bool isPlayer;
 
     [SerializeField] GameObject model;
+    private AudioSource _audioSource;
+
+    private AudioSource audioSource
+    {
+        get
+        {
+            if (_audioSource == null)
+                _audioSource = GetComponent<AudioSource>();
+            return _audioSource;
+        }
+    }
+    [SerializeField] private CharacterEffectsScrObj effects;
     public override void Spawned()
     {
         _changes = GetChangeDetector(ChangeDetector.Source.SimulationState);
@@ -124,6 +136,7 @@ public class Health : NetworkBehaviour, IDamageable
             currentReviveTime = reviveTime;
 
         }
+        audioSource.PlayOneShot(effects.Death_Sound);
         HealthInGameUI.SetActive(false);
         model.SetActive(false);
 
@@ -157,7 +170,7 @@ public class Health : NetworkBehaviour, IDamageable
 
         if (pDamage > HealthPoints)
             pDamage = HealthPoints;
-        
+        audioSource.PlayOneShot(effects.Damaged_Sound);
         HealthPoints -= pDamage;
 
         

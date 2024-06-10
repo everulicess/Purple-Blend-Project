@@ -650,6 +650,7 @@ MonoBehaviour:
   _isDead: 0
   maxHealthPoints: 100
   model: {fileID: 7557073420346008603}
+  effects: {fileID: 11400000, guid: 612524fe55a01014e8cb83f3e2d46f3e, type: 2}
 --- !u!114 &717622672262634564
 MonoBehaviour:
   m_ObjectHideFlags: 0

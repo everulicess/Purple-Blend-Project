@@ -10,7 +10,8 @@ public class CharacterEffectsScrObj : ScriptableObject
     public AudioClip Footsteps_Sound;
 
     [Header("Attack Effects")]
-    public AudioClip[] Attack_1_Sounds;
+    [SerializeField]
+    AudioClip[] Attack_1_Sounds;
     [HideInInspector]
     public AudioClip Attack_1_Sound
     {
@@ -20,7 +21,7 @@ public class CharacterEffectsScrObj : ScriptableObject
             return Attack_1_Sounds[pos];
         }
     }
-    public VisualEffect Attack_1_Visual;
+    //public VisualEffectAsset Attack_1_Visual;
 
     [HideInInspector]
     public AudioClip Attack_2_Sound
@@ -31,8 +32,9 @@ public class CharacterEffectsScrObj : ScriptableObject
             return Attack_2_Sounds[pos];
         }
     }
-    public AudioClip[] Attack_2_Sounds;
-    public VisualEffect Attack_2_Visual;
+    [SerializeField]
+    AudioClip[] Attack_2_Sounds;
+    //public VisualEffectAsset Attack_2_Visual;
 
     [HideInInspector]
     public AudioClip Attack_3_Sound
@@ -43,15 +45,17 @@ public class CharacterEffectsScrObj : ScriptableObject
             return Attack_3_Sounds[pos];
         }
     }
-    public AudioClip[] Attack_3_Sounds;
-    public VisualEffect Attack_3_Visual;
+    [SerializeField]
+    AudioClip[] Attack_3_Sounds;
+    //public VisualEffectAsset Attack_3_Visual;
 
     [Header("Special Attack Effects")]
     public AudioClip Special_Attack_Sound;
-    public VisualEffect Special_Attack_Visual;
+    //public VisualEffectAsset Special_Attack_Visual;
 
     [Header("Damaged Effects")]
-    public AudioClip[] Damaged_Sounds;
+    [SerializeField] 
+    AudioClip[] Damaged_Sounds;
     [HideInInspector]
     public AudioClip Damaged_Sound 
     {
@@ -61,4 +65,6 @@ public class CharacterEffectsScrObj : ScriptableObject
         }
     }
     public AudioClip Death_Sound;
+
+    //public VisualEffectAsset vfx;
 }

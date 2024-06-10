@@ -39,7 +39,6 @@ public class CombatController : NetworkBehaviour
 
     [SerializeField] private CharacterEffectsScrObj effects;
     private AudioSource _audioSource;
-
     private AudioSource audioSource
     {
         get
@@ -49,6 +48,7 @@ public class CombatController : NetworkBehaviour
             return _audioSource;
         }
     }
+    [SerializeField] VisualEffect[] visualEffects = new VisualEffect[3];
     // Start is called before the first frame update
     public override void Spawned()
     {
@@ -64,7 +64,7 @@ public class CombatController : NetworkBehaviour
         setTargets = hitbox.AddComponent<SetTargets>();
         attackArea = gameObject.transform.Find("AttackArea").gameObject;
         animator = GetComponent<Animator>();
-
+        Debug.LogError($"vfx in the array: {visualEffects.Length}");
     }
 
     public override void FixedUpdateNetwork()
