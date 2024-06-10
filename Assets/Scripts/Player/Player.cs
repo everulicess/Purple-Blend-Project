@@ -13,7 +13,7 @@ using TMPro;
 //}
 [RequireComponent(
     typeof(NetworkCharacterController),
-    typeof(NetworkMecanimAnimator),
+    typeof(AudioSource),
     typeof(Collector)
     )]
 public class Player : NetworkBehaviour, IPlayerLeft
@@ -21,6 +21,13 @@ public class Player : NetworkBehaviour, IPlayerLeft
     public static Player Local { get; set; }
 
     public static Camera PlayerCamera { get; set; }
+
+    [Header("Sounds")]
+    [SerializeField] private CharacterEffectsScrObj effects;
+    AudioSource m_AudioSource;
+    AudioClip footsteps;
+
+
 
     [SerializeField] private float turnSpeed = 360f;
     [SerializeField] CharacterStatsScrObj Character;
@@ -86,6 +93,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
             PlayerCamera = localCamera.GetComponentInChildren<Camera>();
             //Debug.LogError($"RPC with character is {PlayerPrefs.GetString("Character")}");
         }
+
         m_InGameMenu = GetComponentInChildren<InGameMenu>();
         m_CharacterController = GetComponent<NetworkCharacterController>();
         m_CharacterController.maxSpeed = Character.MovementStats.MovementSpeed;
@@ -93,6 +101,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
         m_Collector = GetComponent<Collector>();
         m_Health = GetComponent<Health>();
         m_CombatController = GetComponent<CombatController>();
+        m_AudioSource = GetComponent<AudioSource>();
     }
     public override void FixedUpdateNetwork()
     {
@@ -160,11 +169,9 @@ public class Player : NetworkBehaviour, IPlayerLeft
     private void Update()
     {
         ResetDodge();
-
     }
     private void Dodge(NetworkInputData data)
     {
-        
         if (!canDodge)
             return;
         anim.SetTrigger("Dash");
@@ -220,13 +227,13 @@ public class Player : NetworkBehaviour, IPlayerLeft
         if (transform.position.y <= -7f)
             m_Health.OnTakeDamage(100);
     }
-
     private void WalkAnim()
     {
         if (m_CharacterController.Velocity == Vector3.zero)
         {
             anim.SetFloat("MoveX", 0);
             anim.SetFloat("MoveY", 0);
+
         }
         else
         {
@@ -238,6 +245,11 @@ public class Player : NetworkBehaviour, IPlayerLeft
             anim.SetFloat("MoveX", Mathf.Sin(angle) * ratio);
             anim.SetFloat("MoveY", Mathf.Cos(angle) * ratio);
         }
+    }
+
+    public void PlayFootstepSound()
+    {
+        m_AudioSource.PlayOneShot(effects.Footsteps_Sound);
     }
 
     private void KnockBackHandler(NetworkInputData data)
