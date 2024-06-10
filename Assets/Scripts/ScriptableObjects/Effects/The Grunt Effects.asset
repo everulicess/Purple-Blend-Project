@@ -13,19 +13,11 @@ MonoBehaviour:
   m_Name: The Grunt Effects
   m_EditorClassIdentifier: 
   Footsteps_Sound: {fileID: 8300000, guid: 75051752c8e356c429b4c86905fdd22d, type: 3}
-  Attack_1_Sounds:
+  Attack_Sounds:
   - {fileID: 8300000, guid: 1b1f19d080a09694387c05a28c3a9449, type: 3}
   - {fileID: 8300000, guid: e1a6d7a86eed74043a43867638cfcdf6, type: 3}
   - {fileID: 8300000, guid: d7ff849a563e18e41b9f54a9bac8abdd, type: 3}
-  Attack_1_Visual: {fileID: 0}
-  Attack_2_Sounds:
-  - {fileID: 8300000, guid: e1a6d7a86eed74043a43867638cfcdf6, type: 3}
-  Attack_2_Visual: {fileID: 0}
-  Attack_3_Sounds:
-  - {fileID: 8300000, guid: d7ff849a563e18e41b9f54a9bac8abdd, type: 3}
-  Attack_3_Visual: {fileID: 0}
   Special_Attack_Sound: {fileID: 8300000, guid: e1a6d7a86eed74043a43867638cfcdf6, type: 3}
-  Special_Attack_Visual: {fileID: 0}
   Damaged_Sounds:
   - {fileID: 8300000, guid: e9221a6d91661b84f9d3b7ef68f86813, type: 3}
   - {fileID: 8300000, guid: 3d79009a1a9f6a44cae89ddbab6aa8ca, type: 3}

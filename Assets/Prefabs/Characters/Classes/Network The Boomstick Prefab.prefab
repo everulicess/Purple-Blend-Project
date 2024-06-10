@@ -670,7 +670,7 @@ MonoBehaviour:
   comboMaxTime: 1.5
   attackTypes:
   - {fileID: 11400000, guid: 9068d4ea7c0beae4fa1b41f731d83e36, type: 2}
-  specialType: {fileID: 11400000, guid: 9068d4ea7c0beae4fa1b41f731d83e36, type: 2}
+  specialType: {fileID: 11400000, guid: c42bf9bb9f6ddb64fb1674df99d101b0, type: 2}
   hitbox: {fileID: 8930525562460017052}
   attackArea: {fileID: 8930525562460017052}
   point: {x: 0, y: 0, z: 0}
@@ -1395,13 +1395,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8930525562460017052}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.38268343, z: -0, w: 0.92387956}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.06999996, y: 1.41, z: 1.3693402}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6435882370432190310}
-  m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8410590473292243203
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1417,7 +1417,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8930525562460017052}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2856,6 +2856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd85cc99427ab146b461dc58554b0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleVector: {x: 0, y: 0, z: 0}
 --- !u!1 &2710336947887126957 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5520196426281162266, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
@@ -2873,6 +2874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd85cc99427ab146b461dc58554b0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleVector: {x: 0, y: 0, z: 0}
 --- !u!114 &7392545545072944489 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1121740997152934622, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
@@ -2911,6 +2913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd85cc99427ab146b461dc58554b0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleVector: {x: 0, y: 0, z: 0}
 --- !u!1001 &8406785387148779789
 PrefabInstance:
   m_ObjectHideFlags: 0

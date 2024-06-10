@@ -13,17 +13,11 @@ MonoBehaviour:
   m_Name: The Boomstick Effects
   m_EditorClassIdentifier: 
   Footsteps_Sound: {fileID: 8300000, guid: b5e0da623f5af0e4ca0252240aa654a9, type: 3}
-  Attack_1_Sounds:
+  Attack_Sounds:
   - {fileID: 8300000, guid: 8748b2480c089c64dae4bed72a57a06f, type: 3}
-  Attack_1_Visual: {fileID: 0}
-  Attack_2_Sounds:
   - {fileID: 8300000, guid: f4b4c8d50aa19624d8a9fcc49b437ed9, type: 3}
-  Attack_2_Visual: {fileID: 0}
-  Attack_3_Sounds:
-  - {fileID: 8300000, guid: 8748b2480c089c64dae4bed72a57a06f, type: 3}
-  Attack_3_Visual: {fileID: 0}
+  - {fileID: 8300000, guid: f4b4c8d50aa19624d8a9fcc49b437ed9, type: 3}
   Special_Attack_Sound: {fileID: 8300000, guid: f4b4c8d50aa19624d8a9fcc49b437ed9, type: 3}
-  Special_Attack_Visual: {fileID: 0}
   Damaged_Sounds:
   - {fileID: 8300000, guid: 401c52b07de184443a110f9e8aa5e731, type: 3}
   Death_Sound: {fileID: 8300000, guid: 6abdcfc50be4fce4384acff767c63bc0, type: 3}

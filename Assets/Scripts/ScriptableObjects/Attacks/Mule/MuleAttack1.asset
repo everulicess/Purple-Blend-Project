@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e66e5365f8c12414784e8a41cd2bb8f7, type: 3}
   m_Name: MuleAttack1
   m_EditorClassIdentifier: 
-  damage: 15
+  damage: 10
   knockback: 0
   playerPush: 0
   colliderShape: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}

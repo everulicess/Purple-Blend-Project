@@ -515,7 +515,7 @@ MonoBehaviour:
   - {fileID: 4465863578537605111}
   - {fileID: 3362694299446480417}
   _isDead: 0
-  maxHealthPoints: 100
+  maxHealthPoints: 75
   model: {fileID: 755707749715191414}
   effects: {fileID: 11400000, guid: 7afda3c58343f91439969a06bf71868b, type: 2}
 --- !u!114 &717622672262634564
@@ -1823,6 +1823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd85cc99427ab146b461dc58554b0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleVector: {x: 0, y: 0, z: 0}
 --- !u!224 &2148719043610033839 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2287637638139377301, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
@@ -1850,6 +1851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd85cc99427ab146b461dc58554b0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleVector: {x: 0, y: 0, z: 0}
 --- !u!1 &5689514990461836832 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5520196426281162266, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
@@ -1867,6 +1869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd85cc99427ab146b461dc58554b0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleVector: {x: 0, y: 0, z: 0}
 --- !u!1001 &1350973941477561707
 PrefabInstance:
   m_ObjectHideFlags: 0

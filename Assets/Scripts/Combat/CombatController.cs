@@ -118,27 +118,10 @@ public class CombatController : NetworkBehaviour
     {
         SetAttackData();
         DamageTargets();
-        IncreaseComboCounter();
         targets.Clear();
-        switch (comboCounter)
-        {
-            case 0:
-                audioSource.PlayOneShot(effects.Attack_1_Sound);
-                PlayVisual(true);
-                ; break;
-            case 1:
-                audioSource.PlayOneShot(effects.Attack_2_Sound);
-                PlayVisual(false);
-                ; break;
-            case 2:
-                audioSource.PlayOneShot(effects.Attack_3_Sound);
-                PlayVisual(true);
-                ; break;
-            default:
-                audioSource.PlayOneShot(effects.Attack_1_Sound);
-                PlayVisual(true);
-                break;
-        }
+        if (comboCounter < attackTypes.Count) audioSource.PlayOneShot(effects.Attack_Sounds[comboCounter]);
+        if (special) audioSource.PlayOneShot(effects.Special_Attack_Sound);
+        IncreaseComboCounter();
     }
     private void PlayVisual(bool isLeft)
     {
@@ -177,7 +160,7 @@ public class CombatController : NetworkBehaviour
     // Sets the attack data to the correct attack within the combo.
     private void SetAttackData()
     {
-        if (!special) curAttack = attackTypes[comboCounter];
+        if (!special && comboCounter < attackTypes.Count) curAttack = attackTypes[comboCounter];
         else curAttack = specialType;
         damage = curAttack.damage;
         knockback = curAttack.knockback;
@@ -189,7 +172,7 @@ public class CombatController : NetworkBehaviour
     // Increases the combo counter or resets it if it is done.
     private void IncreaseComboCounter()
     {
-        if (comboCounter < attackTypes.Count - 1)
+        if (comboCounter <= attackTypes.Count - 1)
         {
             comboCounter++;
             comboTimeRemaining = comboMaxTime;
@@ -207,6 +190,7 @@ public class CombatController : NetworkBehaviour
     {
         isAttacking = false;
         special = false;
+        animator.SetBool("Special", false);
         setTargets.ClearTargets();
     }
 }

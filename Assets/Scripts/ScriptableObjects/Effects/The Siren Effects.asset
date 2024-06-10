@@ -13,17 +13,10 @@ MonoBehaviour:
   m_Name: The Siren Effects
   m_EditorClassIdentifier: 
   Footsteps_Sound: {fileID: 8300000, guid: 56f30146875b3e14da0328c9ab4b51c4, type: 3}
-  Attack_1_Sounds:
+  Attack_Sounds:
   - {fileID: 8300000, guid: 91aef09f729f6e9468b2c357520fb63a, type: 3}
-  Attack_1_Visual: {fileID: 0}
-  Attack_2_Sounds:
   - {fileID: 8300000, guid: 91aef09f729f6e9468b2c357520fb63a, type: 3}
-  Attack_2_Visual: {fileID: 0}
-  Attack_3_Sounds:
-  - {fileID: 8300000, guid: 91aef09f729f6e9468b2c357520fb63a, type: 3}
-  Attack_3_Visual: {fileID: 0}
   Special_Attack_Sound: {fileID: 8300000, guid: 91aef09f729f6e9468b2c357520fb63a, type: 3}
-  Special_Attack_Visual: {fileID: 0}
   Damaged_Sounds:
   - {fileID: 8300000, guid: e7f985110d169994eb7527c105a6eb32, type: 3}
   Death_Sound: {fileID: 8300000, guid: 43982a641c63e454eb3a4b1e0eab1c30, type: 3}

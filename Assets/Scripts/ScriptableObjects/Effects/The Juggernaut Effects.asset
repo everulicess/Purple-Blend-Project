@@ -13,17 +13,9 @@ MonoBehaviour:
   m_Name: The Juggernaut Effects
   m_EditorClassIdentifier: 
   Footsteps_Sound: {fileID: 8300000, guid: 59c7b99ed205ed44db27fd1d4b851122, type: 3}
-  Attack_1_Sounds:
+  Attack_Sounds:
   - {fileID: 8300000, guid: 895775ac2d3a8b94e8176933484c8b45, type: 3}
-  Attack_1_Visual: {fileID: 0}
-  Attack_2_Sounds:
-  - {fileID: 8300000, guid: 895775ac2d3a8b94e8176933484c8b45, type: 3}
-  Attack_2_Visual: {fileID: 0}
-  Attack_3_Sounds:
-  - {fileID: 8300000, guid: 895775ac2d3a8b94e8176933484c8b45, type: 3}
-  Attack_3_Visual: {fileID: 0}
   Special_Attack_Sound: {fileID: 8300000, guid: 895775ac2d3a8b94e8176933484c8b45, type: 3}
-  Special_Attack_Visual: {fileID: 0}
   Damaged_Sounds:
   - {fileID: 8300000, guid: b1ed068ac9dcadd498f193df7d432395, type: 3}
   Death_Sound: {fileID: 8300000, guid: 33e8ce0a81825e04ea7a7b0ef1294315, type: 3}

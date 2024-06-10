@@ -134,6 +134,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
         }
         if (data.buttons.IsSet(MyButtons.SpecialButton) && !IsAttacking && !isDodging)
         {
+            anim.SetBool("Special", true);
             IsAttacking = true;
             m_CombatController.special = true;
             FaceTo(data);

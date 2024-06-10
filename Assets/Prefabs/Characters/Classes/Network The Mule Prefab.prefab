@@ -342,7 +342,7 @@ MonoBehaviour:
   - {fileID: 7435807005395502130}
   - {fileID: 9047939758319719065}
   _isDead: 0
-  maxHealthPoints: 100
+  maxHealthPoints: 150
   model: {fileID: 5700824517083699655}
   effects: {fileID: 11400000, guid: 644af2e76cfea1e48afd3714dae86981, type: 2}
 --- !u!114 &717622672262634564
@@ -1908,6 +1908,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd85cc99427ab146b461dc58554b0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleVector: {x: 0, y: 0, z: 0}
 --- !u!1 &1052828269204585294 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1891199006425163251, guid: 2d9cf11d6d5898f41ba78a4dfb1191d6, type: 3}
@@ -1925,6 +1926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd85cc99427ab146b461dc58554b0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleVector: {x: 0, y: 0, z: 0}
 --- !u!1 &1960438600091886863 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1123197614227356594, guid: 2d9cf11d6d5898f41ba78a4dfb1191d6, type: 3}
@@ -1952,6 +1954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd85cc99427ab146b461dc58554b0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleVector: {x: 0, y: 0, z: 0}
 --- !u!1 &6908274228702730215 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5439671107980970330, guid: 2d9cf11d6d5898f41ba78a4dfb1191d6, type: 3}

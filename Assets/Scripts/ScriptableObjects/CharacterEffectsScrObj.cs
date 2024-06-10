@@ -11,43 +11,43 @@ public class CharacterEffectsScrObj : ScriptableObject
 
     [Header("Attack Effects")]
     [SerializeField]
-    AudioClip[] Attack_1_Sounds;
+    public AudioClip[] Attack_Sounds;
     [HideInInspector]
-    public AudioClip Attack_1_Sound
+    public AudioClip Attack_Sound
     {
         get
         {
-            int pos = Random.Range(0, Attack_1_Sounds.Length);
-            return Attack_1_Sounds[pos];
+            int pos = Random.Range(0, Attack_Sounds.Length);
+            return Attack_Sounds[pos];
         }
     }
     //public VisualEffectAsset Attack_1_Visual;
 
-    [HideInInspector]
-    public AudioClip Attack_2_Sound
-    {
-        get
-        {
-            int pos = Random.Range(0, Attack_2_Sounds.Length);
-            return Attack_2_Sounds[pos];
-        }
-    }
-    [SerializeField]
-    AudioClip[] Attack_2_Sounds;
-    //public VisualEffectAsset Attack_2_Visual;
+    //[HideInInspector]
+    //public AudioClip Attack_2_Sound
+    //{
+    //    get
+    //    {
+    //        int pos = Random.Range(0, Attack_2_Sounds.Length);
+    //        return Attack_2_Sounds[pos];
+    //    }
+    //}
+    //[SerializeField]
+    //AudioClip[] Attack_2_Sounds;
+    ////public VisualEffectAsset Attack_2_Visual;
 
-    [HideInInspector]
-    public AudioClip Attack_3_Sound
-    {
-        get
-        {
-            int pos = Random.Range(0, Attack_3_Sounds.Length);
-            return Attack_3_Sounds[pos];
-        }
-    }
-    [SerializeField]
-    AudioClip[] Attack_3_Sounds;
-    //public VisualEffectAsset Attack_3_Visual;
+    //[HideInInspector]
+    //public AudioClip Attack_3_Sound
+    //{
+    //    get
+    //    {
+    //        int pos = Random.Range(0, Attack_3_Sounds.Length);
+    //        return Attack_3_Sounds[pos];
+    //    }
+    //}
+    //[SerializeField]
+    //AudioClip[] Attack_3_Sounds;
+    ////public VisualEffectAsset Attack_3_Visual;
 
     [Header("Special Attack Effects")]
     public AudioClip Special_Attack_Sound;
