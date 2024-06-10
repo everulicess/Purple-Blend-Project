@@ -365,6 +365,7 @@ MonoBehaviour:
   hitbox: {fileID: 8930525562460017052}
   attackArea: {fileID: 0}
   point: {x: 0, y: 0, z: 0}
+  effects: {fileID: 11400000, guid: 644af2e76cfea1e48afd3714dae86981, type: 2}
 --- !u!114 &3081060940803887086
 MonoBehaviour:
   m_ObjectHideFlags: 0

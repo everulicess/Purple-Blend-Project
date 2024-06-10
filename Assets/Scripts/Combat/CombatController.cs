@@ -37,6 +37,18 @@ public class CombatController : NetworkBehaviour
 
     protected string thisObjectTag;
 
+    [SerializeField] private CharacterEffectsScrObj effects;
+    private AudioSource _audioSource;
+
+    private AudioSource audioSource
+    {
+        get
+        {
+            if (_audioSource == null)
+                _audioSource = GetComponent<AudioSource>();
+            return _audioSource;
+        }
+    }
     // Start is called before the first frame update
     public override void Spawned()
     {
@@ -52,6 +64,7 @@ public class CombatController : NetworkBehaviour
         setTargets = hitbox.AddComponent<SetTargets>();
         attackArea = gameObject.transform.Find("AttackArea").gameObject;
         animator = GetComponent<Animator>();
+
     }
 
     public override void FixedUpdateNetwork()
@@ -110,6 +123,23 @@ public class CombatController : NetworkBehaviour
         DamageTargets();
         IncreaseComboCounter();
         targets.Clear();
+        switch (comboCounter)
+        {
+            case 0:
+                audioSource.PlayOneShot(effects.Attack_1_Sound);
+
+                ; break;
+            case 1:
+                audioSource.PlayOneShot(effects.Attack_2_Sound);
+
+                ; break;
+            case 2:
+                audioSource.PlayOneShot(effects.Attack_3_Sound);
+                ; break;
+            default:
+                audioSource.PlayOneShot(effects.Attack_1_Sound);
+                break;
+        }
     }
 
     // Checks through the list of objects within the targets list to damage them all.
