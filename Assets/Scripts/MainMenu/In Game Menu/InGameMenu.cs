@@ -16,7 +16,7 @@ public class InGameMenu : MonoBehaviour
 
     bool interactWithMenu;
     NetworkRunner Runner;
-    
+    Button[] buttons;
     public void SetMenuInteraction(bool _interaction)
     {
         interactWithMenu = _interaction;
@@ -24,15 +24,23 @@ public class InGameMenu : MonoBehaviour
     void Start()
     {
         MenuPanel.SetActive(false);
+        buttons = MenuPanel.GetComponentsInChildren<Button>();
+
     }
 
     private void LateUpdate()
     {
-        if (interactWithMenu)
+        if (Input.GetKeyDown(KeyCode.Escape))
             MenuToggle();
     }
     public void MenuToggle()
     {
+        foreach (Button item in buttons)
+        {
+            Debug.LogError(item.name);
+            item.GetComponent<RectTransform>().localScale = new(1,1,1);
+           
+        }
         if (Player.Local)
         {
             MenuPanel.SetActive(!MenuPanel.activeInHierarchy);

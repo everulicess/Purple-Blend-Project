@@ -48,7 +48,7 @@ public class CombatController : NetworkBehaviour
             return _audioSource;
         }
     }
-    [SerializeField] VisualEffect[] visualEffects = new VisualEffect[3];
+    [SerializeField] VisualEffect[] visualEffects;
     // Start is called before the first frame update
     public override void Spawned()
     {
@@ -64,7 +64,6 @@ public class CombatController : NetworkBehaviour
         setTargets = hitbox.AddComponent<SetTargets>();
         attackArea = gameObject.transform.Find("AttackArea").gameObject;
         animator = GetComponent<Animator>();
-        Debug.LogError($"vfx in the array: {visualEffects.Length}");
     }
 
     public override void FixedUpdateNetwork()
@@ -127,21 +126,31 @@ public class CombatController : NetworkBehaviour
         {
             case 0:
                 audioSource.PlayOneShot(effects.Attack_1_Sound);
-
+                PlayVisual(true);
                 ; break;
             case 1:
                 audioSource.PlayOneShot(effects.Attack_2_Sound);
-
+                PlayVisual(false);
                 ; break;
             case 2:
                 audioSource.PlayOneShot(effects.Attack_3_Sound);
+                PlayVisual(true);
                 ; break;
             default:
                 audioSource.PlayOneShot(effects.Attack_1_Sound);
+                PlayVisual(true);
                 break;
         }
     }
-
+    private void PlayVisual(bool isLeft)
+    {
+        if (visualEffects.Length==0)
+            return;
+        if (isLeft)
+            visualEffects[0].Play();
+        else
+            visualEffects[1].Play();
+    }
     // Checks through the list of objects within the targets list to damage them all.
     private void DamageTargets()
     {

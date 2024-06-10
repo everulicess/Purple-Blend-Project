@@ -170,7 +170,6 @@ public class Health : NetworkBehaviour, IDamageable
 
         if (pDamage > HealthPoints)
             pDamage = HealthPoints;
-        audioSource.PlayOneShot(effects.Damaged_Sound);
         HealthPoints -= pDamage;
 
         
@@ -179,6 +178,8 @@ public class Health : NetworkBehaviour, IDamageable
     {
         if (!isInitailized) 
             return;
+        audioSource.PlayOneShot(effects.Damaged_Sound);
+
         if (HealthPoints <= 0)
         {
             isDead = true;

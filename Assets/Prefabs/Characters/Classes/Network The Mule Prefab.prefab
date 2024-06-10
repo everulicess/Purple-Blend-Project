@@ -367,6 +367,9 @@ MonoBehaviour:
   attackArea: {fileID: 0}
   point: {x: 0, y: 0, z: 0}
   effects: {fileID: 11400000, guid: 644af2e76cfea1e48afd3714dae86981, type: 2}
+  visualEffects:
+  - {fileID: 1976924066332759912}
+  - {fileID: 1986469188264146470}
 --- !u!114 &3081060940803887086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2046,6 +2049,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1141262089334088249, guid: 562a3e66195dda9408a51d948a03d185, type: 3}
   m_PrefabInstance: {fileID: 2288202291153393986}
   m_PrefabAsset: {fileID: 0}
+--- !u!2083052967 &1986469188264146470 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 310758200935772004, guid: 562a3e66195dda9408a51d948a03d185, type: 3}
+  m_PrefabInstance: {fileID: 2288202291153393986}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2590640565820626490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2741,6 +2749,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5464769e432d0741a0d0c563df21ee2, type: 3}
+--- !u!2083052967 &1976924066332759912 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 6081642444893629265, guid: a5464769e432d0741a0d0c563df21ee2, type: 3}
+  m_PrefabInstance: {fileID: 5695123208110210105}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3184950225846582234 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7150048494703560675, guid: a5464769e432d0741a0d0c563df21ee2, type: 3}

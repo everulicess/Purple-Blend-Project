@@ -566,6 +566,7 @@ MonoBehaviour:
   attackArea: {fileID: 0}
   point: {x: 0, y: 0, z: 0}
   effects: {fileID: 11400000, guid: de5dbaf2af4a03944810fe3a1e104524, type: 2}
+  visualEffects: []
 --- !u!114 &450433305955062855
 MonoBehaviour:
   m_ObjectHideFlags: 0
