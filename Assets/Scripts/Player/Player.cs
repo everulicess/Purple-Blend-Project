@@ -41,11 +41,11 @@ public class Player : NetworkBehaviour, IPlayerLeft
     private readonly Quaternion skew = Quaternion.Euler(0, 45, 0);
 
     [SerializeField] GameObject cam;
-    [SerializeField] GameObject endCam;
     GameObject localCamera;
     private bool isAttacking = false;
 
     public bool canEndGame;
+    [Networked] private bool endGame { get; set; }
 
     Collector m_Collector;
     Health m_Health;
@@ -96,6 +96,11 @@ public class Player : NetworkBehaviour, IPlayerLeft
     }
     public override void FixedUpdateNetwork()
     {
+        if (endGame)
+        {
+            gameObject.SetActive(false);
+            localCamera.SetActive(false);
+        }
         HandleDeath();
         Falling();
         if (m_Health.isDead)
@@ -292,7 +297,6 @@ public class Player : NetworkBehaviour, IPlayerLeft
 
     public void ChangeCamera()
     {
-        cam.SetActive(false);
-        endCam.SetActive(true);
+        endGame = true;
     }
 }

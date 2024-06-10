@@ -15,11 +15,8 @@ public class MapManager : NetworkBehaviour
     [SerializeField] private int offset;
     [SerializeField] private List<NetworkObject> net_Rooms = new();
     [SerializeField] private NavMeshSurface navMeshSurface;
-    //Endgame dancing
-    [SerializeField] private GameObject MuleDance;
-    [SerializeField] private GameObject SirenDance;
-    [SerializeField] private GameObject BoomstickDance;
-    //
+    [SerializeField] private Camera mainCam;
+
     private float endCountdownTime;
     [SerializeField] private float maxEndCountdownTime;
 
@@ -31,6 +28,7 @@ public class MapManager : NetworkBehaviour
     [Networked] public float totalGold { get; set; }
     public bool canGameEnd;
     public bool canStartCountdown;
+    private bool gameEnded = false;
 
     [Networked] bool areRoomsSpawned { get; set; }
     public override void Spawned()
@@ -142,7 +140,7 @@ public class MapManager : NetworkBehaviour
     private void StartEnemySpawning()
     {
         Invoke(nameof(NaveMeshBuild), 0.5f);
-        for (int i = 0; i < generatedRooms.Count-1; i++)
+        for (int i = 0; i < generatedRooms.Count - 1; i++)
         {
             if (rooms[i].transform.GetChild(4).childCount > 0)
             {
@@ -179,25 +177,47 @@ public class MapManager : NetworkBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-         if (canGameEnd)
+        if (canGameEnd)
         {
             other.GetComponent<Player>().canEndGame = true;
         }
     }
     private void EndGameCountdown()
     {
-        if (endCountdownTime > 0)
+        if (endCountdownTime > 0 && gameEnded == false)
         {
             endCountdownTime -= Time.deltaTime;
         } else
         {
+            gameEnded = true;
             endCountdownTime = 0;
-            MuleDance.SetActive(true);
-            SirenDance.SetActive(true);
-            BoomstickDance.SetActive(true);
-            //GameObject.Find("Player").GetComponent <Player>().ChangeCamera();
-            FindObjectOfType<Player>().ChangeCamera();
-            //Runner.Shutdown();
+            Player[] players = FindObjectsOfType<Player>();
+            for (int i = 0; i < players.Length; i++)
+            {
+                players[i].ChangeCamera();
+            }
+            RPC_ActivateCamera();
+        }
+    }
+
+    [Rpc(sources: RpcSources.All, targets: RpcTargets.StateAuthority)]
+    public void RPC_ActivateCamera(RpcInfo info = default)
+    {
+        Debug.Log("pass1");
+        RPC_ActivateCamera2(info.Source);
+    }
+
+    [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.InputAuthority, HostMode = RpcHostMode.SourceIsServer)]
+    public void RPC_ActivateCamera2(PlayerRef messageSource)
+    {
+        Debug.Log("pass2");
+        if (messageSource == Runner.LocalPlayer)
+        {
+            Debug.Log("pass3");
+            mainCam.gameObject.SetActive(true);
+        } else
+        {
+            mainCam.gameObject.SetActive(true);
         }
     }
 }
