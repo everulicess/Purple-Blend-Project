@@ -1958,6 +1958,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4329418304506125130, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
+      propertyPath: m_Color.b
+      value: 0.20784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329418304506125130, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
+      propertyPath: m_Color.g
+      value: 0.57254905
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329418304506125130, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
+      propertyPath: m_Color.r
+      value: 0.25882354
+      objectReference: {fileID: 0}
     - target: {fileID: 6535130715290234076, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
       propertyPath: m_Name
       value: InGameHealth
@@ -2434,6 +2446,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7614059473792143559}
     m_Modifications:
+    - target: {fileID: 1059309773391084352, guid: f5205c428d7844d4aaa421fd2a2352c2, type: 3}
+      propertyPath: m_Color.b
+      value: 0.20784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 1059309773391084352, guid: f5205c428d7844d4aaa421fd2a2352c2, type: 3}
+      propertyPath: m_Color.g
+      value: 0.57254905
+      objectReference: {fileID: 0}
+    - target: {fileID: 1059309773391084352, guid: f5205c428d7844d4aaa421fd2a2352c2, type: 3}
+      propertyPath: m_Color.r
+      value: 0.25882354
+      objectReference: {fileID: 0}
     - target: {fileID: 4586191054459784073, guid: f5205c428d7844d4aaa421fd2a2352c2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3040,7 +3064,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7405290898277208973, guid: 72f9ae94f1d043f4c8ed083693ba7aba, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 25
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7405290898277208973, guid: 72f9ae94f1d043f4c8ed083693ba7aba, type: 3}
       propertyPath: m_LocalPosition.x
