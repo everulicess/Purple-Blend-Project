@@ -121,7 +121,9 @@ public class CombatController : NetworkBehaviour
         targets.Clear();
         if (comboCounter < attackTypes.Count) audioSource.PlayOneShot(effects.Attack_Sounds[comboCounter]);
         if (special) audioSource.PlayOneShot(effects.Special_Attack_Sound);
-        IncreaseComboCounter();
+        if (comboCounter == 1) PlayVisual(true);
+        else PlayVisual(false);
+            IncreaseComboCounter();
     }
     private void PlayVisual(bool isLeft)
     {

@@ -3232,7 +3232,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: dd109d85140aa0d44aa150ce85ce1e07, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -8569,7 +8569,7 @@ MonoBehaviour:
   mainCam: {fileID: 1986834342}
   maxEndCountdownTime: 5
   _totalGold: 0
-  canGameEnd: 0
+  canGameEnd: 1
   canStartCountdown: 0
 --- !u!4 &1193862571
 Transform:
