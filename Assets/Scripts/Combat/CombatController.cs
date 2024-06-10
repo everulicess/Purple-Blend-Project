@@ -5,6 +5,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using Fusion;
+using UnityEngine.VFX;
 
 public class CombatController : NetworkBehaviour
 {

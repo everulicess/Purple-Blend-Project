@@ -5816,9 +5816,71 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - Name: 0
-    SoundToPlay: {fileID: 8300000, guid: 28e9f6569d2db8a4babcd2a3bca33201, type: 3}
+    SoundToPlay: {fileID: 8300000, guid: 61c14e39a98251542b1805bfdb7dd640, type: 3}
   - Name: 1
-    SoundToPlay: {fileID: 8300000, guid: 3eed0311f2f5a6343b4a478ac21dc19d, type: 3}
+    SoundToPlay: {fileID: 8300000, guid: 5707c6cd37e28fa4d8e431b0cea5c867, type: 3}
+  - Name: 2
+    SoundToPlay: {fileID: 8300000, guid: 80d87ffb9816b894fbd5d17da151a46f, type: 3}
+  - Name: 3
+    SoundToPlay: {fileID: 8300000, guid: 1182d0e36defe5946b2eca11d66e5dda, type: 3}
+  - Name: 4
+    SoundToPlay: {fileID: 8300000, guid: 3b818261a0864d1478f2ebf15fe8787c, type: 3}
+  - Name: 5
+    SoundToPlay: {fileID: 8300000, guid: 47df3ae8a357a9d44a19078ba0f4cddb, type: 3}
+  - Name: 6
+    SoundToPlay: {fileID: 8300000, guid: e7f985110d169994eb7527c105a6eb32, type: 3}
+  - Name: 7
+    SoundToPlay: {fileID: 8300000, guid: 91aef09f729f6e9468b2c357520fb63a, type: 3}
+  - Name: 8
+    SoundToPlay: {fileID: 8300000, guid: 43982a641c63e454eb3a4b1e0eab1c30, type: 3}
+  - Name: 9
+    SoundToPlay: {fileID: 8300000, guid: 56f30146875b3e14da0328c9ab4b51c4, type: 3}
+  - Name: 10
+    SoundToPlay: {fileID: 8300000, guid: 401c52b07de184443a110f9e8aa5e731, type: 3}
+  - Name: 11
+    SoundToPlay: {fileID: 8300000, guid: 6abdcfc50be4fce4384acff767c63bc0, type: 3}
+  - Name: 12
+    SoundToPlay: {fileID: 8300000, guid: f4b4c8d50aa19624d8a9fcc49b437ed9, type: 3}
+  - Name: 13
+    SoundToPlay: {fileID: 8300000, guid: b5e0da623f5af0e4ca0252240aa654a9, type: 3}
+  - Name: 14
+    SoundToPlay: {fileID: 8300000, guid: 8748b2480c089c64dae4bed72a57a06f, type: 3}
+  - Name: 15
+    SoundToPlay: {fileID: 8300000, guid: 1b1f19d080a09694387c05a28c3a9449, type: 3}
+  - Name: 16
+    SoundToPlay: {fileID: 8300000, guid: e1a6d7a86eed74043a43867638cfcdf6, type: 3}
+  - Name: 17
+    SoundToPlay: {fileID: 8300000, guid: d7ff849a563e18e41b9f54a9bac8abdd, type: 3}
+  - Name: 18
+    SoundToPlay: {fileID: 8300000, guid: fd9128d50326538499f2991273b6fc67, type: 3}
+  - Name: 19
+    SoundToPlay: {fileID: 8300000, guid: caa4b8999fe9782478aa6b4bde2cd2c2, type: 3}
+  - Name: 20
+    SoundToPlay: {fileID: 8300000, guid: 3d79009a1a9f6a44cae89ddbab6aa8ca, type: 3}
+  - Name: 21
+    SoundToPlay: {fileID: 8300000, guid: e9221a6d91661b84f9d3b7ef68f86813, type: 3}
+  - Name: 22
+    SoundToPlay: {fileID: 8300000, guid: 75051752c8e356c429b4c86905fdd22d, type: 3}
+  - Name: 23
+    SoundToPlay: {fileID: 8300000, guid: 895775ac2d3a8b94e8176933484c8b45, type: 3}
+  - Name: 24
+    SoundToPlay: {fileID: 8300000, guid: b1ed068ac9dcadd498f193df7d432395, type: 3}
+  - Name: 25
+    SoundToPlay: {fileID: 8300000, guid: 33e8ce0a81825e04ea7a7b0ef1294315, type: 3}
+  - Name: 26
+    SoundToPlay: {fileID: 8300000, guid: 59c7b99ed205ed44db27fd1d4b851122, type: 3}
+  - Name: 27
+    SoundToPlay: {fileID: 8300000, guid: 9c437f7aa2ce96f459fc4fa8daabfcb9, type: 3}
+  - Name: 28
+    SoundToPlay: {fileID: 8300000, guid: eeaad3192419a8541be90f8ca1d590c2, type: 3}
+  - Name: 29
+    SoundToPlay: {fileID: 8300000, guid: 75ab79bd69fdf87498224c08565293ba, type: 3}
+  - Name: 30
+    SoundToPlay: {fileID: 8300000, guid: 6ce1942cc7b53c3498d4c3647115d101, type: 3}
+  - Name: 31
+    SoundToPlay: {fileID: 8300000, guid: 82b22eadc0d23664f8b13cb9fe33bf73, type: 3}
+  - Name: 32
+    SoundToPlay: {fileID: 8300000, guid: 927ed05c27e8e0d4fa391b2dd6ae3ba9, type: 3}
 --- !u!82 &963096549
 AudioSource:
   m_ObjectHideFlags: 0

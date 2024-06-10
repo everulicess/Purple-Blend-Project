@@ -195,7 +195,7 @@ public class Collector : NetworkBehaviour
         CollectedCoins++;
         CarriedPocketLoot = CollectedCoins * coinsValue;
         CarriedPocketLoot = Mathf.Clamp(CarriedPocketLoot, 0f, pocketCapacity);
-        SoundManager.RPC_PlaySound(SoundName.Name1, this.transform.position);
+        SoundManager.RPC_PlaySound(SoundName.CoinsPickup, this.transform.position);
 
     }
     /// <summary>
@@ -212,6 +212,7 @@ public class Collector : NetworkBehaviour
             if (carriedRelics >= relicCapacity)
                 return;
             carriedRelics++;
+            SoundManager.RPC_PlaySound(SoundName.RelicPickup, this.transform.position);
             pRelic.DeleteObject();
             InteractUI.SetActive(false);
         }
@@ -263,6 +264,7 @@ public class Collector : NetworkBehaviour
             carriedRelics = 0;
             CollectedCoins = 0;
             _deposit.UpdateGlobalGold(totalPlayerGold);
+            SoundManager.RPC_PlaySound(SoundName.LootDelivered, this.transform.position);
             totalPlayerGold = 0;
             foreach (Image image in relicSpotsHUD)
             {

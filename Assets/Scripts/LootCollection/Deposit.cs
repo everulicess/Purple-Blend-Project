@@ -46,6 +46,7 @@ public class Deposit : NetworkBehaviour
             return;
 
         TMP_GlobalGold.text = $"{globalGold}/{goldGoal}";
+
     }
     public void UpdateGlobalGold(float pAmountToIncrease)
     {
