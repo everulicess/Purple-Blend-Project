@@ -302,7 +302,7 @@ MonoBehaviour:
   relicInGameUI: {fileID: 4903873315415699787}
   relictHUDUI: {fileID: 4088070440632760029}
   InteractUI: {fileID: 5828116268135088533}
-  pocketCapacity: 250
+  pocketCapacity: 300
   relicCapacity: 2
   collectedRelic: {fileID: 21300000, guid: f819952b83f130e4abe3b8b0223f06d7, type: 3}
   emptyRelic: {fileID: 21300000, guid: e37199b4165b42949ab71b874c656324, type: 3}
@@ -1333,7 +1333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7405290898277208973, guid: 72f9ae94f1d043f4c8ed083693ba7aba, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 25
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7405290898277208973, guid: 72f9ae94f1d043f4c8ed083693ba7aba, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1839,6 +1839,18 @@ PrefabInstance:
     - target: {fileID: 7187681845092375047, guid: 2d9cf11d6d5898f41ba78a4dfb1191d6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7580186577198992420, guid: 2d9cf11d6d5898f41ba78a4dfb1191d6, type: 3}
+      propertyPath: m_Color.b
+      value: 0.20784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 7580186577198992420, guid: 2d9cf11d6d5898f41ba78a4dfb1191d6, type: 3}
+      propertyPath: m_Color.g
+      value: 0.57254905
+      objectReference: {fileID: 0}
+    - target: {fileID: 7580186577198992420, guid: 2d9cf11d6d5898f41ba78a4dfb1191d6, type: 3}
+      propertyPath: m_Color.r
+      value: 0.25882354
       objectReference: {fileID: 0}
     - target: {fileID: 7902730663528924501, guid: 2d9cf11d6d5898f41ba78a4dfb1191d6, type: 3}
       propertyPath: m_Sprite
@@ -2931,6 +2943,18 @@ PrefabInstance:
     - target: {fileID: 937645739349912451, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329418304506125130, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
+      propertyPath: m_Color.b
+      value: 0.20784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329418304506125130, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
+      propertyPath: m_Color.g
+      value: 0.57254905
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329418304506125130, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
+      propertyPath: m_Color.r
+      value: 0.25882354
       objectReference: {fileID: 0}
     - target: {fileID: 6535130715290234076, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
       propertyPath: m_Name

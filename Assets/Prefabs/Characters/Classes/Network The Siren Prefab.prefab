@@ -475,8 +475,8 @@ MonoBehaviour:
   relicInGameUI: {fileID: 1667627445925715411}
   relictHUDUI: {fileID: 8706280931610186675}
   InteractUI: {fileID: 1164927877415879500}
-  pocketCapacity: 125
-  relicCapacity: 2
+  pocketCapacity: 150
+  relicCapacity: 1
   collectedRelic: {fileID: 21300000, guid: f819952b83f130e4abe3b8b0223f06d7, type: 3}
   emptyRelic: {fileID: 21300000, guid: e37199b4165b42949ab71b874c656324, type: 3}
   carryPoint: {fileID: 0}
@@ -1404,10 +1404,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 3995838882187223508}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 398.03796, y: -303.907}
-  m_SizeDelta: {x: 796.077, y: 79.814}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -344.922, y: 39.906982}
+  m_SizeDelta: {x: 689.844, y: 79.814}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3729412461081768292
 CanvasRenderer:
@@ -1464,15 +1464,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1958,6 +1958,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4329418304506125130, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
+      propertyPath: m_Color.b
+      value: 0.20784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329418304506125130, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
+      propertyPath: m_Color.g
+      value: 0.57254905
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329418304506125130, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
+      propertyPath: m_Color.r
+      value: 0.25882354
+      objectReference: {fileID: 0}
     - target: {fileID: 6535130715290234076, guid: eb8db3733e1aae0418ea5377d3eab781, type: 3}
       propertyPath: m_Name
       value: InGameHealth
@@ -2434,6 +2446,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7614059473792143559}
     m_Modifications:
+    - target: {fileID: 1059309773391084352, guid: f5205c428d7844d4aaa421fd2a2352c2, type: 3}
+      propertyPath: m_Color.b
+      value: 0.20784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 1059309773391084352, guid: f5205c428d7844d4aaa421fd2a2352c2, type: 3}
+      propertyPath: m_Color.g
+      value: 0.57254905
+      objectReference: {fileID: 0}
+    - target: {fileID: 1059309773391084352, guid: f5205c428d7844d4aaa421fd2a2352c2, type: 3}
+      propertyPath: m_Color.r
+      value: 0.25882354
+      objectReference: {fileID: 0}
     - target: {fileID: 4586191054459784073, guid: f5205c428d7844d4aaa421fd2a2352c2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2931,7 +2955,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7337452384554698901, guid: e4526ceabbca046439c0806ec57f0aef, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4526ceabbca046439c0806ec57f0aef, type: 3}
@@ -3039,7 +3064,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7405290898277208973, guid: 72f9ae94f1d043f4c8ed083693ba7aba, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 25
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7405290898277208973, guid: 72f9ae94f1d043f4c8ed083693ba7aba, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3106,7 +3131,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 716733155463955827, guid: 72f9ae94f1d043f4c8ed083693ba7aba, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72f9ae94f1d043f4c8ed083693ba7aba, type: 3}

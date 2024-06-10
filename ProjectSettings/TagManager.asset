@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - HitBox
   - DetectionArea
+  - EndCanvas
   layers:
   - Default
   - TransparentFX

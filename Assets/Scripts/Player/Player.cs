@@ -83,6 +83,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
     float currentDodgeCooldown;
     [SerializeField] TextMeshProUGUI counterText;
     PlayerRef myUserID;
+    GameObject endCanvas;
     public override void Spawned()
     {
         if (Object.HasInputAuthority)
@@ -91,9 +92,11 @@ public class Player : NetworkBehaviour, IPlayerLeft
             localCamera = Instantiate(cam);
             localCamera.GetComponent<LocalCamera>().SetTarget(camTarget);
             PlayerCamera = localCamera.GetComponentInChildren<Camera>();
+            endCanvas = GameObject.FindGameObjectWithTag("EndCanvas");
+            endCanvas.SetActive(false);
             //Debug.LogError($"RPC with character is {PlayerPrefs.GetString("Character")}");
         }
-
+        
         m_InGameMenu = GetComponentInChildren<InGameMenu>();
         m_CharacterController = GetComponent<NetworkCharacterController>();
         m_CharacterController.maxSpeed = Character.MovementStats.MovementSpeed;
@@ -103,12 +106,19 @@ public class Player : NetworkBehaviour, IPlayerLeft
         m_CombatController = GetComponent<CombatController>();
         m_AudioSource = GetComponent<AudioSource>();
     }
+    [Networked] bool stopGoing { get; set; } = false;
     public override void FixedUpdateNetwork()
     {
+        if (!Player.Local)
+            return;
+        if (stopGoing)
+            return;
         if (endGame)
         {
-            gameObject.SetActive(false);
+            endCanvas.SetActive(true);
             localCamera.SetActive(false);
+            gameObject.SetActive(false);
+            stopGoing = true;
         }
         HandleDeath();
         Falling();

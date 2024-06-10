@@ -11,7 +11,7 @@ public class ButtonHoverBehaviour : MonoBehaviour, IPointerEnterHandler, IPointe
     [SerializeField] Vector3 scaleVector;
     public void OnPointerClick(PointerEventData eventData)
     {
-        rectTransform.localScale /= scale;
+        rectTransform.localScale = scaleVector;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -21,14 +21,7 @@ public class ButtonHoverBehaviour : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (SceneManager.GetActiveScene().name == "MenuScene")
-        {
-            rectTransform.localScale = scaleVector;
-        }
-        else
-        {
-            rectTransform.localScale = new(1, 1, 1);
-        }
+        rectTransform.localScale = scaleVector;
     }
     void Start()
     {

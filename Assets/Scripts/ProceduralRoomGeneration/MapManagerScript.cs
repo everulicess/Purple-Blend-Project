@@ -196,28 +196,37 @@ public class MapManager : NetworkBehaviour
             {
                 players[i].ChangeCamera();
             }
-            RPC_ActivateCamera();
+            RPC_ActivateCamera(true);
         }
     }
 
-    [Rpc(sources: RpcSources.All, targets: RpcTargets.StateAuthority)]
-    public void RPC_ActivateCamera(RpcInfo info = default)
+    [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
+    public void RPC_ActivateCamera(bool activateCanvas, RpcInfo info = default)
     {
         Debug.Log("pass1");
-        RPC_ActivateCamera2(info.Source);
+        RPC_ActivateCamera2( activateCanvas, info.Source);
     }
 
     [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.InputAuthority, HostMode = RpcHostMode.SourceIsServer)]
-    public void RPC_ActivateCamera2(PlayerRef messageSource)
+    public void RPC_ActivateCamera2( bool activateCanvas, PlayerRef messageSource)
     {
         Debug.Log("pass2");
         if (messageSource == Runner.LocalPlayer)
         {
             Debug.Log("pass3");
-            mainCam.gameObject.SetActive(true);
+            mainCam.gameObject.SetActive(activateCanvas);
         } else
         {
-            mainCam.gameObject.SetActive(true);
+            mainCam.gameObject.SetActive(activateCanvas);
         }
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+    public void QuitSession()
+    {
+        Runner.Shutdown();
     }
 }
