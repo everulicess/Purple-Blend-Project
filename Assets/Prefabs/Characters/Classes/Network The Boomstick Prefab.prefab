@@ -812,6 +812,7 @@ MonoBehaviour:
   effects: {fileID: 11400000, guid: 612524fe55a01014e8cb83f3e2d46f3e, type: 2}
   visualEffects:
   - {fileID: 5752885268336480167}
+  - {fileID: 5752885268336480167}
 --- !u!114 &-3939159237397215304
 MonoBehaviour:
   m_ObjectHideFlags: 0
