@@ -37,7 +37,6 @@ public class InGameMenu : MonoBehaviour
     {
         foreach (Button item in buttons)
         {
-            Debug.LogError(item.name);
             item.GetComponent<RectTransform>().localScale = new(1,1,1);
            
         }
