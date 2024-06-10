@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   net_ThisObject: {fileID: -5985927602359136261}
-  goldValue: 25
+  goldValue: 50
 --- !u!114 &7649276759529094740
 MonoBehaviour:
   m_ObjectHideFlags: 0

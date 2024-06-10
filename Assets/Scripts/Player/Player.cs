@@ -163,7 +163,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
             m_Health.OnTakeDamage(10);
 
         //For ending game
-        if (canEndGame && data.buttons.IsSet(MyButtons.PartyButton))
+        if (canEndGame && data.buttons.IsSet(MyButtons.InteractButton))
             EndGameCountdown();
     }
     private void Update()

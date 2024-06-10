@@ -28,13 +28,13 @@ public class Collector : NetworkBehaviour
     [SerializeField] float pocketCapacity;
     [Networked] float CarriedPocketLoot { get; set; }
     int CollectedCoins;
-    readonly float coinsValue = 25f;
+    readonly float coinsValue = 50f;
 
     //Relics
     [Range(1, 4)]
     [SerializeField] int relicCapacity;
     [Networked] int carriedRelics { get; set; }
-    readonly float relicValue = 50f;
+    readonly float relicValue = 100f;
     
 
     //Treasure
