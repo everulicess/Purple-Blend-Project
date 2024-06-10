@@ -362,7 +362,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f93b0a0143f18a9419c6280456abdfd9, type: 2}
   - {fileID: 11400000, guid: f93b0a0143f18a9419c6280456abdfd9, type: 2}
   - {fileID: 11400000, guid: d91615e8c66ea494291ff56db9b87fda, type: 2}
-  specialType: {fileID: 0}
+  specialType: {fileID: 11400000, guid: f93b0a0143f18a9419c6280456abdfd9, type: 2}
   hitbox: {fileID: 8930525562460017052}
   attackArea: {fileID: 0}
   point: {x: 0, y: 0, z: 0}
@@ -486,7 +486,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
