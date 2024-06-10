@@ -558,7 +558,7 @@ MonoBehaviour:
   special: 0
   comboMaxTime: 1
   attackTypes:
-  - {fileID: 11400000, guid: e09f88e6bce1d8246b3f5fe6bc4a6291, type: 2}
+  - {fileID: 11400000, guid: b9cc16c244060c148a9793c5aba94c85, type: 2}
   specialType: {fileID: 0}
   hitbox: {fileID: 771044456922951676}
   attackArea: {fileID: 0}
