@@ -13,7 +13,6 @@ public enum Pings
     Thanks,
     Help,
     NeedToDeposit,
-    FollowMe
 }
 [Serializable]
 public class PingInfo
@@ -37,7 +36,6 @@ public struct CommunicationLibrary
     public PingInfo Thanks_Ping;
     public PingInfo Help_Ping;
     public PingInfo NeedToDeposit_Ping;
-    public PingInfo FollowMe;
 }
 public class CommunicationManager : MonoBehaviour
 {
@@ -60,7 +58,6 @@ public class CommunicationManager : MonoBehaviour
         audioDictionary.Add(Pings.Thanks, communicationLibrary.Thanks_Ping.Sound);
         audioDictionary.Add(Pings.Help, communicationLibrary.Help_Ping.Sound);
         audioDictionary.Add(Pings.NeedToDeposit, communicationLibrary.NeedToDeposit_Ping.Sound);
-        audioDictionary.Add(Pings.FollowMe, communicationLibrary.FollowMe.Sound);
 
         //Visuals
         visualsDictionary.Add(Pings.Attack, communicationLibrary.Attack_Ping.Prefab);
@@ -69,7 +66,6 @@ public class CommunicationManager : MonoBehaviour
         visualsDictionary.Add(Pings.Thanks, communicationLibrary.Thanks_Ping.Prefab);
         visualsDictionary.Add(Pings.Help, communicationLibrary.Help_Ping.Prefab);
         visualsDictionary.Add(Pings.NeedToDeposit, communicationLibrary.NeedToDeposit_Ping.Prefab);
-        visualsDictionary.Add(Pings.FollowMe, communicationLibrary.FollowMe.Prefab);
 
         //Icons
         IconsDictionary.Add(Pings.Attack, communicationLibrary.Attack_Ping.Icon);
@@ -78,7 +74,6 @@ public class CommunicationManager : MonoBehaviour
         IconsDictionary.Add(Pings.Thanks, communicationLibrary.Thanks_Ping.Icon);
         IconsDictionary.Add(Pings.Help, communicationLibrary.Help_Ping.Icon);
         IconsDictionary.Add(Pings.NeedToDeposit, communicationLibrary.NeedToDeposit_Ping.Icon);
-        IconsDictionary.Add(Pings.FollowMe, communicationLibrary.FollowMe.Icon);
     }
 }
 
