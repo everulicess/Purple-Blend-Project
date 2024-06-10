@@ -8457,9 +8457,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: {x: 500, y: 500}
-  dungeonSize: 2
+  dungeonSize: 30
   startPos: {x: 50, y: 50}
-  offset: 30
+  offset: 20
   net_Rooms:
   - {fileID: 2784021426514672902, guid: 71c974cd4915ae94cb2ee69f67884d34, type: 3}
   - {fileID: 3797573688906876902, guid: b7ed5b819a99b8a4fb277743f2455381, type: 3}
