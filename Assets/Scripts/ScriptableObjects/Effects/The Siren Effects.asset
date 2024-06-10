@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec22a65b3daba04dbe8e376ee9381ea, type: 3}
+  m_Name: The Siren Effects
+  m_EditorClassIdentifier: 
+  Footsteps_Sound: {fileID: 8300000, guid: 56f30146875b3e14da0328c9ab4b51c4, type: 3}
+  Attack_1_Sounds:
+  - {fileID: 8300000, guid: 91aef09f729f6e9468b2c357520fb63a, type: 3}
+  Attack_1_Visual: {fileID: 0}
+  Attack_2_Sounds:
+  - {fileID: 8300000, guid: 91aef09f729f6e9468b2c357520fb63a, type: 3}
+  Attack_2_Visual: {fileID: 0}
+  Attack_3_Sounds:
+  - {fileID: 8300000, guid: 91aef09f729f6e9468b2c357520fb63a, type: 3}
+  Attack_3_Visual: {fileID: 0}
+  Special_Attack_Sound: {fileID: 8300000, guid: 91aef09f729f6e9468b2c357520fb63a, type: 3}
+  Special_Attack_Visual: {fileID: 0}
+  Damaged_Sounds:
+  - {fileID: 8300000, guid: e7f985110d169994eb7527c105a6eb32, type: 3}
+  Death_Sound: {fileID: 8300000, guid: 43982a641c63e454eb3a4b1e0eab1c30, type: 3}

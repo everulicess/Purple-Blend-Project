@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec22a65b3daba04dbe8e376ee9381ea, type: 3}
+  m_Name: The Mule Effects
+  m_EditorClassIdentifier: 
+  Footsteps_Sound: {fileID: 8300000, guid: 1182d0e36defe5946b2eca11d66e5dda, type: 3}
+  Attack_1_Sounds:
+  - {fileID: 8300000, guid: 61c14e39a98251542b1805bfdb7dd640, type: 3}
+  Attack_1_Visual: {fileID: 0}
+  Attack_2_Sounds:
+  - {fileID: 8300000, guid: 5707c6cd37e28fa4d8e431b0cea5c867, type: 3}
+  Attack_2_Visual: {fileID: 0}
+  Attack_3_Sounds:
+  - {fileID: 8300000, guid: 80d87ffb9816b894fbd5d17da151a46f, type: 3}
+  Attack_3_Visual: {fileID: 0}
+  Special_Attack_Sound: {fileID: 8300000, guid: 5707c6cd37e28fa4d8e431b0cea5c867, type: 3}
+  Special_Attack_Visual: {fileID: 0}
+  Damaged_Sounds:
+  - {fileID: 8300000, guid: 47df3ae8a357a9d44a19078ba0f4cddb, type: 3}
+  Death_Sound: {fileID: 8300000, guid: 3b818261a0864d1478f2ebf15fe8787c, type: 3}
