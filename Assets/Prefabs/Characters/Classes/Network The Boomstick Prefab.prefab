@@ -610,8 +610,8 @@ MonoBehaviour:
   relicInGameUI: {fileID: 1909681667847965041}
   relictHUDUI: {fileID: 1421684771665261630}
   InteractUI: {fileID: 7273799226762355125}
-  pocketCapacity: 125
-  relicCapacity: 2
+  pocketCapacity: 150
+  relicCapacity: 1
   collectedRelic: {fileID: 21300000, guid: f819952b83f130e4abe3b8b0223f06d7, type: 3}
   emptyRelic: {fileID: 21300000, guid: e37199b4165b42949ab71b874c656324, type: 3}
   carryPoint: {fileID: 0}
@@ -1977,7 +1977,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7337452384554698901, guid: e4526ceabbca046439c0806ec57f0aef, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4526ceabbca046439c0806ec57f0aef, type: 3}
@@ -2513,7 +2514,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 716733155463955827, guid: 72f9ae94f1d043f4c8ed083693ba7aba, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72f9ae94f1d043f4c8ed083693ba7aba, type: 3}
@@ -2856,6 +2858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd85cc99427ab146b461dc58554b0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleVector: {x: 0, y: 0, z: 0}
 --- !u!1 &2710336947887126957 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5520196426281162266, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
@@ -2873,6 +2876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd85cc99427ab146b461dc58554b0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleVector: {x: 0, y: 0, z: 0}
 --- !u!114 &7392545545072944489 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1121740997152934622, guid: 9146ce4d952d9b342954bc501bd64e27, type: 3}
@@ -2911,6 +2915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd85cc99427ab146b461dc58554b0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleVector: {x: 0, y: 0, z: 0}
 --- !u!1001 &8406785387148779789
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -302,7 +302,7 @@ MonoBehaviour:
   relicInGameUI: {fileID: 4903873315415699787}
   relictHUDUI: {fileID: 4088070440632760029}
   InteractUI: {fileID: 5828116268135088533}
-  pocketCapacity: 250
+  pocketCapacity: 300
   relicCapacity: 2
   collectedRelic: {fileID: 21300000, guid: f819952b83f130e4abe3b8b0223f06d7, type: 3}
   emptyRelic: {fileID: 21300000, guid: e37199b4165b42949ab71b874c656324, type: 3}
@@ -1908,6 +1908,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd85cc99427ab146b461dc58554b0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleVector: {x: 0, y: 0, z: 0}
 --- !u!1 &1052828269204585294 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1891199006425163251, guid: 2d9cf11d6d5898f41ba78a4dfb1191d6, type: 3}
@@ -1925,6 +1926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd85cc99427ab146b461dc58554b0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleVector: {x: 0, y: 0, z: 0}
 --- !u!1 &1960438600091886863 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1123197614227356594, guid: 2d9cf11d6d5898f41ba78a4dfb1191d6, type: 3}
@@ -1952,6 +1954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd85cc99427ab146b461dc58554b0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleVector: {x: 0, y: 0, z: 0}
 --- !u!1 &6908274228702730215 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5439671107980970330, guid: 2d9cf11d6d5898f41ba78a4dfb1191d6, type: 3}
