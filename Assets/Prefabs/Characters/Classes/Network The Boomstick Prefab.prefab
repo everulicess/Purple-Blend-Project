@@ -612,6 +612,8 @@ MonoBehaviour:
   InteractUI: {fileID: 7273799226762355125}
   pocketCapacity: 125
   relicCapacity: 2
+  collectedRelic: {fileID: 21300000, guid: f819952b83f130e4abe3b8b0223f06d7, type: 3}
+  emptyRelic: {fileID: 21300000, guid: e37199b4165b42949ab71b874c656324, type: 3}
   carryPoint: {fileID: 0}
   LayerMask:
     serializedVersion: 2
@@ -1907,6 +1909,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1446885561691544887, guid: e4526ceabbca046439c0806ec57f0aef, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e37199b4165b42949ab71b874c656324, type: 3}
+    - target: {fileID: 1446885561691544887, guid: e4526ceabbca046439c0806ec57f0aef, type: 3}
       propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
@@ -1954,6 +1960,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7818233111838565623, guid: e4526ceabbca046439c0806ec57f0aef, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e37199b4165b42949ab71b874c656324, type: 3}
     - target: {fileID: 7818233111838565623, guid: e4526ceabbca046439c0806ec57f0aef, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -2351,6 +2361,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 4291797076797343056}
     m_Modifications:
     - target: {fileID: 26588970972408081, guid: 72f9ae94f1d043f4c8ed083693ba7aba, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e37199b4165b42949ab71b874c656324, type: 3}
+    - target: {fileID: 26588970972408081, guid: 72f9ae94f1d043f4c8ed083693ba7aba, type: 3}
       propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
@@ -2482,6 +2496,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8662068945908486353, guid: 72f9ae94f1d043f4c8ed083693ba7aba, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e37199b4165b42949ab71b874c656324, type: 3}
     - target: {fileID: 8662068945908486353, guid: 72f9ae94f1d043f4c8ed083693ba7aba, type: 3}
       propertyPath: m_Color.b
       value: 1

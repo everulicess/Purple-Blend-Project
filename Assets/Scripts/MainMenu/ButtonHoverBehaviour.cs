@@ -7,7 +7,7 @@ public class ButtonHoverBehaviour : MonoBehaviour, IPointerEnterHandler, IPointe
 {
     RectTransform rectTransform;
     float scale = 1.25f;
-
+    Vector3 scaleVector = new(1, 1, 1);
     public void OnPointerClick(PointerEventData eventData)
     {
         rectTransform.localScale /= scale;
@@ -20,9 +20,8 @@ public class ButtonHoverBehaviour : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        rectTransform.localScale /= scale;
+        rectTransform.localScale = scaleVector;
     }
-    // Start is called before the first frame update
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();

@@ -35,7 +35,8 @@ public class Collector : NetworkBehaviour
     [SerializeField] int relicCapacity;
     [Networked] int carriedRelics { get; set; }
     readonly float relicValue = 100f;
-    
+    [SerializeField] Sprite collectedRelic;
+    [SerializeField] Sprite emptyRelic;
 
     //Treasure
     bool carryingTreasure = false;
@@ -149,18 +150,18 @@ public class Collector : NetworkBehaviour
     private void ResetRelicsUI()
     {
         foreach (Image image in relicSpotsHUD)
-            image.color = Color.white;
+            image.sprite = emptyRelic;
 
         foreach (Image image in relicSpotsInGame)
-            image.color = Color.white;
+            image.sprite = emptyRelic;
     }
 
     private void RelicsUIUpdate()
     {
         for (int image = 0; image < carriedRelics; image++)
         {
-            relicSpotsHUD[image].color = Color.yellow;
-            relicSpotsInGame[image].color = Color.yellow;
+            relicSpotsHUD[image].sprite = collectedRelic;
+            relicSpotsInGame[image].sprite = collectedRelic;
         }
     }
 
