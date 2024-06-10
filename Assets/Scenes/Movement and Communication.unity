@@ -7915,7 +7915,7 @@ MonoBehaviour:
   mainCam: {fileID: 1986834342}
   maxEndCountdownTime: 5
   _totalGold: 0
-  canGameEnd: 1
+  canGameEnd: 0
   canStartCountdown: 0
 --- !u!4 &1193862571
 Transform:
