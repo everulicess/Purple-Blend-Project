@@ -117,8 +117,6 @@ public class CombatController : NetworkBehaviour
     private void TryAttacking()
     {
         SetAttackData();
-        // Enables attack area's MeshRenderer to show the attack happening.
-        hitbox.gameObject.GetComponent<MeshRenderer>().enabled = true;
         DamageTargets();
         IncreaseComboCounter();
         targets.Clear();
@@ -207,10 +205,8 @@ public class CombatController : NetworkBehaviour
     }
     private void DisableIsAttacking()
     {
-        // Allows player to attack again and disables the attack area's MeshRenderer.
         isAttacking = false;
         special = false;
-        hitbox.gameObject.GetComponent<MeshRenderer>().enabled = false;
         setTargets.ClearTargets();
     }
 }
