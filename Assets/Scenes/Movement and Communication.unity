@@ -2064,7 +2064,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd85cc99427ab146b461dc58554b0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleVector: {x: 0, y: 0, z: 0}
 --- !u!114 &298455339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4927,7 +4926,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd85cc99427ab146b461dc58554b0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleVector: {x: 0, y: 0, z: 0}
 --- !u!114 &705101630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6856,27 +6854,27 @@ MonoBehaviour:
   communicationLibrary:
     Attack_Ping:
       Prefab: {fileID: 5181428273564063880, guid: 6d379561705db3245ac91b2b3b710692, type: 3}
-      Sound: {fileID: 8300000, guid: 3eed0311f2f5a6343b4a478ac21dc19d, type: 3}
+      Sound: {fileID: 8300000, guid: 3d9ed2a794f51a04da212f5b2f0825f1, type: 3}
       Icon: {fileID: 2800000, guid: 4f1e2ea614a9d8a479ddf7c9230d198a, type: 3}
     Loot_Ping:
       Prefab: {fileID: 5181428273564063880, guid: 1f59fccc08d662b45a4c8de3b947ce87, type: 3}
-      Sound: {fileID: 8300000, guid: 28e9f6569d2db8a4babcd2a3bca33201, type: 3}
+      Sound: {fileID: 8300000, guid: 3d9ed2a794f51a04da212f5b2f0825f1, type: 3}
       Icon: {fileID: 2800000, guid: c3c58c3293a3c4141a1bd3057c6df25e, type: 3}
     GreatJob_Ping:
       Prefab: {fileID: 5181428273564063880, guid: 7f9998c93e3043140a93ef0ab20f6f7b, type: 3}
-      Sound: {fileID: 8300000, guid: 3eed0311f2f5a6343b4a478ac21dc19d, type: 3}
+      Sound: {fileID: 8300000, guid: 3d9ed2a794f51a04da212f5b2f0825f1, type: 3}
       Icon: {fileID: 2800000, guid: d75d3db47eaf3ea4ebac3e25c824b2e7, type: 3}
     Thanks_Ping:
       Prefab: {fileID: 5181428273564063880, guid: b353a79ae9e13df49b56079f2580eeba, type: 3}
-      Sound: {fileID: 8300000, guid: 28e9f6569d2db8a4babcd2a3bca33201, type: 3}
+      Sound: {fileID: 8300000, guid: 3d9ed2a794f51a04da212f5b2f0825f1, type: 3}
       Icon: {fileID: 2800000, guid: 43221f8b72c5d084dbac7d6d5a290d8f, type: 3}
     Help_Ping:
       Prefab: {fileID: 5181428273564063880, guid: 78bf47d4181a7174fb7a992a6821bce0, type: 3}
-      Sound: {fileID: 8300000, guid: 3eed0311f2f5a6343b4a478ac21dc19d, type: 3}
+      Sound: {fileID: 8300000, guid: 3d9ed2a794f51a04da212f5b2f0825f1, type: 3}
       Icon: {fileID: 2800000, guid: f77b8ad3616376e42b67bea7852afd5e, type: 3}
     NeedToDeposit_Ping:
       Prefab: {fileID: 5181428273564063880, guid: b7c951ff51c483846a11c60bb297e28f, type: 3}
-      Sound: {fileID: 8300000, guid: 28e9f6569d2db8a4babcd2a3bca33201, type: 3}
+      Sound: {fileID: 8300000, guid: 3d9ed2a794f51a04da212f5b2f0825f1, type: 3}
       Icon: {fileID: 2800000, guid: 93f2de7c800d5d941a16e68f89fb97e6, type: 3}
 --- !u!4 &963096546
 Transform:
