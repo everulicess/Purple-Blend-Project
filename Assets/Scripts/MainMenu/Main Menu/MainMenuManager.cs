@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using Fusion;
 using System;
-
+[RequireComponent(typeof(AudioSource))]
 public class MainMenuManager : MonoBehaviour
 {
     // If you create a new panel, put it here.
@@ -21,6 +21,17 @@ public class MainMenuManager : MonoBehaviour
 
     [SerializeField] TMP_InputField sessionName;
 
+    [Header("ButtonSounds")]
+    [SerializeField] AudioClip ButtonSound;
+    AudioSource _audioSource;
+    private AudioSource audioSource
+    { 
+        get 
+        {
+            if (_audioSource == null)
+                _audioSource = GetComponent<AudioSource>();
+            return _audioSource;
+        } }
     private void Start()
     {
         HideAllPanels();
@@ -117,5 +128,10 @@ public class MainMenuManager : MonoBehaviour
         HideAllPanels();
 
         StatusPanel.SetActive(true);
+    }
+
+    public void PlayButtonSound()
+    {
+        audioSource.PlayOneShot(ButtonSound);
     }
 }

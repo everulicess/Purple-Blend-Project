@@ -8,7 +8,7 @@ public class ButtonHoverBehaviour : MonoBehaviour, IPointerEnterHandler, IPointe
 {
     RectTransform rectTransform;
     float scale = 1.25f;
-    [SerializeField] Vector3 scaleVector;
+    Vector3 scaleVector;
     public void OnPointerClick(PointerEventData eventData)
     {
         rectTransform.localScale = scaleVector;
