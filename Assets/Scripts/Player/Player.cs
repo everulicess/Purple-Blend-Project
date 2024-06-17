@@ -7,7 +7,6 @@ using TMPro;
 
 [RequireComponent(
     typeof(NetworkCharacterController),
-    typeof(NetworkMecanimAnimator),
     typeof(CharacterInputHandler)
     )]
 public class Player : NetworkBehaviour, IPlayerLeft
@@ -17,11 +16,17 @@ public class Player : NetworkBehaviour, IPlayerLeft
     public static Camera PlayerCamera { get; set; }
 
     [SerializeField] private float turnSpeed = 360f;
-    [SerializeField] CharacterStatsScrObj Character;
+    CharacterStatsScrObj Character;
     [SerializeField] private Transform camTarget;
     [SerializeField] private GameObject escapeMenu;
+    bool initialized = false;
     //[SerializeField]Characters currentCharacter;
-
+    public void SetPlayerVariables(CharacterStatsScrObj pCharacter, Animator pAnim)
+    {
+        Character = pCharacter;
+        anim = pAnim;
+        initialized = true;
+    }
     public static Vector3 m_MousePosition;
     private NetworkCharacterController m_CharacterController;
     private Animator anim;
@@ -69,7 +74,6 @@ public class Player : NetworkBehaviour, IPlayerLeft
     float dodgeCooldown = 10f;
     float currentDodgeCooldown;
     [SerializeField] TextMeshProUGUI counterText;
-    PlayerRef myUserID;
     public override void Spawned()
     {
         if (Object.HasInputAuthority)
@@ -84,20 +88,18 @@ public class Player : NetworkBehaviour, IPlayerLeft
         m_CharacterController = GetComponent<NetworkCharacterController>();
         //m_CharacterController.maxSpeed = Character.MovementStats.MovementSpeed;
         m_CharacterController.maxSpeed = 5;
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
         m_Collector = GetComponent<Collector>();
         m_Health = GetComponent<Health>();
         m_CombatController = GetComponent<CombatController>();
     }
-    public void SetUserID(PlayerRef ID)
-    {
-        myUserID = ID;
-        Debug.LogError($"MY player ID is {ID}");
-    }
     public override void FixedUpdateNetwork()
     {
+        if (!initialized)
+            return;
         HandleDeath();
         Falling();
+
         if (m_Health.isDead)
             return;
         //count down attack time and end the attack once it hits 0
@@ -110,8 +112,9 @@ public class Player : NetworkBehaviour, IPlayerLeft
         //exit if there is no input
         if (!GetInput(out NetworkInputData data) && !Runner.IsForward) return;
 
-        KnockBackHandler(data);
-        if (m_CombatController.ranged) m_CombatController.attackArea.transform.position = data.pointToLookAt;
+        SettingMovementDirection(data);
+        if (m_CombatController.ranged) 
+            m_CombatController.attackArea.transform.position = data.pointToLookAt;
         //initiate attack with mouse click (also checks if the player is already attacking so the animation does not restart)
         if (data.buttons.IsSet(MyButtons.AttackButton) && !IsAttacking && !isDodging) 
         {
@@ -153,10 +156,9 @@ public class Player : NetworkBehaviour, IPlayerLeft
         if (canEndGame && data.buttons.IsSet(MyButtons.PartyButton))
             EndGameCountdown();
     }
-
+    #region DODGE
     private void Dodge(NetworkInputData data)
     {
-        
         if (!canDodge)
             return;
         anim.SetTrigger("Dash");
@@ -164,7 +166,6 @@ public class Player : NetworkBehaviour, IPlayerLeft
     }
     IEnumerator Dodging(NetworkInputData data)
     {
-        //forward = skew * data.movementInput*500f;
         m_CharacterController.acceleration *= 2f;
         m_CharacterController.maxSpeed *= 2f;
         IsAttacking = false;
@@ -200,20 +201,21 @@ public class Player : NetworkBehaviour, IPlayerLeft
             canDodge = true;
         }
     }
-
+    #endregion
+    #region DYING_&_TELEPORT
     private void HandleDeath()
     {
         if (!m_Health.isDead)
             return;
             m_CharacterController.Teleport(new Vector3(0, 1.5f, 0));
-
     }
     private void Falling()
     {
         if (transform.position.y <= -7f)
             m_Health.OnTakeDamage(100);
     }
-
+    #endregion
+    #region MOVEMENT_&_ROTATION
     private void WalkAnim()
     {
         if (m_CharacterController.Velocity == Vector3.zero)
@@ -232,11 +234,9 @@ public class Player : NetworkBehaviour, IPlayerLeft
             anim.SetFloat("MoveY", Mathf.Cos(angle) * ratio);
         }
     }
-
-    private void KnockBackHandler(NetworkInputData data)
+    private void SettingMovementDirection(NetworkInputData data)
     {
         //check for the knockback, if there is no knockback then the player will be able to move
-
         if (data.movementInput != Vector3.zero && !isDodging) 
         {
             forward = skew * data.movementInput;
@@ -263,10 +263,7 @@ public class Player : NetworkBehaviour, IPlayerLeft
 
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Runner.DeltaTime * 90);
     }
-    public void OnRespawn()
-    {
-        m_CharacterController.Teleport(new Vector3(0f, 1f, 0f));
-    }
+    #endregion
 
     //Handles what happens when the player leaves
     public void PlayerLeft(PlayerRef player)
@@ -276,13 +273,6 @@ public class Player : NetworkBehaviour, IPlayerLeft
             Runner.Despawn(Object);
         }
     }
-
-    //Open player menu when pressing escape
-    public void OpenMenu()
-    {
-        escapeMenu.gameObject.SetActive(!escapeMenu.activeInHierarchy);
-    }
-
     private void EndGameCountdown()
     {
         GameObject.Find("MapManager").GetComponent<MapManager>().canStartCountdown = true;

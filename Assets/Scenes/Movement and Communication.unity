@@ -4946,11 +4946,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3c9b05e0050b14795ada352febe257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JoinSessionButton: {fileID: 0}
   PanelToHide:
   - {fileID: 0}
   - {fileID: 0}
-  characterPosition: {fileID: 0}
   TheMule: {fileID: 0}
   TheBoomstick: {fileID: 0}
   TheSiren: {fileID: 0}
